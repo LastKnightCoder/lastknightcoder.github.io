@@ -1,0 +1,17 @@
+.lastestTitle {
+  --border-color: #e5e5e5;
+  width: 100%;
+  flex-shrink: 0;
+  min-width: 100%;
+  font-size: 2em;
+  font-weight: bold;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.articleCardList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 40px;
+  margin: 20px 0 50px;
+}

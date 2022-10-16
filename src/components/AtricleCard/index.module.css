@@ -1,0 +1,36 @@
+.articleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.articleImage {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  padding-top: 50%;
+  border-radius: .3em;
+  margin: 10px 0;
+}
+
+.articleTitle {
+  font-weight: bold;
+  font-size: 1.4em;
+  line-height: 1.3;
+}
+
+.articleDescription {
+  opacity: .7;
+  line-height: 1.3;
+}
+
+.articleAuthor {
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: -10px;
+}
+
+.articleTime {
+  opacity: .8;
+}

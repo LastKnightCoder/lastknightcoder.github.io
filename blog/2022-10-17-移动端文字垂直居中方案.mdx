@@ -1,0 +1,575 @@
+---
+slug: mobile-text-middle
+tags:
+  - SVG
+  - Canvas
+  - 文字垂直居中
+authors: xiongtao
+---
+
+有过移动端开发经验的人，想必都对文字垂直居中头痛不已，因为使用常规手段实现文字垂直居中在部分 Android 手机上会出现文字偏上的情况，往往需要配合 `line-height` 或者 `padding` 进行微调，苦不堪言。下面是我尝试的几种文字垂直居中方案：
+
+`line-height` 实现垂直居中:
+
+```html
+<div id="line-height">
+  查看更多
+</div>
+```
+
+```css
+#line-height {
+  width: 200px;
+  text-align: center;
+  
+  height: 56px;
+  line-height: 56px;
+  
+  font-size: 26px;
+  color: black;  
+  
+  border: 1px solid;
+  border-radius: 28px;
+}
+```
+
+`display: flex` 实现垂直居中：
+
+```html
+<div id="flex">查看更多</div>
+```
+
+```css
+#flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 56px;
+  font-size: 26px;
+  color: black;
+  border: 1px solid;
+  border-radius: 28px;
+}
+```
+
+`padding` 实现垂直居中：
+
+```html
+<div id="padding">查看更多</div>
+```
+
+```css
+#padding {
+  width: 200px;
+  text-align: center;
+  box-sizing: border-box;
+  height: 56px;
+  font-size: 26px;
+  line-height: 1;
+  padding: 15px 0;
+  color: black;
+  border: 1px solid;
+  border-radius: 28px;
+}
+```
+
+Canvas 实现垂直居中： 
+
+```html
+<div id="canvas-container">
+  <canvas id="canvas" width="200" height="56"></canvas>
+</div>
+```
+
+```css
+#canvas-container {
+  width: 200px;
+  height: 56px;
+  color: black;
+  border: 1px solid;
+  border-radius: 28px;
+}
+#canvas {
+  width: 200px;
+  height: 56px;
+}
+```
+
+```js
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+
+// 解决高清屏模糊的问题
+const computedStyle = window.getComputedStyle(canvas);
+const dpr = window.devicePixelRatio;
+canvas.width = parseFloat(computedStyle.width) * dpr;
+canvas.height = parseFloat(computedStyle.height) * dpr;
+ctx.scale(dpr, dpr);
+
+const text = '查看更多';
+const fontSize = 26;
+ctx.font = `${fontSize}px normal`;
+const textWidth = ctx.measureText(text).width;
+ctx.textBaseline = 'bottom'
+// 这里的 1.15 是因为底线其实是超出了行框盒子的，超出字体大小的 5%-10%，见附录
+ctx.fillText(text, (canvas.width / dpr - textWidth) / 2, (canvas.height / dpr + 1.15 * fontSize) / 2);
+```
+
+SVG 实现垂直居中：
+
+```html
+<div id="svg-container">
+  <svg width="200" height="56" viewBox="0 0 200 56">
+    <text
+      text-anchor="middle"
+      fill="currentColor"
+      x="100"
+      dominant-baseline="central"
+      y="28"
+      font-size="26"
+    >
+      查看更多
+    </text>
+  </svg>
+</div>
+```
+
+```css
+#svg-container {
+  width: 200px;
+  height: 56px;
+  color: black;
+  border: 1px solid;
+  border-radius: 28px;
+}
+```
+
+通过在不同机型上的对比，发现 Canvas 和 SVG 的方案在各个机型下面均保持一致的居中效果，因此决定将其抽离为一个 React 组件，下面就详细讲解该组件的开发思路。
+
+本文以 SVG 为例，Canvas 开发思路是一样的，在文章的最后给出 Canvas 的实现，供以参考。
+
+## 使用方法
+
+为实现垂直居中功能，组件需要四个参数
+
+- `height`：容器高度，单位为 `px`
+- `fontSize`：字体大小，单位为 `px`
+- `text`：文字内容
+- `color`：文字颜色
+
+这四个参数是必须传递的，使用方法如下：
+
+```jsx
+// 使用方式一
+<TextMiddle fontSize={28} height={60} color={'deepskyblue'} text={'查看更多'} />
+```
+
+除了上面四个属性，还支持传递 `className` 与 `style`。
+
+## SVG 垂直居中原理
+
+在 SVG 中通过 `text` 标签来显示文字，可以通过 `x` 和 `y` 属性来设置文字的位置，这里我们关注到 `y`，它设置的是文字基线在 SVG 画布中的位置，我们可以通过  `dominant-baseline` 来指定基线在文字的哪个位置，我们将其设置为 `central`，表示基线在文字的中间，然后将 `y` 设置为高度的一半，即可实现文字的垂直居中。
+
+```html
+<svg width="200" height="60" viewBox="0 0 200 60">
+  <text
+    font-size="26"
+    fill="currentColor"
+    dominant-baseline="central" y="30">
+    查看更多
+  </text>
+</svg>
+```
+
+
+
+:::note
+
+上面使用的单位均为 `px`。
+
+::: 
+
+根据上面的原理，可以写出第一版的 `TextMiddle` 实现
+
+```jsx
+import React, { useEffect, useRef } from "react";
+
+const TextMiddle = props => {
+  const { height, fontSize, color, text, className = '', style = {} } = props;
+  const container = useRef();
+
+  const actualStyle = {
+    ...style,
+    height: `${height / 100}rem`,
+    fontSize: `${fontSize / 100}rem`,
+    color
+  };
+
+  useEffect(() => {
+    const computedStyle = window.getComputedStyle(container.current);
+    const actualHeight = parseFloat(computedStyle.height);
+    const actualFontSize = parseFloat(computedStyle.fontSize);
+    const actualWidth = parseFloat(computedStyle.width);
+
+    const svg = `
+      <svg width="${actualWidth}" height="${actualHeight}" viewBox="0 0 ${actualWidth} ${actualHeight}">
+        <text
+          font-size="${actualFontSize}"
+          fill="currentColor"
+          dominant-baseline="central" y="${actualHeight / 2}"
+        >
+          ${text}
+        </text>
+      </svg>
+    `;
+    container.current.innerHTML = svg;
+  }, [text]);
+
+  return (
+    <div ref={container} className={className} style={actualStyle}>
+      {text}
+    </div>
+  )
+}
+
+export default TextMiddle;
+```
+
+## 文字超出
+
+事情到这还没有结束，我们使用 `SVG` 这种方案是有缺点的，那就是缺失了流动性，文字只能一行展示，不会换行，多余的文字会被隐藏不可见。
+
+考虑在实际开发中，一般都是单行文本实现垂直居中，所以就不对换行进行处理，但是文字超出还是比较常见的，所以有必要对文字超出进行进行处理，这里对超出的文字使用 `...` 代替。
+
+怎么判断文字是否超出了呢？我们需要知道文字的长度，如果文字的长度大于容器的长度，就说明超出了，这个时候我们需要进行打点。可以通过 `Canvas` 的 `measureText` 来获得文本的宽度
+
+```js
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+const getTextLength = (text, fontSize) => {
+  ctx.font= `${fontSize}px normal`;
+  const metrics = ctx.measureText(text);
+  return parseInt('' + metrics.width);
+}
+```
+
+这里对文字的长度进行了取整，这是因为在小数部分存在误差，因此我们也需要对容器的长度进行取整，由于取整之后，可能存在 `1px` 的误差，因此我们需要设置容器的宽度为取整后 `+1`
+
+```js
+const actualWidth = parseInt(computedStyle.width) + 1;
+const textLength = getTextLength(text, actualFontSize);
+if (textLength > actualWidth) {
+	// 文字超出处理
+}
+```
+
+接下来我们只需要计算超出的文字分界点，然后进行截断
+
+```js
+const actualWidth = parseInt(computedStyle.width) + 1;
+const textLength = getTextLength(text, actualFontSize);
+let actualText = text;
+// 计算截断点以及实际文本
+if (textLength > actualWidth) {
+  actualText = text.slice(0, 1) + '...';
+  for (let i = 1; i < text.length; i++) {
+    const adjustText = text.slice(0, i) + '...';
+    const adjustWidth = getTextLength(adjustText, actualFontSize);
+    if (adjustWidth > actualWidth) {
+      break;
+    }
+    actualText = adjustText;
+  }
+}
+const svg = `
+  <svg width="${actualWidth}" height="${actualHeight}" viewBox="0 0 ${actualWidth} ${actualHeight}">
+    <text
+      font-size="${actualFontSize}"
+      fill="currentColor"
+      dominant-baseline="central" y="${actualHeight / 2}"
+    >
+      ${actualText}
+    </text>
+  </svg>
+`;
+container.current.innerHTML = svg;
+```
+
+## 性能优化
+
+当页面上有太多的 SVG 要渲染时，会有较大的白屏时间，经测试，同时有 1000 个 SVG 渲染，将会有接近 1s 的白屏时间，这个是不可接受的，我们可以通过 `IntersectionObserver` 来进行一个性能优化，只有当该组件即将出现在视口中时，我们才渲染为 SVG。
+
+```js
+const svg = `
+  <svg width="${actualWidth}" height="${actualHeight}" viewBox="0 0 ${actualWidth} ${actualHeight}">
+    <text
+      font-size="${actualFontSize}"
+      fill="currentColor"
+      dominant-baseline="central" y="${actualHeight / 2}"
+    >
+      ${actualText}
+    </text>
+  </svg>
+`;
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    // 进入视口时或已经在视口中
+    if (entry.isIntersecting) {
+      container.current.innerHTML = svg;
+      // 取消监听
+      observer.unobserve(container.current);
+    }
+  })
+}, {
+  // 视口范围向下扩大 500px，提前加载
+  rootMargin: '0px 0px 500px 0px'
+});
+observer.observe(container.current);
+```
+
+另一个就是对于苹果手机，我们没有必要使用 SVG 的方案，因为苹果手机的兼容性很好，对于苹果手机就使用设置行高等于高度的方案
+
+```js
+const isIos = /ipad|iphone|macintosh/gim.test(window.navigator.userAgent);
+const actualStyle = {
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  ...style,
+  height: `${height / 100}rem`,
+  lineHeight: `${height / 100}rem`,
+  fontSize: `${fontSize / 100}rem`,
+  color
+};
+
+useEffect(() => {
+	if (isIos) {
+	  return;
+	}
+	// ... 其它逻辑
+}, []);
+```
+
+:::warning
+不要为 `TextMiddle` 添加 `display: flex;`，否则 `text-overflow` 会失效，除非你确定你的文本一定不会超出容器的宽度。
+:::
+
+## 最终代码
+
+### SVG
+
+```jsx
+import React, { useEffect, useRef } from "react";
+
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+const getTextLength = (text, fontSize) => {
+  ctx.font= `${fontSize}px normal`;
+  const metrics = ctx.measureText(text);
+  return parseInt('' + metrics.width);
+}
+
+const TextMiddle = props => {
+  const { height, fontSize, color, text, className = '', style = {} } = props;
+  const container = useRef();
+  const isIos = /ipad|iphone|macintosh/gim.test(window.navigator.userAgent);
+  const actualStyle = {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    ...style,
+    height: `${height / 100}rem`,
+    lineHeight: `${height / 100}rem`,
+    fontSize: `${fontSize / 100}rem`,
+    color
+  };
+
+  useEffect(() => {
+    if (isIos) {
+      return;
+    }
+    const computedStyle = window.getComputedStyle(container.current);
+    const actualHeight = parseFloat(computedStyle.height);
+    const actualFontSize = parseFloat(computedStyle.fontSize);
+    const actualWidth = parseInt(computedStyle.width) + 1;
+    const textLength = getTextLength(text, actualFontSize);
+    let actualText = text;
+    if (textLength > actualWidth) {
+      actualText = text.slice(0, 1) + '...';
+      for (let i = 1; i < text.length; i++) {
+        const adjustText = text.slice(0, i) + '...';
+        const adjustWidth = getTextLength(adjustText, actualFontSize);
+        if (adjustWidth > actualWidth) {
+          break;
+        }
+        actualText = adjustText;
+      }
+    }
+
+    const svg = `
+      <svg width="${actualWidth}" height="${actualHeight}" viewBox="0 0 ${actualWidth} ${actualHeight}">
+        <text
+          font-size="${actualFontSize}"
+          fill="currentColor"
+          dominant-baseline="central" y="${actualHeight / 2}"
+        >
+          ${actualText}
+        </text>
+      </svg>
+    `;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        // 进入视口时或已经在视口中
+        if (entry.isIntersecting) {
+          container.current.innerHTML = svg;
+          observer.unobserve(container.current);
+        }
+      })
+    }, {
+      // 视口范围向下扩大 500px，提前加载
+      rootMargin: '0px 0px 500px 0px'
+    });
+    observer.observe(container.current);
+  }, [text]);
+
+  return (
+    <div ref={container} className={className} style={actualStyle}>
+      {text}
+    </div>
+  )
+}
+
+export default TextMiddle;
+```
+
+### Canvas
+
+```jsx
+import React, { useEffect, useRef } from "react";
+
+const isIos = /ipad|iphone|macintosh/gim.test(window.navigator.userAgent);
+
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+const getTextLength = (text, fontSize) => {
+  ctx.font= `${fontSize}px normal`;
+  const metrics = ctx.measureText(text);
+  return parseInt('' + metrics.width);
+}
+
+const TextMiddle = props => {
+  const { text, color, height, fontSize, className = '', style = {} } = props;
+  const container = useRef();
+
+  const actualStyle = {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    ...style,
+    height: `${height / 100}rem`,
+    lineHeight: `${height / 100}rem`,
+    fontSize: `${fontSize / 100}rem`,
+    color
+  };
+
+  useEffect(() => {
+    if (isIos) {
+      return;
+    }
+
+    const computedStyle = window.getComputedStyle(container.current);
+    const actualHeight = parseFloat(computedStyle.height);
+    const actualFontSize = parseFloat(computedStyle.fontSize);
+    const actualWidth = parseInt(computedStyle.width) + 1;
+    
+    // 高分屏模糊处理
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.style.width = actualWidth + 'px';
+    canvas.style.height = actualHeight + 'px';
+    const dpr = window.devicePixelRatio;
+    canvas.width = actualWidth * dpr;
+    canvas.height = actualHeight * dpr;
+    ctx.scale(dpr, dpr);
+
+    // 文字超出处理
+    const textLength = getTextLength(text, actualFontSize);
+    let actualText = text;
+    if (textLength > actualWidth) {
+      actualText = text.slice(0, 1) + '...';
+      for (let i = 1; i < text.length; i++) {
+        const adjustText = text.slice(0, i) + '...';
+        const adjustWidth = getTextLength(adjustText, actualFontSize);
+        if (adjustWidth > actualWidth) {
+          break;
+        }
+        actualText = adjustText;
+      }
+    }
+
+    ctx.font = `${actualFontSize}px normal`;
+    ctx.fillStyle = color;
+    ctx.textBaseline = 'bottom';
+    // 底线其实是超出行框盒子的，参考字母 y g 的下边缘，超出的部分是字体大小的 10%
+    ctx.fillText(actualText, 0, (canvas.height / dpr + 1.15 * actualFontSize) / 2);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          container.current.removeChild(container.current.firstChild);
+          container.current.append(canvas);
+          observer.unobserve(container.current);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px 500px 0px'
+    });
+    observer.observe(container.current);
+  }, [text, color]);
+
+  return (
+    <div ref={container} className={className} style={actualStyle}>
+      {text}
+    </div>
+  )
+}
+
+export default TextMiddle;
+```
+
+
+## 附录
+
+这个来补充 `Canvas` 绘制文字的一个细节，在代码里面我们绘制文字用了下面的代码
+
+```js
+ctx.textBaseline = 'bottom';
+ctx.fillText(actualText, 0, (canvas.height / dpr + 1.2 * actualFontSize) / 2);
+```
+
+关于文字的位置这里给了 `canvas.height / dpr + 1.2 * actualFontSize) / 2`，按道理应该给 `canvas.height / dpr + actualFontSize) / 2`，所以我们为什么要乘 `1.2`。
+
+我们先看下这个公式是怎么计算的，假设容器的高度是 `h`，字体的大小是 `s`，要使得字体垂直居中，那么字体底部离顶部的距离就是 `(h - s) / 2 + s = (h + s) / 2`。现在我们的计算公式是 `(h + 1.2 * s) / 2`，这是为什么？
+
+这是因为底线的距离并不是文字所在盒子的底部，看一个例子
+
+```html
+<div id="container">查看更多y</div>
+```
+
+```css
+#container {
+  font-size: 100px;
+  outline: 1px solid red;
+  line-height: 1;
+}
+```
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/image.7f1js39a5200.webp" style={{ zoom: '50%' }} />
+
+可以看到底线（也就是字母 `y` 的底部）超出了行框盒子，所以将底线设置到 `(h + s) / 2`，会使得文字偏上。要使得文字正常，我们需要知道超出了多少，这个大小与字体大小成一个比例关系，不妨设为 `y`，则超出的大小为 `ys`，这个时候我们只要在向下移动 `ys` 就可以了 `(h + s) / 2 + ys = (h + (1 + 2y)s) / 2`。
+
+对于不同的字体，`y` 不一样，范围在 `5%~10%` 之间，这里我取了 `7.5%`，所以值就是 `(h + 1.15s) / 2`。
+
+所以对于不同的字体实现的是一个伪居中，最大的误差在 `2.5%`，也就是说对于字体大小在 `40px` 以内的文本，误差小于 `1px`（对于移动端的文本来说，文字大小一般少有超过 `15px` 的）。实现了视觉上的“居中”，最重要的是，在各个机型上均能保持一致性。
