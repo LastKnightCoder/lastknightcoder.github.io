@@ -9,10 +9,18 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-code-background: transparent;
+  --ifm-font-family-base: 'Trbuchet MS', 'Lora', '新宋体', '华文行楷', '黑体-简';
+  --ifm-font-family-monospace: 'Fira Code', '楷体', '楷体-简';
+  --inline-code-color: #1A66FF;
+}
+
+.alert {
+  --ifm-code-background: var(--ifm--code-background);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+html[data-theme='dark'] {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -21,4 +29,19 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-code-background: transparent;
+  --inline-code-color: #FBDE2D;
+}
+
+code {
+  border: none;
+  color: var(--inline-code-color);
+}
+
+code span {
+  font-style: normal !important;
+}
+
+video {
+  max-width: 100%;
 }

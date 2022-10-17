@@ -7,15 +7,22 @@ tags:
 authors: xiongtao
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 有过移动端开发经验的人，想必都对文字垂直居中头痛不已，因为使用常规手段实现文字垂直居中在部分 Android 手机上会出现文字偏上的情况，往往需要配合 `line-height` 或者 `padding` 进行微调，苦不堪言。下面是我尝试的几种文字垂直居中方案：
 
 `line-height` 实现垂直居中:
 
+<Tabs>
+<TabItem value='html' label='HTML'>
+
 ```html
-<div id="line-height">
-  查看更多
-</div>
+<div id="line-height">查看更多</div>
 ```
+
+</TabItem>
+<TabItem value='css' label='CSS' default>
 
 ```css
 #line-height {
@@ -31,13 +38,23 @@ authors: xiongtao
   border: 1px solid;
   border-radius: 28px;
 }
-```
+```  
+
+</TabItem>
+</Tabs>
+
 
 `display: flex` 实现垂直居中：
+
+<Tabs>
+<TabItem value='html' label='HTML'>
 
 ```html
 <div id="flex">查看更多</div>
 ```
+
+</TabItem>
+<TabItem value='css' label='CSS' default>
 
 ```css
 #flex {
@@ -53,11 +70,20 @@ authors: xiongtao
 }
 ```
 
+</TabItem>
+</Tabs>
+
 `padding` 实现垂直居中：
+
+<Tabs>
+<TabItem value='html' label='HTML'>
 
 ```html
 <div id="padding">查看更多</div>
 ```
+
+</TabItem>
+<TabItem value='css' label='CSS' default>
 
 ```css
 #padding {
@@ -74,13 +100,22 @@ authors: xiongtao
 }
 ```
 
+</TabItem>
+</Tabs>
+
 Canvas 实现垂直居中： 
+
+<Tabs>
+<TabItem value='html' label='HTML'>
 
 ```html
 <div id="canvas-container">
   <canvas id="canvas" width="200" height="56"></canvas>
 </div>
 ```
+
+</TabItem>
+<TabItem value='css' label='CSS'>
 
 ```css
 #canvas-container {
@@ -95,6 +130,9 @@ Canvas 实现垂直居中：
   height: 56px;
 }
 ```
+
+</TabItem>
+<TabItem value='js' label='JavaScript' default>
 
 ```js
 const canvas = document.querySelector('#canvas');
@@ -116,7 +154,13 @@ ctx.textBaseline = 'bottom'
 ctx.fillText(text, (canvas.width / dpr - textWidth) / 2, (canvas.height / dpr + 1.15 * fontSize) / 2);
 ```
 
+</TabItem>
+</Tabs>
+
 SVG 实现垂直居中：
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
 
 ```html
 <div id="svg-container">
@@ -135,6 +179,9 @@ SVG 实现垂直居中：
 </div>
 ```
 
+</TabItem>
+<TabItem value='css' label='CSS'>
+
 ```css
 #svg-container {
   width: 200px;
@@ -144,6 +191,9 @@ SVG 实现垂直居中：
   border-radius: 28px;
 }
 ```
+
+</TabItem>
+</Tabs>
 
 通过在不同机型上的对比，发现 Canvas 和 SVG 的方案在各个机型下面均保持一致的居中效果，因此决定将其抽离为一个 React 组件，下面就详细讲解该组件的开发思路。
 

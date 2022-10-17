@@ -1,0 +1,153 @@
+---
+slug: css-animation-timer
+athors: xiongtao
+date: 2022-09-15
+tags:
+  - CSS
+  - 动画
+  - 定时器
+  - 神来之笔
+---
+
+:::info
+
+该笔记是来源于公众号文章[还在用定时器吗？借助 CSS 来监听事件](https://mp.weixin.qq.com/s/N25KcGneKPgvBa8zBownlw)。
+
+:::
+
+## hover延时触发
+
+### 一般方法
+
+鼠标进入时开始定时器
+
+```js
+var timer = null
+el.addEventListener('mouseover', () => {
+  timer && clearTimeout(timer)
+  timer = setTimeout(() => {
+    // 具体逻辑
+  }, 1000)
+})
+```
+
+鼠标离开时取消定时器
+
+```js
+el.addEventListener('mouseout', () => {
+  timer && clearTimeout(timer)
+})
+```
+
+### 利用动画结束事件
+
+为元素添加延时动画
+
+```css
+button:hover{
+  opacity: 0.999; /*无关紧要的样式*/
+  transition: 0s 1s opacity; /*延时 1s */
+}
+```
+
+监听动画结束事件
+
+```js
+el.addEventListener('transitionend', () => {
+  // 具体逻辑
+})
+```
+
+无需定时器，也无需取消，更无需考虑 dom 结构，完美实现。
+
+## 长按触发
+
+### 一般方法
+
+借助定时器，按下时开启定时器，离开时取消定时器
+
+```js
+
+el.onmousedown = function(){
+    this.timer && clearTimeout(this.timer);
+    this.timer = settimeout(function(){
+        //业务代码
+    },1000)
+}
+el.onmouseup = function(){
+    this.timer && clearTimeout(this.timer);
+}
+```
+
+### 利用动画结束事件
+
+为 `:active` 伪类添加延时动画
+
+```css
+button:hover:active{
+  opacity: .999; /*无关紧要的样式*/
+  transition: opacity 1s; /*延时 1s */
+}
+```
+
+然后再监听 `transitionend` 事件
+
+```js
+el.addEventListener('transitionend', () => {
+  // 具体逻辑
+})
+```
+
+## 轮播和暂停
+
+### 一般方法
+
+鼠标放上去时暂停，鼠标离开时自动滚动，借助定时器 `setInterveal` 进行轮播，鼠标放上去时清除定时器，鼠标离开时新建定时器
+
+```js
+function autoPlay(){
+  timer && clearInterval(timer)
+  timer = setInterval(function(){
+    // 轮播逻辑
+  }, 1000)
+}
+autoPlay()
+view.onmouseover = function(){
+    timer && clearInterval(timer)
+}
+el.onmouseout = function(){
+    autoPlay()
+}
+```
+
+## animationiteration 事件
+
+设置动画为无限次数，每次动画开始时都会触发 animationiteration 事件，鼠标放上去时动画暂停
+
+```css
+.view {
+  animation: scroll 1s infinite; /*每1s动画，无限循环*/
+}
+.view:hover{
+  animation-play-state: paused; /*hover暂停*/
+}
+@keyframes scroll {
+  to {
+    transform: translateZ(.1px); /*无关紧要的样式*/
+  }
+}
+```
+
+```js
+
+view.addEventListener("animationiteration", () => {
+  // 轮播逻辑
+})
+```
+
+
+
+
+
+
+

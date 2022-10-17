@@ -1,0 +1,407 @@
+---
+slug: IntersectionObserver
+tags: 
+  - IntersectionObserver
+  - 延迟加载
+  - 无限滚动
+  - 性能优化
+authors: xiongtao
+date: 2022-09-28
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+如果我们需要监听某个元素是否出现在视口中，一般做法是监听 `scroll` 事件，然后查询元素离视口顶部的距离，但是监听 `scroll` 事件存在性能问题。
+
+浏览器原生提供了 `IntersectionObserver` 监听器，可以监听某个元素是否出现在视口中。
+
+## 使用方法
+
+1. 首先通过 `new IntersectionObserver(callback, options)` 创建一个监视器，其中 callback 是当监听的元素出现在视口时执行的回调函数，options 是一些选项，稍后介绍。
+2. 然后通过监视器的 `observe` 方法监听感兴趣的元素。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="box"></div>
+```
+
+</TabItem>
+<TabItem value='css' label='CSS'>
+
+```css
+#box {
+  width: 100%;
+  height: 500px;
+  background: deeppink;
+  position: relative;
+  top: calc(100vh + 100px);
+}
+```  
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const observer = new IntersectionObserver(entries => {
+    console.log('entries: ', entries);
+});
+
+observer.observe(document.getElementById('box'));
+```  
+
+</TabItem>
+</Tabs>
+
+
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/IntersectionObserver-base.mp4"></video>
+
+## options
+
+### threshold
+
+通过 `threshold` 可以指定元素与视口相交的比例来触发回调函数，它的值是一个数字或一个数组，默认是 `0`，即元素一出现在视口中就执行
+
+```js
+const observer = new IntersectionObserver(entries => {  
+  console.log(entries);  
+}, {  
+  threshold: [0.5, 1]  
+});
+```
+
+上述代码表示当元素一半出现在视口中或者元素全部出现在视口中时，均会执行回调函数。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/IntersectionObserver-threshold.mp4"></video>
+
+### root
+
+我们不止可以监听元素在视口中出现与消失，在任意可滚动的元素中均可以监听，我们通过 `root` 来指定滚动的容器，`root` 的默认值为 `null`，当值为 `null`，使用 `document` 作为滚动容器。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="box-container">
+  <div id="box"></div>
+  <div id="box-after"></div>
+</div>
+```
+
+</TabItem>
+<TabItem value='css' label='CSS'>
+
+```css
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#box-container {
+    height: 300px;
+    overflow: auto;
+    width: 300px;
+    margin: 100px auto;
+}
+
+#box {
+    width: 100%;
+    height: 300px;
+    background: deepskyblue;
+    position: relative;
+    top: 300px;
+}
+
+#box-after {
+    position: relative;
+    height: 300px;
+    top: 300px;
+}
+```  
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const observer = new IntersectionObserver(entries => {
+  console.log('entries: ', entries);
+}, {
+  threshold: [0.5, 1],
+  root: document.getElementById('box-container'),
+});
+
+observer.observe(document.getElementById('box'));
+```  
+
+</TabItem>
+</Tabs>
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/IntersectionObserver-root.mp4"></video>
+
+### rootMargin
+
+`rootMargin `可以增大或缩小视口的区域，与 `margin` 属性的取值相似，不过这里的 `rootMargin` 还可以为负值。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="box"></div>
+```
+
+</TabItem>
+<TabItem value='css' label='CSS'>
+
+```css
+#box {
+  width: 100%;
+  height: 500px;
+  background: deeppink;
+  position: relative;
+  top: calc(100vh + 100px);
+}
+```  
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const observer = new IntersectionObserver(entries => {
+  console.log(entries);
+}, {
+  threshold: [0.5, 1],
+  rootMargin: '-100px 0px -100px 0px'
+});
+```  
+
+</TabItem>
+</Tabs>
+
+上面设置了 `rootMargin` 为 `-100px 0px 0px -100px`，使得视口与元素交叉区域的计算不再是蓝色，而变为了黄色
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/BoundingRect-第-2-页.6z20zf4eop40.png" style={{zoom: '50%'}} />
+
+如果元素下面没有其他空间，那么元素不可能完全位于黄色区域中，`threshold `设置为 `1` 没有意义。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/IntersectionObserver-rootMargin.mp4"></video>
+
+虽然我们设置了 `threshold: [0.5, 1]` ，但是从视频可以看到出现和消失分别只打印了一次。
+
+## entries
+
+传入该回调函数的是一个数组，因为可以同时监听多个对象，多个对象可能同时出现在视口中，因此是一个数组。数组的每个元素都是对象，包含以下字段：
+
+- `intersectionRatio`：出现在视口中的元素与整体的比例
+- `boundingClientRect`：元素的大小及位置信息
+- `intersectionRect`：元素出现在视口中这部分的大小及位置信息
+- `rootBounds`：root 的大小及位置信息
+- `target`：被监听的元素
+- `time`：触发该事件的时间，单位为毫秒，页面加载时为 0
+- `isIntersecting`：是出现还是消失
+
+### intersectionRatio
+
+`intersectionRatio` 表示元素出现在视口中的部分与元素整体的比例
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/BoundingRect-第 3 页.png" alt="BoundingRect-第 3 页" style={{zoom: '50%'}} />
+
+### boundingClientRect、intersectionRect 与 rootBounds
+
+`boundingClientRect`、`intersectionRect` 与 `rootBounds` 的值都是 `DOMRect` 对象，提供了元素的大小以及相对于视口的位置关系，具体可以参考 `Element.getBoundingClientRect()` 方法，各字段含义如下所示。
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/BoundingRect-第-1-页.61y0smwvqk00.png" style={{ zoom: '50%'}} />
+
+`boundingClientRect` 表示的是被监听的元素的大小与 `root` 的位置关系，`intersectionRect` 表示元素与视口交叉区域部分的大小与 `root` 的位置关系，`rootBounds` 表示的是 `root` 的大小与视口的位置关系。
+
+`rootBounds` 的大小及位置均会收到 `rootMargin` 的影响。
+
+### target
+
+`target` 表示的就是被监听的元素。
+
+### isIntersecting
+
+```js
+const observer = new IntersectionObserver(entries => {  
+  for (const entry of entries) {  
+    console.log(entry.isIntersecting);  
+  }  
+}, {  
+  threshold: [0.5],  
+});  
+  
+observer.observe(document.getElementById('box'));
+```
+
+当被监听的元素进入或消失于视口中时，均会触发回调函数的执行，`isIntersecting` 的值可以表示是出现在视口中还是消失在视口中，当值为 `true` 时，表示出现在视口中，为 `false` 表示消失在视口中。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/IntersectionObserver-isIntersecting.mp4"></video>
+
+### time
+
+可见性发生变化的时间，是一个高精度时间戳，单位为毫秒。
+
+## 案例
+
+### 图片懒加载
+
+如果一个页面中图片的数量太多，会影响页面的加载速度，对网站性能造成影响，我们可以当图片出现在视口中时才对图片进行加载，传统的方法需要监听 `scroll` 事件，然后判断图片是否在视口中。但是 `scroll` 触发的十分频繁，具有性能问题。现在可以通过 `IntersectionObserver` 来实现，并且有较好的性能。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="before"></div>
+<div id="image-list">
+  <img class="lazy-image" data-src="images/01.jpg" />
+  <img class="lazy-image" data-src="images/02.jpg" />
+  <img class="lazy-image" data-src="images/03.jpg" />
+  <img class="lazy-image" data-src="images/04.jpg" />
+</div>
+```
+
+</TabItem>
+<TabItem value='css' label='CSS'>
+
+```css
+#before {
+  height: calc(100vh + 10px);
+}
+
+#image-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 100px 50px;
+}
+
+#image-list .lazy-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+```  
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    // 当向下滑动的时候
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      const src = img.dataset.src;
+      img.src = src;
+      // 取消监听
+      observer.unobserve(img);
+    }
+  });
+});
+
+const lazyImages = document.getElementsByClassName('lazy-image');
+for (let lazyImage of lazyImages) {
+  observer.observe(lazyImage);
+}
+```  
+
+</TabItem>
+</Tabs>
+
+我们将图片的链接设置在自定义属性 `data-src` 上，而不是 `src` 属性，然后我们监听这些图像，当图像出现在视口中时，我们获取图像的 `data-src` 属性，并设置到 `src` 属性上，并且取消监听对象。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/IntersectionObserver-%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD.mp4"></video>
+
+### 无限滚动
+
+假设有一个商品展示页，因为商品太多，我们不会一次性全部请求，而是当用户向下浏览查看商品时，当到达页面底部时，请求更多的商品进行展示。一般的做法是监听 `scroll` 事件，查询滚动条离底部的距离，当小于一定阈值时，自动的请求数据加载。现在我们可以通过 `IntersectionObserver` 获得更好的性能。
+
+我们在商品的下面放置一个元素，当滑到底部时，该元素出现在视口中，此时加载更多的商品。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="goods">
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+  <div class="good"></div>
+</div>
+<div id="footer"></div>
+```
+
+</TabItem>
+<TabItem value='css' label='CSS'>
+
+```css
+#goods {
+  width: 320px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px auto;
+}
+
+.good {
+  height: 150px;
+  background: deeppink;
+}
+
+#footer {
+  background: transparent;
+  height: 10px;
+}
+```  
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      loadMore(10);
+    }
+  });
+}, {
+  // 扩展视口的底部区域，提前加载
+  rootMargin: '0px 0px 100px 0px'
+});
+
+const loadMore = (n) => {
+  let appendedGoods = '';
+  for (let i = 0; i < n; i++) {
+    appendedGoods += '<div class="good"></div>'
+  }
+  const goods = document.getElementById('goods');
+  goods.innerHTML = goods.innerHTML + appendedGoods;
+}
+
+const footer = document.getElementById('footer');
+observer.observe(footer);
+```  
+
+</TabItem>
+
+</Tabs>
+
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/IntersectionObserver-%E6%97%A0%E9%99%90%E5%8A%A0%E8%BD%BD.mp4"></video>
+
+:::info Info
+IntersectionObserver API 是异步的，不随着目标元素的滚动同步触发。
+:::

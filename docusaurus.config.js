@@ -81,12 +81,15 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'JavaScript/selection-and-range',
+            type: 'dropdown',
+            label: '前端开发',
             position: 'left',
-            label: 'Web',
+            items: [{
+              label: 'CSS',
+              to: '/docs/CSS/CSS介绍'
+            }]
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'right'},
           {
             type: 'dropdown',
             label: 'Slides',
@@ -128,8 +131,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'JavaScript',
-                to: '/docs/JavaScript',
+                label: 'CSS',
+                to: '/docs/CSS/CSS介绍',
               },
             ],
           },
