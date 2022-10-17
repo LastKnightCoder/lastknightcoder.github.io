@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[7754],{9205:e=>{e.exports=JSON.parse('{"label":"IntersectionObserver","permalink":"/blog/tags/intersection-observer","allTagsPath":"/blog/tags","count":1}')}}]);

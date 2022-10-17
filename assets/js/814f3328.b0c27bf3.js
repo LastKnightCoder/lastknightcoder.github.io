@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[535],{5641:e=>{e.exports=JSON.parse('{"title":"\u6240\u6709\u7684\u535a\u5ba2","items":[{"title":"\u79fb\u52a8\u7aef\u6587\u5b57\u5782\u76f4\u5c45\u4e2d\u65b9\u6848","permalink":"/blog/mobile-text-middle"}]}')}}]);

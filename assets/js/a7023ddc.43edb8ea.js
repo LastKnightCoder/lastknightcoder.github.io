@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[713],{3457:a=>{a.exports=JSON.parse('[{"label":"SVG","permalink":"/blog/tags/svg","count":1},{"label":"Canvas","permalink":"/blog/tags/canvas","count":1},{"label":"\u6587\u5b57\u5782\u76f4\u5c45\u4e2d","permalink":"/blog/tags/\u6587\u5b57\u5782\u76f4\u5c45\u4e2d","count":1}]')}}]);
