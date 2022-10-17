@@ -1,0 +1,397 @@
+---
+slug: 控制对象的访问
+tags:
+  - Object
+  - defineProperty
+  - defineProperties
+  - preventExtensions
+  - seal
+  - freeze
+  - Proxy
+authors: xiongtao
+date: 2021-05-21
+---
+
+本篇文章总结控制对象访问的相关 API。
+
+## Object.defineProperty
+
+`Object.defineProperty` 可以对对象的属性进行配置，它接收如下参数：
+
+- `obj`：对象
+- `prop`：属性
+- `descriptor`：属性描述符
+
+其中 `descriptor` 包括如下配置选项
+
+- `value`：属性的值
+- `writable`：属性是否可写，默认为 `false`
+- `set`：为属性设置值时会触发此方法，设置的新值会作为参数传入
+- `get`：访问此属性是会触发此方法
+- `configurable`：该属性是否可再次进行配置，默认为 `false`
+- `enumerable`：是否可遍历，默认为 `false`
+
+其中 `value` 与 `writable` 是一组，`set` 和 `get` 是一组，二者不可同时使用。
+
+<!--truncate-->
+
+### 例子1
+
+```javascript
+const obj = {}
+
+Object.defineProperty(obj, 'name', {
+    value: 'Alice',
+    writable: false
+})
+
+console.log(obj.name) // Alice
+
+obj.name = 'Bob'      // 不可写，更改无效
+console.log(obj.name) // Alice
+```
+
+在上面我们为 `obj` 的 `name` 属性配置了 `value` 属性为 `Alice` 作为 `obj.name` 的初始值，又配置了 `writable` 为 `false`，表明该属性是不可写的，对该属性进行赋值时无效的。
+
+### 例子2
+
+```javascript
+const obj = {}
+
+let username
+Object.defineProperty(obj, 'name', {
+    set(value) {
+        if (value === 'Alice') {
+            username = value
+        }
+    },
+    get() {
+        return username
+    }
+})
+
+obj.name = 'Alice'     // 赋值有效
+console.log(obj.name)  // Alice
+
+obj.name = 'Bob'       // 赋值无效 
+console.log(obj.name)  // Alice
+```
+
+上面我们为 `obj` 的 `name` 属性配置了 `set` 和 `get` 方法，没当我们为 `obj.name` 赋予新值时都会调用 `set` 方法，并将新值传入，在 `set` 方法中，我们对新值进行了判断，如果新值为 `Alice` 则我们赋值给 `username`；每次当我们访问 `obj.name` 时，则会触发 `get` 方法，在 `get` 方法中我们直接返回了 `username` 这个变量的值，通过这种方式可以控制对象属性的访问操作。
+
+### 例子3
+
+```javascript
+const obj = {
+    a: 1,
+    b: 2
+}
+console.log(Object.keys(obj)) // [ 'a', 'b' ]
+
+
+Object.defineProperty(obj, 'a', {
+    enumerable: false         // 不可枚举
+})
+console.log(Object.keys(obj)) // [ 'b' ]
+```
+
+在上面我们定义了一个 `obj` 对象，其中有 `a, b` 两个属性，默认都是可枚举的。通过 `Object.keys` 方法可以取得对象中所以可枚举的属性，这时它们都在返回的数组中；接着我们配置 `a` 为不可枚举，此时再次调用 `Object.keys`，此时 `a` 就不在返回的数组中了。
+
+### 例子4
+
+```javascript
+const obj = {
+    a: 1,
+    b: 2
+}
+
+Object.defineProperty(obj, 'a', {
+    enumerable: false,
+    configurable: false
+})
+
+console.log(Object.keys(obj)) // [ 'b' ]
+
+// TypeError: Cannot redefine property: a
+Object.defineProperty(obj, 'a', {
+    enumerable: true
+})
+```
+
+上面我们配置了 `a` 为不可枚举，并且配置 `configurable` 为 `false`，然后接着我们又想配置属性 `a` 为可枚举的，但是会报错 `TypeError: Cannot redefine property: a`，这是因为我们配置 `configurable` 为 `false`，表示不可再次配置，当我们再次对属性 `a` 进行配置便会报错。
+
+```javascript
+const obj = {
+    a: 1,
+    b: 2
+}
+
+Object.defineProperty(obj, 'a', {
+    enumerable: false,
+    configurable: true        // 可继续配置
+})
+console.log(Object.keys(obj)) // [ 'b' ]
+
+Object.defineProperty(obj, 'a', {
+    enumerable: true
+})
+console.log(Object.keys(obj)) // [ 'a', 'b' ]
+```
+
+## Object.defineProperties
+
+`Object.defineProperty` 每次只能配置对象的一个属性，而 `Object.defineProperties` 可以一次性配置对象的多个属性，它的语法如下：
+
+```javascript
+Object.defineProperties(obj, {
+    prop1: {
+        // 配置选项同 Object.defineProperty
+    },
+    prop2: {
+        // ...
+    }
+})
+```
+
+见下例：
+
+```javascript
+const obj = {
+    name: 'Alice',
+    age: 25
+}
+
+Object.defineProperties(obj, {
+    name: {
+        writable: false    // 不能写 name 属性
+    },
+    age: {
+        enumerable: false, // 不能遍历到 age 这个属性
+        get() {
+            return 18      // 别问，问就是 18
+        }
+    }
+})
+```
+
+## Object.preventExtensions
+
+`Object.preventExtions(obj)` 可以使得对象 `obj` 不可扩展，即不能为对象添加新的属性
+
+```javascript
+const obj = {
+    name: 'Alice',
+    age: 20
+}
+
+Object.preventExtensions(obj)
+
+obj.gender = 'female'   // 无法添加新的属性
+console.log(obj.gender) // undefined
+```
+
+上面我们将 `obj` 设置为不可扩展后试图添加新的属性，但是并没有成功。设置为不可扩展后，我们可以正常访问现有对象上的属性，以及更改和删除
+
+```javascript
+const obj = {
+    name: 'Alice',
+    age: 20
+}
+
+Object.preventExtensions(obj)
+
+obj.name = 'Bob'
+console.log(obj.name)  // Bob
+
+delete obj.name
+console.log(Object.keys(obj)) // [ 'age' ]
+```
+
+**对象一旦变为不可扩展后，就一直是不可扩展的。**通过 `Object.isExtensible` 方法可以判断一个对象是否是可扩展的
+
+```javascript
+const obj = {
+    name: 'Alice',
+    age: 20
+}
+
+console.log(Object.isExtensible(obj)) // true
+Object.preventExtensions(obj)
+console.log(Object.isExtensible(obj)) // false
+```
+
+## Object.seal
+
+`seal` 的意思是封印，`Object.seal` 比 `Object.preventExtensiable` 更近一步，被 `seal` 了的对象，除了变为不可扩展，还不可配置 `configurable: false`，属性不能被删除了以及属性不能被 `Object.defineProperty` 进行配置了
+
+```javascript
+const obj = {
+    name: 'Alice',
+    age: 20
+}
+
+Object.seal(obj)
+
+obj.gender = 'female'
+console.log(obj.female) // undefined, 不可扩展
+
+delete obj.name
+console.log(obj.name)   // Alice, 不可删除
+```
+
+但是我们还可以对象现有的属性进行更改的
+
+```javascript
+const obj = {
+    name: 'Alice',
+    age: 20
+}
+
+Object.seal(obj)
+
+obj.name = 'Bob'
+console.log(obj.name) // Bob
+```
+
+通过 `Object.isSealed` 可以判断对象是否被 `seal` 了
+
+```javascript
+const obj = {}
+
+console.log(Object.isSealed(obj)) // false
+Object.seal(obj)
+console.log(Object.isSealed(obj)) // true
+```
+
+## Object.freeze
+
+`freeze` 是冻结的意思，它相对于 `Object.seal` 更进一步，不仅不可扩展，不可配置，对象的数据属性 `writable`  会被设置为  `false`
+
+```javascript
+const obj = {
+    name: 'Alice'
+}
+
+Object.freeze(obj)
+
+obj.age = 18     // 不可扩展，无效
+obj.name = 'Bob' // 不可修改，无效
+delete obj.name  // 不可配置，无效
+
+console.log(obj) // { name: 'Alice' }
+```
+
+但是如果有定义 `set` 方法的话，对象属性还是可以被修改的
+
+```javascript
+const obj = {
+    name: 'Alice'
+}
+
+let username = obj.name
+Object.defineProperty(obj, 'name', {
+    set(value) {
+        username = value
+    },
+    get() {
+        return username
+    }
+})
+
+Object.freeze(obj)
+
+obj.name = 'Bob'
+console.log(obj.name) // Bob
+```
+
+通过 `Object.isFrozen` 方法可以判断一个对象是否被 `freeze` 了
+
+```javascript
+const obj = {}
+
+console.log(Object.isFrozen(obj)) // false
+Object.freeze(obj)
+console.log(Object.isFrozen(obj)) // true
+```
+
+## Proxy
+
+`Proxy` 是 `ES6` 中的新特性，它可以为对象做一层代理，当用户通过代理访问对象时，代理可以拦截一些操作，例如为属性赋值，访问属性的值，从而控制对象的访问。`Proxy` 可以拦截 13 种操作，这里不会详细介绍，只会介绍 `set` 和 `get` 拦截。
+
+`Proxy` 的语法如下
+
+```javascript
+const proxy = new Proxy(target, {
+    // 拦截的方法
+})
+```
+
+### 例子1
+
+```javascript
+const target = {
+    name: 'Alice',
+    age: 18
+}
+
+let proxy = new Proxy(target, {
+    set(trapTarget, key, value, receiver) {
+        // 只能为 age 属性赋值，并且值必须不大于 18 才能赋值成功
+        if (key === 'age' && value <= 18) {
+            trapTarget[key] = value
+        }
+    }
+})
+
+// 无法为 name 赋值
+proxy.name = 'Bob'
+console.log(proxy.name)  // Alice
+console.log(target.name) // Alice
+
+// 大于 18 赋值失败
+proxy.age = 19
+console.log(proxy.age)   // 18
+console.log(target.age)  // 18
+
+// 不大于 18，赋值成功
+proxy.age = 15
+console.log(proxy.age)   // 15
+console.log(target.age)  // 15
+```
+
+上面我们为 `target` 对象做了层代理，当我们通过代理赋值时，会被 `set` 方法拦截，`set` 方法接收四个参数：
+
+- `trapTarget`：被代理的对象
+- `key`：被赋值的属性
+- `value`：被赋的值
+- `receiver`：操作发生的对象，即代理对象
+
+上面我们只允许对 `age` 属性赋值，并且赋的值不能大于 `18`。
+
+### 例子2
+
+```javascript
+const target = {
+    name: 'Alice',
+    age: 20
+}
+
+let proxy = new Proxy(target, {
+    get(trapTarget, key, receiver) {
+        if (key === 'age') {
+            return 18
+        }
+        return trapTarget[key]
+    }
+})
+
+console.log(proxy.age)  // 18
+console.log(target.age) // 20
+```
+
+我们对 `target` 的 `get` 方法进行了代理，当我们通过代理对象访问属性值时，如果访问的是 `age` 属性，则返回 `18`，其他属性不做处理直接返回原值。
+
+``` note
+如果直接通过 `target` 访问属性的话，操作是不会被拦截的，代理没有作用。
+```
+

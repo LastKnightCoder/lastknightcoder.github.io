@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Fira+Code:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&display=swap');
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
@@ -10,7 +12,7 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-code-background: transparent;
-  --ifm-font-family-base: 'Trbuchet MS', 'Lora', '新宋体', '华文行楷', '黑体-简';
+  --ifm-font-family-base: 'Trbuchet MS', 'Lora', '新宋体', '宋体-简', '华文行楷', '黑体-简';
   --ifm-font-family-monospace: 'Fira Code', '楷体', '楷体-简';
   --inline-code-color: #1A66FF;
 }
@@ -44,4 +46,10 @@ code span {
 
 video {
   max-width: 100%;
+}
+
+#post-content img {
+  display: block;
+  max-width: 100%;
+  margin: 1.5em auto;
 }

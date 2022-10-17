@@ -10,6 +10,16 @@ module.exports = [
     image: '/img/latest_posts/pikaqiu.jpg'
   },
   {
+    title: 'MutationObserver',
+    description: '在复杂的网页应用中，DOM 结构会频繁的发生变化，有的时候我们需要根据变化来进行相应的操作，\
+以往通过 Mutation Events 来监听 DOM 的变化，目前它已经废弃了，被 MutationObserver 所取代。\
+MutationObserver 的兼容性很好，可以放心大胆的使用。',
+    auhor: '熊滔',
+    time: '2022-10-11',
+    link: '/blog/MutationObserver',
+    image: '/img/latest_posts/mutation-observer.jpg'
+  },
+  {
     title: 'IntersectionObserver',
     description: '如果我们需要监听某个元素是否出现在视口中，一般做法是监听 scroll 事件，\
 然后查询元素离视口顶部的距离，但是监听 scroll 事件存在性能问题。\

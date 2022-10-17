@@ -1,0 +1,910 @@
+---
+authors: xiongtao
+slug: 手写Promise
+tags:
+  - Promise
+  - 手写
+---
+
+## Promise 的使用
+
+### 回调地狱
+
+首先我们了解一下 `Promise` 出现的背景，假设有下面的程序
+
+```javascript
+let name = getUserNameById(id);
+let score = getScoreByName(name);
+let scholarship = getScholarshipByScore(score);
+console.log(scholarship);
+```
+
+这个程序首先根据 `id` 去获取名字，接着根据拿到的名字取获得分数，最后根据分数去获取奖学金，最后打印出奖学金。但是这个程序真的能达到预期的效果吗? 答案是不能，因为 `JavaScript` 是异步的，对于一般的耗时操作并不会立即执行，而是将函数保存在一个队列中，直到代码执行完毕，才会拿出队列中的函数执行。所以上面的函数都不会被立即执行，所以当然没有返回值，所以上面的 `name, score, scholarship` 都是 `undefined`。
+
+为了解决这种情况，我们一般会使用回调函数的形式，等我们根据 `id` 拿到 `name` 之后，将 `name` 传入回调函数，这样就可以保证"同步"的效果，所以我们将上面的代码修改如下
+
+```javascript
+getUserNameById(id, function (name) {
+  getScoreByName(name, function (score) {
+    getScholarshipByScore(score, function (scholarship) {
+      console.log(scholarship);
+    });
+  });
+});
+```
+
+<!--truncate-->
+
+但是上面的程序看起来还是怪吓人的，函数套着函数，像这样的情况我们称之为回调地狱。回调地狱不能使用 `try... catch` 捕获异常，不能使用 `return`，并且代码的可读性差，还容易出错。可能现在你还体会不到，上面我们只是嵌套了三层，实际的情况可能有更多的层，使得代码很难阅读。
+
+### Promise 的简单使用
+
+正是为了解决这样的问题，在 `ES6` 中提出了 `Promise` 来解决这个问题，我们来看如何使用 `Promise`，看下面的程序
+
+```javascript
+let p = new Promise((resolve) => {
+  // fn1
+  setTimeout(() => {
+    console.log("1s");
+    resolve(1);
+  }, 1000);
+});
+
+p.then((value) => {
+  // fn2
+  console.log(value);
+});
+```
+
+`Promise` 构造函数接受一个回调函数 `fn1`，并返回一个对象，该对象有一个 `then` 方法，`then` 方法也接受一个回调函数 `fn2`，只有当 `fn1` 中接收 `resolve` 函数执行(当 `resolve` 执行以后，我们就说该 `Promise` 对象进入了 `fulfilled` 状态)，`fn2` 才会被执行。
+
+以上面的代码为例，首先我们往 `Promise` 中传递了一个回调函数 `fn1`，该函数会立即执行
+
+```javascript
+// 向构造函数中传入的回调函数 fn1
+(resolve) => {
+  setTimeout(() => {
+    console.log("1s");
+    resolve(1);
+  }, 1000);
+};
+```
+
+当该 `fn1` 的 `resolve` 函数执行之后，`fn2` 才会被执行，所以 `1s` 之后 `fn2` 才会执行
+
+```javascript
+// then 接收的回调函数 fn2
+(value) => {
+  console.log(value);
+};
+```
+
+`fn2` 接收的参数 `value` 是通过 `resolve` 传入的，在上面我们通过 `resolve(1)` 传入了参数 `1`，所以 `fn2` 接受到的参数为 `1`。上面执行的结果为
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/2020062714122022-04-21-20-12-28.gif" style={{ zoom: '50%'}}/>
+
+可见 `fn2` 是在 `resolve` 函数之后执行的，这样就可以保证代码执行的顺序，并且不用写嵌套的回调函数，而是使用 `then` 方法进行"平行"的调用。
+
+### 链式调用
+
+所谓的链式调用是指在调用 `then` 方法之后还可以继续调用 `then` 方法，如下
+
+```javascript
+let p = new Promise((resolve) => {
+  // fn1
+  resolve(1);
+});
+
+p.then((value) => {
+  // fn2
+  console.log(value);
+  return 2;
+}).then((value) => {
+  // fn3
+  console.log(value);
+});
+```
+
+输出如下
+
+```javascript
+1;
+2;
+```
+
+如上所示，我们连续调用了两次 `then`，在执行时，`fn3` 是在 `fn2` 之后执行的，并且 `fn3` 中的参数 `value` 是 `fn2` 的返回值。其实 `then` 方法也可以不传递任何的参数
+
+```javascript
+let p = new Promise((resolve) => {
+  // fn1
+  resolve(1);
+});
+
+p.then((value) => {
+  // fn2
+  console.log(value);
+  return 2;
+}).then() // 没有传递任何的参数
+  .then((value) => {
+    // fn3
+    console.log(value);
+  });
+```
+
+在上面我们调用了没有传入回调函数 `then` 之后又继续调用了一个 `then`，根据我们上面所讲的，`fn3` 接受的参数 `value` 是第二个 `then` 回调函数的返回值，但是由于第二个 `then` 没有回调函数，意味着根本没有返回值，这个时候会把上一层的返回值即 `fn2` 返回值传到 `fn3`
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/202204212013242022-04-21-20-13-25.png" style={{ zoom: '50%'}}/>
+
+所以上面的输出是
+
+```javascript
+1
+2
+```
+
+`then` 中的回调函数除了可以返回普通的值以外，还可以返回一个 `Promise` 对象，当返回 `Promise` 对象时，下面如果继续调用 `then`，那么 `then` 中的回调函数要等到这个 `Promise` 对象中的 `resolve` 方法执行后才会被执行，即进入了 `fulfilled` 状态 ，并且这个 `then` 中回调函数所需的参数是返回的 `Promise` 对象 `resolve` 传入的值，如下
+
+```javascript
+let p = new Promise((resolve) => {
+  resolve(1);
+});
+
+p.then((value) => {
+  // fn1
+  console.log(value);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("then 返回的Promise");
+      resolve(2);
+    }, 1000);
+  });
+}).then((value) => {
+  // fn2
+  console.log(value);
+});
+```
+
+`fn2` 在 `fn1` 返回的 `Promise` 进入了 `fulfilled` 状态之后才会被执行
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/202204212014492022-04-21-20-14-50.png" style={{ zoom: '50%'}}/>
+
+上面的执行结果为
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/2020062717352022-04-21-20-16-02.gif" style={{ zoom: '50%'}}/>
+
+### 原型方法
+
+上面我们介绍了 `resolve` 和 `then` 方法，当我们执行 `resolve` 方法之后，`then` 接收的回调函数才会执行。其实传入 `Promise` 的回调函数有两个参数，一个是 `resolve`，另一个是 `reject`，当函数产生错误时，那么我们会调用 `reject` 方法，这时我们说 `Promise` 对象进入了 `rejetced` 状态，这时后面的 `then` 方法不会执行，与 `then` 方法相对的是一个 `catch` 方法，该方法也是接收一个回调函数，该回调函数时用来处理错误的，当该 `Promise` 对象进入了 `rejected` 状态，`catch` 中的回调函数才会被执行，与 `then` 相似，`catch` 中回调函数接收的参数是 `reject` 调用时传入的参数，如下
+
+```javascript
+let p = new Promise((resolve, reject) => {
+  reject("error");
+}).then(() => {
+    console.log("then方法执行了");
+  })
+  .catch((error) => {
+    console.log("catch方法执行");
+    console.log("message: " + error);
+  });
+```
+
+结果为
+
+```javascript
+catch方法执行;
+message: error;
+```
+
+上面我们调用了 `reject`，这时后面的 `then` 中的回调函数是不会执行的，而是会执行 `catch` 中的回调函数。
+
+:::note note
+
+其实 `then` 方法可以接受两个回调函数，第一个回调函数用来处理 `resolve` 之后的结果，而第二个回调函数则是用来处理 `reject` 之后的结果，比如上面的程序可以写为
+
+```javascript
+let p = new Promise((resolve, reject) => {
+  reject("error");
+}).then(
+  () => {
+    console.log("then方法执行了");
+  },
+  (error) => {
+    console.log("catch方法执行");
+    console.log("message:" + error);
+  }
+);
+```
+:::
+
+执行的结果与上面的相同，**其实 `catch(onError)` 函数本质上就是 `then(null, onError)`**。
+
+有的时候无论是成功以否，我们都希望执行一个函数，该函数的作用一般是用来资源的回收，用来完成这个功能的是 `finally` 函数，该函数也是接收一个回调函数，该回调函数无论是在 `fulfilled` 状态还是 `rejected` 状态都是会被执行的
+
+```javascript
+let p = new Promise((resolve, reject) => {
+  // rejected状态
+  reject();
+})
+  .then(
+    () => {
+      console.log("then方法执行了");
+    },
+    () => {
+      console.log("catch方法执行");
+    }
+  )
+  .finally(() => {
+    console.log("finally执行了");
+  });
+```
+
+最后的执行结果为
+
+```javascript
+catch方法执行;
+finally执行了;
+```
+
+现在我们将 `reject()` 改为 `resolve()`
+
+```javascript
+let p = new Promise((resolve, reject) => {
+  // fulfilled 状态
+  resolve();
+}).then(
+    () => {
+      console.log("then方法执行了");
+    },
+    () => {
+      console.log("catch方法执行");
+    }
+  )
+  .finally(() => {
+    console.log("finally执行了");
+  });
+```
+
+这时执行的结果为
+
+```
+then方法执行了
+finally执行了
+```
+
+所以不论出于哪个状态，`finally` 中的回调函数都会被执行。
+
+### 静态方法
+
+静态方法指的就是通过 `Promise` 直接调用的方法。
+
+#### resolve
+
+我们首先来介绍 `resolve` 方法，该函数接收一个参数，返回一个 `Promise` 对象，根据参数的不同情况，返回值也不相同
+
+1. 参数是一个 `Promise` 对象，直接返回
+
+   ```javascript
+   let p1 = new Promise((resolve, reject) => {
+     resolve(123);
+   });
+
+   let p2 = Promise.resolve(p1);
+
+   console.log(p1 === p2); // true
+   ```
+
+2. 参数是一个含有 `then` 方法的对象(我们也称之为 `thenable` 对象)，那么会立即执行该 `then` 方法，该 `then` 方法接收两个参数，这两个参数分别为返回的 `Promise` 的 `resolve, reject` 方法
+
+   ```javascript
+   let p = Promise.resolve({
+     then(resolve, reject) {
+       resolve(123);
+     },
+   });
+
+   p.then((value) => {
+     console.log(value); // 123
+   });
+   ```
+
+3. 参数不是上面两种情况，那么会返回的一个 `fulfilled` 状态的 `Promise`，该 `Promise` 会将参数传给后面的 `then`
+
+   ```javascript
+   let p = Promise.resolve("123");
+
+   p.then((value) => {
+     console.log(value); // 123
+   });
+   ```
+
+#### all
+
+该方法也会返回一个 `Promise` 对象，它接受一个由 `Promise` 对象组成的数组，只有当该数组中的所有 `Promise` 对象都变为 `fulfilled` 状态之后，返回的 `Promise` 对象才会变为 `fulfilled` 状态
+
+```javascript
+let p1 = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("p1");
+    resolve(1);
+  }, 1000);
+});
+
+let p2 = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("p2");
+    resolve(2);
+  }, 2000);
+});
+
+let p3 = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("p3");
+    resolve(3);
+  }, 3000);
+});
+
+Promise.all([p1, p2, p3]).then((results) => {
+  console.log(results); // [ 1, 2, 3 ]
+});
+```
+
+在上面我们定义三个 `Promise` 对象，这个三个对象分别在 `1s, 2s, 3s` 后变为 `fulfilled`，所以返回的 `Promise` 对象在 `3s` 后变为 `fulfilled` 状态，并且会将这三个 `Promise` 对象向 `resolve` 传入的值形成数组传入到返回的 `Promise` 的 `resolve` 中
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/202204212018472022-04-21-20-18-48.png" style={{ zoom: '50%'}}/>
+
+上面代码的执行结果为
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/202006272055gif2022-04-21-20-19-28.gif" style={{ zoom: '50%'}}/>
+
+#### race
+
+`race` 方法它也会返回一个 `Promise` 对象，同 `all` 方法一样，它也接受一个由 `Promise` 对象组成的数组，但是不是当所有的 `Promise` 对象变为 `fulfilled` 后，返回的 `Promise` 对象才会变为 `fulfilled`，而是这些 `Promise` 对象进行竞赛，当最快的一个 `Promise` 对象变为 `fulfilled` 状态时，返回的 `Promise` 对象就会变为 `fulfilled`
+
+```javascript
+let p1 = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("p1");
+    resolve(1);
+  }, 1000);
+});
+
+let p2 = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("p2");
+    resolve(2);
+  }, 2000);
+});
+
+let p3 = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("p3");
+    resolve(3);
+  }, 3000);
+});
+
+Promise.race([p1, p2, p3]).then((result) => {
+  console.log(result);
+});
+```
+
+并且会将向最快变为 `fulfilled` 状态的 `Promise` 对象的 `resolve` 传入的值传入到返回的 `Promise` 对象的 `resolve` 方法中
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/202204212020082022-04-21-20-20-09.png" style={{ zoom: '50%'}}/>
+
+所以上面程序的执行结果为
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/2020062721142022-04-21-20-20-53.gif" style={{ zoom: '50%'}}/>
+
+可见当 `p1` 变为 `fulfilled` 之后，返回的 `Promise` 也变为了 `fulfilled` 状态，并且拿到了向 `p1` 的 `resolve` 中传入的值。
+
+## 实现 Promise
+
+### 简单实现
+
+下面就将简单实现一个 `Promise`。首先我们要明确，`Promise` 有三个状态，分别为 `pending, fulfilled, rejected` 三个状态，初始时的 `Promise` 是 `pending` 状态，当调用 `resolve` 方法后就会变为 `fulfilled` 状态，当处于 `fulfilled` 状态时，`then` 中的第一个回调函数才会被执行；调用 `reject` 方法就会变为 `rejected` 状态，当处于 `rejected` 状态时，`then` 中的第二个回调函数才会被执行或者 `catch` 中的回调函数才会被执行。并且 `fulfilled` 和 `rejected` 状态只能由 `pending` 状态转变而来，并且一般转变为 `fulfilled` 状态或者 `rejected` 状态，那么状态就不能再次进行转变
+
+```javascript
+class Promise {
+  // Promise的三个状态
+  PENDING = "pending";
+  FULFILLED = "fulfilled";
+  REJECTED = "rejected";
+
+  // 当前状态
+  state = this.PENDING;
+  // 传给 then 中回调函数的值
+  value = null;
+
+  // 构造函数，接收一个回调函数，立即执行该函数并将 _resolve 和 _reject 传入
+  constructor(fn) {
+    fn(this._resolve.bind(this), this._reject.bind(this));
+  }
+
+  // 当执行到 then 方法但还未变为 fulfilled 状态时，那么将向 then 中传入的回调函数先保存起来
+  callbacks = [];
+
+  _resolve(value) {
+    // 如果状态不为 pending，说明状态已发生改变，不再执行
+    if (this.state !== this.PENDING) {
+      return;
+    }
+
+    // 将要传给 then 中回调函数的值保存起来
+    this.value = value;
+    // 改变状态
+    this.state = this.FULFILLED;
+    // 执行向 then 中传入的 onFulfilled 函数
+    this.callbacks.forEach((callback) => callback.onFulfilled(this.value));
+  }
+
+  _reject(error) {
+    // 过程同 reject
+    if (!this.PENDING) {
+      return;
+    }
+    this.value = error;
+    this.state = this.REJECTED;
+    this.callbacks.forEach((callback) => callback.onRejected(this.value));
+  }
+
+  then(onFulfilled, onRejected) {
+    // 如果当前的状态为 pending，那么将回调函数保存到 callbacks 函数中，等到状态改变时执行
+    if (this.state === this.PENDING) {
+      this.callbacks.push({
+        onFulfilled,
+        onRejected,
+      });
+      return;
+    }
+
+    // 如果状态为 fulfilled 状态，则执行 onFulfilled 方法
+    if (this.state === this.FULFILLED) {
+      onFulfilled(this.value);
+      return;
+    }
+
+    // 同上
+    if (this.state === this.REJECTED) {
+      onRejected(this.value);
+      return;
+    }
+  }
+}
+```
+
+上面的程序的注释描述了程序的功能，相比还是不难理解的，现在我们来测试一下是否有效
+
+```javascript
+let p = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("1s后");
+    resolve(1);
+  }, 1000);
+});
+
+p.then((value) => {
+  console.log(value);
+});
+```
+
+结果如下
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/2020062721452022-04-21-20-21-44.gif" style={{ zoom: '50%'}}/>
+
+### 链式调用
+
+现在我们来实现链式调用，要实现链式调用就需要返回一个 `Promise`，每次调用 `then` 方法我们都返回一个新的 `Promise`，修改如下
+
+```javascript
+_resolve(value) {
+  if (this.state !== this.PENDING) {
+      return;
+  }
+  this.value = value;
+  this.state = this.FULFILLED;
+  // 修改了这里，由于需要将 then 中的回调函数的返回值返回，所以不能简单的调用
+  this.callbacks.forEach(callback => this._handle(callback));
+}
+
+_reject(error) {
+  if (!this.PENDING) {
+      return;
+  }
+  this.value = error;
+  this.state = this.REJECTED;
+  // 同 resolve
+  this.callbacks.forEach(callback => this._handle(callback));
+}
+
+then(onFulfilled, onRejected) {
+  // 返回新的 Promise
+  return new Promise((resolve, reject) => {
+    this._handle({
+      onFulfilled,
+      onRejected,
+      resolve,
+      reject
+    })
+  })
+}
+
+_handle(callback) {
+  // 如果是 pending 状态，将 callback 延迟执行
+  if (this.state === this.PENDING) {
+    this.callbacks.push(callback);
+  }
+  if (this.state === this.FULFILLED) {
+    // 如果 then 方法没有传入 onFulFilled 回调函数，那么将上一层返回的值传入
+    if (!callback.onFulfilled) {
+      callback.resolve(this.value);
+      return;
+    }
+    // 如果有 onFulFilled 函数，那么将 onFulFilled 函数的返回值传入到返回的 Promise 对象的 resolve 中
+    try {
+      // 用户传入的回调函数可能会出错，所以使用 try...catch 包裹起来
+      let ret = callback.onFulfilled(this.value);
+      callback.resolve(ret);
+    } catch (e) {
+      // 当传入的回调函数出错时，Promise 变为 rejected状态
+      callback.reject(e);
+    }
+  }
+  if (this.state === this.REJECTED) {
+    if (!callback.onRejected) {
+      callback.reject(this.value);
+      return;
+    }
+    let ret = callback.onRejected(this.value);
+    callback.reject(ret);
+  }
+}
+```
+
+现在我们来测试一下是否能够进行链式调用
+
+```javascript
+let p = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("1s后");
+    resolve(1);
+  }, 1000);
+});
+
+p.then((value) => {
+  console.log(value);
+  return 2;
+}).then() // 什么回调函数都没有传入，会将上一个 then 返回的值传入
+  .then((value) => {
+    console.log(value);
+  });
+```
+
+上面的执行结果为
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/2020062722232022-04-21-20-22-52.gif" style={{ zoom: '50%'}}/>
+
+上面我们还要最后一个问题没有解决，就是如果 `then` 中的回调函数返回的是 `Promise` 对象，那么我们就要在 `_resolve` 对值进行判断，如果值是 `Promise` 对象，记作 `p1`，那么 `then` 返回的 `Promise` 对象 `p2` 的 `resolve` 方法应当在 `p1` 对象的 `resolve` 执行之后执行。修改 `_resolve` 如下
+
+```javascript
+_resolve(value) {
+  if (this.state !== this.PENDING) {
+      return;
+  }
+
+  // 只增加了下面的代码
+  if (value instanceof Promise) {
+    // 当前 resolve 的执行应当在 value 的 resolve 执行之后
+    value.then(this._resolve.bind(this), this._reject.bind(this));
+    return;
+  }
+
+  this.value = value;
+  this.state = this.FULFILLED;
+  this.callbacks.forEach(callback => this._handle(callback));
+}
+```
+
+现在我们来验证一番
+
+```javascript
+let p = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("1s后");
+    resolve(1);
+  }, 1000);
+});
+
+p.then((value) => {
+  console.log(value);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("又1s后");
+      resolve(2);
+    }, 1000);
+  });
+}).then((value) => {
+  console.log(value);
+});
+```
+
+执行结果为
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/2020062722392022-04-21-20-23-35.gif" style={{ zoom: '50%'}}/>
+
+### 原型方法
+
+接下来继续实现 `Promise` 对象的几个原型方法，分别是 `catch` 和 `finally`。`catch` 的实现很简单
+
+```javascript
+catch(onRejected) {
+  return this.then(null, onRejected);
+}
+```
+
+接下来是实现 `finally` 方法，最容易想到的版本是
+
+```javascript
+finally(onDone) {
+  return this.then(onDone, onDone);
+}
+```
+
+不管是处于 `fulfilled` 的状态还是 `rejected` 的状态，`onDone` 方法都会得到执行，但是使用这样的方式有缺点
+
+1. `onDone` 方法是无论失败还是成功时都会执行的，所以它应该没有参数，但是使用 `then(onDone, onDone)` 的方式就会传入参数
+2. 如果 `onDone` 返回一个 `Promise` 对象的话，那么会改变 `finally` 返回的 `Promise` 的状态
+
+处于上述考虑，我们使用下面的实现方式
+
+```javascript
+finally(onDone) {
+  if (typeof onDone !== 'function') {
+    return this.then();
+  }
+  // 无论成功与否，onDone() 都会执行，且不需要参数
+  // 另外执行 finally 不会影响之前的 Promise 状态
+  return this.then(
+    value => Promise.resolve(onDone()).then(() => value),
+    error => Promise.resolve(onDone()).then(() => {throw error})
+  );
+}
+```
+
+### 静态方法
+
+最后来实现 `Promise` 的静态方法，首先实现 `resolve` 方法，对于该方法的使用我们在用法那里已经介绍过了，所以这里直接贴出实现的代码
+
+```javascript
+static resolve(value) {
+  // 如果传入的是 Promise 对象，直接返回
+  if (value instanceof Promise) {
+    return value;
+  }
+
+  // 如果传入的是 thenable 对象，则立即执行对象的 then，并将 resolve 和 reject 传入
+  if (value && typeof value === 'object' && typeof value.then === 'function') {
+    return new Promise((resolve, reject) => value.then(resolve, reject));
+  }
+
+  if (value) {
+    // 如果不是上面两种情况，并且 value 存在，那么直接将 value 传入 resolve
+    return new Promise(resolve => resolve(value));
+  } else {
+    return new Promise(resolve => resolve());
+  }
+}
+```
+
+`all` 方法在上面也介绍过了，只有当所有传入的 `Promise` 对象都变为 `fulfilled` 状态，返回的 `Promise` 对象才会变为 `fulfilled` 状态，所以我们使用一个变量来统计已经变为 `fulfilled` 状态的 `Promise` 对象的个数，当所有 `Promise` 对象都变为 `fulfilled` 状态时，执行 `resolve` 方法，将返回的 `Promise` 对象变为 `fulfilled` 状态，如下
+
+```javascript
+static all(promises) {
+  return new Promise((resolve, reject) => {
+    // Promise 对象的个数
+    let itemLength = promises.length;
+    // 统计已变为 fulfilled 状态的 Promise 对象个数
+    let finishedPromise = 0;
+    // 返回的数组
+    let results = Array.from({length: itemLength});
+
+    promises.forEach(promise => {
+      promise.then(result => {
+        results[finishedPromise] = result;
+        finishedPromise++;
+        // 当所有的 Promise 对象变为 fulfilled 时，返回的 Promise 对象状态变为 fulfilled
+        if (finishedPromise == itemLength) {
+          resolve(results);
+        }
+      }, error => {
+        // 只要有一个变为 rejected，那么直接变为 rejected 状态
+        reject(error);
+      })
+    })
+  })
+}
+```
+
+`race` 方法的用法也介绍过，在这里我们利用 `resolve` 方法只会执行一次的特性，我们很快可以写出这样的代码
+
+```javascript
+static race(promises) {
+  return new Promise((resolve, reject) => {
+    promises.forEach(promise => {
+      promise.then(result => {
+        resolve(result);
+      }, error => {
+        reject(error);
+      })
+    })
+  })
+}
+```
+
+由于 `resolve` 只会执行一次，只有最先变为 `fulfilled` 状态的 `Promise` 对象能将它 `resolve` 的值传入。
+
+### 完整代码
+
+```javascript
+class Promise {
+  PENDING = "pending";
+  FULFILLED = "fulfilled";
+  REJECTED = "rejected";
+
+  state = this.PENDING;
+  value = null;
+
+  constructor(fn) {
+    fn(this._resolve.bind(this), this._reject.bind(this));
+  }
+
+  callbacks = [];
+
+  _resolve(value) {
+    if (this.state !== this.PENDING) {
+      return;
+    }
+
+    if (value instanceof Promise) {
+      value.then(this._resolve.bind(this), this._reject.bind(this));
+      return;
+    }
+
+    this.value = value;
+    this.state = this.FULFILLED;
+    this.callbacks.forEach((callback) => this._handle(callback));
+  }
+
+  _reject(error) {
+    if (!this.PENDING) {
+      return;
+    }
+    this.value = error;
+    this.state = this.REJECTED;
+    this.callbacks.forEach((callback) => this._handle(callback));
+  }
+
+  then(onFulfilled, onRejected) {
+    return new Promise((resolve, reject) => {
+      this._handle({
+        onFulfilled,
+        onRejected,
+        resolve,
+        reject,
+      });
+    });
+  }
+
+  catch(onRejected) {
+    return this.then(null, onRejected);
+  }
+
+  finally(onDone) {
+    if (typeof onDone !== "function") {
+      return this.then();
+    }
+
+    return this.then(
+      (value) => Promise.resolve(onDone()).then(() => value),
+      (error) =>
+        Promise.resolve(onDone()).then(() => {
+          throw error;
+        })
+    );
+  }
+
+  _handle(callback) {
+    if (this.state === this.PENDING) {
+      this.callbacks.push(callback);
+    }
+
+    if (this.state === this.FULFILLED) {
+      if (!callback.onFulfilled) {
+        callback.resolve(this.value);
+        return;
+      }
+
+      try {
+        let ret = callback.onFulfilled(this.value);
+        callback.resolve(ret);
+      } catch (e) {
+        callback.reject(e);
+      }
+    }
+
+    if (this.state === this.REJECTED) {
+      if (!callback.onRejected) {
+        callback.reject(this.value);
+        return;
+      }
+      let ret = callback.onRejected(this.value);
+      callback.reject(ret);
+    }
+  }
+
+  static resolve(value) {
+    if (value instanceof Promise) {
+      return value;
+    }
+
+    if (
+      value &&
+      typeof value === "object" &&
+      typeof value.then === "function"
+    ) {
+      return new Promise((resolve, reject) => value.then(resolve, reject));
+    }
+
+    if (value) {
+      return new Promise((resolve) => resolve(value));
+    } else {
+      return new Promise((resolve) => resolve());
+    }
+  }
+
+  static all(promises) {
+    return new Promise((resolve, reject) => {
+      let itemLength = promises.length;
+      let finishedPromise = 0;
+      let results = Array.from({ length: itemLength });
+
+      promises.forEach((promise) => {
+        promise.then(
+          (result) => {
+            results[finishedPromise] = result;
+            finishedPromise++;
+            if (finishedPromise == itemLength) {
+              resolve(results);
+            }
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    });
+  }
+
+  static race(promises) {
+    return new Promise((resolve, reject) => {
+      promises.forEach((promise) => {
+        promise.then(
+          (result) => {
+            resolve(result);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    });
+  }
+}
+```
+
+## 参考文章
+
+- [图解 Promise 实现原理（一）：先写一个基础的 Promise](https://mp.weixin.qq.com/s?__biz=MzA5NTcxOTcyMg==&mid=2247486601&idx=1&sn=54429420b0c07d518cec0f25a335c41e&chksm=90ba54cca7cddddae70a7ed7c000f0b1bc0d7c2d1c3b24f57775dc5822fc86fd9ba0c5f3ed70&scene=126&sessionid=1592905857&key=82c238abbe3b82baf9881311d259c9d04b6825a9ccae7b2a4719b98d46065f568a0db4178266ff98feff0214486915cb1af9165162e328decbc0810fb56726ef47afce6aab7d437b05ee4b92e1e2edac&ascene=1&uin=MTc3NjQ2ODM3NQ%3D%3D&devicetype=Windows+10+x64&version=6209007b&lang=zh_CN&exportkey=AXzB1RasL6jiqp0WQ45qnf4%3D&pass_ticket=x774fARNYVyp1e9yDUlfRb7wSl0izcpF0j6DFaHf0fkEHDL6jv0ElWc1SzaZ6%2B%2B1)
+- [图解 Promise 实现原理（二）： Promise 链式调用](https://mp.weixin.qq.com/s?__biz=MzA5NTcxOTcyMg==&mid=2247486680&idx=1&sn=94ad054b685f05fbb6e37059399c9cef&chksm=90ba549da7cddd8b5c802100f0d4752587c2781797d69bf33b7f3da241b754a0c28b4250b947&scene=126&sessionid=1592905847&key=e82ba7b3cce71606954236c4df9ca857aa88e193ff96f051fc026f71c1b1ca29273ee7acb983db16e8bbaf66b5fca09e484347169ba81d069693c0bd0e0575c68bdbe3d58d3f3215e65fbb45d745e79b&ascene=1&uin=MTc3NjQ2ODM3NQ%3D%3D&devicetype=Windows+10+x64&version=6209007b&lang=zh_CN&exportkey=Af0QDGTKJ0ZZ3MXT%2BURTN9M%3D&pass_ticket=x774fARNYVyp1e9yDUlfRb7wSl0izcpF0j6DFaHf0fkEHDL6jv0ElWc1SzaZ6%2B%2B1)
+- [图解 Promise 实现原理（三）：Promise 原型方法实现](https://mp.weixin.qq.com/s?__biz=MzA5NTcxOTcyMg==&mid=2247486762&idx=1&sn=278db1c95220579a8c1a2125a65d627a&chksm=90ba556fa7cddc7902cd186b057a989d0ca1a1357ba101feb9f871985385909e104aaafd4bda&scene=126&sessionid=1592905847&key=f6dee7b9ef4ba659a75dc0797593ee3ed7a2ec7d08fcb00f6cc346c81f86fc7a61cf5067c66192cee324e7aa9577fb5657def17927abdf0ce25d2e702f369d6a2ee3a3ac2bd2e3ae501aea18372ad528&ascene=1&uin=MTc3NjQ2ODM3NQ%3D%3D&devicetype=Windows+10+x64&version=6209007b&lang=zh_CN&exportkey=AY0%2FcOOAjibVmsT%2B%2B1tYPmI%3D&pass_ticket=x774fARNYVyp1e9yDUlfRb7wSl0izcpF0j6DFaHf0fkEHDL6jv0ElWc1SzaZ6%2B%2B1)
+- [图解 Promise 实现原理（四）：Promise 静态方法实现](https://mp.weixin.qq.com/s?__biz=MzA5NTcxOTcyMg==&mid=2247486839&idx=1&sn=5e9d85a70e9f85c94250a8c1c86772ca&chksm=90ba5532a7cddc24535cfc80fe892ffa34ff3a9638fbc1e9810ebab3c35784402968f9a65d44&scene=126&sessionid=1593161282&key=e82ba7b3cce71606a4cce70ca930ac7d6b61a05729ee3144ff9c5ccd0f54be407ea3ba04542163e11032e315e329bcf1536ceaf16ef408d759adda51f9d1ed57c083e30ba375fa10862d7e6705e0942d&ascene=1&uin=MTc3NjQ2ODM3NQ%3D%3D&devicetype=Windows+10+x64&version=6209007b&lang=zh_CN&exportkey=AWZmv5R1eG3cSK0W44%2F8fyM%3D&pass_ticket=uTkleeK9zg7mTbWWYlCzmyU6cReKuc7iYYllvVI7AfOrz4Zh0w9gvqjsFpKY5qNq)
+- [Promise.all 和 Promise.race 源码实现](https://juejin.im/post/5d3f0a38f265da03bb4a81ff)

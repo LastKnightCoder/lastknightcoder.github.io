@@ -1,0 +1,116 @@
+---
+slug: 柯里化
+authors: xiongtao
+date: 2021-06-08
+tags: 
+  - 柯里化
+  - 函数式编程
+---
+
+## 柯里化介绍
+
+函数柯里化指的是函数处理一部分的参数，然后返回一个函数来处理剩余的参数，如比如有一个加法函数如下
+
+```javascript
+function add(x, y) {
+    return x + y;
+}
+add(1, 2); // 3
+```
+
+现在如果这个函数被柯里化，那么我们可以如下使用
+
+```javascript
+const increment = add(1); // 接收第一个参数，返回一个函数处理第二个参数
+increment(2); // 3
+increment(4); // 5
+```
+
+<!--truncate-->
+
+## 柯里化实现
+
+现在怎么实现这种效果，如果只是针对上面的加法函数，那么可以如下实现
+
+```javascript
+function add(x, y) {
+    return function(y) {
+        return x + y;
+    }
+}
+```
+
+但是这种方法明显只对加法函数有效，我们现在是想设计一个函数，它接收一个函数为参数，作用就是把这个函数柯里化，并将这个柯里化的函数返回，比如
+
+```javascript
+curryAdd = curry(add); // 接收add函数，将函数add柯里化
+const increment = curryAdd(1);
+increment(2); // 3
+increment(4); // 5
+```
+
+首先实现一个简单版本的
+
+```javascript
+function curry(fn, ...args1) {
+    return function(...args2) {
+        fn(...args1, ...args2)
+    }
+}
+```
+
+但是这个函数明显有一个缺陷，那就是只能传入两次参数，怎么解决，肯定使用递归了
+
+```javascript
+function curry(fn, ...args1) {
+    if (fn.length == args1.length) {
+        return fn(...args1);
+    } else {
+        return function(...args2) {
+            return curry(fn, ...args1, ...args2)
+        }
+    }
+}
+```
+
+上面的函数首先判断接收的参数的个数与函数要求参数的个数是否相同，如果相同则直接执行函数，否则返回一个函数来处理剩下的参数，这样就可以实现函数的柯里化。
+
+## 柯里化应用举例
+
+现在来看一下柯里话用什么用处，假设有一个 `ajax` 请求的函数如下
+
+```javascript
+function ajax(type, url, data) {
+    let xhr = new XMLHttpRequest();
+    xhr.onReadystateChange = function() {
+        // ...
+    }
+    xhr.open(type, url);
+    xhr.send(data);
+}
+```
+
+现在我们将这个函数柯里化
+
+```javascript
+let curriedAjax = curry(ajax);
+let post = curriedAjax('post');
+```
+
+我们向 `curriedAjax` 传入一个参数 `post`，得到一个函数，这个函数的作用是用来发 `post` 请求的，我们每次发 `post` 请求时，只需要使用 `post` 方法即可，这样函数的复用性有了极大的增强，我们可以继续传入参数
+
+```javascript
+let postGoogle = post('https://www.google.com');
+```
+
+我们又得到了一个函数，该函数的作用是向 `https://www.google.com` 发送 `post` 请求，函数的复用性又进一步的提升。
+
+```info
+使用过 jQuery 的都知道，可以使用 `$.ajax()` 这样的通用方法，但是也有 `$.get()` 和 `$.post()` 这样的语法糖，但是 `jQuery` 底部是不是这样实现的就不得而知了。
+```
+
+## 参考链接
+
+- [大佬，JavaScript 柯里化，了解一下](https://juejin.im/post/5af13664f265da0ba266efcf)
+- [JavaScript专题之函数柯里化](https://github.com/mqyqingfeng/Blog/issues/42)
+

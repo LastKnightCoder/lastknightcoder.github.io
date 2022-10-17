@@ -1,0 +1,713 @@
+---
+slug: MutationObserver
+tags: 
+  - MutationObserver
+  - DOM
+authors: xiongtao
+date: 2022-10-11
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+在复杂的网页应用中，DOM 结构会频繁的发生变化，有的时候我们需要根据变化来进行相应的操作，以往通过 `Mutation Events` 来监听 DOM 的变化，目前它已经废弃了，被 `MutationObserver` 所取代。`MutationObserver` 的兼容性很好，可以放心大胆的使用。
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/image.70ve24867iw.webp" style={{ zoom: '50%'}} />
+
+## 基本用法
+
+`MutationObserver` 的基本用法如下
+
+```js
+const observer = new MutationObserver(mutations => {
+
+});
+observer.observe(element, options);
+```
+
+<!--truncate-->
+
+我们通过 `new MutationObserver()` 创建一个 `MutationObserver` 对象，构造函数接收一个回调函数作为参数，当被监听的元素 DOM 发生变化时，该回调函数将会执行。
+
+回调函数接收一个参数，该参数是一个数组，其中元素类型为 `MutationRecord`，`MutationRecord` 包含如下属性：
+
+```js
+{
+	type: 'attributes',
+	target: div#container,
+	addedNodes: [],
+	removeNodes: [],
+	previousSibling: null,
+	nextSibling: null,
+	attributeName: '',
+	attributeNamespace: null,
+	oldValue: ''
+}
+```
+
+在后续内容中会详细介绍每个字段的作用。
+
+通过 `observe(element, options)` 对元素 `element` 进行监听，除了需要传入要监听的元素以外，还需要传递一个 `options` 对象，它包括如下字段：
+
+```js
+{
+	childList: true,
+	attributes: true,
+	attributeFilter: ['class', 'style'],
+	attributeOldValue: true,
+	characterData: true,
+	characterDataOldValue: true,
+	subtree: true
+}
+```
+
+这里为了完整性将可设置的所有参数列了出来，实际在 `options` 参数并不需要指定每一个属性。
+
+可以观察到除了 `attributeFilter` 属性外，其它属性都是布尔值，也就说这些属性相当于一个开关，设置某个属性为 `true` 就相当于开启某个特性，后面会详细介绍每个属性的作用。
+
+:::note note
+虽然不需要指定每一个属性，但是 `childList`, `attributes`, `characterData` 这三个属性必须有一个设置为 `true`。
+:::
+
+如果不再需要监听 DOM 的变化时，可以通过 `observer.disconnect()` 方法停止监听。
+
+来看一个🌰。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="container">
+  <p>世界这么大，我想去看看</p>
+</div>
+<button id="btn">删除元素</button>
+```
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const observer = new MutationObserver(mutations => {
+  console.log(mutations);
+});
+observer.observe(document.getElementById('container'), {
+  childList: true
+});
+
+const btn = document.getElementById('btn');
+btn.addEventListener('click', () => {
+  document.getElementById('container').removeChild(
+    document.querySelector('#container p')
+  );
+});
+```  
+
+</TabItem>
+</Tabs>
+
+页面中有一个 `id` 为 `container` 的元素，其中有一个 `p` 标签， `p` 标签中其中包含一些文字。页面中还有一个按钮，当点击按钮时，会将 `p` 标签从 `container` 中移除。
+
+现在我们创建一个 `MutationObserver`，并监听了 `container` 元素，设置 `options` 中的 `childList` 为 `true`，表示当 `container` 的子节点发生变化时（新增或删除），将会被监听到，从而触发回调函数的执行。在回调函数中，我们只是简单的打印了回调函数的参数。
+
+可以观察到，当我们删除 `p` 标签时，控制台打印了内容，表示 `container` 的变化被监听到了。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-base.mp4"></video>
+
+:::info info
+通过 `MutationObserver` 可以监视到三种 DOM 变化：
+
+1. 子元素发生变化（新增或删除）
+2. 属性发生变化
+3. 包含的文本发生变化
+
+可通过 `MutationRecord` 对象的 `type` 属性来区分是何种变化，它有三个值分别与上述变化对应：
+
+1. `childList`
+2. `attributes`
+3. `characterData`
+:::
+
+## 通过 `childList` 来监听子元素的变化
+
+### childList
+
+当 `options` 中的 `childList` 设置为 `true` 时，表示监听子元素的变化，即子元素的新增与删除。
+
+同样在页面上存在一个 `container` 元素，其中包含了一个 `p` 标签；页面上同时存在一个按钮，当点击按钮时会删除 `p` 标签或者创建 `p` 标签。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="container">
+  <p>世界这么大，我想去看看</p>
+</div>
+<button id="btn">删除/新增</button>
+```
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  console.log(mutations);
+});
+observer.observe(container, {
+  childList: true
+});
+
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  const p = container.querySelector('p');
+  if (p) {
+    container.removeChild(p);
+  } else {
+    container.innerHTML = '<p>世界这么大，我想去看看</p>';
+  }
+});
+```  
+
+</TabItem>
+</Tabs>
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-childList1.mp4"></video>
+
+从视频可以观察到，当 `p` 标签的删除与新增时，均会触发回调函数的执行。
+
+通过 `MutationRecord` 对象的 `addedNodes` 与 `removedNodes` 属性可以访问到添加的节点以及删除的节点。通过 `nextSibling` 与 `prevSibling` 可以获得被删除或新增节点的前后兄弟节点（如果不存在则为 `null`）。
+
+```js
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    console.log(mutation.addedNodes);
+    console.log(mutation.removedNodes);
+  })
+});
+observer.observe(container, {
+  childList: true
+});
+```
+<video src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-childList3.mp4" controls></video>
+
+### subtree
+
+需要注意的是，设置 `childList` 为 `true`，只能监听**直接子元素**的新增与删除，对于更深层次的子元素的变化无法监听。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="container">
+  <div id="inner-container">
+    <p>世界这么大，我想去看看</p>
+  </div>
+</div>
+<button id="btn">删除/新增</button>
+```
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  console.log(mutations);
+});
+observer.observe(container, {
+  childList: true
+});
+    
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  const innerContainer = document.querySelector('#inner-container');
+  const p = innerContainer.querySelector('p');
+  if (p) {
+    innerContainer.removeChild(p);
+  } else {
+    innerContainer.innerHTML = '<p>世界这么大，我想去看看</p>';
+  }
+});
+```  
+
+</TabItem>
+</Tabs>
+
+相比于上例，在 `p` 标签与 `container` 之间添加了一个 `inner-container` 元素，我们还是监听 `container` 元素，点击按钮时对 `p` 标签进行移除或者添加。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-childList2.mp4"></video>
+
+因为只能监听直接子元素，而 `p` 标签并不是 `container` 的 直接子元素，所以 `p` 标签的删除与新增无法被监听到，所以回调函数不会被执行，控制台不会有任何的输出。
+
+那有没有办法进行深层次的监听呢？答案是有，需要配合 `subtree` 属性。除了需要指定 `childList` 为 `true` 以外还需要指定 `subtree` 为 `true`。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="container">
+  <div id="inner-container">
+    <p>世界这么大，我想去看看</p>
+  </div>
+</div>
+<button id="btn">删除/新增</button>
+```
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  console.log(mutations);
+});
+observer.observe(container, {
+  childList: true,
+  subtree: true
+});
+    
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  const innerContainer = document.querySelector('#inner-container');
+  const p = innerContainer.querySelector('p');
+  if (p) {
+    innerContainer.removeChild(p);
+  } else {
+    innerContainer.innerHTML = '<p>世界这么大，我想去看看</p>';
+  }
+});
+```  
+
+</TabItem>
+</Tabs>
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-childList4.mp4"></video>
+
+## 通过 `attributes` 来监听属性的变化
+
+### attributes
+
+当设置 `attributes` 属性为 `true` 时，就可以监听到属性的变化，包括自定义属性。
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="container" class="red">
+  <p>世界这么大，我想去看看</p>
+</div>
+<button id="btn">改变颜色</button>
+```
+
+</TabItem>
+
+<TabItem value='css' label='CSS'>
+
+```css
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+```
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  console.log(mutations);
+});
+observer.observe(container, {
+  attributes: true
+});
+
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  container.classList.toggle('red');
+  container.classList.toggle('green');
+});
+```  
+
+</TabItem>
+</Tabs>
+
+在上述代码中，每次点击按钮时，都会对 `container` 的类名进行改变，交替的添加和删除 `red` 和 `green` 类，从而使得文字的样式发生变化。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-attributes1.mp4"></video>
+
+从视频中的打印结果看，每次我们修改 `class` 时，回调函数都被执行了，可以看到这次的数组中包含两个元素，一个是删除类的变动，一个是新增类的变动。
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/image.1uex3gw8w2rk.webp" style={{ zoom: '50%'}} />
+
+可见看到，属性变动对应的 `MutationRecord` 对象的 `type` 为 `attributes`，通过 `attributeName` 可以知道什么属性发生了变化。
+
+### attributeOldValue
+
+通过设置 `attributeOldValue` 为 `true`，可以知道变动之前的属性值。看一个🌰
+
+<Tabs>
+<TabItem value='html' label='HTML' default>
+
+```html
+<div id="container" data-text="Hello World"></div>
+<button id="btn">改变自定义属性</button>
+```
+
+</TabItem>
+
+<TabItem value='css' label='CSS'>
+
+```css
+#container::before {
+  content: attr(data-text);
+}
+```
+
+</TabItem>
+
+<TabItem value='js' label='JavaScript'>
+
+```js
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    console.log(mutation.oldValue);
+  });
+});
+observer.observe(container, {
+  attributes: true,
+  attributeOldValue: true
+});
+
+const texts = ['Hello World', '你好世界'];
+let count = 0;
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  container.dataset.text = texts[++count % 2];
+});
+```  
+
+</TabItem>
+</Tabs>
+
+在上面的代码中，我们为 `container` 元素设置了自定义属性 `data-text`，并设置其伪元素 `::before` 的 `content` 为 `data-text`，随后我们点击按钮，改变 `data-text` 的值，`content` 随之改变，页面发生变化。我们使用 `MutationObserver` 检测到这一变化，并且可以通过 `MutationRecord` 对象的 `oldValue` 属性来访问到变化之前的属性值。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-attrOldValue.mp4?x=2"></video>
+
+### attributeFilter
+
+通过指定 `attributeFilter` 属性，可以只关监听特定属性的变化，它的值为一个数组，只监听数组中包含的属性的变化
+
+<Tabs>
+
+<TabItem value='html'label='HTML'>
+
+```html
+<div class="red" id="container" data-text="Hello World"></div>
+<button id="btn">改值与改色</button>
+```
+
+</TabItem>
+
+<TabItem value='css'label='CSS'>
+
+```css
+#container::before {
+  content: attr(data-text);
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+```
+
+</TabItem>
+
+<TabItem value='js'label='JavaScript'>
+
+```javascript
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    // 打印出变动的属性
+    console.log(mutation.attributeName);
+  })
+});
+observer.observe(container, {
+  attributes: true,
+  // 只监听 data-text 的变化
+  attributeFilter: ['data-text']
+});
+
+let count = 0;
+const texts = ['Hello World', '你好世界'];
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  container.classList.toggle('red');
+  container.classList.toggle('green');
+  container.dataset.text = texts[++count % 2];
+});
+```
+
+</TabItem>
+
+</Tabs>
+
+在上面我们同时改变 `class` 属性与 `data-text` 属性，但是在 `options` 中我们设置了 `attributeFilter: ['data-text']`，即只监听 `data-text` 属性。我们在回调函数中打印出监听的属性。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-attrFilter.mp4"></video>
+
+从视频中可以看到，只打印了 `data-text`，并没有打印 `class`。
+
+### subtree
+
+`attributes` 属性也可以配合 `subtree` 使用，除了可以监听指定元素上属性的变化，还可以监听到该元素包含的子元素上的属性的变化。
+
+<Tabs>
+
+<TabItem value='html'label='HTML'>
+
+```html
+<div id="container">
+  <p class="red">Hello World!</p>
+</div>
+```
+
+</TabItem>
+
+<TabItem value='css'label='CSS'>
+
+```css
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+```
+
+</TabItem>
+
+<TabItem value='js'label='JavaScript'>
+
+```javascript
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    console.log(mutation);
+  });
+});
+observer.observe(container, {
+  attributes: true,
+  subtree: true
+});
+
+setTimeout(()=> {
+  const p = container.querySelector('p');
+  p.className = 'green';
+}, 3000);
+```
+
+</TabItem>
+
+</Tabs>
+
+在 `container` 里面有一个 `p` 标签，`p` 标签包含一个 `class` 属性。我们使用 
+`MutationObserver` 直接监听 `container`，然后开启一个定时器，在定时器中修改 `p` 标签的 `class` 属性，由于在 `options` 中设置了 `subtree: true`，所以即使我们监听的是 `container`，但是 `p` 标签属性的变化还是能被监听到。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-attributes2.mp4"></video>
+
+## 通过 `characterData` 来监听文本的变化
+
+### characterData
+
+通过将 `characterData` 设置为 `true` 来监听文本节点的变化。其相应的 `MutationRecord` 对象的 `type` 属性为 `characterData`。
+
+<Tabs>
+
+<TabItem value='html'label='HTML'>
+
+```html
+<div id="container" contenteditable="true">世界这么大，我想去看看</div>
+```
+
+</TabItem>
+
+<TabItem value='js'label='JavaScript'>
+
+```javascript
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    console.log(mutation);
+  });
+});
+observer.observe(container.firstChild, {
+  characterData: true
+});
+```
+
+</TabItem>
+
+</Tabs>
+
+我们准备了一个 `div`，并且设置了其 `contenteditable` 属性为 `true`，即内部文字可编辑。随后我们监听了 `div` 下的文本节点，设置了 `characterData` 属性为 `true`，即监听文字的变化。
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-characterData1.mp4"></video>
+
+:::note note
+
+1. 当使用 <kbd>Ctrl + B</kbd> 或者 <kbd>Ctrl + I</kbd> 使得文本加粗或者倾斜时，会使得原文本节点变为多个节点，这时你再编辑文字，会发现 `MutationObserver` 不起作用，除非你编辑的文字被认为是原始的文本节点。
+2. 当你将文本节点包含的所有文字都删除后，`MutationObserver` 不再触发回调函数，因为一旦文字删除后，原文本节点就被移除了，再次输入的文字形成了一个新的文本节点，而这个文本节点并没有被监听。如果以 `childList: true` 监听文本节点父容器，可以观察到删除所有文本的时候会触发一次回调函数，因为此时文本节点被删除了，而删完之后新增文字又会触发一次回调函数，因为此时新增了一个文本节点。
+3. 输入中文字符时 `MutationObserver`无法监听到对应变化。
+
+:::
+
+### subtree
+
+以上三个问题均可以通过配合 `subtree` 来解决，当设置 `subtree` 为 `true` 时，可以监听到子节点中文本的变化，所以不管是分裂为多个节点还是原节点被删除然后新增，所有文本的变化都可以被检测到。
+
+```js
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    console.log(mutation);
+  });
+});
+observer.observe(container, {
+  characterData: true,
+  subtree: true
+});
+```
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-characterData2.mp4"></video>
+
+:::note note
+选择文字然后进行删除，这个文本变化好像检查不到，不知道为什么，跟选区有关吗？
+:::
+
+### characterDataOldValue 
+
+设置 `characterDataOldValue` 为 `true` 后，可以通过 `MutationRecord` 对象的 `oldValue` 属性获得变动之前的文本。
+
+```js
+const container = document.querySelector('#container');
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    console.log(mutation.oldValue);
+  });
+});
+observer.observe(container, {
+  characterData: true,
+  characterDataOldValue: true,
+  subtree: true,
+});
+```
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-chatacterData3.mp4"></video>
+
+## 通过 `takeRecords` 拦截变化
+
+通过 `takeRecords()` 方法，可以在 `mutations` 被回调函数处理之前拦截到。
+
+<Tabs>
+
+<TabItem value='html'label='HTML'>
+
+```html
+<ul id="list">
+  <li>篮球</li>
+  <li>足球</li>
+  <li>羽毛球</li>
+</ul>
+```
+
+</TabItem>
+
+<TabItem value='js'label='JavaScript'>
+
+```javascript
+const list = document.querySelector('#list');
+const observer = new MutationObserver(mutations => {
+  console.log('callback:', mutations);
+});
+observer.observe(list, {
+  childList: true
+});
+
+setTimeout(() => {
+  list.insertAdjacentHTML('beforeend', '\\n<li>乒乓球</li>');
+  const records = observer.takeRecords();
+  console.log('takeRecords:', records);
+}, 3000);
+```
+
+</TabItem>
+
+</Tabs>
+
+上面我们准备了一个列表，使用一个定时器向列表中添加一项内容，添加内容之后，我们马上使用 `takeRecords()` 进行了拦截，因此不会触发回调函数的执行。
+
+<video src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-takeRecords.mp4" controls></video>
+
+## 监听多个元素
+
+同一个 `MutationObserver` 可以同时监听多个元素，可通过 `disconnect` 取消所有元素的监听。
+
+<Tabs>
+
+<TabItem value='html'label='HTML'>
+
+```html
+<div id="text1" contenteditable="true">Hello World!</div>
+<div id="text2" contenteditable="true">你好，世界！</div>
+<button id="btn1">监听text1</button>
+<button id="btn2">监听text2</button>
+<button id="stopBtn">取消监听</button>
+```
+
+</TabItem>
+
+<TabItem value='js'label='JavaScript'>
+
+```javascript
+const observer = new MutationObserver(mutations => {
+  console.log(mutations);
+});
+
+btn1.addEventListener('click', () => {
+  observer.observe(text1, {
+    characterData: true,
+    subtree: true
+  });
+});
+btn2.addEventListener('click', () => {
+  observer.observe(text2, {
+    characterData: true,
+    subtree: true
+  });
+});
+stopBtn.addEventListener('click', () => {
+  observer.disconnect();
+});
+```
+
+</TabItem>
+
+</Tabs>
+
+<video controls src="https://video-obsidian.oss-cn-beijing.aliyuncs.com/MutationObserver-disconnect.mp4"></video>
+
+:::info info
+调用 `disconnect()` 会取消所有元素的监听，这是我觉得不方便的地方，不像 `IntersectionObserver` 可以通过 `unobserve()` 方法取消监听指定的元素。
+:::
