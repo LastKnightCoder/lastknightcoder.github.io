@@ -10,7 +10,7 @@ authors: xiongtao
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-有过移动端开发经验的人，想必都对文字垂直居中头痛不已，因为使用常规手段实现文字垂直居中在部分 Android 手机上会出现文字偏上的情况，往往需要配合 `line-height` 或者 `padding` 进行微调，苦不堪言。下面是我尝试的几种文字垂直居中方案：
+有过移动端开发经验的人，想必都对文字垂直居中头痛不已，因为使用常规手段实现文字垂直居中在部分 Android 手机上会出现文字偏上的情况，往往需要各种手段进行微调，苦不堪言。下面是我尝试的几种文字垂直居中方案：
 
 `line-height` 实现垂直居中:
 
@@ -150,9 +150,8 @@ const text = '查看更多';
 const fontSize = 26;
 ctx.font = `${fontSize}px normal`;
 const textWidth = ctx.measureText(text).width;
-ctx.textBaseline = 'bottom'
-// 这里的 1.15 是因为底线其实是超出了行框盒子的，超出字体大小的 5%-10%，见附录
-ctx.fillText(text, (canvas.width / dpr - textWidth) / 2, (canvas.height / dpr + 1.15 * fontSize) / 2);
+// 这里的 0.75 是因为基线在行框盒子之上，大约是 10%-15%，这里取 12.5%
+ctx.fillText(text, (canvas.width / dpr - textWidth) / 2, (canvas.height / dpr + 0.75 * fontSize) / 2);
 ```
 
 </TabItem>
@@ -170,8 +169,7 @@ SVG 实现垂直居中：
       text-anchor="middle"
       fill="currentColor"
       x="100"
-      dominant-baseline="central"
-      y="28"
+      y="37.75"
       font-size="26"
     >
       查看更多
@@ -196,6 +194,10 @@ SVG 实现垂直居中：
 </TabItem>
 </Tabs>
 
+为什么移动端的文字这么难以居中，这是因为行高 `line-height` 导致的，一般而言，当 `line-height` 大于字体大小时，字体的上下间距应当是平分的，但是在部分机型却不是这样，如 HONOR 20 Pro 中出现上面的距离小于下面的距离。**但是当设置 `line-height: normal` 时，即默认值，会惊讶的发现字体上下间距近乎相等**，所以如果使得文字垂直居中，一定不要设置 `line-height`。
+
+上面的前两种方案 `line-height` 与 `padding` 都设置了 `line-height`，因此在移动端会偏上。而 `display: flex` 没有设置 `line-height`，所以有近乎居中的效果，但是还是有误差，在不同的机型上还是有不同的表现。
+
 通过在不同机型上的对比，发现 Canvas 和 SVG 的方案在各个机型下面均保持一致的居中效果，因此决定将其抽离为一个 React 组件，下面就详细讲解该组件的开发思路。
 
 本文以 SVG 为例，Canvas 开发思路是一样的，在文章的最后给出 Canvas 的实现，供以参考。
@@ -218,28 +220,31 @@ SVG 实现垂直居中：
 
 除了上面四个属性，还支持传递 `className` 与 `style`。
 
+:::note
+
+这里高度和字体大小的单位都是 `px`，在组件的内部会将其转为 `rem`。
+
+:::
+
 ## SVG 垂直居中原理
 
-在 SVG 中通过 `text` 标签来显示文字，可以通过 `x` 和 `y` 属性来设置文字的位置，这里我们关注到 `y`，它设置的是文字基线在 SVG 画布中的位置，我们可以通过  `dominant-baseline` 来指定基线在文字的哪个位置，我们将其设置为 `central`，表示基线在文字的中间，然后将 `y` 设置为高度的一半，即可实现文字的垂直居中。
+在 SVG 中通过 `text` 标签来显示文字，可以通过 `x` 和 `y` 属性来设置文字的位置，这里我们关注到 `y`，它设置的是文字基线在 SVG 画布中的位置
 
 ```html
 <svg width="200" height="60" viewBox="0 0 200 60">
-  <text
-    font-size="26"
-    fill="currentColor"
-    dominant-baseline="central" y="30">
+  <text font-size="26" fill="currentColor" y="37.75">
     查看更多
   </text>
 </svg>
 ```
 
+这里 `y` 的计算是 `y="(height + 0.75 * fontSize) / 2"`，因为这里 `y` 指的是文字基线的位置，而基线是比文字的底部要高的，参考下图
 
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/image.75qa29adc040.webp" style={{ zoom: '50%' }} />
 
-:::note
+字母 `x` 的底部就是基线的位置，它距离行框盒子底部有一段距离，这个距离与字体大小成比例，与字体大小有关，这个比例不妨设为 `r`，那么 `y` 的计算公式为 `y = (height + fontSize) / 2 - r * fontSize = (height + (1 - 2r)fontSize) / 2`。经调研，比例 `r` 与字体有关，分布在 10% - 15%，这里我们取 12.5%，所以 `y = (height + 0.75 * fontSize) / 2`。
 
-上面使用的单位均为 `px`。
-
-::: 
+对于不同的字体，最大的误差为 `2.5%` 的字体大小，也就是说字体大小 `40px` 才会有 `1px` 的误差，移动端的字体大小少有超过 `15px` 的，最大误差连半个像素都不到，可实现不同平台上的伪居中。
 
 根据上面的原理，可以写出第一版的 `TextMiddle` 实现
 
@@ -268,7 +273,7 @@ const TextMiddle = props => {
         <text
           font-size="${actualFontSize}"
           fill="currentColor"
-          dominant-baseline="central" y="${actualHeight / 2}"
+          y="${(actualHeight + 0.75 * actualFontSize) / 2}"
         >
           ${text}
         </text>
@@ -338,7 +343,7 @@ const svg = `
     <text
       font-size="${actualFontSize}"
       fill="currentColor"
-      dominant-baseline="central" y="${actualHeight / 2}"
+      y="${(actualHeight + 0.75 * actualFontSize) / 2}"
     >
       ${actualText}
     </text>
@@ -357,7 +362,7 @@ const svg = `
     <text
       font-size="${actualFontSize}"
       fill="currentColor"
-      dominant-baseline="central" y="${actualHeight / 2}"
+      y="${(actualHeight + 0.75 * actualFontSize) / 2}"
     >
       ${actualText}
     </text>
@@ -463,7 +468,7 @@ const TextMiddle = props => {
         <text
           font-size="${actualFontSize}"
           fill="currentColor"
-          dominant-baseline="central" y="${actualHeight / 2}"
+          y="${(actualHeight + 0.75 * actualFontSize) / 2}"
         >
           ${actualText}
         </text>
@@ -562,8 +567,7 @@ const TextMiddle = props => {
     ctx.font = `${actualFontSize}px normal`;
     ctx.fillStyle = color;
     ctx.textBaseline = 'bottom';
-    // 底线其实是超出行框盒子的，参考字母 y g 的下边缘，超出的部分是字体大小的 10%
-    ctx.fillText(actualText, 0, (canvas.height / dpr + 1.15 * actualFontSize) / 2);
+    ctx.fillText(actualText, 0, (canvas.height / dpr + 0.75 * actualFontSize) / 2);
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -588,39 +592,3 @@ const TextMiddle = props => {
 
 export default TextMiddle;
 ```
-
-
-## 附录
-
-这个来补充 `Canvas` 绘制文字的一个细节，在代码里面我们绘制文字用了下面的代码
-
-```js
-ctx.textBaseline = 'bottom';
-ctx.fillText(actualText, 0, (canvas.height / dpr + 1.2 * actualFontSize) / 2);
-```
-
-关于文字的位置这里给了 `canvas.height / dpr + 1.2 * actualFontSize) / 2`，按道理应该给 `canvas.height / dpr + actualFontSize) / 2`，所以我们为什么要乘 `1.2`。
-
-我们先看下这个公式是怎么计算的，假设容器的高度是 `h`，字体的大小是 `s`，要使得字体垂直居中，那么字体底部离顶部的距离就是 `(h - s) / 2 + s = (h + s) / 2`。现在我们的计算公式是 `(h + 1.2 * s) / 2`，这是为什么？
-
-这是因为底线的距离并不是文字所在盒子的底部，看一个例子
-
-```html
-<div id="container">查看更多y</div>
-```
-
-```css
-#container {
-  font-size: 100px;
-  outline: 1px solid red;
-  line-height: 1;
-}
-```
-
-<img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/image.7f1js39a5200.webp" style={{ zoom: '50%' }} />
-
-可以看到底线（也就是字母 `y` 的底部）超出了行框盒子，所以将底线设置到 `(h + s) / 2`，会使得文字偏上。要使得文字正常，我们需要知道超出了多少，这个大小与字体大小成一个比例关系，不妨设为 `y`，则超出的大小为 `ys`，这个时候我们只要在向下移动 `ys` 就可以了 `(h + s) / 2 + ys = (h + (1 + 2y)s) / 2`。
-
-对于不同的字体，`y` 不一样，范围在 `5%~10%` 之间，这里我取了 `7.5%`，所以值就是 `(h + 1.15s) / 2`。
-
-所以对于不同的字体实现的是一个伪居中，最大的误差在 `2.5%`，也就是说对于字体大小在 `40px` 以内的文本，误差小于 `1px`（对于移动端的文本来说，文字大小一般少有超过 `15px` 的）。实现了视觉上的“居中”，最重要的是，在各个机型上均能保持一致性。

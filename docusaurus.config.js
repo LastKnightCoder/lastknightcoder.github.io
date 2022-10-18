@@ -57,9 +57,12 @@ const config = {
           },
           blogSidebarCount: 'ALL',
           blogSidebarTitle: '所有的博客',
+          remarkPlugins: [math, [npm2yarn, {sync: true}]],
+          rehypePlugins: [katex],
         },
         pages: {
-          remarkPlugins: [npm2yarn],
+          remarkPlugins: [math, [npm2yarn, {sync: true}]],
+          rehypePlugins: [katex],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -170,7 +173,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Built with Docusaurus.`,
       },
       prism: {
-        additionalLanguages: ['java', 'matlab', 'latex'],
+        additionalLanguages: ['java', 'matlab', 'latex', 'rust'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },

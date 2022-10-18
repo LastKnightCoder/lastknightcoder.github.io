@@ -1,0 +1,105 @@
+---
+authors: xiongtao
+tags:
+  - 深度学习
+  - YOLO
+  - 目标检测
+---
+
+下载[源码包](https://github.com/ultralytics/yolov5/archive/refs/tags/v6.1.tar.gz)，解压
+
+```bash
+wget https://github.com/ultralytics/yolov5/archive/refs/tags/v6.1.tar.gz
+tar -zxvf yolov5-6.1.tar.gz
+```
+
+进入解压目录，安装依赖
+
+```bash
+cd yolov5-6.1
+pip install -r requirements.txt
+```
+
+下载预训练模型 [yolov5s6.pt](https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5s6.pt)，在项目根目录新建 weights 文件夹，将下载的预训练模型放入。
+
+使用 labelImg 标注自己的数据集，在项目根目录新建  datasets 文件夹，然后将数据集放入，datasets 文件夹的结构如下，每一个数据集都包含三个文件夹 `train, test, valid`，其中 `test` 文件夹不是必须的，每个文件夹都包含两个文件夹 `images` 和 `labels`，分别放置图片和标签。
+
+```text
+datasets
+├── multi-class-denoise
+│   ├── test
+│   │   ├── images
+│   │   └── labels
+│   ├── train
+│   │   ├── images
+│   │   └── labels
+│   └── valid
+│       ├── images
+│       └── labels
+├── one-class-denoise
+│   ├── test
+│   │   ├── images
+│   │   └── labels
+│   ├── train
+│   │   ├── images
+│   │   └── labels
+│   └── valid
+│       ├── images
+│       └── labels
+└── one-class-noise
+    ├── test
+    │   ├── images
+    │   └── labels
+    ├── train
+    │   ├── images
+    │   └── labels
+    └── valid
+        ├── images
+        └── labels
+```
+
+在根目录下的 data 文件夹下新建 `xxx.yaml` 训练配置文件，用以指定数据集的位置以及要识别的类别数目，一个参考如下 `data/one-class-denoise.yaml`：
+
+```yaml
+path: ../datasets/one-class-denoise  # dataset root dir
+
+train: train/images  # train images (relative to 'path')
+val: valid/images  # val images (relative to 'path')
+test: test/images # test images (optional)
+
+# Classes
+nc: 1  # number of classes
+names: ['obj']  # class names
+```
+
+然后就可以愉快的训练了
+
+```bash
+python3 train.py --img 640 --batch 16 --epochs 200 --data ./data/one-class-denoise.yaml --cfg ./models/yolov5s.yaml --weights ./weights/yolov5s6.pt
+```
+
+- `--img`：指定图片大小
+- `--batch`：指定批量大小
+- `--epochs`：指定训练轮次
+- `--data`：指定训练配置文件地址
+- `--cfg`：指定使用的模型
+- `--weights`：指定使用的预训练权重
+
+训练的结果放在 `runs/train/` 下面，可以通过 `results.csv` 观察到训练结果，或者通过 `tensorboard` 观察结果 
+
+```bash
+tensorboard --logdir runs/train --port 6009
+```
+
+然后在浏览器通过 `localhost:6009` 即可实时查看到训练结果。
+
+在 `runs/train/exp/weights` 下保存着训练好的模型，有两个模型 `best.pt` 以及 `last.pt`，分别表示训练过程中最好的模型以及最后一个模型。我们随后便可使用训练好的模型进行推理
+
+```bash
+python3 detect.py --source datasets/one-class-denoise/test/images/ --weights ./runs/train/exp/weights/best.pt
+```
+
+- `--source`：指定要推理的图像来源，可以是具体的图片，也可以是视频，也可以存放图像的文件夹地址
+- `--weights`：指定要使用的模型参数，使用指定训练好的 `best.pt` 或者 `last.pt`
+
+

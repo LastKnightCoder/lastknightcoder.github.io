@@ -1,0 +1,49 @@
+---
+slug: encodeURI与encodeURIComponent
+authors: xiongtao
+tags:
+  - 编码
+  - encodeURI
+  - encodeURIComponent
+---
+
+`encodeURI` 与 `encodeURIComponent` 都是对 URI 进行编码的，由于 URI 仅支持 ASCII 字符，对于一些特殊的字符需要进行编码，例如汉字、`&` 、`?` 等有意义的特殊符号。
+
+- `encodeURI` 不会对 `~!@#$&*()=:/,;?+'` 这些特殊字符进行编码
+- `encodeURIComponent` 不会对 `~!*()'` 这些特殊字符进行编码
+
+数字与字母（0-9，a-z，A-Z）是不会被编码的，`_-.~!*'()` 这些字符也不会被编码 。可以观察到二者的区别是 `encodeURIComponent` 会对更多的字符进行编码，而 `encodeURI` 对有些特殊字符不会编码，如 `&, :, /`。
+
+<!--truncate-->
+
+`encodeURI` 一般用于对整个 `URI` 进行编码，如
+
+```js
+const url = 'https://xxx.github.io/my first page.html'
+// https://xxx.github.io/my%20first%20page.html
+const encodeUrl = encodeURI(url) 
+```
+上面将空格编码为了 `%20`。
+
+如果使用 `encodeURIComponent` 对整个 URI 编码，它会使得 `://` 等字符也被编码，所以 `encodeURIComponent` 不用对整个 URI 进行编码。
+
+```js
+const url = 'https://xxx.github.io/my first page.html'
+// https%3A%2F%2Fxxx.github.io%2Fmy%20first%20page.html
+const encodeUrl = encodeURIComponent(url) 
+```
+`encodeURIComponent` 一般用来编码参数
+
+```js
+const username = 'Li & Wang'
+// https://xxx.github.io?username=Li & Wang&age=18
+const url = `https://xxx.github.io?username=${username}&age=18` 
+```
+
+由于 `&` 在参数中是连接符，`username` 不是一个整体，与我们的预期不符，我们需要对参数进行编码才能发送正确的参数
+
+```js
+const username = 'Li & Wang'
+// https://xxx.github.io?username=Li%20%26%20Wang&age=18
+const url = `https://xxx.github.io?username=${encodeURIComponent(username)}&age=18` 
+```

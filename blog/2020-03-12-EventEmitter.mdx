@@ -1,0 +1,847 @@
+---
+slug: EventEmitter
+authors: xiongtao
+tags:
+  - Node
+  - EventEmitter
+---
+
+## EventEmitter 的使用
+
+`EventEmitter` 为我们提供了事件订阅机制，通过引入 `events` 模块来使用它。
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+// 监听 data 事件
+eventEmitter.on("data", () => {
+    console.log("data");
+});
+
+// 触发 data 事件
+eventEmitter.emit("data");
+```
+
+上述代码我们使用 `on` 方法来为事件绑定回调函数，使用 `emit` 方法来触发一个事件。
+
+### on、addListener
+
+我们可以通过 `on` 和 `addListener` 方法来为某事件添加一个监听器，二者的使用是一样
+
+```javascript
+eventEmitter.on("data", () => {
+    console.log("data");
+});
+
+eventEmitter.addListener("data", () => {
+    console.log("data");
+});
+```
+
+第一个参数为事件名，第二个参数为对应的回调函数，当 EventEmitter 实例对象调用 `emit` 触发相应的事件时便会调用该回调函数，如
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", () => {
+    console.log("data");
+});
+
+eventEmitter.addListener("data", () => {
+    console.log("data");
+});
+
+eventEmitter.emit("data");
+```
+
+在控制台会打印出两次 `data`
+
+```
+data
+data
+```
+
+:::tip
+
+从上面的例子也可以看出，可以为同一事件绑定多个回调函数。
+
+:::
+
+#### 执行顺序
+
+当使用 `on` 或 `addListener` 绑定多个回调函数时，触发的顺序就是添加的顺序，如
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", () => {
+    console.log("data 1");
+});
+
+eventEmitter.on("data", () => {
+    console.log("data 2");
+});
+
+eventEmitter.on("data", () => {
+    console.log("data 3");
+});
+
+eventEmitter.emit("data");
+```
+
+会在控制台依次打印出
+
+```
+data 1
+data 2
+data 3
+```
+
+#### 重复添加
+
+并且使用 `on` 方法绑定事件时，并不会做去重检查
+
+```javascript
+const {EventEmitter} = require('events');
+const eventEmitter = new EventEmitter();
+
+const listener = () => {
+    console.log("lsitener");
+}
+
+eventEmitter.on("data", listener);
+eventEmitter.on("data", listener);
+eventEmitter.emit("data");
+```
+
+控制台的打印结果为
+
+```
+lsitener
+lsitener
+```
+
+上面的程序为事件绑定了两次 `listener` 这个函数，但是内部并不会检查是否已经添加过这个回调函数，然后去重，所以上面在控制台打印出了两次 listener。
+
+#### 传递参数
+
+另外回调函数还可以接收参数，参数通过 `emit` 触发事件时传入，如
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", data => {
+    console.log(data);
+});
+
+// 为回调函数传入参数 HelloWorld!
+eventEmitter.emit("data", "HelloWorld!");
+```
+
+上面我们使用 `emit` 触发事件时，还传递了额外的参数，这个参数会被传递给回调函数。
+
+#### 同步执行
+
+另外一个比较关心的问题，事件的触发是同步的还是异步的，我们做一个实验
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", () => {
+    console.log("触发了 data 事件！");
+});
+
+console.log("start");
+eventEmitter.emit("data");
+console.log("end");
+```
+
+上面我们我们在触发事件前后都向控制台打印了信息，如果触发事件后是异步执行的，那么后面的打印语句就会先执行，否则如果是同步的话，就会先执行事件绑定的回调函数。执行结果如下
+
+```javascript
+start
+触发了 data 事件！
+end
+```
+
+可见事件触发是同步执行的。
+
+### off、removeListener
+
+`off` 与 `removeListener` 方法的作用同 `on` 和 `addLsitener` 的作用是相反的，它们的作用是为某个事件删除对应的回调函数
+
+```javascript
+const {EventEmitter} = require('events');
+const eventEmitter = new EventEmitter();
+
+let listener1 = () => {
+    console.log("listener1");
+}
+let listener2 = () => {
+    console.log("listener2");
+}
+
+eventEmitter.on("data", listener1);
+eventEmitter.on("data", listener2);
+
+// 第一次触发，两个回调函数否会执行
+eventEmitter.emit("data");
+
+eventEmitter.off("data", listener1);
+// 第二次触发，只会执行 listener2
+eventEmitter.emit("data");
+```
+
+控制台打印结果为
+
+```js
+listener1
+listener2
+listener2
+```
+
+第一次触发事件时，两个事件都会触发，然后我们为事件删除了 listener1 这个回调函数，所以第二次触发时，只会触发 listener2。
+
+:::note
+注意：如果我们使用 `on` 或者 `addListener` 绑定的是一个匿名函数，那么便无法通过 `off` 和 `removeListener` 去解绑一个回调函数，因为它会通过比较两个函数的引用是否相同来解绑函数的。
+:::
+
+### once
+
+使用 `once` 可以绑定一个只执行一次的回调函数，当触发一次之后，该回调函数便自动会被解绑
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.once("data", () => {
+    console.log("data");
+});
+
+eventEmitter.emit("data");
+eventEmitter.emit("data");
+```
+
+上述代码我们使用 `once` 为 `data` 事件绑定了一个回调函数，然后使用 `emit` 方法触发了两次，因为使用 `once` 绑定的回调函数只会被触发一次，所以第二次触发，回调函数不会执行，所以在控制台只打印了一次 data。
+
+另外同 `on` 绑定的回调函数一样，我们同样可以通过 `emit` 方法向回调函数传递参数
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.once("data", data => {
+    console.log(data);
+});
+
+eventEmitter.emit("data", "Hello");
+```
+
+控制台打印结果
+
+```javascript
+Hello
+```
+
+### prependListener、prependOnceListener
+
+使用 `on` 或者 `addListener` 为事件绑定的回调函数会被根据添加的顺序执行，而使用 `prependLsitener` 绑定的事件回调函数会在其他回调函数之前执行
+
+```javascript
+const {EventEmitter} = require('events');
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", () => {
+    console.log("on");
+});
+
+eventEmitter.prependListener("data", () => {
+    console.log("prepend");
+});
+
+eventEmitter.emit("data");
+```
+
+上述代打我们先用控制台的打印结果为
+
+```js
+prepend
+on
+```
+
+`prependOnceListener` 同 `prependListener`，不过它绑定的回调函数只会被执行一次
+
+```javascript
+const {EventEmitter} = require('events');
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", () => {
+    console.log("on");
+});
+
+eventEmitter.prependOnceListener("data", () => {
+    console.log("prepend once");
+});
+
+eventEmitter.emit("data");
+eventEmitter.emit("data");
+```
+
+上面我们使用 `prependOnceListener` 绑定了一个回调函数，当触发事件时，该回调函数会在其他函数之前执行，并且只会执行一次，所以当第二次我们触发函数时，该回调函数不会执行，控制台打印结果为
+
+```js
+prepend once
+on
+on
+```
+
+### removeAllListeners
+
+`removeAllListeners([event])` 方法可以删除事件 `event` 绑定的所有回调函数，如果没有传入 `event` 参数的话，那么该方法就会删除所有事件绑定的回调函数
+
+```javascript
+const {EventEmitter} = require('events');
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", () => {
+    console.log("data 1");
+});
+
+eventEmitter.on("data", () => {
+    console.log("data 2");
+});
+
+eventEmitter.emit("data");
+eventEmitter.removeAllListeners("data");
+eventEmitter.emit("data");
+```
+
+上面程序为 `data` 事件绑定了两个回调函数，并且在调用 `removeAllListeners` 方法之前分别触发了一次 `data` 事件，第二次触发 `data` 事件时，不会有任何的回调函数被执行，`removeAllListeners` 删除了 `data` 事件绑定的所有回调函数。控制台的打印结果为：
+
+```js
+data 1
+data 2
+```
+
+### eventNames 
+
+通过 `eventNames` 方法我们可以知道为哪些事件绑定了回调函数，它返回一个数组
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("start", () => {
+    console.log("start");
+});
+eventEmitter.on("end", () => {
+    console.log("end");
+});
+eventEmitter.on("error", () => {
+    console.log("error");
+});
+
+console.log(eventEmitter.eventNames()); // [ 'start', 'end', 'error' ]
+```
+
+如果我们将某事件的所有回调函数删除后，此时 `eventNames` 便不会返回该事件了
+
+```javascript
+eventEmitter.removeAllListeners("error");
+console.log(eventEmitter.eventNames()); // [ 'start', 'end' ]
+```
+
+### listenerCount
+
+`listenerCount` 方法可以得到某个事件绑定了多少个回调函数
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("data", () => {
+
+});
+eventEmitter.on("data", () => {
+
+});
+
+console.log(eventEmitter.listenerCount("data")); // 2
+```
+
+### setMaxLsiteners、getMaxListeners
+
+`setMaxListeners` 是用来设置最多为每个事件绑定多少个回调函数，但是实际上是可以绑定超过设置的数目的回调函数的，不过当你绑定超过指定数目的回调函数时，会在控制台给出一个警告
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+// 设置只能为每个回调函数绑定 1 个回调函数
+eventEmitter.setMaxListeners(1);
+
+// 为 data 事件绑定了三个回调函数
+eventEmitter.on("data", () => {
+    console.log("data 1");
+});
+eventEmitter.on("data", () => {
+    console.log("data 2");
+});
+eventEmitter.on("data", () => {
+    console.log("data 3");
+});
+```
+
+运行上述程序，控制台打印结果为
+
+```javascript
+data 1
+data 2
+data 3
+(node:36928) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 2 data listeners added to [EventEmitter]. Use emitter.setMaxListeners() to increase limit
+```
+
+可见事件绑定的三个回调函数都可以被触发，并且在控制台打印出了一条警告信息。
+
+`getMaxListeners` 是获得能为每个事件绑定多少个回调函数的方法，使用 `setMaxListeners` 设置的值时多少，返回的值就是多少
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.setMaxListeners(1);
+
+console.log(eventEmitter.getMaxListeners()); // 1
+```
+
+如果没有使用 `setMaxLsiteners` 进行设置，那么默认能够为每个事件最多绑定 `10` 个回调函数，可以通过 `EventEmitter` 的 `defaultMaxListeners` 属性获得该值
+
+```javascript
+const {EventEmitter} = require("events");
+
+console.log(EventEmitter.defaultMaxListeners); // 10
+```
+
+### listeners、rawListeners
+
+当我们使用 `once` 绑定一个回调函数时，不会直接为该事件绑定该函数，而是会使用一个函数包装该函数，这个包装函数称为 `wrapper`，然后为该事件绑定 `wrapper` 函数，在 `wrapper` 函数内部，设定了当执行一次之后将自己解绑的逻辑。
+
+`listeners` 返回指定事件绑定的回调函数组成的数组，而 `rawListeners` 也是返回指定事件绑定的回调函数组成的数组，与 `listeners` 不同的是，对于 `once` 绑定的回调函数返回的是 `wrapper`，而不是原生绑定的函数。
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.once("data", () => {
+    console.log("once");
+})
+
+let fns = eventEmitter.listeners("data");
+// once 绑定的函数，不是 wrapper，内部没有解绑的逻辑，所以后面触发 data 事件时还会执行 once 绑定的函数
+fns[0]()
+eventEmitter.emit("data");
+```
+
+控制台打印结果为
+
+```js
+once
+once
+```
+
+下面将上面的 `listeners` 替换为 `rawListeners`
+
+```javascript
+const {EventEmitter} = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.once("data", () => {
+    console.log("once");
+})
+
+
+let fns = eventEmitter.rawListeners("data");
+// 因为返回的是 once 绑定函数的 wrapper，其内部有执行一次后解绑的逻辑
+// 所以后面触发事件时 once 绑定的函数不会再执行
+fns[0]()
+eventEmitter.emit("data");
+```
+
+控制台的打印结果为
+
+```js
+once
+```
+
+## 实现一个 EventEmitter
+
+在这个小节将从零实现一个 EventEmitter，来加深对该模块的理解。首先我们需要准备一个 `listeners` 来存储所有绑定的回调函数，它是一个 `Map` 对象，键是事件名，而值是一个数组，数组中保存的是该事件绑定的回调函数。
+
+```javascript
+class EventEmitter {
+    constructor() {
+        this.listeners = new Map();
+    }
+}
+```
+
+### on、addListener
+
+使用 `on` 绑定回调函数时，我们先判断 `Map` 集合中是否有为该事件绑定回调函数，如果有取出对应数组，并添加该回调函数进数组，没有则新建一个数组，添加该回调函数，并添加进 `Map` 集合
+
+```javascript
+on(event, callback) {
+    if(!this.listeners.has(event)) {
+        this.listeners.set(event, []);
+    }
+    let fns = this.listeners.get(event);
+    fns.push(callback);
+}
+```
+
+`addListener` 的功能与 `on` 是一样的，我们直接调用 `on` 方法即可
+
+```javascript
+addListener(event, callback) {
+    this.on(event, callback);
+}
+```
+
+### emit
+
+当我们使用 `emit` 触发事件时，我们从 `Map` 取出对应的回调函数组成的数组，然后依次取出函数执行。另外我们还可以通过 `emit` 传递参数
+
+```javascript
+emit(event, ...args) {
+    if(!this.listeners.has(event)) {
+        return;
+    }
+    let fns = this.listeners.get(event);
+    let values = [];
+    for(let fn of fns) {
+        values.push(fn);
+    }
+    for (let fn of values) {
+        fn(...args);
+    }
+}
+```
+
+:::tip
+这里你可能会觉得我写的有点复杂，所以你会觉得直接这么写更好
+
+```javascript
+emit(event, ...args) {
+    if(!this.listeners.has(event)) {
+        return;
+    }
+    for (let fn of fns) {
+        fn(...args);
+    }
+}
+```
+
+一开始我也是这么写的，但是因为 `once` 绑定的函数它在执行完毕后将自己从数组中移除，并且是同步的，所以在执行循环的时候，数组是在不断变化的，使用上述的方式会使得一些回调函数会被漏掉，所以我才会先将数组中的函数复制到另一个数组，然后遍历这个新的数组，因为 `once` 绑定的函数它只会删除原数组中的函数，而不会删除新的这个数组，所以新数组的长度在遍历的过程不会改变，也就不会发生漏掉函数未执行的情况。
+:::
+
+
+### prependListener
+
+实现 `prependListener` 的逻辑同 `on` 一样，不过我们是往数组的最前方添加回调函数
+
+```javascript
+prependListener(event, callback) {
+    if(!this.listeners.has(event)) {
+        this.listeners.set(event, []);
+    }
+    let fns = this.listeners.get(event);
+    fns.unshift(callback);
+}
+```
+
+### off、removeListener
+
+使用 `off` 方法是用来解绑事件的，在数组中找到指定的函数，然后删除即可
+
+```javascript
+off(event, callback) {
+    if(!this.listeners.has(event)) {
+        return;
+    }
+    let fns = this.listeners.get(event);
+    // 找出数组中的回调函数，然后删除
+    for (let i = 0; i < fns.length; i++) {
+        if(fns[i] === callback) {
+            fns.splice(i, 1);
+            break;
+        }
+    }
+    // 如果删除回调函数后，数组为空，则删除该事件
+    if (fns.length === 0) {
+        this.listeners.delete(event);
+    }
+}
+```
+
+`removeListener` 同 `off` 的作用一样，我们在内部直接调用 `off` 方法即可
+
+```javascript
+removeListener(event, callback) {
+    this.off(event, callback);
+}
+```
+
+### once、prependOnceListener
+
+使用 `once` 绑定一个只执行一次的函数，所以我们需要将绑定的回调函数使用一个函数包装一下，然后添加进数组中，这个包装函数我们称之为 `wrapper`。在包装函数中，当执行一遍后会将自己从数组中删除
+
+```javascript
+once(event, callback) {
+    let wrapper = (...args) => {
+        callback(...args);
+        this.off(event, wrapper);
+    }
+    if(!this.listeners.has(event)) {
+        this.listeners.set(event, []);
+    }
+    let fns = this.listeners.get(event);
+    fns.push(wrapper);
+}
+```
+
+`prependOnceListener` 的实现同 `once`，只是向数组的开头插入函数，将上面代码中的 `push` 换为 `unshift` 即可
+
+```javascript
+prependOnceListener(event, callback) {
+    let wrapper = (...args) => {
+        callback(...args);
+        this.off(event, wrapper);
+    }
+    if(!this.listeners.has(event)) {
+        this.listeners.set(event, []);
+    }
+    let fns = this.listeners.get(event);
+    fns.unshift(wrapper);
+}
+```
+
+### removeAllListeners
+
+直接从删除对应的事件，如果没有传入具体事件的话，则需要删除所有的事件
+
+```javascript
+removeAllListeners(event) {
+    // 如果没有传入 event，则删除所有事件
+    if (event === undefined) {
+        this.listeners = new Map();
+        return;
+    }
+    this.listeners.delete(event);
+}
+```
+
+### eventNames
+
+获得已经绑定了哪些事件
+
+```javascript
+eventNames() {
+    return [...this.listeners.keys()];
+}
+```
+
+### listenerCount
+
+获得某事件绑定可多少个回调函数
+
+```javascript
+listenerCount(event) {
+    return this.listeners.get(event).length;
+}
+```
+
+:::tip
+
+上述的实现有一个 bug，那就是无法删除使用 `once` 绑定的函数，我的想法是使用一个 `Map` 将 `once` 绑定的函数同对应的 `wrapper` 对应，删除时即可根据 `once` 的回调函数找到对应的 `wrapper` 然后删除
+
+```javascript
+constructor() {
+    this.listeners = new Map();
+    // 保存 once 的回调函数与对应的 wrapper 
+    this.onceToWrapper = new Map();
+}
+
+once(event, callback) {
+    let wrapper = (...args) => {
+        callback(...args);
+        // 删除之前，删除 callback 和 wrapper 的关系
+        this.onceToWrapper.delete(callback);
+        this.off(event, wrapper);
+    }
+    if(!this.listeners.has(event)) {
+        this.listeners.set(event, []);
+    }
+    let fns = this.listeners.get(event);
+    // 添加之前，绑定 callback 和 wrapper 的关系
+    this.onceToWrapper.set(callback, wrapper);
+    fns.push(wrapper);
+}
+
+prependOnceListener(event, callback) {
+    let wrapper = (...args) => {
+        callback(...args);
+        // 同上
+        this.onceToWrapper.delete(callback);
+        this.off(event, wrapper);
+    }
+    if(!this.listeners.has(event)) {
+        this.listeners.set(event, []);
+    }
+    let fns = this.listeners.get(event);
+    // 同上
+    this.onceToWrapper.set(callback, wrapper);
+    fns.unshift(wrapper);
+}
+
+off(event, callback) {
+    if(!this.listeners.has(event)) {
+        return;
+    }
+    let fns = this.listeners.get(event);
+    // 先从 onceToWrapper 中查找是否有对应的 wrapper，如果有说明是 once 绑定的
+    callback = this.onceToWrapper.get(callback) || callback;
+    for (let i = 0; i < fns.length; i++) {
+        if(fns[i] === callback) {
+            fns.splice(i, 1);
+            break;
+        }
+    }
+    if (fns.length === 0) {
+        this.listeners.delete(event);
+    }
+}
+```
+:::
+
+全部代码如下
+
+```javascript
+class EventEmitter {
+    constructor() {
+        this.listeners = new Map();
+        this.onceToWrapper = new Map();
+    }
+
+    on(event, callback) {
+        if(!this.listeners.has(event)) {
+            this.listeners.set(event, []);
+        }
+        let fns = this.listeners.get(event);
+        fns.push(callback);
+    }
+
+    addListener(event, callback) {
+        this.on(event, callback);
+    }
+
+    emit(event, ...args) {
+        if(!this.listeners.has(event)) {
+            return;
+        }
+        let fns = this.listeners.get(event);
+        let values = [];
+        for(let fn of fns) {
+            values.push(fn);
+        }
+        for (let fn of values) {
+            fn(...args);
+        }
+    }
+
+    prependListener(event, callback) {
+        if(!this.listeners.has(event)) {
+            this.listeners.set(event, []);
+        }
+        let fns = this.listeners.get(event);
+        fns.unshift(callback);
+        
+    }
+
+    off(event, callback) {
+        if(!this.listeners.has(event)) {
+            return;
+        }
+        let fns = this.listeners.get(event);
+        callback = this.onceToWrapper.get(callback) || callback;
+        for (let i = 0; i < fns.length; i++) {
+            if(fns[i] === callback) {
+                fns.splice(i, 1);
+                break;
+            }
+        }
+        if (fns.length === 0) {
+            this.listeners.delete(event);
+        }
+    }
+
+    removeListener(event, callback) {
+        this.off(event, callback);
+    }
+
+    once(event, callback) {
+        let wrapper = (...args) => {
+            callback(...args);
+            this.onceToWrapper.delete(callback);
+            this.off(event, wrapper);   
+        }
+        if(!this.listeners.has(event)) {
+            this.listeners.set(event, []);
+        }
+        let fns = this.listeners.get(event);
+        this.onceToWrapper.set(callback, wrapper);
+        fns.push(wrapper);
+    }
+
+    prependOnceListener(event, callback) {
+        let wrapper = (...args) => {
+            callback(...args);
+            this.onceToWrapper.delete(callback);
+            this.off(event, wrapper);
+        }
+        if(!this.listeners.has(event)) {
+            this.listeners.set(event, []);
+        }
+        let fns = this.listeners.get(event);
+        this.onceToWrapper.set(callback, wrapper);
+        
+        fns.unshift(wrapper);
+    }
+
+    removeAllListeners(event) {
+        if (event === undefined) {
+            this.listeners = new Map();
+            return;
+        }
+        this.listeners.delete(event);
+    }
+
+    eventNames() {
+        return [...this.listeners.keys()];
+    }
+
+    listenerCount(event) {
+        return this.listeners.get(event).length;
+    }
+}
+```
+
+## 参考文献
+
+- [How to code your own event emitter in Node.js: a step-by-step guide](https://www.freecodecamp.org/news/how-to-code-your-own-event-emitter-in-node-js-a-step-by-step-guide-e13b7e7908e1/)
+- [Nodejs|Events](https://nodejs.org/api/events.html)
+

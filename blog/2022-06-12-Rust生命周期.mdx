@@ -1,0 +1,148 @@
+当我们借用一个变量时，如果变量被销毁，那么我们就不能通过该借用的引用访问数据，因为变量以及被销毁了，此时访问的数据是不可知的。
+
+```rust
+fn main() {
+  let x;
+  {
+    let y = 5;
+    x = &y;
+  }
+  println!("{}", x);
+}
+```
+
+如果我们尝试编译该代码，编译器将会给出错误
+
+```rust
+error[E0597]: `y` does not live long enough
+ --> hello5.rs:5:9
+  |
+5 |     x = &y;
+  |         ^^ borrowed value does not live long enough
+6 |   }
+  |   - `y` dropped here while still borrowed
+7 |   println!("{}", x);
+  |                  - borrow later used here
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0597`.
+```
+
+我们使用 `x` 变量借用 `y` 的引用，但是在 `y` 变量销毁以后，`x` 变量就不能访问 `y` 的数据了，它是一个悬空指针。好在我们不需要担心这个问题，编译器可以找到问题并为我们解决。编译器要解决这个问题，就得知道变量的声明周期，例如上面 `x, y` 的声明周期。
+
+但是如果函数返回一个引用的话，函数是不知道返回的变量的声明周期
+
+```rust
+fn get_one(x: &i32, y: &i32) -> &i32 {
+  &x
+}
+```
+
+如果我们尝试定义上面的函数，编译器会给出一个错误
+
+```rust
+error[E0106]: missing lifetime specifier
+  --> hello6.rs:13:33
+   |
+13 | fn get_one(x: &i32, y: &i32) -> &i32 {
+   |               ----     ----     ^ expected named lifetime parameter
+   |
+   = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y`
+help: consider introducing a named lifetime parameter
+   |
+13 | fn get_one<'a>(x: &'a i32, y: &'a i32) -> &'a i32 {
+   |           ++++     ++          ++          ++
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0106`.
+```
+
+这是因为编译器不知道返回的引用的生命周期，如果不知道生命周期的话，它就不能检测悬空指针的问题，所以编译就不会通过，我们需要指定返回的引用的生命周期。
+
+为了避免这样的事情发生，在我们定义函数时，需要为变量添加生命周期标记，生命周期标记使用 `'` 开头，后面跟若干字符用于标记，一般我们使用单个字符，如 `'a, 'b`。
+
+```rust
+fn get_one<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32 {
+  &x
+}
+```
+
+上面我们添加的 `'a, 'b` 就是生命周期标记，对于方法中使用的标记，都要在方法名后的 `<>` 中声明，例如 `add<'a, 'b>`，方法的输入分别被标记了不同的生命周期符号，`x: &'a i32, y: &'b i32` 表示它们具有不同的生命周期，返回的引用的生命周期时 `'a`，说明它与 `x: &'a i32` 的生命周期相同。
+
+具有这些信息，编译器就可以检测悬空指针的问题了。看下面的一个例子：
+
+```rust
+fn main() {
+  let x = 1;
+  let z;
+  {
+    let y = 2;
+    z = get_one(&x, &y);
+  }
+
+  println!("{}", z);
+}
+
+fn get_one<'a, 'b>(x: &'a i32, y: &'b i32) -> &'b i32 {
+  &y
+}
+```
+
+`get_one` 函数接收两个 `i32` 的引用，分别声明了不同的生命周期，然后返回一个 `i32` 的引用，其生命周期为 `'b`，与第二个参数的生命周期相同。
+
+然后我们在 `main` 函数中调用 `get_one`，分别传入 `&x, &y`，返回的引用赋值给 `z`，返回的引用的生命周期与第二个参数相同，也就是与 `y` 相同，那么我们就不能在 `y` 的生命周期之外访问 `z`，否则就会导致悬空指针的问题，但是上面的程序中我们在 `y` 所在的块之外访问了 `z`，所以会编译出错
+
+```rust
+warning: unused variable: `x`
+  --> hello6.rs:13:20
+   |
+13 | fn get_one<'a, 'b>(x: &'a i32, y: &'b i32) -> &'b i32 {
+   |                    ^ help: if this is intentional, prefix it with an underscore: `_x`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+error[E0597]: `y` does not live long enough
+ --> hello6.rs:6:21
+  |
+6 |     z = get_one(&x, &y);
+  |                     ^^ borrowed value does not live long enough
+7 |   }
+  |   - `y` dropped here while still borrowed
+8 |
+9 |   println!("{}", z);
+  |                  - borrow later used here
+
+error: aborting due to previous error; 1 warning emitted
+
+For more information about this error, try `rustc --explain E0597`.
+```
+
+给出的错误是说，`y` 已经被销毁了，但是在后面被引用的 `z` 使用了。
+
+如果我们修改上面的函数为
+
+```rust
+fn get_one<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32 {
+  &x
+}
+```
+
+这个时候我们返回的引用的生命周期是 `'a`，与第一个参数的生命周期相同，这个时候我们调用函数，因为返回的引用的生命周期与 `x` 的生命周相同，在 `x` 被销毁以前都可以使用，所以程序可以正确编译。
+
+```rust
+warning: unused variable: `y`
+  --> hello6.rs:13:32
+   |
+13 | fn get_one<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32 {
+   |                                ^ help: if this is intentional, prefix it with an underscore: `_y`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: 1 warning emitted
+
+1
+```
+
+程序正确打印出了 `x` 的值 `1`（当然还给出了一些警告，因为我们在 `get_one` 函数里面只用了 `x`，没有用 `y`）。
