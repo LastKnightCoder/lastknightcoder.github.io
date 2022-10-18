@@ -22,6 +22,8 @@ pip install -r requirements.txt
 
 下载预训练模型 [yolov5s6.pt](https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5s6.pt)，在项目根目录新建 weights 文件夹，将下载的预训练模型放入。
 
+<!--truncate-->
+
 使用 labelImg 标注自己的数据集，在项目根目录新建  datasets 文件夹，然后将数据集放入，datasets 文件夹的结构如下，每一个数据集都包含三个文件夹 `train, test, valid`，其中 `test` 文件夹不是必须的，每个文件夹都包含两个文件夹 `images` 和 `labels`，分别放置图片和标签。
 
 ```text

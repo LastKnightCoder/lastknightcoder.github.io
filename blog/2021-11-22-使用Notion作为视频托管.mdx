@@ -1,0 +1,282 @@
+---
+authors: xiongtao
+tags:
+  - Notion
+  - 视频
+---
+
+有的时候希望在博客里面添加视频，博客托管在 `Github Page` 上，但是视频一般比较大，也就没有办法将其上传到 `Github` 上，一般来说我们可以讲视频上传到视频托管平台，比如 `bilibili` 和 `Youtube`。
+
+对于国内将视频上传到 `bilibili` 是一个比较好的选择，但是在博客中嵌入的 `bilibili` 的清晰度最高只有 `720P`，如果需要更高清晰度则需要前往 `B站` 观看，如果可以的话，我并不希望读者离开我的博文去观看视频，最好能在本页面观看。
+
+将视频上传到 `Youtube` 上没有清晰度的限制，但是因为墙的存在，视频很可能无法访问。
+
+除此之外，有些视频可能无法上传到视频托管平台，例如电影，由于版权，上传的视频不能过审，也无法提供视频托管服务。
+
+<!--truncate-->
+
+后来我发现可以将视频放在 `Notion`，对于 `Pro Plan` 可以上传无限容量的文件，当然就可以上传视频，因为它是一个网页应用，我们可以拿到视频的播放地址，我们可以将视频地址拿过来嵌入到自己的博客中，这样就可以播放视频了，并且也没有清晰度的限制，唯一的缺点可能就是播放速度可能不是很快，但是因为上传到 `Notion` 是不用审核的，咱们可以分享一些电影。
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110142140352021-10-14-21-40-36.png" style={{ zoom: '50%' }}/>
+
+但是很快我发现天真了，链接很快就失效，Notion 做了相关处理，视频链接是有时间限制的，但是后面我想到 `Notion` 提供了 `API` 来访问页面的内容，那我们可以在每次打开博客的时候对相关页面进行访问，拿到最新的链接进行播放即可，说干就干。
+
+按照 `Notion` [官网指南](https://developers.notion.com/docs/getting-started)，首先需要前往 [https://www.notion.so/my-integrations](https://www.notion.so/my-integrations) 创建一个 `integrations`，具体按照它的来操作，比如我创建了一个名字为 `test` 的 `integrations`，创建好之后会给你一个字符串密钥，我们就可以通过这个密钥来访问相关页面。
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110142148482021-10-14-21-48-49.png" style={{ zoom: '50%' }}/>
+
+
+我们将需要被访问的页面 `share` 到该 `integrations` 中，
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110150133482021-10-15-01-33-48.png" style={{ zoom: '50%' }}/>
+
+
+然后就可以使用 `Notion` 提供 `JS` 接口来访问相关页面，首先新建一个 `npm` 项目，并下载依赖
+
+```bash
+npm install @notionhq/client
+```
+
+然后通过下面的代码访问页面内容
+
+```js
+const { Client } = require("@notionhq/client");
+const notion = new Client({
+  auth: "integrations密钥",
+});
+
+(async () => {
+  const res = await notion.blocks.children.list({
+    block_id: "块ID",
+  });
+  const { results } = res;
+  console.log(results);
+})();
+```
+
+在上面的代码中，我们使用 `notion.blocks.children.list` 来获得指定块 ID 包含的所有内容，**注意到页面也是一个块**，而页面的块 ID 可以通过网页地址拿到
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110142158162021-10-14-21-58-17.png" style={{ zoom: '50%' }}/>
+
+
+上述代码的运行结果为
+
+```json
+[
+  {
+    object: 'block',
+    id: '3b628e1d-84da-4c6c-900d-b6e4a285xxxx',
+    created_time: '2021-02-19T07:18:00.000Z',
+    last_edited_time: '2021-02-22T07:24:00.000Z',
+    has_children: false,
+    archived: false,
+    type: 'video',
+    video: { caption: [Array], type: 'file', file: [Object] }
+  },
+  {
+    object: 'block',
+    id: '5adccff1-b93f-4d1e-a079-0d20d1a5xxxx',
+    created_time: '2021-09-28T00:09:00.000Z',
+    last_edited_time: '2021-09-28T00:09:00.000Z',
+    has_children: false,
+    archived: false,
+    type: 'paragraph',
+    paragraph: { text: [] }
+  }
+]
+```
+
+返回结果是一个数组，包含两个元素，都是对象，第一个元素中的 `type` 属性为 `video`，就是我们想要的结果，注意到这个对象有一个 `id` 属性，这是这个视频块的 `blcok_id`。拿到视频的块 ID 后，我们可以使用 `notion.blocks.retrieve` 拿到指定块的内容
+
+```js
+const { Client } = require("@notionhq/client");
+const notion = new Client({
+  auth: "integrations密钥",
+});
+
+(async () => {
+  const res = await notion.blocks.retrieve({
+    block_id: "3b628e1d-84da-4c6c-900d-b6e4a285xxxx",
+  });
+  console.log(res);
+})();
+```
+
+打印结果为
+
+```json
+{
+  object: 'block',
+  id: '3b628e1d-84da-4c6c-900d-b6e4a285xxxx',
+  created_time: '2021-02-19T07:18:00.000Z',
+  last_edited_time: '2021-02-22T07:24:00.000Z',
+  has_children: false,
+  archived: false,
+  type: 'video',
+  video: {
+    caption: [ [Object] ],
+    type: 'file',
+    file: {
+      url: 'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/6f8c2891-109a-4b5f-8700-1f0214784b36/-.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211014%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211014T140553Z&X-Amz-Expires=3600&X-Amz-Signature=c42b604dacab8e48efc58b6ba48ca6b83141dbea49467b2529a73e833ca2caa8&X-Amz-SignedHeaders=host',
+      expiry_time: '2021-10-14T15:05:53.554Z'
+    }
+  }
+}
+```
+
+`video` 属性中的 `file` 属性给出了视频的地址以及失效时间，虽然有失效时间，但是我们每次都可以通过 `API` 拿到新的视频播放地址，视频就会永久有效，我们可以抽离出一个 `Vue` 组件，该 `Vue` 组件接收一个视频的块 ID
+
+```html vue
+<template>
+  <div>
+    <video ref="video"></video>
+  </div>
+</template>
+
+<script>
+  import { Client } from "@notionhq/client";
+  const notion = new Client({
+    auth: "integrations密钥",
+  });
+
+  export default {
+    name: "NotionVideo",
+    props: ["block_id"],
+    mounted() {
+      const video = this.$refs.video;
+      (async () => {
+        const res = await notion.blocks.retrieve({
+          block_id: this.block_id,
+        });
+        video.src = res.video.file.url;
+      })();
+    },
+  };
+</script>
+
+<style scoped>
+  video {
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+  }
+</style>
+```
+
+然后如下使用
+
+```html vue
+<NotionVideo block_id="3b628e1d-84da-4c6c-900d-b6e4a285xxxx" />
+```
+
+但是万万没有想到，不能跨域！！！
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110142229092021-10-14-22-29-09.png" style={{ zoom: '50%' }}/>
+
+
+为了解决跨域的问题，我们必须使用一个服务器中转请求，并在该服务器中处理跨域问题，但是我没有服务器，这就意味着我需要租一个服务器，但是咱没钱啊，此时我的脑海里想起可不可以使用我的电脑作为服务器呢，但是我的电脑因为到处移动，它的 `IP` 是不断变化的，无法提供稳定的服务，总不可能每次变 `IP` 我都要重新改一下请求地址并部署一次项目吧。
+
+然后我想到了内网穿透，之前用过内网穿透提供网页服务，然后我发现免费的内网穿透实在是太差劲了，而且有的平台要实名认证，我这也不敢将自己的信息暴露，我对他们是不信任的，那么似乎陷入了死胡同。
+
+但是天无绝人之路，我想到了 `Serverless` 服务，很多企业提供免费的函数调用，每月前一百万次调用免费，这简直就是免费，因为我根本就不可能调用一百万次。提供这样产品的企业很多，我最终选择了腾讯云提供的 `Serverless` 服务，因为腾讯打的广告多，之前折腾过但是没有成功，这次继续折腾。经过折腾，发现最简单的使用过程如下，首先在本地编写代码，然后将代码打包成 `zip` 上传即可，需要注意的是：
+
+- 入口文件为 `app.js`
+- 监听的端口号必须为 `9000`
+- 所需要的依赖，即 `node_modules` 文件夹需要一起打包
+
+代码如下所示
+
+```js
+const Koa = require("koa");
+const app = new Koa();
+
+const { Client } = require("@notionhq/client");
+const notion = new Client({
+  auth: "integrations密钥",
+});
+
+// 跨域处理
+app.use(async (ctx, next) => {
+  ctx.set("Access-Control-Allow-Origin", "*");
+  ctx.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild"
+  );
+  ctx.set("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+  if (ctx.method == "OPTIONS") {
+    ctx.body = 200;
+  } else {
+    await next();
+  }
+});
+
+app.use(async (ctx, next) => {
+  const query = ctx.query;
+  const { block_id } = query;
+  if (!block_id) {
+    ctx.body = {};
+    await next();
+  }
+  const res = await notion.blocks.retrieve({
+    block_id,
+  });
+  ctx.body = {
+    url: res.video.file.url,
+  };
+});
+
+// Web 类型云函数，只能监听 9000 端口
+app.listen(9000, () => {
+  console.log(`Server start on http://localhost:9000`);
+});
+```
+
+注意到在代码中做了跨域处理，所以就不存在跨域的问题。然后我们点击部署，接着会给出一个访问地址，我们就可以通过访问地址来请求服务。
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110150116212021-10-15-01-16-22.png" style={{ zoom: '50%' }}/>
+
+下面我们就需要更改 `NotionVideo.vue` 文件，使用 `fetch` 方法访问腾讯云给出的访问路径
+
+```html vue
+<template>
+  <div>
+    <video ref="video" controls></video>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "NotionVideo",
+    props: ["block_id"],
+    mounted() {
+      const video = this.$refs.video;
+      fetch(`腾讯云访问路径/?block_id=${this.block_id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const { url } = data;
+          if (!url) {
+            return;
+          }
+          video.src = url;
+        })
+        .catch((e) => {
+          console.log("视频加载失败");
+        });
+    },
+  };
+</script>
+
+<style scoped>
+  video {
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+  }
+</style>
+```
+
+下面我们便可以通过如下方式访问视频
+
+```html vue
+<NotionVideo block_id="3b628e1d-84da-4c6c-900d-b6e4a285xxxx" />
+```

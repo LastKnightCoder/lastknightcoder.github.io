@@ -29,6 +29,8 @@ error: aborting due to previous error
 For more information about this error, try `rustc --explain E0597`.
 ```
 
+<!--truncate-->
+
 我们使用 `x` 变量借用 `y` 的引用，但是在 `y` 变量销毁以后，`x` 变量就不能访问 `y` 的数据了，它是一个悬空指针。好在我们不需要担心这个问题，编译器可以找到问题并为我们解决。编译器要解决这个问题，就得知道变量的声明周期，例如上面 `x, y` 的声明周期。
 
 但是如果函数返回一个引用的话，函数是不知道返回的变量的声明周期
