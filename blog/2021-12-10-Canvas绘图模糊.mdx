@@ -1,0 +1,84 @@
+---
+authors: xiongtao
+tags:
+  - Canvas
+  - 高分屏
+---
+
+在高分辨率屏幕 `(dpr > 1)` 上进行绘图时，会发现绘制的图像比较模糊，这是因为 Canvas 画布的单位不是一个 CSS 像素大小，而是一个物理像素大小。而 CSS 像素大小与物理像素大小相差 `dpr` 倍。当我们设置 Canvas 大小与 CSS 大小相同时，由于 CSS 大小是 Canvas 大小的 `dpr` 倍，所以会发生拉伸，导致图像模糊
+
+```html
+<style>
+  #canvas {
+    width: 100px;
+    height: 100px;
+  }
+</style>
+<canvas id="canvas" width="100" height="100"></canvas>
+```
+
+如上面的代码，虽然数值上画布大小和其 CSS 大小都是 `100`，但实际上它们相差 `dpr` 倍，因此画布会被拉伸放大，因此会导致模糊。
+
+既然知道了原因，那我们只要设置画布大小为 CSS 大小的 `dpr` 倍，这样画布就不会被拉伸了。而为了使得在画布中使用的单位是 CSS 像素，我们可以设置 `ctx.scale(dpr)` ，这样我们使用的单位就相当于 CSS 像素
+
+```js
+ctx.scale(dpr);
+// 这样绘制的矩形就是 (100px, 100px) 的了
+ctx.fillRect(0, 0, 100, 100);
+```
+
+看个例子进行对比：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #canvas,
+      #canvas2 {
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <canvas id="canvas2"></canvas>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const { width: w, height: h } = window.getComputedStyle(canvas);
+      canvas.width = parseInt(w);
+      canvas.height = parseInt(h);
+
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#e77c8e";
+      ctx.fillRect(100, 100, 100, 100);
+
+      const canvas2 = document.getElementById("canvas2");
+      const { width: w2, height: h2 } = window.getComputedStyle(canvas2);
+      canvas2.width = parseInt(w2) * window.devicePixelRatio;
+      canvas2.height = parseInt(h2) * window.devicePixelRatio;
+
+      const ctx2 = canvas2.getContext("2d");
+      ctx2.scale(window.devicePixelRatio, window.devicePixelRatio);
+      ctx2.fillStyle = "#e77c8e";
+      ctx2.fillRect(100, 100, 100, 100);
+    </script>
+  </body>
+</html>
+```
+
+有两个 `Canvas` 画布，它的大小都是 $300\text{px}\times300\text{px}$，画布的大小第一个设置的数值与 CSS 大小一样，第二个设置为 `dpr` 倍，并且第二个画布设置了 `ctx.scale(dpr)` ，看一下效果
+
+<iframe  width="100%" height="330"  src="https://lastknightcoder.github.io/canvas-demos/75.html"></iframe>
+
+第二个矩形明显比第一个清晰许多。
+
+:::note
+使用这种方法需要注意的是，此时画布的大小被设置为了 $300 \times \text{dpr}$，但是我们要将其看作是 `300px` 的大小。
+:::

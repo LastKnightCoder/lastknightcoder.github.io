@@ -1,0 +1,184 @@
+---
+authors: xiongtao
+tags:
+  - Github Actions
+  - VuePress
+date: 2021-05-31
+---
+
+随着我 `VuePress` 博客中的东西越来越多，每次我打包好项目然后上传到 `Github` 上需要好一会儿时间，之前在一些文章中知道 `Github Actions` 可以帮我自动部署项目，正好今天尝试尝试。
+
+在使用 `Github Actions` 以前，部署过程是这样的：
+
+- 写文章
+- 生成静态文件
+- 将静态文件部署到 `Github Page` 上
+
+ 使用了 `Github Actions` 后，过程变为了：
+
+- 写文章
+- 提交文章到 `Github` 上
+
+<!--truncate-->
+
+## 配置文件
+
+接着我们介绍如何使用这一利器。首先你需要在你的项目下新建 `.github/workflows/` 文件夹，接着在 `workflows` 文件夹下新增 `xxx.yml` 文件，这个文件名随意，但是必须是 `YAML` 文件，比如我新增文件名为 `deploy.yml`，给出我的配置内容(去掉了一些个性化的配置)
+
+```yaml
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install and Build 🔧 
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          BRANCH: gh-pages
+          FOLDER: docs/.vuepress/dist
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+```
+
+当你向 `Github` 提交代码时，它会自动的检测 `.github/workflows/` 目录，如果有配置的话，就会根据你的配置 `workflow` 自动部署项目。
+
+从上面的配置看，主要分为三个部门：
+
+- `name`：这个 `workflow` 的名称，自己随便取
+
+- `on`：触发条件
+
+  ```yaml
+  on:
+    push:
+      branches:
+        - master
+  ```
+
+  上述表示当我们向 `master` 分支 `push` 时就会触发该 `workflow`
+
+- `jobs`：规定要执行的任务，例如上面我们定义了一个任务 `build-and-deploy`，每个任务包含如下配置
+
+  - `runs-on`：运行所需要的虚拟机环境，`Github` 为我们提供了如下环境
+
+    - `ubuntu-latest`，`ubuntu-18.04`或`ubuntu-16.04`
+    - `windows-latest`，`windows-2019`或`windows-2016`
+    - `macOS-latest`或`macOS-10.14`
+
+    这里我们选择了 `ubuntu-latest`
+
+  - `steps`：任务运行的步骤
+
+接着我们对我们运行的步骤进行说明，我们的步骤包含三步，第一步是拉取主分支的代码
+
+```yaml
+- name: Checkout 🛎️
+  uses: actions/checkout@v2.3.1
+```
+
+第二步，运行两个命令 `npm install` 与 `npm run build`
+
+```yaml
+- name: Install and Build 🔧 
+  run: |
+    npm install
+    npm run build
+```
+
+第三步，将 生成的静态文件夹部署到 `gh-pages` 分支上
+
+```yaml
+- name: Deploy 🚀
+  uses: JamesIves/github-pages-deploy-action@4.1.3
+  with:
+    BRANCH: gh-pages
+    FOLDER: docs/.vuepress/dist
+    ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+```
+
+## 配置密钥
+
+使用 `Github Actions` 是需要 `ACCESS-TOKEN`，既然都已经会使用 `Github` 了，就肯定知道这个东西怎么生成了，如果不会，请求参照[官方文档](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)。
+
+我们需要在仓库的 `Setting` 中选择 `Secrets`
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting2/20210531185034.png" alt="image-20210531185033956"  />
+
+点击右上方的 `New repository secret`
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting2/20210531185129.png" alt="image-20210531185129280"  />
+
+`Name` 必须写为 `ACCESS_TOKEN`，`Value` 就是你的 `token`，填写完毕点击 `Add secret`，如果填写没有问题的话，点击之后就会提示添加成功。
+
+每次当你将 `Vuepress` 项目提交到 `Github` 上的时候，`Github` 就会自动帮你部署项目。
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting2/20210531185615.png" alt="image-20210531185615412"  />
+
+在 `Actions` 的这个选项中可以看到项目的部署情况，上面可以看到我尝试了三次，第三次成功了，前两次是踩坑，下面就介绍了我踩的两次坑。
+
+## 踩坑
+
+在 `VuePress` 官网上面，给出的构建脚本命令是
+
+```bash
+npm run docs:build
+```
+
+我觉得麻烦，改为了 `npm run build`，所以第一次运行的时候，就提示我没有这个脚本
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting2/20210531190036.png" alt="image-20210531190036475"  />
+
+我改过来了，所以如果你构建的脚本命令和我的不一致的话，还是要改的。
+
+另一个坑，上面配置好了以后，我将我的 `VuePress` 博客提交到 `Github`，但是运行一段时间之后爆出了错误
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting2/20210531190224.png" alt="image-20210531190224283"  />
+
+从错误的类型看好像是超内存了，然后经过我的搜索，在 `Github` 的一个 `issue` 中找到了[解决办法](https://github.com/ScaCap/action-surefire-report/issues/17#issuecomment-677015255)，添加下面的环境变量
+
+```yaml
+env:
+  NODE_OPTIONS: '--max_old_space_size=4096'
+```
+
+更改后的配置文件如下
+
+```yaml {17-18}
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install and Build 🔧 
+        run: |
+          npm install
+          npm run build
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          BRANCH: gh-pages
+          FOLDER: docs/.vuepress/dist
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+```
+

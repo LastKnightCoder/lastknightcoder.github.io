@@ -1,0 +1,1127 @@
+---
+authors: xiongtao
+tags:
+  - TypeScript
+date: 2020-05-30
+---
+
+## 介绍
+
+### TypeScript是什么
+
+`TypeScript` 是什么? 引用官方的定义
+
+> TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. Any browser. Any host. Any OS. Open source.
+
+简单翻译就是
+
+> `TypeScript` 是 `JavaScript` 的超集，并且可以被编译成 `JavaScript`。它可以运行在任何浏览器，任何主机，任何操作系统上。并且它是开源的。
+
+看到这里你可能对 `TypeScript` 还是没有什么感觉，其实在我看来 `TypeScript` 是对 `JavaScript` 做了各种限制，这里说的限制并不是贬义的意思，因为 `JavaScript` 实在是太灵活了，很多的问题只有在运行的时候才会暴露出来，比如对于函数，即使定义时要求传两个参数，但是在使用时却可以传入任意的参数，所以你无法限制使用该函数的用户传入正确的参数，如果碰到不仔细看 `API` 文档的用户，鬼知道它使用的时候会传入什么，出了问题说不定会甩锅你兼容性做的不好。而 `TypeScript` 则限制了这一点，在使用时传入的参数必须与定义传入的相同，并且有提示每个参数的作用，用户使用该函数时必须按规定的来。
+
+<!--truncate-->
+
+### TypeScript的优势
+
+那么 `TypeScript` 可以为我们带来什么好处：
+
+1. 错误在编译时就可以暴露出来，而不必等到运行时才暴露出来
+
+  如下 `js` 文件
+
+  <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291015132022-10-23-20-24-28.png" />
+
+  如上，一不小心将变量名写错了，写成了 `MyNane`，这种错误是很有可能发生的，但是在很多的时候我们自己却很难发现，只有当我们运行该程序报错的时候，我们才有可能根据报错信息，确定报错的原因；更糟糕的是，如果报错的信息不明确，你几乎无法确定是哪里出现问题，到时候要靠一双肉眼去找出这么一个小小的不同，曾经我就有因为变量名写错的问题，我找了半个小时。但是如果我们使用 `TypeScript` 的话，这样的问题在编译时就会被发现，如下 `ts` 文件
+
+  <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291019142022-10-23-20-25-23.png" />
+
+  我们可以发现，在 `MyNane` 下面出现了红色的波浪线，将鼠标放在上面，还会贴心的给出提示。
+
+2. 智能提示
+
+  对于现代的程序员来说，代码的智能提示那是能够大大的提高工作效率的，不仅如此，还可以减少出错的概率，如果你手动写出一个对象的方法名，出错的概率可是很高的，特别是对于一些英语不好的同学。但是问题来了，因为 `JavaScript` 不是静态类型，而是动态类型，所有的变量都使用 `var, let, const` 声明，而不是像 `C` 语言这样静态类型语言，不同的类型使用不同的关键字，如 `int, char[]` 等等。所以这就意味着 `JavaScript` 这个类型是可变的，一会儿这是字符串类型，一会儿是数字类型，编译器根本在编译阶段根本不能确定你是什么类型，所以无法给出相应类型的特有方法，比如字符串类型的 `toUpperCase()` 方法，如下 `js` 文件
+
+  <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/2020052910402022-10-23-20-26-31.gif" />
+
+  如上，上面的函数的功能是将传入的单词首字母大写，我们只是简单的调用字符串对象的函数 `toUpperCase()`，但是我们发现当我们打出 `word.` 时没有给出任何的提出，因为 `JavaScript` 根本不能确定你传入的是不是字符串，毕竟 `JavaScript` 是如此的灵活，使用时你可以传入任何类型的参数。但是对于 `TypeScript` 就不一样了，因为它会对参数的类型做出限制，如下
+  
+  <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/2020052910462022-10-23-20-27-10.gif" />
+  
+  我们限制了传入的参数必须为 `string` 类型，在编译的阶段，我们能够肯定传入的一定是 `string` 类型，所以在函数的方法里面，当我们输入 `word.` 时会给出字符串对象的所有方法。除此之外，我们还规定了函数必须传入什么类型，这样用户在使用时就不能随便的传入参数，所有的一切必须按规定的来，这又无形的减少了 `bug` 的产生，并且用户在调用该方法时，还会给出提出，需要传入什么参数类型，必要的时候还可以给出传入参数的意义，如下
+  
+  <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/2020052910572022-10-23-20-27-45.gif" />
+
+`TypeScript` 的好处还不止这一些，不过就我列举的这两个，就有足够的理由来学 `TypeScript` 了，`TypeScript` 更多的好处就需要你在使用的过程中慢慢理会了。
+
+## 入门使用
+
+下面就将介绍 `TypeScript` 的安装，以及如何将 `TypeScript` 转化为 `JavaScript` 代码，毕竟浏览器和 `Node` 只能运行 `JavaScript` 代码。
+
+### 安装TypeScript
+
+在安装 `TypeScript` 之前，确保你的计算机按照好了 `Node`，如果没有安装，可以去网上搜如何安装，教程很多。安装完成之后，使用 `npm` 下载 `typescript`
+
+```shell
+npm install -g typescript
+```
+
+查看版本(主要是验证是否成功安装)
+
+```shell
+tsc -V
+
+Version 3.8.3
+```
+
+### 编写TypeScript程序
+
+新建 `greeter.ts`
+
+```ts
+function greeter(person: string) {
+    return "Hello " + person;
+}
+
+let user = 'XT';
+console.log(greeter(user));
+```
+
+在命令行中使用 `tsc` 命令将它编译为 `js`
+
+```shell
+tsc greeter.ts
+```
+
+这时会在该目录下生成 `greeter.js`，`greeter.js` 的内容为
+
+```js
+function greeter(person) {
+    return "Hello " + person;
+}
+var user = 'XT';
+console.log(greeter(user));
+```
+
+接着我们使用 `node` 运行该 `js` 文件
+
+```shell
+node greeter.js
+```
+
+输出为
+
+```
+Hello XT
+```
+
+所以我们一般的流程为，编写 `ts` 文件，然后使用 `tsc` 编译为 `js` 文件，然后使用 `node` 运行 `js` 文件查看结果，那有没有什么工具帮我们做这件事情，一个命令直接到位。这里我们推荐使用 `ts-node`，该命令可以一步到位，就相当于是直接运行 `ts` 文件，首先下载 `ts-node`
+
+```shell
+npm install -g ts-node
+```
+
+现在我们可以直接使用 `ts-node greeter.ts` 查看结果。
+
+## 基本类型
+
+`TypeScript` 与 `JavaScript` 最大的不同就是 `TypeScript` 是一个有类型的语言，我们一般使用下面的方式声明变量
+
+```ts
+let 变量名: 类型 = 值;
+```
+
+那么 `TypeScript` 有哪些类型呢? 下面就简单介绍一下。
+
+### boolean
+
+```ts
+// 值只能为true或者false
+let isDone: boolean = false;
+```
+### number
+
+```ts
+let decNumber: number = 20; // 十进制
+let hexNumber: number = 0x14; // 十六进制 20
+let binNumber: number = 0b10100; // 二进制 20
+let octNumber: number = 0o24; //八进制 20
+```
+
+### string
+
+```ts
+let name: string = "bob"; // 单引号，双引号都可以
+let greetStr: string = `Hello ${name}`; // 支持模板字符串
+```
+
+### 数组(Array)
+
+```ts
+let list: number[] = [1, 2, 3]; // 数字数组
+let list: Array<number> = [1, 2, 3]; // 数组泛型
+```
+
+### 元祖(Turple)
+
+规定了数组的长度，以及每个元素的类型
+
+```ts
+let x: [string, number]; // x有两个元素，第一个元素为字符串，第二个元素为数字
+x = ["hello", 1]
+```
+
+### enum
+
+枚举类型
+
+```ts
+enum Color {
+    Red,
+    Green,
+    Blue
+}
+
+let colorName: Color = Color.Blue;
+```
+
+### any
+
+任意类型，与写 `JavaScript` 一样
+
+```ts
+// 不清楚是什么类型，或者不希望做语法检查，就相当于写JavaScript
+let notSure: any = 4;
+notSure = false;
+
+let list: any[] = [1, true, "a"]
+```
+
+### void
+
+`void` 一般用于表示函数不返回任何值，将它声明为一个变量没有意义
+
+```ts
+// 不返回任何值
+function printUser(user): void {
+    console.log(user)
+}
+
+// 声明一个void类型变量是没有意义的
+let x: void = null; // 只能被赋值为null和undefined
+```
+
+### undefined, null
+
+```ts
+let u: undefined = undefined; // 通常声明变量意义不大
+let n: null = null;
+```
+
+### never
+
+函数抛出异常或者死循环是可以使用 `nerver` 作为返回值
+
+```ts
+// 表示不存在的数据类型 函数抛出异常的时候就可以用never 
+// never是任何类型的子类型，可以赋值给任何的类型
+function error(message: string): never {
+    throw new Error(message)
+}
+
+function fail() {
+    return error("something error");
+}
+
+// 无限循环，函数不能结束，也可以返回never
+function inifiniteLoop(): never {
+    while (true) {
+
+    }
+}
+```
+
+### object
+
+```ts
+// 表示非原始类型
+declare function create(o: object | null): void;
+
+create({prop: 0});
+```
+
+> 注意：当没有将变量声明为某个基本类型时，`TypeScript` 会进行类型推断，如
+>
+> ```typescript
+> let str = 'hello'; // str 会被推断为 string 类型
+> ```
+>
+> 如上，变量 `str` 会被推断为 `string` 类型，这时 `str` 不能被赋值为别的类型
+> <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291314402022-10-23-20-29-18.png" />
+>
+> 如果变量在声明时并没有被赋值，那么它的类型会被推断为 `any`，这时它可以被赋予任何类型的值
+>
+> ```typescript
+> let str; // str 被推断为 any，可以为赋予任何类型的值
+> str = 'hello';
+> str = 2;
+> ```
+>
+> <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291319262022-10-23-20-30-04.png" />
+>
+
+## 高级类型
+
+### 枚举类型
+
+我们使用 `enum` 来定义枚举类型，如
+
+```typescript
+enum Week {
+    Mon,
+    Tue,
+    Wen,
+    Thu,
+    Fri,
+    Sat,
+    Sun
+}
+```
+
+枚举类型会被编译为从零递增的数字
+
+```js
+var Week;
+(function (Week) {
+    Week[Week["Mon"] = 0] = "Mon";
+    Week[Week["Tue"] = 1] = "Tue";
+    Week[Week["Wen"] = 2] = "Wen";
+    Week[Week["Thu"] = 3] = "Thu";
+    Week[Week["Fri"] = 4] = "Fri";
+    Week[Week["Sat"] = 5] = "Sat";
+    Week[Week["Sun"] = 6] = "Sun";
+})(Week || (Week = {}));
+```
+
+通过编译后的代码可以看出，枚举名和枚举值可以互相引用
+
+```ts
+console.log(Week[0] === 'Mon'); // true
+console.log(Week[1] === 'Tue'); // true
+console.log(Week[2] === 'Wen'); // true
+console.log(Week[3] === 'Thu'); // true
+
+console.log(Week['Fri'] === 4); // true
+console.log(Week['Sat'] === 5); // true
+console.log(Week['Sun'] === 6); // true
+```
+
+我们还可以为枚举名手动赋值，如
+
+```ts
+enum Week {
+    Mon = 1,
+    Tue,
+    Wen,
+    Thu,
+    Fri,
+    Sat,
+    Sun
+}
+```
+
+我们为 `Mon` 手动赋值为 `1`，未手动赋值的项会接着上一项递增，所以 `Tue` 的值为 `2`，`Wen` 的值为 `3`，以此递增。如果后面递增的数字与前面定义数字重复了，这时是不会报错的，而是会覆盖之前的项
+
+```ts
+enum Week {
+    Mon = 3,
+    Tue = 1,
+    Wen,
+    Thu,
+    Fri,
+    Sat,
+    Sun
+}
+```
+
+可见 `Thu` 的值也是 `3`，这个时候它的值与 `Mon` 重复了，但是此时 `Week[3]` 的值是 `Thu` 而不是 `Mon`，因为后面的 `Thu` 将前面的 `Mon` 覆盖了
+
+```js
+var Week;
+(function (Week) {
+    Week[Week["Mon"] = 3] = "Mon";
+    Week[Week["Tue"] = 1] = "Tue";
+    Week[Week["Wen"] = 2] = "Wen";
+    Week[Week["Thu"] = 3] = "Thu"; // Week[3] 被重新赋值为了"Thu"
+    Week[Week["Fri"] = 4] = "Fri";
+    Week[Week["Sat"] = 5] = "Sat";
+    Week[Week["Sun"] = 6] = "Sun";
+})(Week || (Week = {}));
+```
+
+### 函数类型
+
+对于函数来说，我们使用函数类型来规范它，一个函数有输入和输出，所以我们使用如下的形式来表示函数类型
+
+```ts
+(x: number, y:number) => number
+```
+
+上面就规范这个函数类型的输入为两个 `number` 类型的参数，输出为 `number` 类型的参数，如
+
+```ts
+let add:(x: number, y:number) => number = (x, y) => {
+    return x + y;
+}
+```
+
+上面的 `add` 函数是一个 `(x: number, y:number) => number` 类型的函数，它必须接受两个 `number` 类型的参数，返回一个 `number` 类型的参数，如果 `add` 函数不满足此规则，那么就会报错
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291350412022-10-23-20-31-09.png" />
+
+在上面 `add` 返回的是一个 `string` 类型的值，而不是 `number` 类型，这时编译器就会报错。
+
+现在考虑有一个减法函数，它也满足上面的函数类型，所以它可以被声明如下
+
+```ts
+let substract: (x: number, y: number) => number = (x, y) {
+    return x - y;
+}
+```
+
+如果还有很多的函数也满足上面的函数类型的话，那是不是每次都要写一般函数类型，所以我们可不可以为这个函数类型起一个别名，这样方便引用，我们可以通过 `type` 起别名，如下
+
+```ts
+type compute = (x: number, y: number) => number;
+
+let substract: compute = (x, y) {
+    return x - y;
+}
+
+let add: compute = (x, y) {
+    return x + y;
+}
+```
+
+如果还有别的函数时这个函数类型的话，我们使用起的别名 `compute` 进行申明就可以了。
+
+如果我们使用匿名函数的形式声明一个函数，那么它会进行类型推断，如
+
+```ts
+function add(x: number, y: number): number {
+    return x + y;
+}
+```
+
+那么 `add` 会被自动推断为 `(x: number, y:number) => number`，如果参数没有注明类型，那么会被推断为 `any`。
+
+### 联合类型
+
+联合类型表示取值可以为多种类型的一种，如下
+
+```ts
+let score: string | number; // score 可以为数字，也可以为字符串
+
+score = 97;
+score = "97"; // 不会报错
+```
+
+当我们为联合类型进行赋值时，会根据类型推断推断出一个类型，这个时候我们就可以访问该类型所拥有的属性和方法，如
+
+```ts
+let score: string | number;
+score = "97"; // 被推断为 string 类型
+score.length; // 可以访问 string 类型的属性和方法
+```
+
+当 `TypeScript` 不能确定联合类型的具体类型时，那么只能访问联合类型中这些类型的共有的属性和方法，如
+
+```ts
+function getLength(something: string|number): number {
+    return something.length;
+}
+```
+
+因为 `something` 为 `string` 或者 `number` 类型，所以它只能访问 `string` 和 `number` 类型共有的属性和方法，但是因为 `number` 类型没有 `length` 属性，所以上面会报错，如下
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291437212022-10-23-20-32-16.png" />
+
+## 接口
+
+接口可以看做是对象的类型，接口规定了对象的结构，我们使用 `interface` 来定义一个接口
+
+```ts
+interface Person {
+    name: string;
+    age: number;
+}
+```
+
+上面我们定义一个叫做 `Person` 的接口，如果某个对象时这个接口类型，那么这个对象就必须含有 `name` 和 `age` 属性，并且 `name` 属性的值为 `string`，`age` 属性的值为 `number`，如下
+
+```ts
+let person: Person = {
+    name: 'bob',
+    age: 13
+}
+```
+
+可以说接口规定了对象的结构，定义了对象所必须拥有的属性名，不能多，也不能少，否则会报错，如下
+
+```ts
+let person: Person = {
+    name: 'bob',
+    age: 13,
+    gender: 'male'
+}
+```
+
+`person` 中含有接口 `Person` 不曾定义过的属性 `gender`，这时就会报错
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291448132022-10-23-20-33-03.png" />
+
+### 可选属性
+
+有时候我们并不需要对象完全匹配一个形状，这个时候可以定义可选属性，定义的规则如下
+
+```ts
+interface Person {
+    name: string;
+    age: number;
+    gender?: string;
+}
+```
+
+在上面我们定义了一个可选属性 `gender`，这个时候类型为 `Person` 的对象，可以有 `gender` 属性，也可以没有
+
+```ts
+let person: Person = {
+    name: 'bob',
+    age: 13,
+    gender: 'male'
+}
+```
+
+或者
+
+```ts
+let person: Person = {
+    name: 'bob',
+    age: 13
+}
+```
+
+都是可以的。
+
+### 只读属性
+
+有时候我们希望对象的某些属性在定义时被赋值，并且以后不能被更改，那么可以在这个属性定义为只读属性。我们使用 `readonly` 定义某个属性为只读属性
+
+```ts
+interface Person {
+    readonly id: number;
+    name: string;
+    age: number;
+}
+```
+
+当对象的类型为 `Person` 时，在创建时要为 `id` 赋值(初始化)，并且这时 `id` 是只读的，不能被改变
+
+```ts
+let tom: Person = {
+    id: 1,
+    name: 'Tom',
+    age: 3
+}
+
+tom.id = 2;
+```
+
+上面我们尝试修改 `tom` 对象的 `id`，但是因为 `id` 是只读的，不能被修改，所以上面的程序会报错
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291539012022-10-23-20-33-59.png" />
+
+### 任意属性
+
+如果我们希望某个接口可以有任意的属性，我们可以使用如下方式
+
+```ts
+interface Person {
+    name: string;
+    age?: number;
+    [propName: string]: any;
+}
+```
+
+我们定义了 `Person` 接口可以有任意的属性，该属性的键值为 `string` 类型，值为 `any` 类型。一旦定义了任意属性，那么确定属性和可选属性的类型必须为任意属性所规定的类型的子集。比如修改上面的接口
+
+```ts
+interface Person {
+    name: string;
+    age?: number;
+    [propName: string]: string;
+}
+```
+
+因为 `age` 的值类型为 `number`，而任意属性规定的值类型为 `string`，所以会报错
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291559452022-10-23-20-34-50.png" />
+
+## 类
+
+类可以看做是创建对象的模板，我们使用 `class` 来定义一个类，一个类中有属性和方法
+
+```ts
+class Person {
+    public name: string;
+    public age: number;
+
+    constructor(name:string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+let tom = new Person("Tom", 3);
+```
+
+我们可以通过类来大量的创建对象。在类中有一个方法 `constructor()`，这个方法叫做构造函数，它的功能是用来初始化属性的。
+
+### 类的继承
+
+我们使用 `extends` 关键字来实现继承
+
+```ts
+class Person {
+    public name: string;
+    public age: number;
+
+    constructor(name:string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Student extends Person {
+    public score: number;
+    constructor(name: string, age: number, score: number) {
+        super(name, age);
+        this.score = score;
+    }
+}
+```
+
+通过继承，我们复用父类的属性和方法。在上面我们使用了 `super`，该方法的作用是调用父类的构造函数初始化父类的属性。
+
+### 访问权限
+
+访问权限有三种，分别为 `public`，`private`，`protected` 三种，在上面我们使用的都是 `public` 访问权限，使用该权限，可以在任何地方被访问到，例如
+
+```ts
+class Person {
+    public name: string;
+    public age: number;
+
+    constructor(name:string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+let tom = new Person("Tom", 3);
+// 可以直接访问
+console.log(tom.name, tom.age); // Tom 3
+```
+
+如果使用 `private`，那么该属性只能在类内部才能被访问，在类的外部不能被访问，如
+
+```ts
+class Person {
+    private name: string;
+    public age: number;
+
+    constructor(name:string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+let tom = new Person("Tom", 3);
+
+console.log(tom.name, tom.age);
+```
+
+我们将 `name` 的访问权限修改为了 `private`，这个时候不能再类外被直接访问，所以上面通过 `tom.name` 访问属性 `name` 会报错
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291710392022-10-23-20-35-40.png" />
+
+如果使用 `protected` 修饰，那么该属性只能在该类内部及其子类中才能被访问，除此之外不能被访问，如下
+
+```ts
+class Person {
+    protected name: string;
+    public age: number;
+
+    constructor(name:string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Student extends Person {
+    public score: number;
+    constructor(name: string, age: number, score: number) {
+        super(name, age);
+        this.score = score;
+    }
+
+    // 在子类中可以被访问
+    public getName(): string {
+        return this.name;
+    }
+}
+
+let alice = new Student("Alice", 4, 5);
+
+console.log(alice.getName()); // Alice
+
+// 下行语句会报错
+console.log(alice.name);
+```
+
+如上所示，父类 `Person` 的 `name` 属性使用 `protected` 修饰，所以在子类 `Student` 中可以访问，但是在父类和子类的外部不能访问
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005291815162022-10-23-20-36-17.png" />
+
+### 静态属性
+
+我们可以使用 `static` 关键声明静态属性以及静态方法，静态属性和方法是属于类的，而不是具体的对象，使用属性和方法要使用类名调用，如下
+
+```ts
+class Person {
+    public static max_age:number = 100;
+    public name:string;
+    public age:number;
+    constructor(name:string, age:number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+let person = new Person("Tom", 15);
+
+// 通过类对象访问实例属性
+console.log(person.name); // Tom
+// 通过类访问静态属性
+console.log(Person.max_age); // 100
+```
+
+### readonly
+
+我们可以使用 `readonly` 来修饰类的属性，来表示该属性是只读的，只有在构造函数中初始化该属性，如下
+
+```js
+class Person {
+    public readonly name:string;
+    public age:number;
+    constructor(name:string, age:number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+let person = new Person("Alice", 12);
+
+person.name = "Bob";
+```
+
+在上面我们声明了 `name` 属性为 `readonly`，表明 `name` 属性是只读的，但是在后面我们试图修改该属性，这个时候将会报错
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005292027102022-10-23-20-37-00.png" />
+
+### 实现接口
+
+接口的另一个作用就是对类进行抽象，一个类可以实现接口，当类实现接口时，要求类中必须有接口中定义的属性和方法，如下
+
+```typescript
+interface IPerson {
+    name: string;
+    age: number;
+    gender: string;
+}
+
+class Person implements IPerson{
+    public name:string;
+    public age:number;
+    public gender: string;
+    constructor(name:string, age:number, gender:string) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+}
+
+let person = new Person("Alice", 12, "male");
+```
+
+其实我对接口的理解，其实就是定义了一个标准。定义了标准之后，对于具体的实现就不关心了，可以和具体的实现解耦。假设我们有一个方法接受一个操作数据库的对象，但是对于不同的厂家(数据库)，具体怎么操作数据库都是不一样的，所以这个对象不能写死是怎么类型。所以我们应该定义操作数据库的标准，比如操作数据库的方法名，方法接收的参数，而对于具体的实现应该由各自的产商编写。只要这些厂商实现了我们的标准，那么它就可以用，类比过来，我们定义的标准就是接口，而各自厂商的实现就是实现了接口的类。
+
+```typescript
+interface OperateDatabase {
+    save: () => void;
+}
+
+function saveData(obj: OperateDatabase): void {
+    obj.save();
+}
+```
+
+在上面我们定义一个操作数据库的接口 `OperateDatabase`，并且定义了一个方法 `saveData()`，该方法接收一个接口，注意这里我们没有指定是某个特定的对象类型，否则的就会与该类型绑定在一起。接着我们可以两个类实现该接口
+
+```typescript
+class MysqlDatabase implements OperateDatabase {
+    save() {
+        console.log("mysql 保存数据");
+    }
+}
+
+class RedisDatabase implements OperateDatabase {
+    save() {
+        console.log("redis 保存数据");
+    }
+}
+```
+
+这两个类就相当于是这个标准的具体实现。当我们调用 `saveData` 方法时，将具体的实现类传入即可
+
+```typescript
+saveData(new MysqlDatabase()); // mysql 保存数据
+saveData(new RedisDatabase()); // redis 保存数据
+```
+
+## 声明合并
+
+### 函数的合并
+
+现在有这么一个函数，它可以接受一个参数，这个参数可以是字符串或者数字，它的功能是将传入的数字或者字符串反转，比如输入 `123`，则输出 `321`，输入 `hello`，则输出 `olleh`，我们可以定义类如下
+
+```typescript
+function reverse(x: number | string): number|string{
+    if (typeof x === 'number') {
+        return Number(x.toString().split('').reverse().join(''));
+    } else {
+        return x.toString().split('').reverse().join('');
+    }
+}
+```
+
+这个函数的定义有一个缺点，不能精确的表达输入数字时，输出也是数字，输入是字符串时，输出也是字符串。我们可以重载 `reverse` 的多个定义
+
+```typescript
+function reverse(x: number): number;
+function reverse(x: string): string;
+function reverse(x: number | string): number|string{
+    if (typeof x === 'number') {
+        return Number(x.toString().split('').reverse().join(''));
+    } else {
+        return x.toString().split('').reverse().join('');
+    }
+}
+```
+
+### 接口的合并
+
+当我们定义了两个相同名字的接口时，接口中的属性会自动进行合并
+
+```typescript
+interface Person {
+    name: string;
+}
+
+interface Person {
+    age: number;
+}
+```
+
+相当于
+
+```typescript
+interface Person {
+    name: string;
+    age: number;
+}
+```
+
+如果两个接口有相同的属性，只要它们返回的值的类型相同，就不会有问题，如下
+
+```typescript
+interface Person {
+    name: string;
+    gender: string;
+}
+
+interface Person {
+    age: number;
+    gender:string;
+}
+```
+
+在两个接口中，它们有相同的属性名 `gender`，并且它们的定义时一样的，它们的合并也没有问题，相当于如下
+
+```typescript
+interface Person {
+    name: string;
+    age: number;
+    gender:string;
+}
+```
+
+但是如果有相同的属性，但是定义却不同，即值的类型不同，那么会报错
+
+```typescript
+interface Person {
+    name: string;
+    gender: string;
+}
+
+interface Person {
+    age: number;
+    gender:number;
+}
+```
+
+上面两个接口的 `gender` 的定义不同，报错如下
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/2020052921482022-10-23-20-37-34.png" />
+
+## 类型断言
+
+有时候我们需要将一个不确定的类型断言为具体的类型，比如将一个联合类型断言为其中的某一个具体的类型，这样就可以使用它特有的方法。类型断言的语法为
+
+```ts
+值 as 类型
+```
+
+或者
+
+```ts
+<类型>值
+```
+
+上面两种方法都是将值断言为某个具体的类型。因为在 `React` 中只支持 `as` 语法，所以推荐使用第一种方法。
+
+### 联合类型断言为其中具体类型
+
+就如上面所说，有时候我们希望将联合类型断言为具体的类型，这样我们就可以使用类型特有的方法，否则只能使用二者公共的方法。我们第一个形状类型
+
+```ts
+interface Circle {
+    radius: number;
+}
+
+interface Square {
+    size: number;
+}
+
+interface Rectangle {
+    width: number;
+    height: number;
+}
+
+type Shape = Circle | Square | Rectangle;
+```
+
+接着我们定义一个方法，该方法接收 `Shape` 类型的参数，返回面积，我们可能会这么写
+
+```ts
+function getArea(s: Shape): number {
+    if (typeof s.radius === 'number') {
+        return 3.14159 * s.radius * s.radius;
+    } else if (typeof s.size === 'number') {
+         return s.size * s.size;
+    } else {
+        return s.width * s.height;
+    }
+}
+```
+
+但是你会发现一片报红
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/image-for-2022@master/202005292216112022-10-23-20-38-22.png" />
+
+因为传入的类型 `s` 根本无法确定是什么具体的类型，我们只能访问 `Circle, Square, Rectangle` 的公共属性和方法，所以当我们访问他们特有的属性时就会报错，比如 `s.radius`，所以在访问具体的属性进行判断时，我们要断言为具体的类型，修改如下
+
+```ts
+function getArea(s: Shape): number {
+    if (typeof (s as Circle).radius === 'number') {
+        s = s as Circle;
+        return 3.14159 * s.radius * s.radius;
+    } else if (typeof (s as Square).size === 'number') {
+        s = s as Square;
+         return s.size * s.size;
+    } else {
+        s = s as Rectangle;
+        return s.width * s.height;
+    }
+}
+```
+
+我们首先进行断言为具体的类型，然后进行判断。
+
+### 父类或接口断言为子类或实现类
+
+有时候我们需要将父类或接口断言为具体的子类，这样就可以使用子类特有的属性或方法。首先定义一个父类和两个子类
+
+```ts
+class Person {
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+
+}
+
+class Student extends Person{
+    score: number;
+    constructor(name:string, age: number, score: number) {
+        super(name, age);
+        this.score = score;
+    }
+}
+
+class Teacher extends Person{
+    level: number;
+    constructor(name:string, age: number, level: number) {
+        super(name, age);
+        this.level = level;
+    }
+}
+```
+
+接着定义一个方法，该方法接收 `Person` 类型的参数，我们需要断言为具体的子类才能使用子类的属性和方法
+
+```ts
+function isStudent(p: Person) {
+    if (typeof (p as Student).score === 'number') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+console.log(isStudent(new Student('Bob', 15, 100))); // true
+```
+
+## 泛型
+
+在定义函数、类和接口时，并不具体指定具体的类型，而是使用一个占位符表示类型，具体的类型在使用的时候传入决定。
+
+### 函数泛型
+
+我们定义一个函数创建一个数组，并设置默认值，数组中存储的具体类型等到使用时确定
+
+```ts
+function createArray<T>(length: number, defaultValue: T): Array<T> {
+    let x = new Array<T>(length);
+    for (let i = 0; i < length; i++) {
+        x.push(defaultValue);
+    }
+    return x;
+}
+```
+
+该函数接收两个参数，第一个参数为数组的长度，第二个参数为默认值。该数组的类型我们使用泛型 `T` 代替，具体的类型在使用时确定，如创建一个长度为 `5`，类型为 `number`，默认值为 `0` 的数组，如下
+
+```ts
+let arr = createArray<number>(5, 0);
+console.log(arr); // [ <5 empty items>, 0, 0, 0, 0, 0 ]
+```
+
+因为我们不知道泛型的具体类型，所以不能随意操作它的属性和方法，这个时候我们可以对象泛型做出约束，以便我们可以使用特定的属性或方法，如要求泛型必须符合某个接口
+
+```ts
+interface Length {
+    length: number;
+}
+
+function getLength<T extends Length>(t: T):number {
+    return t.length;
+}
+```
+
+上面我们要求泛型 `T` 继承了接口 `Length`，即传入的对象 `t` 必须含有属性 `length`
+
+```ts
+console.log(getLength("123")); // 3
+```
+
+### 接口泛型
+
+同样的，我们也可以在接口中使用泛型
+
+```ts
+interface CreateArrayFunc<T> {
+    (length: number, defaultValue: T): Array<T>
+}
+
+let createArray: CreateArrayFunc<number>;
+
+createArray = function<T>(length: number, defaultValue: T) {
+    let x: T[] = [];
+    for(let i = 0; i < length; i++) {
+        x.push(defaultValue);
+    }
+    return x;
+}
+
+console.log(createArray(5, 3)); // [ 3, 3, 3, 3, 3 ]
+```
+
+### 类泛型
+
+我们也可以在类中使用泛型
+
+```ts
+class Stack<T> {
+    data: T[];
+    size: number;
+    constructor(capacity: number) {
+        this.data = new Array<T>(capacity);
+        this.size = 0;
+    }
+
+    push (item: T): void {
+        this.data.push(item);
+        this.size++;
+    }
+
+    pop (): T {
+        this.size--;
+        return this.data.pop() as T;
+    }
+    
+    printStack(): void {
+        console.log(this.data);
+    }
+}
+```
+
+我们定义了一个 `Stack` 栈，它里面存储的类型是一个泛型，在我们使用的时候确定，如下
+
+```ts
+// 定义了一个存储 number 类型数据的栈 容量为10
+let stack = new Stack<number>(10); 
+
+stack.push(10);
+stack.push(5);
+
+stack.printStack(); // [ <10 empty items>, 10, 5 ]
+```
+
+## 参考文献
+
+- [TypeScript入门教程](https://ts.xcatliu.com/)
+- [TypeScript安利指南](https://juejin.im/post/5d8efeace51d45782b0c1bd6)
+

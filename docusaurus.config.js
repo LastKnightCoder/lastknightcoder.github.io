@@ -26,6 +26,7 @@ const config = {
       type: 'text/css'
     },
   ],
+  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -74,6 +75,16 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        config: {
+          // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+          background: {
+            light: 'rgb(255, 255, 255)',
+            dark: 'rgb(50, 50, 50)'
+          }
+        }
+      },
       navbar: {
         title: 'Coder',
         logo: {
@@ -83,15 +94,6 @@ const config = {
           height: 60,
         },
         items: [
-          {
-            type: 'dropdown',
-            label: '前端开发',
-            position: 'left',
-            items: [{
-              label: 'CSS',
-              to: '/docs/CSS/CSS介绍'
-            }]
-          },
           {to: '/blog', label: 'Blog', position: 'right'},
           {
             type: 'dropdown',
@@ -133,10 +135,7 @@ const config = {
           {
             title: 'Docs',
             items: [
-              {
-                label: 'CSS',
-                to: '/docs/CSS/CSS介绍',
-              },
+
             ],
           },
           {

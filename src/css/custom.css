@@ -12,7 +12,7 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-code-background: transparent;
-  --ifm-font-family-base: 'Trbuchet MS', 'Lora', '新宋体', '宋体-简', '华文行楷', '黑体-简';
+  --ifm-font-family-base: 'Trebuchet MS', 'Lora', '新宋体', '宋体-简', '华文行楷', '黑体-简';
   --ifm-font-family-monospace: 'Fira Code', '楷体', '楷体-简';
   --inline-code-color: #1A66FF;
 }
@@ -52,4 +52,9 @@ video {
   display: block;
   max-width: 100%;
   margin: 1.5em auto;
+  zoom: 50%;
+}
+
+img[no-zoom] {
+  zoom: 100%;
 }

@@ -1,0 +1,301 @@
+---
+authors: xiongtao
+date: 2021-10-03
+tags:
+  - WSL
+  - zsh
+---
+
+最近想学习 `Linux`，所以就需要一个 `Linux` 系统，那怎么搞一个 `Linux` 系统呢，据我所知有如下四种方法
+
+- 安装双系统
+- WSL
+- 租云服务器
+- 安装虚拟机
+
+租云服务器以及虚拟机我都尝试过，不过现在云服务器现在到期了，我重装系统后虚拟机也没有了，所以我现在想尝试一下使用 `WSL`。`WSL` 的全称是 `Windows-SubSystem-Linux`，就是可以在 `Windows` 上面安装一个 `Linux` 的子操作系统，下面就具体讲一下安装过程，以及可能遇到的问题。
+
+## 安装 WSL
+
+如果你上网搜索如何安装 `WSL`，一般都是让你在 `PowerShell` 依次运行这两个命令(需要管理员身份)
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031228482021-10-03-12-28-49.png" />
+
+```powershell
+# 启动虚拟机功能
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+# 启动 Windows 下的 Linux 子系统
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+
+<!--truncate-->
+
+但是每次我运行都会报错(现在演示不了了，因为我现在不报错了)，然后我在网上找到一篇文章[如何在 Windows 10 中安装 WSL2 的 Linux 子系统](https://blog.walterlv.com/post/how-to-install-wsl2.html)可以在 **Windows 功能** 启动这两个功能
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031114072021-10-03-11-14-08.png" />
+
+把**适用于 Linux 的 Windows 子系统**和**虚拟机平台**勾上
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031119272021-10-03-11-19-28.png" />
+
+然后点确定，这时系统会提示你重启，同意即可。重启之后打开应用商店，搜索 `Linux`，选择一个版本下载
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031122042021-10-03-11-22-04.png" />
+
+我选择的是 `Ubuntu 20.04 LTS`，点击进行下载，下载完成之后运行该 `Linux` 系统，还会进行一次安装
+
+>Installing, this may take a few minutes...
+
+
+安装完成之后，会让你设置用户名和密码，正常设置即可，设置完就安装完成了
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031127382021-10-03-11-27-38.png" />
+
+为了能够使用 `ssh` 工具远程访问，我们需要下载一些东西，并进行相关的配置，首先在 `WSL` 中依次运行如下两个命令
+
+```shell
+# 更新系统
+sudo apt update && sudo apt upgrade -y
+# 下载 ssh 服务端
+sudo apt autoremove --purge openssh-server -y && sudo apt install openssh-server -y
+```
+
+然后修改配置文件
+
+```shell
+sudo vim /etc/ssh/sshd_config
+```
+
+因为 `WSL` 与 `Windows` 公用一套端口，所以我们修改 `WSL` 其 `ssh` 端口为 `9999`，并且需要密码验证
+
+```shell
+# 端口 
+Port 9999
+# 密码验证 
+PasswordAuthentication yes
+```
+
+然后启动 `ssh` 服务就可以通过 `ssh` 工具进行远程连接了
+
+```shell
+sudo service ssh --full-restart
+```
+
+## 配置 zsh
+
+查看当前已有的终端，并没有 `zsh`
+
+```shell
+cat /etc/shells
+# /etc/shells: valid login shells
+/bin/sh
+/bin/bash
+/usr/bin/bash
+/bin/rbash
+/usr/bin/rbash
+/bin/dash
+/usr/bin/dash
+/usr/bin/tmux
+/usr/bin/screen
+```
+
+查看当前使用的终端，是 `bash`
+
+```shell
+echo $SHELL
+/bin/bash
+```
+
+### 下载 zsh
+
+在命令行输入一下命令
+
+```shell
+apt install -y zsh
+```
+
+查看当前已有终端，这个时候有 `zsh` 了
+
+```shell
+cat /etc/shells
+# /etc/shells: valid login shells
+/bin/sh
+/bin/bash
+/usr/bin/bash
+/bin/rbash
+/usr/bin/rbash
+/bin/dash
+/usr/bin/dash
+/usr/bin/tmux
+/usr/bin/screen
+/bin/zsh
+/usr/bin/zsh
+```
+
+修改当前终端为 `zsh`
+
+```shell
+chsh -s /bin/zsh
+```
+
+需要重启才能生效，重启完成之后查看当前终端，可以发现已经切换到 `zsh` 了
+
+```shell
+echo $SHELL
+/bin/zsh
+```
+
+### oh-my-zsh 安装脚本
+
+下面下载安装脚本，由于未知原因，`github` 上的脚本下载失败，我们就下载国内的
+
+```shell
+wget https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh
+```
+
+可以在当前目录下面发现下载的 `install.sh`
+
+```shell
+ls
+install.sh
+```
+
+修改脚本内容，将下载源由 `github` 改为 `gitee`
+
+```shell
+sudo vim install.sh
+```
+
+找到以下内容并进行修改
+
+```sh
+# 修改前
+ZSH=${ZSH:-~/.oh-my-zsh}
+REPO=${REPO:-ohmyzsh/ohmyzsh}
+REMOTE=${REMOTE:-https://github.com/${REPO}.git}
+BRANCH=${BRANCH:-master}
+
+# 修改后
+ZSH=${ZSH:-~/.oh-my-zsh}
+# 下面两行进行了修改
+REPO=${REPO:-mirrors/oh-my-zsh}
+REMOTE=${REMOTE:-https://gitee.com/${REPO}.git}
+BRANCH=${BRANCH:-master}
+```
+
+保存并退出，然后为该脚本添加执行权限，并且执行
+
+```shell
+# 添加执行权限
+DESKTOP-PUSQM6M% sudo chmod +x install.sh 
+# 执行脚本
+DESKTOP-PUSQM6M% ./install.sh 
+Cloning Oh My Zsh...
+Cloning into '/home/xt/.oh-my-zsh'...
+remote: Enumerating objects: 1241, done.
+remote: Counting objects: 100% (1241/1241), done.
+remote: Compressing objects: 100% (1213/1213), done.
+remote: Total 1241 (delta 22), reused 850 (delta 9), pack-reused 0
+Receiving objects: 100% (1241/1241), 869.72 KiB | 519.00 KiB/s, done.
+Resolving deltas: 100% (22/22), done.
+
+Looking for an existing zsh config...
+Using the Oh My Zsh template file and adding it to ~/.zshrc.
+
+         __                                     __   
+  ____  / /_     ____ ___  __  __   ____  _____/ /_  
+ / __ \/ __ \   / __ `__ \/ / / /  /_  / / ___/ __ \ 
+/ /_/ / / / /  / / / / / / /_/ /    / /_(__  ) / / / 
+\____/_/ /_/  /_/ /_/ /_/\__, /    /___/____/_/ /_/  
+                        /____/                       ....is now installed!
+
+
+Before you scream Oh My Zsh! look over the `.zshrc` file to select plugins, themes, and options.
+
+• Follow us on Twitter: https://twitter.com/ohmyzsh
+• Join our Discord community: https://discord.gg/ohmyzsh
+• Get stickers, t-shirts, coffee mugs and more: https://shop.planetargon.com/collections/oh-my-zsh
+```
+
+然后我们修改 `oh-my-zsh` 的主题，打开 `~/.zshrc`，修改主题为 `agnoster`
+
+```shell
+sudo vim ~/.zshrc
+```
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031312332021-10-03-13-12-34.png" />
+
+保存并退出，运行如下命令激活配置
+
+```shell
+source ~/.zshrc
+```
+
+效果如下所示
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031316582021-10-03-13-16-58.png" />
+
+### 安装插件
+
+我们可以查看 `~/.zshrc` 来看安装了哪些插件
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031347092021-10-03-13-47-10.png" />
+
+默认只有 `git` 插件，该插件提供了很多 `git` 命令的缩写，例如
+
+- `gp = git push`
+- `gm = git merge`
+
+通过下面的命令查看 `git` 命令的所有缩写
+
+```shell
+cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh
+alias g='git'
+
+alias ga='git add'
+alias gaa='git add --all'
+alias gapa='git add --patch'
+alias gau='git add --update'
+alias gav='git add --verbose'
+alias gap='git apply'
+alias gapt='git apply --3way'
+
+...
+```
+
+下面介绍两个插件：
+
+- zsh-syntax-highlighting：语法高亮，输入正确的语法会显示绿色，输入错误的语法会显示红色
+- zsh-autosuggestions：根据输入的历史命令，对当前输入的命令进行提示，**强烈推荐**
+
+首先对这两个插件进行下载：
+
+```shell
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+然后在 `~/.zshrc` 中添加这两个插件
+
+```shell
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+```
+
+保存并退出后激活配置文件 
+
+```shell
+source ~/.zshrc
+```
+
+效果如下
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3/202110031517142021-10-03-15-17-14.png" />
+
+## 参考文章
+
+- [如何在 Windows 10 中安装 WSL2 的 Linux 子系统](https://blog.walterlv.com/post/how-to-install-wsl2.html)
+- [WSL2来了！但是能正常使用并不简单](https://0x1c.dev/blog/dev/make-wsl2-right/)
+- [CentOS 7 安装配置 oh-my-zsh](https://abelsu7.top/2019/04/11/centos7-install-ohmyzsh/)
+- [oh-my-zsh国内镜像安装和更新方法](https://www.jianshu.com/p/6b47198fd430)
+- [oh my zsh插件安装详细教程及常用插件](https://segmentfault.com/a/1190000039860436)
+
