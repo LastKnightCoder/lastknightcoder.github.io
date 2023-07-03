@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[3497],{7490:e=>{e.exports=JSON.parse('{"label":"Event Loop","permalink":"/blog/tags/event-loop","allTagsPath":"/blog/tags","count":1}')}}]);
