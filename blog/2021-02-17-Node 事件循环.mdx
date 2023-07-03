@@ -1,0 +1,357 @@
+---
+slug: node-event-loop
+tags:
+  - Node
+  - Event Loop
+authors: xiongtao
+---
+
+Node.js 是单线程的，但是它却可以应用在高并发场景，原因就是它的事件循环机制。所以本篇文章来介绍 Node.js 的事件循环机制。
+
+<!--truncate-->
+
+## 同步与异步
+
+因为 Node.js 是单线程的，代码的执行不能使用同步机制，因为同步执行会阻塞代码，在单线程中阻塞代码意味着整个程序都被阻塞到了，从而无法处理其他任务。其他后端语言会使用多个线程去执行代码，即使一个线程被阻塞到了，其他的线程也不会有影响。
+
+所以 Node.js 使用异步的方式去执行代码，为了更好的理解异步的概念，我打个比方，假设你请我做一件事情，同步的方式就是你会一直等我将事情做完，在我把事情做完之前，你不能干别的事情；异步的方式就是你请我做一件事情，在我做事情的时候你可以干别的事，等到我将事情做完的时候我会去通知你。
+
+以读取文件为例，我们来看同步的写法
+
+```javascript
+const fs = require("fs");
+
+// 程序会被阻塞在这里，知道文件读取完毕
+const data = fs.readFileSync("./hello.txt", "utf-8");
+
+console.log(data);
+console.log("同步读取");
+```
+
+输出结果为
+
+```javascript
+Hello World!
+同步读取
+```
+
+因为是同步读取文件，所以会程序会阻塞在这里，直到读取完文件才会继续执行代码，所以先输出读取的文件内容，然后输出 `同步读取`。
+
+接着看异步的写法
+
+```javascript
+const fs = require("fs");
+
+// 程序不会被阻塞在这里
+fs.readFile("./hello.txt", "utf-8", (err, data) => {
+  if (!err) {
+    console.log(data);
+  }
+});
+
+console.log("异步读取");
+```
+
+输出结果为
+
+```javascript
+异步读取
+Hello World!
+```
+
+因为是异步读取文件，此时不会阻塞程序的执行，会继续执行代码，所以会先打印出 `异步读取`，等到文件读取完毕时，则会执行回调函数，打印出读取到的文件内容。
+
+## 事件队列
+
+下面我们就来剖析 Node.js 异步执行的背后过程，我们知道 Node.js 是一门基于事件驱动的语言，我们监听某类事件，例如网络请求事件，并为它绑定一个回调函数，当事件发生时，则会调用这个回调函数。
+
+事实上当事件发生时，回调函数并不会立即得到执行，而是会添加到一个队列中，而执行引擎则会不断的从队列中取出事件执行，取出事件执行的这个过程是同步的，就是说先添加进队列中的函数会被先执行，并且先执行完前面的函数才能执行后面的函数。
+
+我们来看一个例子
+
+```javascript
+setTimeout(() => {
+  // 该回调函数会花费 100 ms
+  let end = Date.now();
+
+  while (end - start < 100) {
+    end = Date.now();
+  }
+}, 5);
+
+setTimeout(() => {
+  let end = Date.now();
+  console.log(`延时了 ${end - start} ms 执行`); // 延时了 100 ms 执行
+}, 10);
+```
+
+上面我们设置了两个定时器，一个延时 `5ms` 后执行，一个延时 `10ms` 后执行，但是我们发现第二个定时器是在延时 `100ms` 后执行的，并不是我们预期的那样。
+
+首先我们需要明确一点，我们设置的 `5ms` 与 `10ms` 这些时间并不是指延时 `5ms` 或 `10ms` 后执行回调函数，而是指延时指定时间后将这些回调函数添加进事件队列。
+
+我们来看一个时间线
+
+<img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting/20210222165625.gif" />
+
+1. `0ms` 时，事件队列为空
+2. `5ms` 时，第一个定时器时间到达，将回调函数添加进事件队列
+3. 执行引擎检查事件队列，发现队列中有事件未执行，取出执行
+4. `10ms` 时，第二个定时器时间到达，将回调函数添加进事件队列，但是因为前面一个回调函数还在执行中，该回调函数不会执行
+5. `100ms` 时，第一个回调函数执行完毕
+6. 执行引擎接着检查事件队列，发现队列不为空，取出第二个回调函数执行函数执行
+
+所以经过了 `100ms`，第二个定时器的回调函数才会被执行。
+
+## 事件循环
+
+解决实际的问题，上面的模型想必已经够用了，但是如果要应对面试题，却还是需要更加深入的了解。首先看一个例子
+
+```javascript
+console.log("start");
+
+const start = Date.now();
+
+setImmediate(() => {
+  console.log("setImmediate");
+});
+
+setTimeout(() => {
+  console.log("setTimeout");
+}, 5);
+
+process.nextTick(() => {
+  console.log("nexTick");
+});
+
+new Promise((resolve) => {
+  console.log("resolve");
+  resolve();
+}).then(() => {
+  console.log("then");
+});
+
+let end = Date.now();
+while (end - start < 5) {
+  end = Date.now();
+}
+
+console.log("end");
+```
+
+请问上面程序的输出结果是什么? 我先卖个关子，希望你看完下面的内容之后能够回答出来。
+
+在上面我们使用一个队列来建模了程序的执行过程，事实上这个队列需要被拆分好几个队列
+
+```text
+   ┌───────────────────────────┐
+┌─>│           timers          │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │     pending callbacks     │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │       idle, prepare       │
+│  └─────────────┬─────────────┘      ┌───────────────┐
+│  ┌─────────────┴─────────────┐      │   incoming:   │
+│  │           poll            │<─────┤  connections, │
+│  └─────────────┬─────────────┘      │   data, etc.  │
+│  ┌─────────────┴─────────────┐      └───────────────┘
+│  │           check           │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+└──┤      close callbacks      │
+   └───────────────────────────┘
+```
+
+上面我们将队列拆分为了 6 个阶段，每一个阶段都有一个队列
+
+- `timers`：`setTimeout` 以及 `setInterval` 中的回调函数会放入这个队列
+- `pending callbacks`：由于某些原因需要推迟到下一轮循环的 `I/O` 回调函数放在这个队列(目前我还没有遇到过此类事件)
+- `idle, prepare`：这个队列是 Node.js 内部使用的，我们不需要关心
+- `poll`：`I/O` 事件，网络请求等事件会放在这个队列
+- `check`：`setImmediate` 中的回调函数会放在这个队列
+- `close`：与 `close` 相关方法会放在这个队列，例如 `socket.on('close', callback)`
+
+Node 会依次经历这 6 个阶段，只有将某个阶段中队列的所有函数都执行完毕，才会进入到下一个阶段。但是关于 `poll` 阶段有一点不同之处，当进入 `poll` 阶段以后，它会计算 `timers` 定时器中下一个定时器到达的时间，然后检查 `poll` 队列是否有任务，如果有就执行，直到队列为空。当队列为空时
+
+1. 是否已经到达了下一个定时器到达的时间，即 `timers` 队列中是否有任务，如果有则继续事件循环，来到下一个阶段
+2. 如果 `timers` 队列中没有任务，那么检查 `check` 队列是否有任务，如果有继续进行事件循环
+3. 如果 `timers` 队列和 `check` 队列都没有任务，那么就会一个停留在 `poll` 阶段，等待新的任务到来，然后执行该任务
+
+所以会有很长一段时间都会处于 `poll` 阶段。
+
+:::info
+
+我们把一次循环称为一个 `tick`。
+
+:::
+
+不知道你有没有发现，我们并没有提及 `process.nextTick` 与  `promise.then` 中的回调函数放在哪个队列。其实还有两个队列，`nextTickQueue` 和 `microTaskQueue`，`process.nextTick` 中的回调函数会被放置在 `nextTickQueue` 中，而 `promise.then` 中的回调函数被被放置在 `microTaskQueue` 中。
+
+那么这两个队列在图中处于何种位置，其实在进入每个阶段之前，都会检查一遍这两个队列，如果有任务的话就会执行，直至将队列中的任务执行完毕。并且 `nextTickQueue` 队列中的函数比 `microTaskQueue` 队列中的函数先被执行。
+
+明白上面的内容之后我们来看那道题目
+
+```javascript
+console.log("start");
+
+const start = Date.now();
+
+setImmediate(() => {
+  console.log("setImmediate");
+});
+
+setTimeout(() => {
+  console.log("setTimeout");
+}, 5);
+
+process.nextTick(() => {
+  console.log("nexTick");
+});
+
+new Promise((resolve) => {
+  console.log("resolve");
+  resolve();
+}).then(() => {
+  console.log("then");
+});
+
+let end = Date.now();
+while (end - start < 5) {
+  end = Date.now();
+}
+
+console.log("end");
+```
+
+首先当我们开始运行程序的时候，并不会立即进入事件循环，而是首先将同步代码执行完毕，所以首先会依次打印出
+
+```console
+start
+resolve
+end
+```
+
+接着在进入事件循环，因为在进入每个阶段之前都会先检查 `nextTickQueue` 和 `microTaskQueue` 这两个队列，并且 `nextTickQueue` 在 `microTaskQueue` 之前执行，所以接着打印出
+
+```console
+nextTick
+then
+```
+
+接着进入 `timers` 阶段，因为我们在主程序中有这么一段代码
+
+```javascript
+let end = Date.now();
+while (end - start < 5) {
+  end = Date.now();
+}
+```
+
+目的就是确保 `setTimeout` 中的回调函数已进入 `timers` 队列，所以此时 `timers` 队列是有函数的，所以此时会打印出
+
+```
+setTimeout
+```
+
+接着进入` pending` 阶段，该队列中没有函数；进入` poll` 阶段(忽略 `idle, prepare` 阶段)，也没有函数，此时因为 `check` 队列中有函数，所以会从 `poll` 阶段进入到 `check` 阶段，所以接着会打印
+
+```
+setImmediate
+```
+
+然后进入 `close` 阶段，没有函数，回到 `timers` 阶段，以此往复。
+
+所以上面程序最终的打印结果为
+
+```console
+start
+resolve
+end
+nexTick
+then
+setTimeout
+setImmediate
+```
+
+## setTimeout vs setImmediate
+
+`setTimeout` 位于 `timers` 阶段，而 `setImmediate` 放置于 `check` 阶段
+
+```javascript
+setTimeout(() => {
+  console.log("setTimeout");
+});
+
+setImmediate(() => {
+  console.log("setImmediate");
+});
+```
+
+所以上面代码的执行结果应该是
+
+```console
+setTimeout
+setImmediate
+```
+
+但是有时会打印出
+
+```console
+setImmediate
+setTimeout
+```
+
+这是因为 `setTimeout` 不传入时间时，默认是 `0`，而 Node.js 做不到 `0ms` 的定时，最少也是 `1ms`。如果执行主程序需要花费 `1ms`，那么 `timers` 队列中就会有函数，就会先打印 `setTimeout`，如果执行主程序不需要 `1ms`，那么来到 `timers` 阶段时，其中还没有函数，但是 `check` 队列中已经有函数了，就会先打印 `setImmediate`。
+
+但是如果在 `I/O` 回调函数中同时调用 `setImmediate` 和 `setTimeout`，那么会先执行 `setImmediate`，因为执行 `I/O` 回调函数时已经处于 `poll` 阶段，下一个阶段就是 `check` 阶段，所以会先执行 `setImmediate`
+
+```javascript
+const fs = require("fs");
+
+fs.readFile("./hello.txt", (err, data) => {
+  setTimeout(() => {
+    console.log("setTimeout");
+  });
+  setImmediate(() => {
+    console.log("setImmediate");
+  });
+});
+```
+
+输出始终为
+
+```console
+setImmediate
+setTimeout
+```
+
+## process.nextTick
+
+这个函数的名字很有误导性，我们知道 `process.nextTick` 中的函数是在进入每个阶段之前执行的，所以它应该是 `currentTick` 而不是 `nextTick`。而 `setImmediate` 只有在 `check` 阶段才会执行，并没有那么的 Immediate。
+
+所以有人提议将二者的名称调换。但是由于有太多的库依赖于这两个 API，如果改动 API 的话，会引起很多的改动。
+
+另外需要注意的一点是，如果我们递归调用 `process.nextTick`，那么 `nextTickQueue` 就永远不会空，即此时就会阻塞事件循环的运行
+
+```javascript
+setTimeout(() => {
+  console.log("setTimeout");
+});
+
+const recursive = () => {
+  process.nextTick(recursive);
+};
+
+process.nextTick(recursive);
+```
+
+上面 `setTimeout` 中的回调函数永远都不会得到执行。
+
+## 参考文献
+
+- [The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
+- [Node 定时器详解](http://www.ruanyifeng.com/blog/2018/02/node-event-loop.html)
+
+
+

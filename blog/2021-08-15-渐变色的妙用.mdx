@@ -1,0 +1,216 @@
+---
+slug: gradient-background-tricks
+tags:
+  - CSS
+  - 渐变色
+  - 使用技巧
+authors: xiongtao
+---
+
+在 CSS 中渐变色作为背景可以制作出非常绚丽，迷人的效果，往往我们将焦点聚集在渐变上面，而忽略了它作为背景图片的作用，在这里我将介绍两个渐变色作为背景色以及背景图片的妙用，可以实现一些难以实现的效果。
+
+<!--truncate-->
+
+## 透明背景蒙层
+
+我在一个实际的应用开发中，UI 给的背景图是一张图片加上一个透明颜色的蒙层背景合成而得的。当时 UI 只给了没有添加蒙层的图片，并告诉我实际的图片是如上做出来的。我当时表示 OK，觉得自己可以搞出来。
+
+<div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px'}}>
+  <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/bg.2d47rqpdwx3w.png" />
+  <img src="https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/mengceng.3s6mxwl8z820.png" /> 
+</div>
+
+### 背景色？
+
+第一次尝试，使用一个透明的背景色
+
+```scss
+background: url('./bg.png') rgba(237, 240, 242, 0.8);
+```
+
+很显然是没用的，因为背景色是一直在背景图片下面的。但是我知道通过 `background` 是可以设置多层背景
+
+```scss
+background: url('./1.png'), url('./2.png');
+```
+
+上面我们设置了两个背景，其中 `1.png` 在 `2.png` 的上面。所以我将背景色设置在另一层背景上可不可以呢
+
+```scss
+background: rgba(237, 240, 242, 0.8), url('bg.png');
+```
+
+但是发现不仅没有蒙层效果，而且连背景图片都消失了，后来我查规范才知道，对于背景色只能设置一次，并且只能设置在最后一层背景中，所以这个方法失败。
+
+### 多层 DOM
+
+第二个方法，使用多层 DOM 结构，使得它们在不同的层，背景图片在底部，接着是透明背景色，接着是内容
+
+```html
+<div class="bg">
+  <div class="color">
+    <div class="content">...</div>
+  <div>
+</div>
+```
+
+```css
+.bg {
+  background: url('bg.png') no-repeat center / contain;
+}
+.color {
+  background: rgba(237, 240, 242, 0.8);
+}
+```
+
+可以实现效果，但是多了几层无意义的 `div` 元素。
+
+### 渐变色
+
+有没有更加简单的方法，后面我在机缘巧合下发现了，渐变色在背景里面是充当背景图片来用的
+
+```css
+background-image: linear-gardient(...);
+```
+
+既然背景色只能出现在最后一层，但是渐变色是背景图片，它可以出现在其它背景图片的上面，只要将渐变色的两个颜色设置为一样，就是一个颜色了
+
+```css
+background: 
+  linear-gradient(rgba(237, 240, 242, 0.8), rgba(237, 240, 242, 0.8)),
+  url('./bg,png') no-repeat center / contain;
+```
+
+**当然最简单的办法就是让 UI 发一张合成后的图片过来 ... ...**
+
+## 背景色块
+
+在一个项目中，要实现如下效果
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/4.54ry6ajplf00.png" />
+
+在特定的文字下面有一条线，线是带圆角的并且在字的下面，这个如何实现？
+
+第一种方案，背景图片，将下面的线切出来，然后作为背景放在字的下面，但是如果字数一旦发生改变，你就得重新切图，这个方案是不得已而为之。
+
+第二种方案使用定位，考虑使用伪元素来画这条线，然后定位在下方
+
+```html
+<em>地上霜</em>
+```
+
+```scss
+em {
+  position: relative;
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    content: '';
+    width: 100%;
+    height: 10px;
+    background: #45b787;
+    border-radius: 5px;
+  }
+}
+```
+
+但是发现下面这条线会**压住文字**，并且对于**换行的文字**无效。
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/1.4v599rukurs0.png" />
+
+线会压住文字，因为子元素是一定在父元素的上层，所以我们改变一下文档结构，使得文字和底部的线是兄弟关系，通过改变它们的 `z-index` 使得线在文字的下方
+
+```html
+<em>
+  <span class="words">地上霜</span>
+  <span class="line"></span>
+</em>
+```
+
+```scss
+em {
+  position: relative;
+    .words {
+      position: relative;
+      z-index: 2;
+    }
+    .line {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      bottom: 0;
+      display: block;
+      content: '';
+      width: 100%;
+      height: 10px;
+      background: #45b787;
+      border-radius: 5px;
+    }
+}
+```
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/2.ir6ms555uqo.png" />
+
+此种方法解决了线会压住文字的问题，但是如果文字换行的话，还是会丢失样式，所以这个方案不可用。
+
+下面就是终极的解决方案，使用渐变色来绘制图片，我们可以将下面的线分为三个部分，中间的一条线以及左右两边的两个圆。首先 DOM 结构如下
+
+```html
+<em>地上霜</em>
+```
+
+我们使用线性渐变色来绘制这个线
+
+```scss
+em {
+  background: 
+    linear-gradient(#45b787, #45b787) no-repeat center bottom / calc(100% - 10px) 10px;
+}
+```
+
+线的宽度为 `calc(100% - 10px)` ，左右各留 `5px` 来放圆。因为是背景，所以会在文字的下方，并且即使是换行也没有问题
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/3.3glu87q32om0.png" />
+
+下面使用径向渐变来绘制圆，首先来看径向渐变的语法
+
+```scss
+radial-gradient(shape size at x-position y-position, color1 stop1, color2 stop2, ...);
+```
+
+`shape` 表示径向渐变的形状，常见的包括 `circle、ellipse` ； `size` 表示形状的大小，对于圆来说就是直径；`(x-position, y-position)` 表示圆心的坐标；后面的 `(color, stop)` 就用来表示渐变色了。使用径向渐变绘制圆可以套用如下模板
+
+```scss
+radial-gradient(circle size at x-position y-position, color1 50%, transparent 50%);
+```
+
+接下来我们只需要设置圆的大小，以及原因位置，填充颜色即可，例如对于直线左边的圆，它的大小是 `10px` ，圆心位于直线左边的中心，也就是离左边 `5px` ，离底部 `5px` ，填充颜色同直线为 `#45b787` ，所以左边的圆可以如下绘制
+
+```scss
+radial-gradient(circle 10px at 5px calc(100% - 5px), #45b787 50%, transparent 50%);
+```
+
+上面 `y-position` 设置为 `calc(100% - 5px)` 表示距离底部 `5px` 。同理右边圆的绘制如下
+
+```scss
+radial-gradient(circle 10px at calc(100% - 5px) calc(100% - 5px), #45b787 50%, transparent 50%);
+```
+
+右边圆的 `x-position` 设置为了 `calc(100% - 5px)` 表示距离右侧 `5px` 。
+
+综合以上，全部的样式如下
+
+```scss
+em {
+  background: 
+    linear-gradient(#45b787, #45b787) no-repeat center bottom / calc(100% - 10px) 10px,
+    radial-gradient(circle 10px at 5px calc(100% - 5px), #45b787 50%, transparent 50%),
+    radial-gradient(circle 10px at calc(100% - 5px) calc(100% - 5px), #45b787 50%, transparent 50%);
+}
+```
+
+效果如下：
+
+<img src="https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/4.54ry6ajplf00.png" />
