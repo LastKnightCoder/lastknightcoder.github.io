@@ -1,0 +1,150 @@
+---
+slug: react-debug-source
+tags:
+  - React
+authors: xiongtao
+---
+
+使用 Vite 创建 React 项目，并且在 WebStorm 中调试 React 源码，效果如下：
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_e432b0ac-5f5a-46b9-bb8b-23075e0cb74b.png)
+
+可以直接调试源码，而不只是打包后的产物。
+
+## 构建 React 源码
+
+为了做到能够直接调试源码，而不是压缩、混肴的产物，我们需要自己构建 React 源码，并且生成 sourcemap 文件。
+
+> sourcemap（源映射）是一个文件，它提供了一种将压缩、合并或经过其他转换后的代码（如在生产环境中使用的代码）映射回原始源代码的方式。当 JavaScript 代码经过构建工具（如 Webpack、Rollup 等）处理后，代码可能会被压缩、丑化（变量名缩短等操作）或者合并成一个文件，这使得调试变得困难，因为调试工具显示的是转换后的代码，而不是开发人员编写的原始代码。
+> 
+
+下载[源码](https://github.com/facebook/react)
+
+```Shell
+git clone git@github.com:facebook/react.git
+```
+
+由于 React 最新的构建结果和之前不同，和找到的参考资料不一样，因此需要 `reset` 到之前的 `commit` 进行构建
+
+```Shell
+git reset --hard 80f3d88190c07c2da11b5cac58a44c3b90fbc296
+```
+
+安装依赖
+
+```Shell
+npm install
+```
+
+由于 React 构建脚本依赖于 Java，因此需要确保 Java 环境已准备就绪
+
+前往 [Oracle 官网](https://www.oracle.com/cn/java/technologies/downloads/#jdk23-windows)下载
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_5edb6669-7bc5-46e2-8373-f4582f46349d.png)
+
+然后一直下一步就行，安装完成后不用手动设置环境变量，在命令行输入 `java -version` 即可验证是否安装成功
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_ac95c681-61bd-44d7-98a4-aeb1aab0f337.png)
+为了生成 sourcemap 文件，需要修改构建脚本的配置，脚本位于 scripts/rollup/build.js 中，首先需要将 sourcemap 为 true
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_2aa358ad-a6ee-4514-8876-54681d4d1676.png)
+
+这时如果直接运行构建脚本 `npm run build`，会发现报错
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_9b84ebcd-2927-4bd2-991d-bdd23461ae3c.png)
+
+上述问题是因为构建的过程中会进行多次转换，会生成多次 sourcemap，然后把 sourcemap 串联起来就是最终的 sourcemap。如果中间有一步转换没有生成 sourcemap，那就断掉了，也就没法把 sourcemap 串联起来了。
+
+这个问题的解决只要找出没有生成 sourcemap 的那几个插件注释掉就可以了
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_ea563647-7178-444f-ba58-3925d7cf70e3.png)
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_22cb8c0f-04cc-4e15-b7e5-dcf284f83d85.png)
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_b7e57410-f5c1-4d09-afef-0f3500381952.png)
+
+再次运行 `npm run build` 就可以正常构建了
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_1623204f-ee00-42f2-a877-dbf8dbcc4896.png)
+
+构建完成后，可以在 build/node_modules 下面看到构建的产物，可以看到生成了 `sourcemap` 文件
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_9fd595b9-ba84-4068-b8f2-6c78fa334cfa.png)
+
+我们把 `react` 和 `react-dom` 链接到全局，方便我们在项目中引用调试
+
+```Shell
+cd build/node_modules/react
+npm link
+
+cd ../react-dom
+npm link
+```
+
+## 创建 React 项目并调试
+
+使用 [Vite](https://vite.dev/guide/) 创建一个 React 项目
+
+```Shell
+npm create vite@latest
+```
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_fb233c9a-1a75-4cb3-87d6-ffe83af7870a.png)
+
+进入项目，安装依赖
+
+```Shell
+cd react-debug
+npm install
+```
+
+这里不使用安装的 `react` 和 `react-dom`，而是使用本地构建好并 `link` 到全局的包
+
+```Shell
+npm link react
+npm link react-dom
+```
+
+为了方便的在 WebStorm 中进行调试，需要进行一些配置，首先点击顶部栏的 Current File，打开一个下拉框，选择 Edit Configurations
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_1868c9b2-340d-40bc-913e-03e1241e7413.png)
+
+会弹出一个配置管理弹窗，点击左上角的 + 并选择 JavaScript Debug
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_4a6c8801-4901-41c9-83e4-01fcaf9b9ce2.png)
+
+编辑调试配置，Name 就是该调试的名称，URL 就是前端项目的启动地址，这里使用的 Vite，默认启动在 http://localhost:5173
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_a27eea62-d8bc-43aa-9fe6-f2722068698d.png)
+
+编辑完成后，启动项目
+
+```javascript
+npm run dev
+```
+
+点击小虫的调试按钮
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_562d2f05-8e1b-4bbe-9f29-499bed8ab291.png)
+
+WebStorm 会自动打开一个 Chrome 页面
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_f9e16a9c-a6d8-4db5-89f8-ff12051fa6f3.png)
+
+可以添加一个断点，给标题添加一个点击事件并添加断点
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_3511ba40-adf1-42b1-8668-af13383eb72b.png)
+
+点击标题，这时会发现程序断住了，可以在 WebStorm 界面可以查看调用栈，变量等信息
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/output_87862203-c6d6-4fb1-b3fc-46052dc63995.gif)
+
+## 参考
+
+- [React 源码调试技巧](https://www.twotwoba.site/blog/frame/react-source-debug)
+
+- [在 WebStorm 中调试 React/Vue 等项目](https://blog.1874.cool/debugger-on-webstorm/)
+
+- [调试源码](https://react.iamkasong.com/preparation/source.html)
+
+- [全网最优雅的 React 源码调试方式](https://juejin.cn/post/7126501202866470949)

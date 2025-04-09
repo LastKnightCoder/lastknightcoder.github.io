@@ -1,0 +1,368 @@
+---
+slug: eslint
+tags:
+  - ESLint
+authors: xiongtao
+---
+
+`ESLint` 是代码检查工具，主要包含代码逻辑和代码风格：
+
+- 代码逻辑：
+  - 使用了未声明的变量
+  - 存在未使用的变量
+  - 在函数式组件以外使用 React Hook
+  - ... ...
+
+- 代码风格：
+  
+  - 是否使用分号
+  - 使用单引号还是双引号
+  - ... ...
+
+:::info
+自 v8.53.0 开始，由于维护成本的原因，ESLint 官方已经放弃了对于代码风格规则的维护与开发，之前有关代码风格的规则都已经迁移到仓库  `@stylistic/eslint-plugin-js`  中，由社区进行维护。
+:::
+
+## 配置
+
+### 配置文件
+
+在 `ESLint` 中代码逻辑和代码风格的检查是通过规则实现的，规则定义了如何检查代码以及如何修复代码，有如下几种方法可以对 `ESLint` 进行配置：
+
+1. 在 `package.json` 中通过 `eslintConfig` 字段进行配置
+2. 在项目的根目录下，通过 `.eslintrc.{(c)js,y(a)ml,json}`进行配置
+3. 在命令行通过 `--config` 指定配置文件
+
+当没有主动指定配置文件，而同时存在多种配置文件时，优先级如下：
+
+1. `.eslintrc.js`
+2. `.eslintrc.cjs`
+3. `.eslintrc.yaml`
+4. `.eslintrc.yml`
+5. `.eslintrc.json`
+6. `package.json`
+
+:::info
+在 v9 版本，存在新的配置系统，在新的配置系统中，将只会存在一个配置文件 `eslint.config.js`，且配置方式与现有系统不同，新的配置系统将采用扁平式的方式。
+:::
+
+### rule
+
+ESLint 每一个检查项都是一个规则（rule），ESLint 为我们提供了大量的 `rule`，通过 `rules` 字段去配置每个具体的 `rule`，包括 违反该 `rule` 的错误等级，以及该 `rule` 需要的参数。
+
+一个参考的示例如下：
+
+```js
+{
+  rules: {
+    // 必须写分号，否则报错
+    semi: ['error', 'always'],
+    // 使用双引号，否则警告
+    quotes: ['warning', 'double'],
+    // 关掉禁止使用 console 的规则
+    'no-console': ['off']
+  }
+}
+```
+
+配置的数组的第一个参数表示如果违反了该条规则，将会产生什么级别的错误，错误等级分为三类：
+
+- `error`或者 2：错误，不可忽视
+- `warn`或者 1：警告，可处理可不处理
+- `off`或者 0：不启动该规则
+
+第二个参数表示该规则接收的选项，例如对于 `semi` 规则接受一个选项，取值为 `always` 或者 `never`，`always` 表示始终有分号，而 `never` 表示不应该有分号。
+
+:::tip
+选项也可以不传递，当不传递选项时，将会使用默认值，例如
+
+```js
+{
+  rules: {
+    semi: ['error'], // 选项没有传递，默认值是 always
+  }
+}
+```
+
+当不传递选项时，可以不使用数组，仅配置错误等级即可
+
+```js
+{
+  rules: {
+    semi: 'error', // 选项没有传递，默认值是 always
+  }
+}
+```
+:::
+
+### extends
+
+`ESLint` 内置了几百个规则，如果我们一个个去了解每个规则，然后决定是否开启的话，我觉得对于每个开发者几乎都是不可能的事情，成本太高了，最好是具有某种开箱即用的方案，比如社区存在某种最佳实践，我们只要直接复用就好了。
+
+基于这样的想法，`ESLint` 提出了 `extends` 配置项，它可以让我们通过 npm 包直接复用已有的最佳实践，`ESLint` 官方有一个推荐的规则配置，可以通过如下方式复用该配置：
+
+```js
+{
+  extends: ['eslint:recommended']
+}
+```
+
+:::info
+在 `extends` 出现之前，对于 `eslint:recommended`的规则，`eslint` 一开始是将其内置，即内置了一些规则，但是这会让用户很迷惑，因为我什么都没有配置就拥有了一些规则。
+
+后来 `eslint` 将这个内置行为去掉了，但是这样用户就得从零开始配置，加重了用户的负担，直到 `extends` 出现才解决这个问题，对于需要内置行为的用户，只要 `extends eslint:recommended` 即可，完全由用户自己决定。
+
+参考 [ESLint's new config system, Part 1: Background](https://eslint.org/blog/2022/08/new-config-system-part-1)。
+:::
+
+### plugin
+
+虽然 `eslint` 内置了几百条规则，但是这些规则也不能完全满足我们的需求，我们需要自己自定义规则，比如 `eslint` 内置的规则都是针对 `js` 的，对于 `jsx` 和 `ts` 没有相应的规则进行检查，这个时候就需要插件来直接自定义规则。
+
+插件一般都命名为 `eslint-plugin-xxx`，如果符合这样的命名规则，那么在使用时就可以省略前面的 `eslint-plugin-`。在使用插件定义的规则之前，我们首先需要在 `plugins` 配置项中先进行声明，然后才可以在 `extends` 和 `rules` 使用插件提供的配置和规则。
+
+以 React Hooks 为例，使用 React Hooks 有两个必须遵守的规则：
+
+1. 只能在函数式组件或自定义 hook 中使用
+2. 不能在分支中使用 hook
+
+为了确保在开发时遵守以上规则，React 官方提供了 `eslint-plugin-react-hooks` 插件
+
+```js
+npm install --save-dev eslint-plugin-react-hooks
+```
+
+```js
+{
+  "plugins": [
+    "react-hooks"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn"  // Checks effect dependencies
+  }
+}
+```
+
+### parser
+
+ESLint 默认使用 `espree` 这个 `parser` 来解析 js 为 AST，但是该解析器针对 `jsx` 或 `ts(x)` 无法解析，万幸的是 ESLint 支持自定义解析器，我们可以通过 `parser` 选项来指定解析器。
+
+以常见的解析 TypeScript 的 `@typescript-eslint/parser` 为例
+
+```js
+npm install --save-dev @typescript-eslint/parser
+```
+
+```js
+module.exports = {
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  parserOptions: {
+    project: './tsconfig.json'
+  }
+};
+```
+
+### env 和 global
+
+JavaScript 可以运行在不同的运行时中，最典型的两个就是浏览器和 Node.js，在不同的运行时，会存在各自独有的全局变量，比如在浏览器中，可以通过 `document` 来访问页面上的 DOM 元素，在 Node 中有 `setImmediate` 来调度任务。
+
+为了防止 ESLint 将这些全局变量识别为未定义的变量，我们需要配置 `env` 来声明所处的环境，配置相应环境后即可支持该环境对应的全局变量
+
+```js
+{
+  env: {
+    browser: true,
+    node: true,
+    jest: true
+  }
+}
+```
+
+`ESLint` 目前支持 `env` 配置列表参见 [Specifying Environments](https://eslint.org/docs/latest/use/configure/language-options#specifying-environments)。
+
+如果你的代码使用到了指定环境未定义的全局变量，比如通过 `script` 引入了一个库，它在全局上挂载了一个变量，这个时候为了防止 `ESLint` 报错，你可以在 `global` 中对该变量进行声明
+
+```js
+{
+  globals: {
+    "jQuery": "readonly",
+    "$": "readonly"
+  }
+}
+```
+
+`globals` 中的值可以配置为 `writable` 或者 `readonly`，`writable` 表示可以修改该全局变量，而 `readonly` 禁止修改，只能访问该变量。
+
+:::warning
+由于历史原因，`globals` 中的值还可以配置为布尔值，`true` 同 `writable`，`false` 同 `readonly`，但是不推荐使用。
+:::
+
+### overrides
+
+在使用 ESLint 进行检查时，我们希望对于某些文件，使用不同的规则，比如对于测试文件，我们允许使用 `console` 进行打印。可以在 `overrides` 中配置与外层 `rules` 不同的规则
+
+```js
+module.exports = {
+  rules: {
+    "no-console": "error"
+  },
+  overrides: [{
+    files: ["__test__/**/*.js"],
+    rules: {
+      "no-console": "off"
+    }
+  }]
+}
+```
+
+通过 `files` 来配置对哪些文件进行覆盖。
+
+## 使用
+
+`ESLint` 有两种使用方式，一种是通过命令行，另一种是通过其提供的 Node.js API 接入到自己的应用中，比如在编辑器中接入 `ESLint`。
+
+### CLI
+
+如果是全局安装的 `eslint`，则可以直接输入 `eslint` 来运行命令，如果仅在项目中安装了，则可通过 `npx eslint` 来运行命令，为了简洁，后续命令都将以全局的形式运行。
+
+`eslint` 的用法如下
+
+```bash
+eslint [options] [file|dir|glob]*
+```
+
+最简单的用法，不使用任何选项
+
+```bash
+# 检查文件 file1.js 和 file2.js
+eslint file1.js file2.js
+
+# 检查 src 文件夹下的所有文件
+eslint src/
+
+# 检查 src 目录下的任意文件夹下的所有 js 文件
+eslint "src/**/*.js"
+```
+
+:::info
+当使用 `src/**`这样 `glob` 的语法时，其结果依赖于你 shell 的解析，如果你想使用 `node` 的 `glob` 语法，建议为其添加双引号。
+:::
+
+由于 `eslint` 的选项太多，并不是每个都常用，因此下面只介绍常用的几个选项，更详细的选项可以参考官方文档 [Command Line Interface Reference](https://eslint.org/docs/latest/use/command-line-interface)。
+
+#### `-c/--config`
+
+在不显示指定配置文件的情况下，会默认读取项目根目录下的 `.eslintrc.{(c)js,y(a)ml,json}`配置文件，配置文件的路径可以通过 `-c` 或 `--config` 来进行显式指定。
+
+```bash
+eslint --config eslint.config.js index.js
+```
+
+#### `-o/--output-file`
+
+默认情况下，`eslint` 的检查结果会输出在当前命令行窗口中，可以通过 `-o` 或 `--output-file` 将结果输出到指定文件中
+
+```bash
+eslint --output-file result.txt index.js
+```
+
+#### `--ext`
+
+默认情况下 `eslint` 只会检查 `.js` 文件，这一行为可以通过 `--ext` 改变，它可以指定要检查的文件的后缀名，可以同时指定多个后缀名
+
+```bash
+# 通过多个 --ext 选项指定多个后缀名
+eslint --ext .js --ext .ts
+
+# 通过 , 分隔多个后缀名
+eslint --ext .js,.ts
+```
+
+:::info
+`--ext` 当且仅当指定的模式为文件夹时才生效，如果指定的模式为文件，`--ext` 是不生效的，如 `eslint --ext .ts src/*`，`--ext` 选项是不生效的，因为 `src/*` 表示 `src` 下的所有文件，`eslint --ext .ts src/` 是生效的，因为 `src/` 表示文件夹。
+:::
+
+```bash
+eslint --ext .json ./
+
+~\eslint-demo\package-lock.json
+  2:9  error  Parsing error: Unexpected token :
+
+~\eslint-demo\package.json
+  2:9  error  Parsing error: Unexpected token :
+
+✖ 2 problems (2 errors, 0 warnings)
+```
+
+#### `--fix`
+
+使用了 `--fix` 选项，`eslint` 将会尽可能的帮你修复错误，如果错误可以被修复，那么该错误将不会在输出结果中显示
+
+```js
+// .eslintrc.js
+module.exports = {
+  rules: {
+    semi: ['error']
+  }
+}
+```
+
+```bash
+# 前两行未添加分号
+λ cat index.js
+var a = 1
+var b = 2
+var c = a + b;
+
+# 只报告了 c 未使用的错误，没有报告 a 和 b 后面没有分号的错误
+# 因为这个错误被自动修复了
+λ npx eslint --fix index.js
+
+~\eslint-demo\index.js
+  3:5  error  'c' is assigned a value but never used  no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+
+# 前两行的分号被自动的添加上了
+λ cat index.js
+var a = 1;
+var b = 2;
+var c = a + b;
+```
+
+### 编辑器集成
+
+#### VSCode
+
+首先需要在 VSCode 插件市场下载  ESLint 插件
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_b7786503-94ef-46cd-994a-19fcf3f88cb4.png)
+
+接着需要全局或者在项目中安装 `eslint`
+
+```bash
+npm install eslint
+```
+
+然后再编码的过程中就可以得到编辑器的提示了
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_fadf339e-010e-4144-acd2-ce582993891f.png)
+
+这里再推荐另外一个插件，Error Lens，可以直接把行内显示错误，而不需要把鼠标放上去才看到具体的错误
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_2488dcb1-cf18-4ad1-b94d-6819b1c64696.png)
+
+效果如下
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_1fbafee6-1ed5-4049-8d16-640b3f6ee998.png)
+
+#### WebStorm
+
+在 WebStorm 中不需要下载 ESLint 插件，WebStorm 默认集成 ESLint，但是这个功能默认是关闭的，需要手动开启
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_7ec380fd-531e-409c-9f40-17d1bcd485c1.png)
+
+使用 Automatic ESLint configuration，WebStorm 会使用该项目下 node_modules 中的 `eslint`，配置文件会使用项目下的 `.eslintrc` 文件；而 Manual ESLint configuration 则需要手动配置使用的 `eslint` 和配置文件。

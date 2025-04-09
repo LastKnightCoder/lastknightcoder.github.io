@@ -1,0 +1,146 @@
+---
+slug: tauri-tips
+tags:
+  - Tauri
+authors: xiongtao
+---
+
+## Drag And Drop
+
+Tauri 默认不支持 H5 Drag And Drop API，需要在 `tauri.config.json` 中禁止 `fileDropEnabled`，二者不能同时工作。
+
+```json
+{
+  // ...
+  "tauri": {
+    // ...
+    "windows": [{
+        "fileDropEnabled": false
+    }]
+  }
+}
+```
+
+:::danger
+我还以为我的用法不对，浪费我好多时间，淦。
+:::
+
+## 自动更新
+
+Tauri 自动更新需要在 `tauri.updater` 中将 `dialog` 设置为 `false`，否则调用 `checkUpdate` 时一直在等待状态
+
+```json
+{
+  "tauri": {
+    "updater": {
+      "dialog": false
+    }
+  }
+}
+```
+
+## 窗口圆角
+
+Tauri 目前不能通过配置实现这个功能，因此要实现圆角一定不能使用自带的 titlebar，需要在页面中实现，首先干掉自带的 `titlebar`，并且将窗口设置为透明
+
+```json
+{
+  "tauri": {
+    "windows": [{
+      "decorations": false,
+      "transparent": true
+    }]
+  }
+}
+```
+
+然后在页面的根元素设置圆角
+
+```css
+#root {
+  border-radius: 12px;
+  overflow: hidden;
+  /* 要设置背景色，否则整个窗口都是透明的 */
+  background: var(--primary-bg-color);
+}
+
+/* 最大化的时候不使用圆角 */
+#root.maximized {
+  border-radius: 0;
+}
+```
+
+## 窗口阴影
+
+使用插件 [windows-shadows](https://github.com/tauri-apps/window-shadows)
+
+```toml
+[dependencies]
+window-shadows = "0.2.2"
+```
+
+```rust
+use window_shadows::set_shadow;
+
+fn main() {
+  // ...
+  tauri::Builder::default()
+  	.setup(|app|) {
+      // ...
+      let window = app.get_window("main").unwrap();
+      set_shadow(&window, true).expect("Unsupported platform!");
+  }
+}
+```
+
+:::note
+在 `tauri@v2` 中，已经原生支持开启和关闭阴影了。
+:::
+
+## 引用本地文件
+
+在 Tauri 中要引用本地文件，需要使用 `convertFileSrc` 将本地路径转化为特殊的 HTTP 路径，需要先 `tauri.conf.json` 文件中设置 `asset` 协议
+
+```json
+{
+  "tauri": {
+    "allowlist": {
+      "protocol": {
+        "asset": true,
+        "assetScope": [
+          "**"
+        ]
+      },
+    }
+  }
+}
+```
+
+```ts
+import { convertFileSrc } from "@tauri-apps/api/tauri";
+
+// -> https://asset.localhost/C%3A%5CUsers%5Cpc%5C.editor%5Cresources%5Cimage_87146a94-78a7-40ce-a9ea-23710c9e3f56.png
+convertFileSrc('C:\\Users\\pc\\.editor\\resources\image_87146a94-78a7-40ce-a9ea-23710c9e3f56.png ')
+```
+
+## vite-plugin-wasm
+
+我使用了 tinypng-lib 这个库来对图片进行压缩，该包使用 wasm，需要使用 vite-plugin-wasm 进行处理，按照[文档](https://www.npmjs.com/package/vite-plugin-wasm)进行了安装和使用
+
+```bash
+pnpm add vite-plugin-wasm vite-plugin-top-level-await
+```
+
+```js
+import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
+
+export default defineConfig({
+  plugins: [
+    wasm(),
+    topLevelAwait()
+  ]
+})
+```
+
+在开发模式下是没有问题，但是打包构建后就没法打开软件，现在还不知道什么原因，不想折腾了。

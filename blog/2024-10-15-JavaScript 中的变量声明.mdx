@@ -1,0 +1,241 @@
+---
+slug: javascript-variable
+tags:
+  - JavaScript
+authors: xiongtao
+---
+
+在 JavaScript 中有三种方式声明变量：
+
+- `var`
+- `let`
+- `const`
+
+`let` 和 `const` 是 `ES6` 新引入的变量声明方式，解决 `var` 声明变量的很多问题，基本上已经不使用 `var` 来声明变量了。
+
+## var
+
+`var` 声明变量有三个特点：
+
+- 声明提升
+  
+  正常情况下，变量需要先声明才能使用，如果在声明之前使用了还未定义的变量，那么会报错，但是在 JavaScript 中，对于使用 `var` 声明的变量，可以在声明之前访问，因为 `var` 声明的变量其作用域会提升到其所在作用域的顶部，不过只有声明会被提升，变量的初始化不会提升，因此在初始化之前访问的值是 `undefined`，在初始化之后访问才能获取到值
+  
+  ```js
+  console.log(a); // undefined，在变量 a 定义之前访问，不会报错，访问到的是 undefined
+  var a = 10;
+  console.log(a); // 10，在定义之后访问，可以访问到初始的值
+  ```
+  
+  上面的语句相当于
+  
+  ```js
+  var a; // 声明提升
+  console.log(a); // undefined
+  a = 10;
+  console.log(a); // 10
+  ```
+
+- 无块级作用域
+  
+  `var` 声明的变量的作用域是离其最近的**函数主体**或**类静态初始化块**，在除此之外的块作用域中，如 `if`、`for`、`while`、`try...catch`、`switch` 等块级作用域中声明的变量可以在其外部访问到
+  
+  ```js
+  var a = true;
+  
+  if (a) {
+      var b = 2;
+  }
+  
+  console.log(b); // 2，如果 a 是 false，那么这里访问到的就是 undefined
+  ```
+  
+  ```js
+  function func () {
+    // 变量 a 的作用域在 func 内，因此在函数外无法访问到 a
+    var a = 1;
+  }
+  
+  func();
+  
+  console.log(a); // ReferenceError: a is not defined
+  ```
+  
+  如果不是在函数或类静态初始化块中使用 `var` 声明变量，分为两种情况：
+  
+  - 如果在模块中，那么 `var` 的作用域就是整个模块
+  
+  - 如果是在脚本中，那么就是全局作用域
+  
+  
+  如果是全局作用域，声明的变量将作为全局对象的**不可配置属性**（对于浏览器环境，对应于 `windows` 属性，对于 Node 环境，就是 `global` 属性）
+  
+  ```js
+  var a = 1;
+  console.log(window.a); // 1
+  
+  delete window.a; // false，不可配置
+  ```
+
+- 重复声明
+  
+  在同一个作用域中，`var` 声明的变量可重复声明，重新声明后值也不会丢失，除非重新进行了初始化
+  
+  ```js
+  var a = 1;
+  console.log(a); // 1
+  
+  var a;
+  console.log(a); // 1
+  
+  a = 10;
+  console.log(a); // 10
+  ```
+  
+  如果 `var` 和 `function` 在同一作用域声明了同一变量，那么 `var` 初始化会覆盖 `function` 的值，因为 `function` 的声明会被提升到作用域的顶部，随后才是变量的初始化
+  
+  ```js
+  var a = 1;
+  
+  function a() {
+      return 2;
+  }
+  
+  console.log(a); // 1
+  ```
+
+## let
+
+`let` 声明的变量与其他语言声明的变量特性一致：
+
+- 在变量声明之前不能使用，从作用域顶部到变量声明之间的区域称为暂时性死区，在暂时性死区中不能访问变量，否则会报错
+  
+  ```js
+  console.log(a); // ReferenceError: Cannot access 'a' before initialization
+  
+  let a = 1;
+  ```
+
+- 块作用域
+  
+  ```js
+  if (true) {
+      let a = 1;
+  }
+  console.log(a) // ReferenceError: a is not defined
+  ```
+  
+  `let` 声明的变量只在所在的块作用域内生效，作用域之外无法访问，否则会报错
+
+- 不可重复性声明
+  
+  在同一作用域内，不可能声明相同命名的变量
+  
+  ```js
+  let a = 1;
+  let a = 2; // SyntaxError: Identifier 'a' has already been declared
+  ```
+
+## const
+
+`const` 和 `let` 具有相同的特点，有一个不同的是 `let` 声明的变量是可变的，可以被重新赋值，而 `const` 声明的变量是不可变的，不可以被重新赋值
+
+```js
+let a = 1;
+a = 2;
+console.log(a); // 2
+```
+
+```js
+const a = 1;
+a = 2; // TypeError: Assignment to constant variable.
+```
+
+因为 `const` 声明的变量不允许重新赋值，因此在声明时就必须初始化
+
+```js
+const a; // SyntaxError: Missing initializer in const declaration
+```
+
+`const` 声明的变量不能被重新赋值，但是不代表值不可以改动
+
+```js
+const obj = {
+  a: 1
+}
+
+obj.a = 2;
+console.log(obj.a); // 2
+```
+
+变量 `obj` 指向的内存地址始终没有发生变化，因此上述操作是被允许的。
+
+> 最佳实践：变量使用 `const` 定义，当变量需要改变时，在使用 `let` 定义。
+
+## 循环中的变量声明
+
+考虑下面的一个循环
+
+```js
+const funcs = []
+for(var i = 0; i < 10; i++) {
+    funcs.push(function() {
+        console.log(i)
+    })
+}
+funcs.forEach(function(func){
+    func()
+})
+```
+
+输出结果为
+
+```js
+10
+10
+10
+10
+10
+10
+10
+10
+10
+10
+```
+
+因为变量 `i` 指向的是全局作用域中的 `i`，经过十次循环后，`i` 的值已经变为了 `10`，所以每次打印的都是 `10`。
+
+如果把 `var` 声明的变量替换为 `let` 或 `const`，因为每次都会重新声明变量 `i`，`func` 中访问的是闭包捕获的重新声明的 `i`
+
+```js
+const funcs = []
+for(var i = 0; i < 10; i++) {
+    funcs.push(function() {
+        console.log(i)
+    })
+}
+funcs.forEach(function(func){
+    func()
+})
+```
+
+输出为
+
+```js
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+## 参考
+
+- [面试官：说说var、let、const之间的区别](https://github.com/febobo/web-interview/issues/34)
+
+- [var](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var)

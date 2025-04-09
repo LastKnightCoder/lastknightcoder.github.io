@@ -1,0 +1,227 @@
+---
+slug: http-cache
+tags:
+  - HTTP
+  - 缓存
+authors: xiongtao
+---
+
+缓存是一种用来提高访问数据速度的技术，通过保存曾经访问过的数据或者预先加载可能用到数据，以便下次访问数据时能更快的提供，不仅可以提高数据的访问速度，还可以减少请求次数，进一步减少数据源的压力。
+
+在网页中，对于一些静态资源在很长的一段时间都是不变的，因此可以将数据缓存下来，在下次请求数据时，直接从缓存中读取，而不必发起网络请求，以加快资源加载速度。虽然静态资源很长一段时间不变，但是当资源发生变化时，希望用户尽快能访问到新的资源，或者有的资源时刻在发生变化，不希望是有缓存，因此需要有一套机制来设置缓存策略，这套缓存策略是通过 HTTP 的一些请求头和响应头进行设置的。
+
+## 强缓存和协商缓存
+
+HTTP 缓存分为两种，强缓存和协商缓存，强缓存指的是只要资源没有过期，不发起网络请求，直接使用缓存的数据，而协商缓存指的是需要和服务器协商一下，看看缓存是否有效，如果服务器说还没有过期则使用缓存中的资源，否则服务器应当下发新的资源。
+
+和强缓存有关的请求头/响应头有 `Cache-Control` 和 `Expires`，和协商缓存的请求头/响应头有 `If-Modified-Since/Last-Modified` 和 `If-None-Match/Etag`。
+
+**强缓存拥有更高的优先级**，协商缓存是在强缓存失效时用于验证缓存的有效性的。
+
+## Expires
+
+`Expires` 是一个 HTTP 1.0 引入的响应头，它的值是一个日期，语法如下：
+
+```HTTP
+Expires: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+```
+
+- `<day-name>`
+  
+  Mon, Tue, Wed, Thu, Fri, Sat, or Sun 其中之一（大小写敏感）
+
+- `<day>`
+  
+  两个数字表示的日期，例如， "04"、"23"
+
+- `<month>`
+  
+  Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec 其中之一（大小写敏感）
+
+- `<year>`
+  
+  四位数字表示的年份，例如 "1990"、"2016"
+
+- `<hour>`
+  
+  两位数字表示的小时， 例如 "09"、"23"
+
+- `<minute>`
+  
+  两位数字表示的分钟，例如 "04"、"59"
+
+- `<second>`
+  
+  两位数字表示的秒，例如 "04"、"59"
+
+- `GMT`
+  
+  格林威治时间，HTTP 的日期始终使用格林威治时间表示，而不是本地时间
+
+
+
+一个示例：
+
+```HTTP
+Expires: Wed, 21 Oct 2024 07:28:00 GMT
+```
+
+如果当前的时间在 `Expires` 指定的时间内，则表示资源有效，则可以直接复用。如果值是 0，则表示是过去的日期，即资源已经失效。
+
+:::danger
+随着 HTTP 1.1 已经普及，`Expires` 已经过时，没必要使用 `Expires` 响应头，而应当使用下面的 `Cache-Control` 响应头。
+:::
+
+## Cache-Control
+
+`Cache-Control` 是 HTTP 1.1 引入的，既可以作为请求头又可以作为响应头，它有很多的指令用来进行访问控制和缓存设置。
+
+语法：
+
+- 指令是大小写不敏感的，但是建议使用小写，因为有些规范不识别大写的指令
+
+- 多个指令使用逗号分隔
+  
+  ```HTTP
+  Cache-Control: public, no-cache
+  ```
+
+- 有些指令可能存在可选参数，可选参数和指令名称使用 `=` 连接
+  
+  ```HTTP
+  Cache-Control: max-age=600
+  ```
+
+|  Request         |  Response                |
+| ---------------- | ------------------------ |
+|  max-age         |  max-age                 |
+|  max-stale       |  -                       |
+|  max-fresh       |  -                       |
+|  -               |  s-maxage                |
+|  no-cache        |  no-cache                |
+|  no-store        |  no-store                |
+|  no-transform    |  no-transform            |
+|  only-if-cached  |  -                       |
+|  -               |  must-revalidate         |
+|  -               |  proxy-revalidate        |
+|  -               |  must-understand         |
+|  -               |  private                 |
+|  -               |  public                  |
+|  -               |  immutable               |
+|  -               |  stale-while-revalidate  |
+|  slate-if-error  |  slate-if-error          |
+
+因为指令实在是太多了，因此只介绍一些常见的指令，更多的指令用法可以参考 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)。
+
+### max-age
+
+对于响应头，`max-age=N` 表示在 `N` 秒内，响应都是有效的，在有效期内，可以直接直接复用此响应。
+
+需要注意的是 `max-age` 表示的不是收到响应后经过的时间，而是指服务器生成响应后经过的时间（这个时间可以通过 `Date` 响应头知道），但是如果中间经过了一些路由或其他缓存服务呢，比如 CDN，在这些缓存服务上有一定的处理时间，那么实际的有效期应当减去这个处理时间，因为服务器的响应时间是相对于这个缓存服务的，这个处理时间会作为 `Age` 响应头返回，例如在缓存服务上花费了 `100` 秒处理，那么就会返回一个 `Age: 100` 的响应头，我们从 `max-age` 中减去 `Age` 就是实际的有效期。
+
+```HTTP
+Cache-Control: max-age=100
+Age: 100
+```
+
+对于请求头，`max-age=N` 表示允许重用 `N` 秒内服务器生成的响应。
+
+有的时候在请求时会设置 `max-age=0`，比如直接输入网址请求一个 HTML 文件时，那么本地的缓存肯定是不可以直接复用的，以保证每次请求都是最新的资源。这里 `max-age=0` 并不表示不使用缓存，而是指需要先询问服务器响应是否可复用，如何服务器发现响应未发生改变，可以返回 `304`  状态码那么就会使用本地的缓存。
+
+:::note
+对于 `-1`、`233.9` 这种值，在规范中并未定义，但是建议当作 `0` 处理。
+:::
+
+### no-cache
+
+在响应头中，`no-cache` 表示本地可以存储这个响应，但是在每次决定是否复用前需要询问服务器，如果希望每次都检查内容是否更新，那么就使用这个指令。
+
+在请求头中，`no-cache` 的含义同响应头一致，也表示在复用缓存前先与源服务器进行验证，以确保访问的是最新的资源，**当用户强制重新加载页面时，浏览器通常会将 ****`no-cache`**** 添加到请求中。**
+
+### no-store
+
+`no-store` 表示任何响应都不应该被缓存，无论是公共的还是私有的。
+
+`no-store` 是在极端情况下用于确保缓存中不存储任何数据，适用于对数据安全性和实时性的要求较高的场景。
+
+### public, private
+
+在解释 `public` 和 `private` 指令的含义之前先给出两个概念：
+
+- Shared Cache：共享缓存，存在于源服务器与客户端之间的缓存，如代理服务器、CDN，它存储响应供多名用户使用
+
+- Private Cache：私有缓存，存在于客户端的缓存，如浏览器，为单个用户提供个性化的内容
+
+`public` 响应指令用于表示响应可以存储在共享缓存中
+
+:::tip
+带有 `Authorization` 头字段的请求的响应不得存储在共享缓存中；因为使用 `Authorization` 请求头，则表示该访问是受限制的，是和个人数据高度相关的，因此不适合放入共享缓存中，但是可以使用 public 突破这一限制。
+:::
+
+```HTTP
+Cache-Control: public, max-age=604800
+```
+
+`private` 响应指令表示响应只能存储在专用缓存（如浏览器的本地缓存）中。如何没有添加 `private` 指令，大部分情况下都是按照 `public` 指令处理的，所以对于一些包含个人隐私的数据需要添加 `private` 指令，防止被添加共享缓存中，导致隐私泄露。
+
+## If-Modified-Since、Last-Modified
+
+`If-Modified-Since` 和 `Last-Mofified` 是一对用于协商缓存的请求响应头。
+
+`Last-Modified` 出现在响应头中，表示某个资源的最后修改时间，`If-Modified-Since` 出现在请求头中，它的作用是告诉服务器想获取指定时间以来修改过的资源。
+
+语法
+
+```HTTP
+If-Modified-Since: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+Last-Modified: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+```
+
+例子：
+
+```HTTP
+If-Modified-Since: Sat, 07 Dec 2024 01:30:37 GMT
+Last-Modified: Sat, 07 Dec 2024 01:21:59 GMT
+```
+
+当客户端首次请求资源时，服务器会返回该资源及 `Last-Modified` 时间，在后续的请求中将上一次的 `Last-Modified` 时间放入到 `If-Modified-Since` 请求头中，服务器根据 `If-Modified-Since` 来判断资源是否被修改过，如果未被修改，则返回 `304 Not Modified`，客户端可以使用本地的缓存，如果资源已经被修改，则服务器返回新的资源以及最新的 `Last Modified`。
+
+## If-None-Match、ETag
+
+`If-Modified-Since` 和 `Last-Modified` 使用时间来判断资源是否过期，有两个缺点：
+
+1. 时间的粒度是秒，如果资源在一秒内多次发生改变，不能精确的标注修改时间
+2. 某些文件是定时生成的，虽然内容没有变化，但是 `Last-Modified` 却变了，导致缓存失效
+
+`If-None-Match` 和 `ETag`(Entity Tag) 可以解决这一问题，`ETag` 出现在响应头中，表示资源标识，一般是资源内容的哈希值或者版本号，`If-None-Match` 出现在请求头中，它的作用同 `If-Modified-Since`，不过其内容是 `ETag` 而不是时间。
+
+语法:
+
+```HTTP
+If-None-Match: "<etag_value>"
+ETag: "<etag_value>"
+```
+
+`<etag_value>` 是所请求资源的实体标记，是由 ASCII 字符组成的字符串，放在双引号之间（如 `"675af34563dc-tr34"`），并可以用 `W/` 作为前缀，表示应使用弱比较算法。
+
+其工作流程和 `If-Modified-Since/Last-Modified` 的流程一致，不展开介绍。
+
+:::info
+`If-Modified-Since/Last-Modified` 和 `If-None-Mathc/ETag` 是可以共存的，当同时出现时，`If-None-Mathc/ETag` 的优先级高于 `If-Modified-Since/Last-Modified`，除非服务器不支持 `If-None-Mathc/ETag`。
+:::
+
+## 参考
+
+- [强缓存和协商缓存](https://juejin.cn/post/6844903838768431118)
+
+- [Expires](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires)
+
+- [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)
+
+- [If-Modified-Since](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Modified-Since)
+
+- [Last-Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified)
+
+- [If-None-Match](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)
+
+- [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)

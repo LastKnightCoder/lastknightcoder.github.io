@@ -1,0 +1,425 @@
+---
+slug: deep-copy
+tags:
+  - JavaScript
+  - 深拷贝
+authors: xiongtao
+---
+
+什么是拷贝？对一个变量进行拷贝是指将其表示的数据复制到另一个变量中，大部分情况下的目的是为了避免直接修改原始数据，以便后续进行多种不同的处理或对比。
+
+最简单的拷贝行为，直接将一个变量赋值给另一个变量
+
+```js
+let a = 1;
+let b = a;
+b = 2;
+console.log(a, b); // 1, 2
+```
+
+```js
+const originalObj = {
+    a: 1
+}
+const copyObj = originalObj;
+copyObj.a = 2;
+console.log(originalObj.a, copyObj.a); // 2, 2
+```
+
+可以看到，这种直接赋值的方式对于基本数据类型和对象是不一样的，对于基本数据类型（`number`, `string`, `null`, `undefined`, `boolean`, `symbol`, `BigInt`）直接赋值是完全隔离的，对拷贝的修改不会影响原数据，而对于对象（包括数组、日期、函数等特殊对象）直接进行赋值拷贝，**拷贝的仅仅是引用**，因此对通过拷贝所持有的引用对数据进行的修改也会影响原来的对象。
+
+因此对于对象的拷贝不能通过直接赋值来达到目的，而是需要将引用的数据进行拷贝，根据拷贝方式的不同，分为浅拷贝和深拷贝。
+
+浅拷贝即只复制对象的一层属性，常见的方式有
+
+```js
+const originalObj = {
+    a: 1
+}
+const copyObj = {};
+for (let key in obj1) {
+    obj2[key] = obj1[key];
+}
+```
+
+```js
+const originalObj = {
+    a: 1
+}
+const copyObj = { 
+    ...obj1
+}
+```
+
+```js
+const originalObj = {
+    a: 1
+}
+const copyObj = Object.assign({}, originalObj);
+```
+
+如果对象的属性的值也是一个对象，那么就会存在问题，复制的仍然是一个引用，对该引用的修改同样会影响原对象
+
+```js
+const originalObj = {
+    a: {
+        b: 1
+    }
+}
+const copyObj = Object.assign({}, originalObj);
+copyObj.a.b = 2;
+console.log(originalObj.a.b, copyObj.a.b); // 2 2
+```
+
+如果希望对拷贝的值的修改完全不影响原对象，这种情况下就需要进行深拷贝了。
+
+:::info
+大部分情况下不需要使用深拷贝，原因：
+
+- 浅拷贝够用了
+- 深拷贝性能较低
+
+:::
+
+## JSON.parse、JSON.stringify
+
+一种序列化的方式是将对象先序列为字符串，然后根据字符串重新反序列化为对象，该种方式创建的对象是完全开辟一块新的内存空间，和原来的对象没有任何关系：
+
+```js
+const originalObj = {
+    a: {
+        b: 1
+    }
+}
+const copyObj = JSON.parse(JSON.stringify(originalObj));
+copyObj.a.b = 2;
+
+console.log(originalObj.a.b, copyObj.a.b); // 1 2
+```
+
+但是该种方式有很多缺点：
+
+- 只能处理被序列化的对象，对于特殊类型的对象在反序列化时会丢失特定的类型信息
+  
+  - `Date` 会被序列化为字符串
+  
+  - `RegExp`、`Promise、Map、Set、WeakMap、WeakSet` 会被序列化为空对象
+  
+  - `Function` ，DOM 对象会被忽略
+  
+  
+  ```js
+  const originalObj = {
+      a: 1,
+      b: new Date(),
+      c: new RegExp('\\d{2}'),
+      d: function () {
+          return 'hello'
+      },
+      e: Promise.resolve('world'),
+      f: new Map([['a', 1], ['b', 2]]),
+      g: new Set([1, 2, 3]),
+      h: new WeakMap(),
+      i: new WeakSet()
+  }
+  const copyObj = JSON.parse(JSON.stringify(originalObj));
+  ```
+  
+  ![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_2ce054a3-ba08-44ff-9851-3b8ebad6bfeb.png)
+
+- 无法处理循环引用，如果对象中存在循环引用，则 `JSON.stringify` 会发生错误
+  
+  ```js
+  const originalObj = {}
+  originalObj.self = originalObj;
+  const copyObj = JSON.parse(JSON.stringify(originalObj));
+  ```
+  
+  ![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_11373c8e-c8e7-4727-9d14-d6b9884b65a1.png)
+
+- 对 `undefined`，`symbol`，`BigInt` 这些值的无法处理，对于值为 
+  
+  - `undefined` 和 `symbol` 的属性在序列化会被忽略
+    
+    ```js
+    const originalObj = {
+        a: 1,
+        b: "Hello",
+        c: true,
+        d: null,
+        e: undefined,
+        f: Symbol("symbol"),
+    }
+    const copyObj = JSON.parse(JSON.stringify(originalObj));
+    ```
+    
+    ![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_b0d57a2c-8c40-4730-827c-275aab1c8d80.png)
+  
+  - `BigInt` 则会报错
+    
+    ```js
+    const originalObj = {
+        a: 1,
+        b: BigInt(123),
+    }
+    const copyObj = JSON.parse(JSON.stringify(originalObj));
+    ```
+    
+    ![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_ad968b60-4caa-46fe-a627-5aa79194d68a.png)
+
+- `NaN` 和 `Infinity` 会被序列化为 `null`
+  
+  ```js
+  const originalObj = {
+      a: 1,
+      b: NaN,
+      c: Infinity,
+  }
+  const copyObj = JSON.parse(JSON.stringify(originalObj));
+  ```
+  
+  ![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_8861ec48-2dc1-408a-9a0e-6e2be3a617bb.png)
+
+
+
+## structuredClone 和 postMessage
+
+浏览器提供了一个  `structuredClone`  API，它可以对数据进行深拷贝，它会递归的对输入对象进行拷贝，并且在递归的过程中会维护一个存储访问过的对象的表，防止无限递归和解决循环引用的问题。
+
+该 API 较新，可能存在[兼容性](https://caniuse.com/?search=structuredClone%20)问题
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_42c9963e-ec38-4ac5-bfd6-a82a7235b10d.png)
+
+另外它只能拷贝可序列化的数据，如果存在不可序列化的数据则会报错，下面这些数据是不可序列化的：
+
+- `Symbol`
+
+- `Function`
+
+- `Promise`
+
+- `WeakMap`
+
+- `WeakSet`
+
+- DOM 对象
+
+
+
+```js
+const originalObj = {
+    a: 1,
+    b: "Hello",
+    c: true,
+    d: undefined,
+    e: null,
+    f: NaN,
+    g: Infinity,
+    h: new Date(),
+    i: /\d{2}/,
+    j: new Map([['a', 1], ['b', 2]]),
+    k: new Set([1, 2, 3]),
+    l: {
+        a: 1,
+    }
+}
+originalObj.self = originalObj;
+
+const copyObj = structuredClone(originalObj);
+copyObj.j.set('c', 3);
+copyObj.k.add(4);
+copyObj.l.a = 2;
+```
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_b86298bb-b4dc-4115-962e-f62c7d9a67d4.png)
+
+也可以使用 `MessageChannel` 对数据进行拷贝，使用 `postMessage` 传递数据时，也是深拷贝，其使用的算法和 `structuredClone` 相同，不同之处在于 `MessageChannel` 拷贝数据是异步的
+
+```js
+const deepCopy = (obj) => {
+    const channel = new MessageChannel();
+    return new Promise((resolve) => {
+        channel.port2.onmessage = (e) => {
+            resolve(e.data);
+        }
+        channel.port1.postMessage(obj);
+    });
+}
+```
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_8a39e453-6f72-474f-92d4-cf30b540a256.png)
+
+## 手动递归拷贝
+
+除了使用已有的 API，还可以手动递归对象来进行深拷贝。首先实现基本的递归拷贝
+
+```js
+const deepCopy = (value) => {
+    if (typeof value !== 'object' || value === null) {
+        return value;
+    }
+    const newObj = Array.isArray(value) ? [] : {};
+    for (const key in value) {
+        if (value.hasOwnProperty(key)) {
+            newObj[key] = deepCopy(value[key]);
+        }
+    }
+    return newObj;
+}
+```
+
+```js
+const originalObj = {
+    a: 1,
+    b: 'hello',
+    c: true,
+    d: undefined,
+    e: null,
+    f: NaN,
+    g: Infinity,
+    h: {
+        a: 1,
+    },
+    i: [1, 2, 3]
+}
+
+const copyObj = deepCopy(originalObj);
+copyObj.h.a = 2;
+copyObj.i.push(4);
+```
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_93c3e1b9-798b-426b-b999-374b1f0246c9.png)
+
+对于基本的对象和数组拷贝没有问题，但是如果存在循环引用，如果自己引用自己，两个对象之间互相引用等，那么就会陷入无限的递归，直至爆栈
+
+```js
+const originalObj = {
+    a: 1,
+    b: 'hello',
+    c: true,
+    d: undefined,
+    e: null,
+    f: NaN,
+    g: Infinity,
+    h: {
+        a: 1,
+    },
+    i: [1, 2, 3]
+}
+originalObj.self = originalObj;
+
+const copyObj = deepCopy(originalObj);
+```
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_8302f60d-2c2c-48fa-80ce-71842a755a12.png)
+
+为了解决这个问题，需要在递归的过程中维护已处理过的对象，当后续访问到相同对象时，直接返回该对象而不用递归处理
+
+```js
+const deepCopy = (value, weakMap = new WeakMap()) => {
+    if (weakMap.has(value)) return weakMap.get(value);
+    if (typeof value !== 'object' || value === null) {
+        return value;
+    }
+    const newObj = Array.isArray(value) ? [] : {};
+    weakMap.set(value, newObj);
+    for (const key in value) {
+        if (value.hasOwnProperty(key)) {
+            newObj[key] = deepCopy(value[key], weakMap);
+        }
+    }
+    return newObj;
+}
+```
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_28812919-419f-4fe9-8fef-2522308ad701.png)
+
+接下来需要对一些特殊的对象进行处理，如 `Function`、`Date`、`Map`、`Set` 等，对于不能进行深拷贝的对象当作普通对象处理，如 `WeakMap`、`WeakSet`、`Promise` 等
+
+```js
+const deepCopy = (value, weakMap = new WeakMap()) => {
+    if (weakMap.has(value)) return weakMap.get(value);
+    if (typeof value !== 'object' || value === null) {
+        return value;
+    }
+    let newObj;
+    if (typeof value === 'function') {
+        newObj = new Function('return ' + value.toString())();
+    } else if (Array.isArray(value)) {
+        newObj = [];
+    } else if (value instanceof Date) {
+        newObj = new Date(value);
+    } else if (value instanceof RegExp) {
+        const { source, flags } = value;
+        newObj = new RegExp(source, flags);
+        // lastIndex 不可遍历
+        newObj.lastIndex = value.lastIndex;
+    } else if (value instanceof Map) {
+        newObj = new Map();
+        for (const [key, val] of value) {
+            newObj.set(deepCopy(key, weakMap), deepCopy(val, weakMap));
+        }
+    } else if (value instanceof Set) {
+        newObj = new Set();
+        for (const val of value) {
+            newObj.add(deepCopy(val, weakMap));
+        }
+    } else {
+        newObj = {};
+    }
+    weakMap.set(value, newObj);
+    for (const key in value) {
+        if (value.hasOwnProperty(key)) {
+            newObj[key] = deepCopy(value[key], weakMap);
+        }
+    }
+    return newObj;
+}
+```
+
+```js
+const originalObj = {
+    a: 1,
+    b: 'hello',
+    c: true,
+    d: undefined,
+    e: null,
+    f: NaN,
+    g: Infinity,
+    h: Symbol("symbol"),
+    i: BigInt(123),
+    j: {
+        a: 1,
+    },
+    k: [1, 2, 3],
+    l: new Date(),
+    m: /\d{2}/,
+    n: new Map([['a', 1], ['b', 2]]),
+    o: new Set([1, 2, 3]),
+    p: new WeakMap(),
+    q: new WeakSet(),
+    r: function () {
+        return 'Hello'
+    },
+    s: Promise.resolve("Hello")
+}
+originalObj.self = originalObj;
+
+const copyObj = deepCopy(originalObj);
+copyObj.j.a = 2;
+copyObj.k.push(4);
+copyObj.n.set('c', 3);
+copyObj.o.add(4);
+const value = copyObj.r();
+console.log(value); // Hello
+```
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_9fd48582-11f2-4a10-b187-61a840be0445.png)
+
+## 参考
+
+- [Window: structuredClone() method](https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone)
+
+- [The structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)
+
+- [JS 从零手写一个深拷贝（进阶篇）](https://www.cnblogs.com/echolun/p/16157161.html)

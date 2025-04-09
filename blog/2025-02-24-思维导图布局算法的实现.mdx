@@ -1,0 +1,118 @@
+---
+slug: mindmap-layout
+tags:
+  - JavaScript
+  - 思维导图
+authors: xiongtao
+---
+
+思维导图布局实现，如下
+
+![](http://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_53be9308-8054-404b-aec5-e998ed49d14a.png)
+
+简单考虑，只考虑向右展开的布局。
+
+已经条件，知道根节点的位置 $(\text{rootX}, \text{rootY})$，以及所有节点的大小（宽高），求其他节点的位置 $(x, y)$。
+
+首先看子节点的 $x$ 和父节点 $\text{parentX}$ 的关系，非常简单，子节点在父节点右侧的 $\text{marginX}$ 处，即
+
+$$
+\text{childX} = \text{parentX} + \text{parentWidth} + \text{marginX}
+$$
+
+对于子节点的 $y$ 的计算就比较复杂了，考虑下图
+
+![](http://blog-hostimaging.oss-cn-beijing.aliyuncs.com/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE_7e5d1ca0-d7fa-4440-8f59-632e6de9f689.png)
+
+在知道父元素的位置和宽高的情况下以及所有子节点总体高度的情况下，计算所有子节点整体的 $y$，在 $y$ 方向上要满足一个关系，就是**父节点和子节点整体是居中对齐的**，即满足
+
+$$
+\text{parentY} + \dfrac{\text{parentHeight}}{2} = \text{childrenY} + \frac{\text{childrenHeight}}{2}
+$$
+
+可以得到
+
+$$
+\text{childrenY} = \text{parentY} + \dfrac{\text{parentHeight}}{2} - \frac{\text{childrenHeight}}{2}
+$$
+
+在知道总体的一个位置之后，计算单个子节点的位置就很简单了，比如对于第 $i$ 个子节点，它离顶部的距离就是之前所有节点的实际高度加上所有间距
+
+$$
+\text{child[i].childrenTop} = \sum_{\text{index} = 0}^{i - 1}\text{child[index].actualHeight} + (i - 1) \times \text{marginY} 
+$$
+
+但是这里还需要做一个调整，这里计算的是这个节点占据区域的整体位置，有可能这个节点的高度小于占据的高度，我们还需要将这个节点居中
+
+$$
+\text{child.top = child.childrenTop} + \frac{\text{child.actualHeight - child.height}}{2}
+$$
+
+上面我们假设 $\text{childrenHeight}$ 是已知的，但实际上是需要计算的，当然很好算，就是所有子节点的占据的高度之和加上所有的间距，注意，这里占据的高度和节点的 $\text{height}$ 值并不相等，一个节点占据的高度($\text{actualHeight}$)的计算方法是
+
+$$
+\text{node.actualHeight} = \max(\text{node.height}, \text{node.childrenHeight}))
+$$
+
+所有 $\text{childrenHeight}$ 的计算为
+
+$$
+\text{node.childrenHeight} = \sum_{i}^{n}\text{children[i].actualHeight} + (n - 1) \times \text{marginY}
+$$
+
+需要两次遍历，第一次遍历计算 $x$、$\text{childrenHeight}$ 和 $\text{actualHeight}$，第二次遍历计算 $y$，可以参考以下代码
+
+```ts
+const MARGIN_X = 36;
+const MARGIN_Y = 16;
+
+const dfs = (node: MindNodeElement, {
+  before,
+  after,
+}, parent: MindNodeElement | null = null, index = 0) => {
+  before?.(node, parent, index);
+  node.children.forEach((child, index) => {
+    this.dfs(child, {
+      before,
+      after,
+    }, node, index);
+  });
+  after?.(node, parent, index);
+}
+
+const layout = (node: MindNodeElement): MindNodeElement => {
+  this.dfs(draft, {
+    before: (node, parent) => {
+      if (parent) {
+        node.x = parent.x + parent.width + MARGIN_X;
+      }
+    },
+    after: (node) => {
+      if (node.children.length > 0) {
+        node.childrenHeight = node.children.reduce((pre, cur) => {
+          return pre + cur.actualHeight;
+        }, 0) + (node.children.length - 1) * MARGIN_Y;
+        node.actualHeight = Math.max(node.childrenHeight, node.height);
+      } else {
+        node.actualHeight = node.height;
+        node.childrenHeight = 0;
+      }
+    }
+  })
+
+  this.dfs(draft, {
+    before: (node, parent, index) => {
+      if (!parent) return;
+
+      const baseY = parent.y + parent.height / 2 - parent.childrenHeight / 2;
+      const beforeSiblings = index > 0 ? parent.children.slice(0, index) : [];
+      const siblingsHeight = beforeSiblings.reduce((pre, cur) => {
+        return pre + cur.actualHeight;
+      }, 0) + beforeSiblings.length * MARGIN_Y;
+
+      const childrenTop = baseY + siblingsHeight;
+      node.y = childrenTop + (node.actualHeight - node.height) / 2;
+    }
+  })
+}
+```

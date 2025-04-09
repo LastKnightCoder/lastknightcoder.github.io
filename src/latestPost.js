@@ -1,49 +1,42 @@
 module.exports = [
   {
-    title: '移动端文字垂直居中',
-    description: '有过移动端开发经验的人，想必都对文字垂直居中头痛不已，\
-因为使用常规手段实现文字垂直居中在部分 Android 手机上会出现文字偏上的情况，\
-往往需要配合 `line-height` 或者 `padding` 进行微调，苦不堪言。',
-    author: '熊滔',
-    time: '2022-10-17',
-    link: '/blog/mobile-text-middle',
-    image: '/img/latest_posts/pikaqiu.jpg'
+    "title": "思维导图布局算法的实现",
+    "description": "思维导图布局实现，如下\n\n![](http://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_53be9308-8054-404b-aec5",
+    "author": "熊滔",
+    "time": "2025-02-24",
+    "link": "/blog/mindmap-layout",
+    "image": "/img/latest_posts/1.jpg"
   },
   {
-    title: 'MutationObserver',
-    description: '在复杂的网页应用中，DOM 结构会频繁的发生变化，有的时候我们需要根据变化来进行相应的操作，\
-以往通过 Mutation Events 来监听 DOM 的变化，目前它已经废弃了，被 MutationObserver 所取代。\
-MutationObserver 的兼容性很好，可以放心大胆的使用。',
-    auhor: '熊滔',
-    time: '2022-10-11',
-    link: '/blog/MutationObserver',
-    image: '/img/latest_posts/mutation-observer.jpg'
+    "title": "深拷贝的实现",
+    "description": "什么是拷贝？对一个变量进行拷贝是指将其表示的数据复制到另一个变量中，大部分情况下的目的是为了避免直接修改原始数据，以便后续进行多种不同的处理或对比。\n\n最简单的拷贝行为，直接将一个变量赋值给另一个",
+    "author": "熊滔",
+    "time": "2024-12-13",
+    "link": "/blog/deep-copy",
+    "image": "/img/latest_posts/2.jpg"
   },
   {
-    title: 'IntersectionObserver',
-    description: '如果我们需要监听某个元素是否出现在视口中，一般做法是监听 scroll 事件，\
-然后查询元素离视口顶部的距离，但是监听 scroll 事件存在性能问题。\
-浏览器原生提供了 IntersectionObserver 监听器，可以监听某个元素是否出现在视口中。',
-    auhor: '熊滔',
-    time: '2022-09-28',
-    link: '/blog/IntersectionObserver',
-    image: '/img/latest_posts/intersection-observer.jpg'
+    "title": "HTTP 缓存",
+    "description": "缓存是一种用来提高访问数据速度的技术，通过保存曾经访问过的数据或者预先加载可能用到数据，以便下次访问数据时能更快的提供，不仅可以提高数据的访问速度，还可以减少请求次数，进一步减少数据源的压力。",
+    "author": "熊滔",
+    "time": "2024-12-07",
+    "link": "/blog/http-cache",
+    "image": "/img/latest_posts/3.jpg"
   },
   {
-    title: 'Selection与Range',
-    description: 'Selection 对象表示用户选择的文本范围或插入符号的当前位置。它代表页面中的文本选区，可能横跨多个元素。通常由用户拖拽鼠标经过文字而产生。\
-Range对象表示包含节点和部分文本节点的文档片段。通过 selection 对象获得的 range 对象才是我们操作光标的重点。',
-    author: '熊滔',
-    time: '2022-09-23',
-    link: '/blog/selection-and-range',
-    image: 'https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/wallhaven-8opwwy.3cbn7rc981c0.webp'
+    "title": "H5 唤端实践",
+    "description": "端外引流是一个提升 DAU 非常重要的手段，常见的端外引流方式有：\n\n- 广告投放\n- 分享裂变\n- 算法推荐\n\n这些手段的形式大多都是准备一个 H5 页面，这个 H5 是在别的 APP 打开的",
+    "author": "熊滔",
+    "time": "2024-12-06",
+    "link": "/blog/h5-call-app",
+    "image": "/img/latest_posts/4.jpg"
   },
   {
-    title: 'CSS动画取代定时器',
-    description: '神来之笔，使用 CSS 动画事件取代定时器',
-    author: '熊滔',
-    time: '2022-09-15',
-    link: '/blog/css-animation-timer',
-    image: '/img/latest_posts/css-animation-timer.jpg'
+    "title": "如何分隔列表项",
+    "description": "在项目开发，一定少不了显示列表，对于列表项我们往往需要一定的间隔分开，下面就要探讨实现这一效果的方式。\n\n## margin\n\n通常情况下我们只需要给每一个元素设置一个 `margin-botto",
+    "author": "熊滔",
+    "time": "2024-12-04",
+    "link": "/blog/split-list",
+    "image": "/img/latest_posts/5.webp"
   }
 ]

@@ -1,0 +1,201 @@
+---
+slug: ts-type-guard
+tags:
+  - TypeScript
+authors: xiongtao
+---
+
+一个值可能同时具有多种可能的类型，在断言为具体的类型之前只能使用公共的属性和方法
+
+```ts
+const strOrNum: string | number = "a";
+// ❎
+strOrNum.toLowerCase();
+// ✅
+(strOrNum as string).toLowerCase();
+```
+
+通过 `as` 断言为主动断言，还可以通过一些方法判断类型，ts 可以帮助将类型进行收缩
+
+```ts
+const strOrNum: string | number = "a";
+if (typeof strOrNum === 'string') {
+  // 经过 typeof 判断后，类型收缩到 string 类型
+  // 不用手动断言即可直接使用 string 下的方法
+  strOrNum.toLowerCase();
+} else {
+  // 此处会将 string 这种可能性去掉，因此只能是 number
+  // 可以使用 number 独有的方法
+  strOrNum.toFixed(2);
+}
+```
+
+根据分支的判断条件，ts 会尝试推导类型，将值可能的类型进行尽可能的收窄，这种类型推断的行为称之为**类型守卫**。`typeof` 是一种常见的类型守卫，除此之外，还有其它的类型守卫，如：
+
+- `===`
+
+- `in`
+
+- `instanceof`
+
+- 类型守卫函数
+
+- 断言函数
+
+
+
+`===` 或 `!==` 一般用于字面量类型的判断
+
+```ts
+const oneOr1: "one" | 1 = 1;
+
+if (oneOr1 === 1) {
+  // 是数字 1
+} else {
+  // 是英文 one
+}
+```
+
+也可用于对象属性的字面量判断，从而区分类型
+
+```ts
+enum EType {
+	DOG = 1,
+  CAT = 2
+}
+
+interface Dog {
+  type: EType.DOG;
+  name: string;
+}
+
+interface Cat {
+  type: EType.CAT;
+  name: string;
+}
+
+const dogOrCat = {
+  type: EType.DOG,
+  name: '旺财'
+}
+
+if (dogOrCat.type === EType.DOG) {
+  // 是 Dog 类型
+} else {
+  // 是 Cat 类型
+}
+```
+
+:::note
+使用 `===` 判断对象的属性来收缩对象类型时，要确保该属性是==**字面量类型**==，比如我将 `Dog` 和 `Cat` 的类型都声明为 `EType` 就无法进行类型推断
+
+```ts
+interface Dog {
+  type: EType;
+  name: string;
+}
+
+interface Cat {
+  type: EType;
+  name: string;
+}
+```
+
+这种情况下可以使用**自定义类型守卫**，见下。
+:::
+
+`in` 操作符可以判断某个属性是否存在于对象中，如果某个对象具有独一无二的属性，通过此判断可以将类型收缩到此对象类型
+
+```ts
+interface Foo {
+  fooOnly: boolean;
+  shared: number;
+}
+
+interface Bar {
+  barOnly: boolean;
+  shared: number;
+}
+
+declare const i: Foo | Bar;
+if ('barOnly' in i) {
+  // 收缩为 Bar 类型
+} else {
+  // 收缩为 Foo 类型
+}
+```
+
+`instanceof` 是用来判断值是否是某个类的示例
+
+```ts
+class Foo {
+	foo();
+}
+
+class Bar {
+	bar();
+}
+
+declare const input: Foo | Bar;
+
+if (input instanceof Foo) {
+  // 收缩为 Foo 的实例，可以调用 foo 方法
+  input.foo();
+} else {
+  // 收缩为 Bar 的实例
+  input.bar();
+}
+```
+
+考虑如下两个类型
+
+```ts
+interface Foo {
+  type: string;
+}
+
+interface Bar {
+  type: number;
+}
+```
+
+`Foo` 和 `Bar` 都包含有 `type` 类型，并且是不同的类型，但是我们却不能通过判断 `type` 的类型使得类型进行收缩
+
+```ts
+declare const a: Foo | Bar;
+if (typeof a.type === 'string') {
+  // 不能将 a 收缩到 Foo 类型
+}
+```
+
+这个时候可以使用自定义的类型守卫
+
+```ts
+function isFoo(val: Foo | Bar) val is Foo  {
+  return typeof val.type === 'string';
+}
+
+if (isFoo(a)) {
+  // 可以收缩到 Foo 类型
+}
+```
+
+标准库的 `Array.isArray` 方法就是通过这种方式将类型收缩到数组的：
+
+![](https://github.com/LastKnightCoder/image-for-2022/raw/master/image.73el2m1zoh40.png)
+
+还有一种方法可以收缩类型，那就是断言，断言一般常见于测试中，一旦断言失败，就表示未达到预期，抛出异常，退出程序。因此能运行到断言后面的代码，就表示断言通过了，可以通过这一特性来收缩类型
+
+```ts
+function assertIsNumber(val: any): assert val is number {
+  if (!typeof val !== 'number') {
+    throw new Error();
+  }
+}
+
+const val: number | string = 12;
+assertIsNumber(val);
+
+// 运行到这里，说明上面的断言通过了，此时 val 的类型一定是 number
+val * 100;
+```

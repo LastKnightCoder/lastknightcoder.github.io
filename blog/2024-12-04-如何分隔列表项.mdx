@@ -1,0 +1,92 @@
+---
+slug: split-list
+tags:
+  - CSS
+  - 技巧
+authors: xiongtao
+---
+
+在项目开发，一定少不了显示列表，对于列表项我们往往需要一定的间隔分开，下面就要探讨实现这一效果的方式。
+
+## margin
+
+通常情况下我们只需要给每一个元素设置一个 `margin-bottom` 即可
+
+```css
+.item {
+  margin-bottom: 12px;
+}
+```
+
+但是这样会带来最后一个元素也会有 `margin-bottom`，这是我们不希望的，这个时候需要对最后一个元素进行处理
+
+```css
+.item {
+  margin-bottom: 12px;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
+```
+
+或者使用“猫头鹰”表达式
+
+```css
+.item + .item {
+  margin-top: 20px;
+}
+```
+
+## margin-trim
+
+CSS 属性 `margin-trim` 可以实现上述效果而不用这么麻烦，它的取值语法如下：
+
+```css
+margin-trim = 
+  none                                                |
+  block                                               |
+  inline                                              |
+  [ block-start || inline-start || block-end || inline-end ]
+```
+
+- `block`：块级子元素与容器的外边距会被裁剪为 0
+
+- `inline`：内联子元素与容器的外边距会被裁剪为 0
+
+
+
+默认值为 `none`。
+
+所以为了实现效果，可采用如下写法：
+
+```css
+.list {
+  /* 块级子元素与父容器的外边距裁剪为 0 */
+  margin-trim: block;
+}
+
+.item {
+  margin: 12px 0;
+}
+```
+
+坏消息是只有 Safari 支持
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_45d99fbf-93c2-439b-9421-ae8dd012d0cb.png)
+
+## flex + gap
+
+更加简单的方式是使用 Flex 布局，然后通过 `gap` 属性指定子项之间的间距
+
+```css
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+```
+
+大部分浏览器都支持 Flex 布局的 `gap` 属性
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_3085e08d-3365-4da8-9f6e-52f411794185.png)

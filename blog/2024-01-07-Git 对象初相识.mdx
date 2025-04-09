@@ -1,0 +1,255 @@
+---
+slug: git-objects
+tags:
+  - Git
+authors: xiongtao
+---
+
+Git 对象，四种类型的对象：
+
+- `blob` 对象
+- `tree` 对象
+- `commit` 对象
+- `tag` 对象
+
+## blob 对象
+
+所有的文件都会被存储为一个 `blob` 对象，需要注意的是，`blob` 对象只存储文件的内容，对于文件的其它信息，例如文件名，修改时间，权限等等信息均不存储（会被存储到 `tree` 对象中），因此，如果两个文件拥有相同的内容，那么只会有一个 `blob` 文件。
+
+新建一个仓库，然后添加两个文件，拥有相同的内容：
+
+```bash
+# 创建目录，并初始化
+xt in ~ λ mkdir git-demo
+xt in ~ λ cd git-demo
+xt in ~/git-demo λ git init
+Initialized empty Git repository in /home/xt/git-demo/.git/
+
+# 创建两个文件 a.txt b.txt 含有相同的内容
+xt in ~/git-demo on master λ echo "Hello World" > a.txt
+xt in ~/git-demo on master λ echo "Hello World" > b.txt
+# 查看 Git 对象，此时没有 Git 对象
+xt in ~/git-demo on master λ tree -a .git/objects
+.git/objects
+├── info
+└── pack
+```
+
+将两个文件添加到暂存区，然后查看 Git 对象的数量
+
+```bash
+xt in ~/git-demo on master λ git add .
+xt in ~/git-demo on master λ tree -a .git/objects
+.git/objects
+├── 55
+│&nbsp;&nbsp; └── 7db03de997c86a4a028e1ebd3a1ceb225be238
+├── info
+└── pack
+
+3 directories, 1 file
+```
+
+此时会发现产生了一个 `55` 的文件夹，包含一个 `7db03de997c86a4a028e1ebd3a1ceb225be238` 的文件，其实二者应该合为一体看 `557db03de997c86a4a028e1ebd3a1ceb225be238`，这串字符串就是这个 `blob` 对象的 `id`，我们统称为 `oid(Object ID)`。这个 `oid` 是使用算法生成的，它可以保证不同的内容有不同的 `oid`，相同的内容有着相同的 `oid`。
+
+可以通过 `git hash-object` 命令查看内容相对应的 `oid`
+
+```bash
+xt in ~/git-demo on master λ echo "Hello World" | git hash-object --stdin
+557db03de997c86a4a028e1ebd3a1ceb225be238
+```
+
+为了防止一个文件夹下的文件更多，以 oid 的前两位划分文件夹，将对象划分到 `00-ff` 共 256 个文件夹中。
+
+如果直接查看 `blob` 对象的内容，会发现不是以文本形式存储的
+
+```bash
+xt in ~/git-demo on master λ cat .git/objects/55/7db03de997c86a4a028e1ebd3a1ceb225be238
+xK��OR04b�H����/�I�A�I%
+```
+
+这是因为 Git 使用了 `zlib` 对文本内容和对象的头信息(header) 进行了压缩, 为了真实还原我们存储的文本内容, 我们可以使用 `git cat-file` 子命令来查看
+
+```bash
+# -p 查看文件内容，并以美观的方式对文件内容进行输出
+xt in ~/git-demo on master λ git cat-file -p 557db03de997c86a4a028e1ebd3a1ceb225be238
+Hello World
+# -t 查看文件类型
+xt in ~/git-demo on master λ git cat-file -t 557db03de997c86a4a028e1ebd3a1ceb225be238
+blob
+```
+
+## tree 对象
+
+如果文件对应到 `blob` 对象，那么文件夹对应到的就是 `tree `对象，文件夹中包含的文件信息（文件名、修改时间等）均存储在 `tree `对象中。而我们的工作区就是一个 tree 对象，我们称为 `root-tree`。`tree` 对象中可以包含 `tree` 对象和 `blob` 对象。
+
+当我们执行 `git commit` 的时候，Git 会生成一个 `tree` 对象来存储当前工作区的快照，这个 `tree` 对象就是 `root-tree`，可以根据 `root-tree` 推演出该仓库的所有内容
+
+```bash
+# 创建一个文件夹 src，并新增一个文件 hello.txt
+xt in ~/git-demo on master λ mkdir src
+xt in ~/git-demo on master λ echo "Hello" > src/hello.txt
+xt in ~/git-demo on master λ tree
+.
+├── a.txt
+├── b.txt
+└── src
+    └── hello.txt
+
+1 directory, 3 files
+
+# 添加到仓库中
+xt in ~/git-demo on master λ git add .
+# 出现了一个新的 blob 对象，对应 hello.txt 的内容
+xt in ~/git-demo on master λ tree -a .git/objects
+.git/objects
+├── 55
+│&nbsp;&nbsp; └── 7db03de997c86a4a028e1ebd3a1ceb225be238
+├── e9
+│&nbsp;&nbsp; └── 65047ad7c57865823c7d992b1d046ea66edf78
+├── info
+└── pack
+
+4 directories, 2 files
+```
+
+进行一次提交
+
+```bash
+# 进行一次提交
+xt in ~/git-demo on master λ git commit -am "first commit"
+[master (root-commit) 94f8403] first commit
+ 3 files changed, 3 insertions(+)
+ create mode 100644 a.txt
+ create mode 100644 b.txt
+ create mode 100644 src/hello.txt
+# 查看对象
+xt in ~/git-demo on master λ tree -a .git/objects
+.git/objects
+├── 1f
+│&nbsp;&nbsp; └── 8946efd983ef493e28de287f5af69f862a6728
+├── 55
+│&nbsp;&nbsp; └── 7db03de997c86a4a028e1ebd3a1ceb225be238
+├── 8c
+│&nbsp;&nbsp; └── 3c7fbcd903744b20fd7567a1fcefa99133b5bc
+├── 94
+│&nbsp;&nbsp; └── f840300469b623c45d1c92ae1edbc2c39c466d
+├── e9
+│&nbsp;&nbsp; └── 65047ad7c57865823c7d992b1d046ea66edf78
+├── info
+└── pack
+
+7 directories, 5 files
+```
+
+可以看到新增了三个对象，分别是一个 `commit` 对象和两个 `tree` 对象
+
+```bash
+# 查看 commit 对象信息，包含 root-tree 对象的 oid
+xt in ~/git-demo on master λ git cat-file -p master
+tree 1f8946efd983ef493e28de287f5af69f862a6728
+author LastKnightCoder <lastknightcoder@gmail.com> 1677897217 +0800
+committer LastKnightCoder <lastknightcoder@gmail.com> 1677897217 +0800
+
+first commit
+
+# 查看 root-tree 对象的内容
+xt in ~/git-demo on master λ git cat-file -p 1f8946efd983ef493e28de287f5af69f862a6728
+100644 blob 557db03de997c86a4a028e1ebd3a1ceb225be238    a.txt
+100644 blob 557db03de997c86a4a028e1ebd3a1ceb225be238    b.txt
+040000 tree 8c3c7fbcd903744b20fd7567a1fcefa99133b5bc    src
+# 查看 src 对应 tree 对象的内容
+xt in ~/git-demo on master λ git cat-file -p 8c3c7fbcd903744b20fd7567a1fcefa99133b5bc
+100644 blob e965047ad7c57865823c7d992b1d046ea66edf78    hello.txt
+```
+
+## commit 对象
+
+`tree` 记录了仓库的内容快照，但是还缺少一些信息，比如提交者，提交信息，提交时间，关联快照。这就需要 `commit` 对象
+
+```bash
+xt in ~/git-demo on master λ git cat-file -p master
+tree 1f8946efd983ef493e28de287f5af69f862a6728
+author LastKnightCoder <lastknightcoder@gmail.com> 1677897217 +0800
+committer LastKnightCoder <lastknightcoder@gmail.com> 1677897217 +0800
+
+first commit
+```
+
+```bash
+xt in ~/git-demo on master λ echo "# Readme" > README.md
+xt in ~/git-demo on master λ git add .
+xt in ~/git-demo on master λ git commit -am "second commit"
+[master 90643a9] second commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+xt in ~/git-demo on master λ tree -a .git/objects
+.git/objects
+├── 1f
+│&nbsp;&nbsp; └── 8946efd983ef493e28de287f5af69f862a6728
+├── 55
+│&nbsp;&nbsp; └── 7db03de997c86a4a028e1ebd3a1ceb225be238
+├── 68
+│&nbsp;&nbsp; └── 181b61e87b8766a6be442bf8ea52629308cbbf
+├── 8c
+│&nbsp;&nbsp; └── 3c7fbcd903744b20fd7567a1fcefa99133b5bc
+├── 90
+│&nbsp;&nbsp; └── 643a9ce0571aa37d5603cf861ae223796b84c8
+├── 94
+│&nbsp;&nbsp; └── f840300469b623c45d1c92ae1edbc2c39c466d
+├── e9
+│&nbsp;&nbsp; └── 65047ad7c57865823c7d992b1d046ea66edf78
+├── f3
+│&nbsp;&nbsp; └── 954314c1026028e77ea3a765aadefa67b45195
+├── info
+└── pack
+
+10 directories, 8 files
+xt in ~/git-demo on master λ git cat-file -p master
+tree 68181b61e87b8766a6be442bf8ea52629308cbbf
+parent 94f840300469b623c45d1c92ae1edbc2c39c466d
+author LastKnightCoder <lastknightcoder@gmail.com> 1677902228 +0800
+committer LastKnightCoder <lastknightcoder@gmail.com> 1677902228 +0800
+
+second commit
+```
+
+第二次提交发现新增了三个 Git 对象，分别是一个 `commit` 对象，一个 `root-tree` 对象，还有一个 `blob` 对象对应新建的 README.md 文件。从第二个 `commit` 对象中，我们可以看到提交的信息，包括作者，提交者，提交时间和提交信息，还能看到关联的提交 parent，指向了前一个 `commit` 对象。
+
+如果用一张图解释当前的 Git 对象的关系，应当如下所示
+
+![](https://github.com/LastKnightCoder/image-for-2022/raw/master/Git%E5%AF%B9%E8%B1%A1.69r1dw9bjcc0.png)
+
+Git 是基于快照的版本管理，而不是基于增量，这就意味着如果你修改了文件，然后进行了提交，那么会生成一个新的 `blob` 对象，相应的，包含该修改文件的文件夹对应的 `tree` 对象也会重新生成。这就会带来一个问题，如果频繁的进行 `commit` 的话，就会导致 `blob` 对象的数目急剧增大，虽然频繁 `commit` 是个好习惯，但是希望在进行 `push` 或合并之前，合并一下多个 `commit`，减少 `commit` 个数。
+
+## tag
+
+`tag` 通常用来记录被认为很重要的提交, 例如软件的发行版本。我们可以创建一个不带有任何额外信息的` tag`，Git 称这种类型的标签为轻量级 `tag`
+
+```bash
+xt in ~/git-demo on master λ git tag v1.0
+xt in ~/git-demo on master λ git cat-file -t v1.0
+commit
+```
+
+轻量级 `tag` 与 `commit` 对象无异，它不会保存额外的信息，就是一个 `commit` 对象。
+
+另一种标签称为附注标签，可以添加额外的信息，比如标签作者，邮箱等等，它是一个 `tag` 对象
+
+```bash
+xt in ~/git-demo on master λ git tag -a v2.0 -m "v2.0"
+xt in ~/git-demo on master λ git cat-file -t v2.0
+tag
+xt in ~/git-demo on master λ git cat-file -p v2.0
+object b9e8d5d9952aea0baac5c19f4ebad48ba623b5f4
+type commit
+tag v2.0
+tagger LastKnightCoder <lastknightcoder@gmail.com> 1677910987 +0800
+
+v2.0
+```
+
+`tag` 对象中除了保存了指向的 `commit` 对象的 `oid`，还保存了标签的一些信息。
+
+## 参考
+
+- [15分钟学会如何找到对象！阿里云程序员详解Git对象和引用原理](https://mp.weixin.qq.com/s/UTETcreecYfotJzlR1fAkw)

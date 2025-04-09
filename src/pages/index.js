@@ -15,7 +15,7 @@ const HomeHeader = () => {
         <div className={styles.title}>{siteConfig.title}</div>
       </div>
       <div className={styles['right-image']}>
-        <img src="https://cdn.staticaly.com/gh/LastKnightCoder/ImgHosting3@master/15433.3jsxzbw2fii0.webp" />
+        <img src="https://cdn.statically.io/gh/LastKnightCoder/ImgHosting3@master/15433.3jsxzbw2fii0.webp" />
       </div>
     </div>
   )

@@ -1,0 +1,413 @@
+---
+slug: h5-call-app
+tags:
+  - H5
+  - 唤端
+authors: xiongtao
+---
+
+
+端外引流是一个提升 DAU 非常重要的手段，常见的端外引流方式有：
+
+- 广告投放
+- 分享裂变
+- 算法推荐
+
+这些手段的形式大多都是准备一个 H5 页面，这个 H5 是在别的 APP 打开的，当用户打开这个页面的时候，能通过某种手段打开自己的 APP 或者引导未下载 APP 的用户下载 APP，这个打开自己 APP 的过程就叫做唤端。
+
+![](https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/%E5%94%A4%E7%AB%AF.drawio_353b7009-15dc-4b49-9923-837fa2c62ac9.png)
+
+## 唤端方式
+
+### URL Schema
+
+URL 是标识和访问资源的方式，比如我们访问网络资源就需要通过 HTTP/HTTPS URL，URL 由如下部分组成：
+
+```
+schema://host[:port]/path[?query][#fragment]
+```
+
+其中 Schema 指的是 URL 中的协议部分，Schema 可以分为两类：
+
+- 系统默认
+  
+  - http/https
+  
+  - ftp
+  
+  - mailto
+  
+  - tel
+  
+  - sms
+
+- 应用注册
+  
+  - wechat
+  
+  - alipay
+  
+  - taobao
+  
+  - amapuri
+
+在应用首次安装或运行的时候，应用会在操作系统中进行登记，登记成功后当用户访问指定的 URL Schema 时，操作系统就会打开相应的应用程序。
+
+常见 APP 的 URL Schema：
+
+|  APP         |  微信         |  支付宝        |  淘宝         |  知乎        |  高德          |
+| ------------ | ----------- | ----------- | ----------- | ---------- | ------------ |
+|  URL Schema  |  weixin://  |  alipay://  |  taobao://  |  zhihu://  |  amapuri://  |
+
+在 H5 中一般有两种方法通过 URL Schema 打开 APP
+
+1. 通过 `iframe` 来访问 URL Schema
+  
+  ```js
+  const CALL_APP_IFRAME_ID = 'call-app-iframe';
+  let callAppIframe = document.getElementById(CALL_APP_IFRAME_ID);
+  if (!callAppIframe) {
+    callAppIframe = document.createElement('iframe');
+    callAppIframe.display = 'none';
+    callAppIframe.id = CALL_APP_IFRAME_ID;
+    document.body.append(callAppIframe);
+  }
+  
+  callAppIframe.src = schema;
+  ```
+  
+  `iframe` 是使用最多的了，因为在未安装 APP 的情况下，不会去跳转错误页面。但是在 iOS 9+ 的 Safari、QQ、UC 等浏览器中，均无法通过此种方式唤端，因此该种方式常用于在 Android 中唤端。
+
+2. 通过 `location.href `直接访问 URL Schema，常见于 iOS
+  
+  ```js
+  const schema = 'amapuri://root';
+  location.href = schema;
+  ```
+  
+  :::info
+  在 QQ 中需要通过 `top.location.href` 进行唤端。
+  :::
+
+
+
+### Universal Link
+
+Universal Link 是在 WWDC 2015 上为 iOS9 引入的新功能，通过传统的 HTTP 链接即可打开 APP。如果用户未安装 APP，则会跳转到该链接所对应的页面。
+
+首先在构建应用程序时需要在 XCode 中指定支持哪些域名，接着需要在所有的域名服务器上准备一个名为 apple-app-site-association(AASA) 的 JSON 文件，这个文件放在服务器的根目录或者 .well-known 目录下，这个文件定义了当访问哪些路径时打开 APP，一个示例如下，各字段含义可参考[文档](https://developer.apple.com/documentation/xcode/supporting-associated-domains)。
+
+```json
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "ABCDE12345.com.example.app", "ABCDE12345.com.example.app2" ],
+             "components": [
+               {
+                  "#": "no_universal_links",
+                  "exclude": true,
+                  "comment": "Matches any URL with a fragment that equals no_universal_links and instructs the system not to open it as a universal link."
+               },
+               {
+                  "/": "/buy/*",
+                  "comment": "Matches any URL with a path that starts with /buy/."
+               },
+               {
+                  "/": "/help/website/*",
+                  "exclude": true,
+                  "comment": "Matches any URL with a path that starts with /help/website/ and instructs the system not to open it as a universal link."
+               },
+               {
+                  "/": "/help/*",
+                  "?": { "articleNumber": "????" },
+                  "comment": "Matches any URL with a path that starts with /help/ and that has a query item with name 'articleNumber' and a value of exactly four characters."
+               }
+             ]
+           }
+       ]
+   },
+   "webcredentials": {
+      "apps": [ "ABCDE12345.com.example.app" ]
+   },
+
+
+    "appclips": {
+        "apps": ["ABCDE12345.com.example.MyApp.Clip"]
+    }
+}
+```
+
+当我们安装或更新应用程序时，都会从服务器中拉取此配置文件，并根据文件内容向系统进行注册，当我们访问 H5 链接时，如果命中了 Universal Link，就打开 APP，如果没命中则直接跳转 H5 页面。
+
+:::note
+从 macOS 11 和 iOS 14 开始，应用程序不再将 AASA 文件请求直接发送到 Web 服务器，而是将这些请求发送到专用于关联域的 Apple CDN，Apple CDN 会定时从我们的服务器拉取文件
+:::
+
+:::info
+即使页面打开是 404，只要网址格式符合规则，都可以命中并成功唤起，但是一般我们会准备一个 H5 页面，未命中跳转到这个页面时可以跳转到 App Store 引导用户下载 APP。
+:::
+
+注意：
+
+1. 同域名无法唤端
+
+2. 必须使用有效证书的 `https://` 托管 AASA 文件，且不得重定向
+
+3. 安装了软件但是无法通过 Universal Link 唤端，可能原因是软件安装时无法获取到 AASA 文件，当程序安装后大约每隔一周才会从 CND 重新校验 AASA 文件，此时需要重新安装或更新 APP 以重新拉取此文件，大部分情况下可以唤端成功
+
+### 微信开放标签
+
+由于微信对 URL Schema 这种唤端方式进行了拦截，在微信中无法直接通过 URL Schema 进行唤端，iOS 虽然可以通过 Universal Link 唤端，但是 Android 只能引导用户到浏览器打开唤端，或者使用应用宝唤端（但这种方式需要用户下载应用宝），这无疑会影响回流量。
+
+在这种情况下需要借助微信提供的[开放标签](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_Open_Tag.html)进行唤端，此功能仅开放给已认证的服务号，服务号绑定JS 接口安全域名下的网页可使用此标签跳转 App，关于安全域名设置操作可参考此[文档](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/WeChat_H5_Launch_APP.html)，除此之外，在 APP 中还需要接入微信提供的 SDK，接入可参考此[文档](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/Android.html)。
+
+当这些前置工作准备就绪后，下面介绍在 H5 页面使用微信的 SDK 进行唤端：
+
+1. 在项目中引入微信 JS SDK：https://res.wx.qq.com/open/js/jweixin-1.6.0.js，可以通过 `script` 直接引入，当然可以判断当前浏览器环境，当仅在微信环境下才引入此脚本，当脚本加载成功后在 `window` 下会有一个 `wx` 对象，可以通过判断该对象是否存在来知道脚本是否加载成功
+  
+  ```js
+  const loadScript = async (url) => {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      
+      
+      script.addEventListener('load', () => {
+        resolve();
+      });
+      script.addEventListener('error', () => {
+        reject();
+      });
+      
+      script.setAttribute('type', 'text/javascript');
+      script.setAttribute('src', url);
+      document.head.appendChild(script);
+    })
+  }
+  const loadWechatSDK = async () => {
+    if (window.wx) {
+      return window.wx;
+    }
+    const wxJsSDK = "https://res.wx.qq.com/open/js/jweixin-1.6.0.js";
+    try {
+      await loadScript(wxJsSDK);
+    } finally {
+      return window.wx;
+    }
+  }
+  ```
+
+2. 签名，签名算法可以参考此[文档](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#62)，由于牵涉到一些密钥，签名操作一般放在服务端，因此需要服务提供一个接口获取签名信息，获取到签名信息后，调用 wx.config 进行配置
+  
+  ```js
+  const wx = await loadWechatSDK();
+  if (!wx) return;
+  wx.config({
+    appId: '',     // 必填，公众号的唯一标识
+    timestamp: xxx,   // 必填，生成签名的时间戳
+    nonceStr: '',  // 必填，生成签名的随机串
+    signature: '', // 必填，签名
+    jsApiList: [], // 必填，需要用到的 JS API，比如打开相册
+    openTagList: ["wx-open-launch-app"], // 选填，需要用到的开放标签
+  });
+  
+  wx.ready(() => {
+    // config 验证成功
+  });
+  wx.error(() => {
+    // config 验证失败
+  })
+  ```
+
+3. 使用开放标签，因为无法通过 API 的方式唤端，需要用户实际点击才可以唤端，因此我们会将开放标签作为蒙层盖住被点击的对象，这样点击时就可以触发唤端
+  
+  ```html
+  <wx-open-launch-app
+    appid="公众号的唯一标识"
+    extinfo="携带的扩展信息"
+    path="跳转的 schema"
+  >
+    <script type="text/wxtag-template">
+      <style>
+        .wx-btn {
+  				position: "absolute";
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0;
+        }
+      </style>
+    </script>
+    <div class="wx-btn"></div>
+  </wx-open-launch-app>
+  ```
+
+因为必须要用户点击才能唤端，因此就会带来一个缺点，无法自动唤端。
+
+## 唤端成功和失败
+
+对于使用微信开放标签，微信提供了事件可以知道唤端是否失败
+
+```html
+<wx-open-launch-app
+  appid="公众号的唯一标识"
+  extinfo="携带的扩展信息"
+  path="跳转的 schema"
+>
+  <script type="text/wxtag-template">
+    <style>
+      .wx-btn {
+				position: "absolute";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+    </style>
+  </script>
+  <div class="wx-btn"></div>
+</wx-open-launch-app>
+<script>
+  var btn = document.getElementById('launch-btn');
+  btn.addEventListener('launch', function (e) {
+    console.log('success');
+  });
+  btn.addEventListener('error', function (e) {
+    console.log('fail', e.detail);
+  });
+</script>
+```
+
+对于非 SDK 唤端，没有事件透出，只能通过监听当前页面是否隐藏来判断是否唤端，唤端成功后，会打开 APP，当前 H5 页面就会隐藏，如果没有打开 APP，那么就会没有反应，停留在当前页面，通过监听几秒内 `visibilitychange` 事件是否有触发并且状态是否为 `hidden` 来判断是否唤端成功
+
+```js
+const checkCallAppSuccess = (timeout = 3000) => {
+  return new Promise((resolve) => {
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        resolve(true);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+      }
+    }
+    setTimeout(() => {
+      resolve(false);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    }, timeout);
+    
+    document.addEventListener('visibilitychange', onVisibilityChange);
+  });
+}
+```
+
+## 实践
+
+我们的目标是提供一个 `callApp` 的异步方法，接收一个 `schema` 参数，返回之是一个 `Promise`，如果唤端成功，值就是 `true`，否则就是 `false`，该方法不适用于微信开放标签，因为微信开放标签不提供 API 进行唤端。
+
+为了不在代码中充斥着 `if-else`，我们使用一个配置来说明在各个平台和操作系统下的唤端方式：
+
+```js
+const config = {
+  Safari: {
+    // Android 没有 Safari 浏览器
+    Android: {
+      action: '',
+      fallback: ''
+    },
+    iOS: {
+      action: 'ul', // Universal Link 唤端
+      fallback: 'appstore' // 跳转应用商店
+    }
+  },
+  Taobao: {
+    Android: {
+      action: 'schema',
+      fallback: 'offcial', // 跳转官网
+    },
+    iOS: {
+      action: 'schema',
+      fallback: 'appstore',
+    }
+  },
+  // 微信空配置，因为微信开放标签无法通过 API 唤端
+  // 如果没有配置微信开放标签，可以在这里添加配置
+  // 比如 Android 打开应用宝，iOS 使用 Universal Link
+  Wechat: {
+    Android: {
+      action: '',
+      fallback: '',
+    },
+    iOS: {
+      action: '',
+      fallback: '',
+    }
+  },
+  // ...
+}
+```
+
+准备好所有的唤端方式：
+
+```js
+const callBySchema = (schema) => {
+  if (isAndroid) {
+    callByIframe(schema);
+  } else {
+    callByLocation(schema);
+  }
+}
+
+const callbyUniversalLink = (schema) => {
+  location.href = `${universalLink}?schema=${schema}`
+}
+
+// 其他唤端方式，跳转官方，App Store 等
+
+const methodConfig = {
+  'schema': callBySchema,
+  'ul': callByUniversalLink
+}
+const getCallMethod = (method) => {
+  return methodConfig[method];
+}
+
+```
+
+最后提供一个对外的 `callApp `方法：
+
+```js
+const callApp = async (schema) => {
+  // 获取操作系统，是 Android 还是 iOS
+  const system = getSystem();
+  const ruleWithSystem = config[system];
+  const action = ruleWithSystem.action;
+  const fallback = ruleWithSystem.fallback;
+  if (!action) {
+    return false;
+  }
+  const callMethod = getCallMethod(action);
+  callMetod?.(schema);
+  const isSuccess = await checkCallAppSuccess();
+  if (!isSuccess && fallback) {
+    const fallbackCallMethod = getCallMethod(action);
+    fallbackCallMethod?.(schema);
+  }
+  
+  return isSuccess;
+}
+```
+
+## 参考
+
+- [H5 唤起 APP 指南](https://www.zhangxinxu.com/php/myRecommBackup?id=h5-up-app)
+
+- [闲鱼唤端的背后](https://juejin.cn/post/7028409312175194149)
+
+- [唤端技术方案](https://tsejx.github.io/cross-platform-guidebook/hybird/call-app/)
+
+- [Universal Link (通用链接) - 唤起App](https://juejin.cn/post/6970990060577488909)
+
+- [Allowing apps and websites to link to your content](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/)
+
+- [Supporting associated domains](https://developer.apple.com/documentation/xcode/supporting-associated-domains#Add-the-associated-domains-entitlement-to-your-app)
