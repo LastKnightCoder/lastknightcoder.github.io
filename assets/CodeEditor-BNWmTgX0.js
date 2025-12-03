@@ -1,0 +1,1 @@
+import{r as u,j as d}from"./global-DUxnHN2f.js";import{U as i}from"./index-tMyIm5jx.js";const l=u.memo(({value:o,options:r,className:t,onChange:e,onKeyDown:s,editorDidMount:a,editorWillUnmount:m})=>d.jsx(i,{value:o,autoCursor:!0,autoScroll:!0,options:r,className:t,onChange:e,onKeyDown:s,editorDidMount:a,editorWillUnmount:m}));l.displayName="CodeEditor";export{l as default};
