@@ -6,15 +6,1975 @@
     <title>文档</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <script>
-      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"人生天地间，忽如远行客","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"sidebar":[{"title":"SVG","children":[{"title":"基本概念","children":[{"title":"SVG 介绍","href":"/docs/document/9/76.html"},{"title":"视口、viewBox 与 preserveAspectRatio","href":"/docs/document/9/80.html"},{"title":"基本形状","children":[{"title":"线","href":"/docs/document/9/82.html"},{"title":"折线","href":"/docs/document/9/83.html"},{"title":"矩形","href":"/docs/document/9/84.html"},{"title":"圆和椭圆","href":"/docs/document/9/85.html"},{"title":"多边形","href":"/docs/document/9/86.html"},{"title":"路径","href":"/docs/document/9/98.html"}]},{"title":"marker","href":"/docs/document/9/99.html"},{"title":"文档组织","href":"/docs/document/9/87.html"},{"title":"渐变色","href":"/docs/document/9/88.html"},{"title":"图案","href":"/docs/document/9/89.html"},{"title":"文本","href":"/docs/document/9/90.html"},{"title":"变换","href":"/docs/document/9/91.html"},{"title":"裁剪","href":"/docs/document/9/92.html"},{"title":"蒙版","href":"/docs/document/9/93.html"}]},{"title":"动画","children":[{"title":"animate","href":"/docs/document/9/79.html"},{"title":"同步动画","href":"/docs/document/9/94.html"},{"title":"animateTransform","href":"/docs/document/9/95.html"},{"title":"animateMotion","href":"/docs/document/9/96.html"}]}]}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document","active":true}]}],"content":{"id":90,"title":"文本","content":[{"type":"paragraph","children":[{"type":"formatted","text":"如何在 SVG 中绘制文本。"}]},{"type":"header","children":[{"type":"formatted","text":"text"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"通过 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签可以在 SVG 中绘制文字"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"50\" viewBox=\"0 0 150 50\"\u003e\n  \u003ctext x=\"20\" y=\"30\"\u003eYou are a dog.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"9a9c16d1-9139-4a2e-aa81-11c288c0fb10","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"50\" viewBox=\"0 0 150 50\"\u003e\n  \u003ctext x=\"20\" y=\"30\" fill=\"gray\"\u003eYou are a dog.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 需要指定两个属性 "},{"type":"formatted","text":"x, y","code":true},{"type":"formatted","text":"，其中 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 表示文字左侧的坐标， "},{"type":"formatted","text":"y","code":true},{"type":"formatted","text":" 表示文字基线的坐标"}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"200\" viewBox=\"0 0 200 200\"\u003e\n  \u003cpath\n  d=\"M 20 10 L 20 120 M 10 30 L 120 30 M 10 70 L 120 70 M 10 110 L 120 110\"\n  stroke=\"gray\"/\u003e\n  \u003ctext x=\"20\" y=\"30\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"70\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"110\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"7f66aafc-9ab8-420d-a016-8e39d87a62c6","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"140\" viewBox=\"0 0 200 140\"\u003e\n  \u003cpath\n  d=\"M 20 10 L 20 120 M 10 30 L 120 30 M 10 70 L 120 70 M 10 110 L 120 110\"\n  stroke=\"gray\"/\u003e\n  \u003ctext fill=\"gray\" x=\"20\" y=\"30\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"20\" y=\"70\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"20\" y=\"110\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"图像中的竖线是 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 指定的位置，横线是 "},{"type":"formatted","text":"y","code":true},{"type":"formatted","text":" 指定的位置。"}]},{"type":"header","children":[{"type":"formatted","text":"水平对齐"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"可以通过 "},{"type":"formatted","text":"text-anchor","code":true},{"type":"formatted","text":" 来指定文本的水平对齐方式，有三种取值"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"start","code":true},{"type":"formatted","text":"：左侧与 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 属性对齐，默认值"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"middle","code":true},{"type":"formatted","text":"：居中与 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 属性对齐"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"end","code":true},{"type":"formatted","text":"：右侧与 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 属性对齐"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"250\" height=\"200\" viewBox=\"0 0 250 200\"\u003e\n  \u003cpath d=\"M 120 10 L 120 120\" stroke=\"gray\" /\u003e\n  \u003ctext x=\"120\" y=\"30\" text-anchor=\"start\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext x=\"120\" y=\"70\" text-anchor=\"middle\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"120\" y=\"110\" text-anchor=\"end\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"aede9a0d-452f-43e2-8d9c-c983d7880976","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"250\" height=\"140\" viewBox=\"0 0 250 140\"\u003e\n  \u003cpath d=\"M 120 10 L 120 120\" stroke=\"#1a66ff\" /\u003e\n  \u003ctext fill=\"gray\" x=\"120\" y=\"30\" text-anchor=\"start\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"120\" y=\"70\" text-anchor=\"middle\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"120\" y=\"110\" text-anchor=\"end\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"字体修饰"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"我们可以通过字体属性修改文字，包括"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"font-family","code":true},{"type":"formatted","text":"：修改字体族"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"font-size","code":true},{"type":"formatted","text":"：修改字体大小"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"font-weight","code":true},{"type":"formatted","text":"：修改字体粗细"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"text-decoration","code":true},{"type":"formatted","text":"：修饰文字，包括"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"none","code":true},{"type":"formatted","text":"：无修饰"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"underline","code":true},{"type":"formatted","text":"：下划线"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"overline","code":true},{"type":"formatted","text":"：上划线"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"line-through","code":true},{"type":"formatted","text":"：贯穿线"}]}]}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"word-spacing","code":true},{"type":"formatted","text":"：单词间的间距"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"letter-spacing","code":true},{"type":"formatted","text":"：字母间的间距"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"600\" height=\"200\" viewBox=\"0 0 600 200\"\u003e\n  \u003ctext\n    x=\"20\"\n    y=\"30\"\n    font-weight=\"bold\"\n    font-family=\"Times New Roman\"\n    font-size=\"30\"\n    font-style=\"italic\"\n  \u003e\n    You are a dog.\n  \u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"70\" text-decoration=\"underline\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"70\" text-decoration=\"line-through\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"420\" y=\"70\" text-decoration=\"overline\"\u003eYou are a pig.\u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"110\" word-spacing=\"5\"\u003eYou are a cat.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"110\" letter-spacing=\"4\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"60628815-a435-47a6-be0a-c8afd800415b","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"600\" height=\"120\" viewBox=\"0 0 600 120\" fill=\"gray\"\u003e\n  \u003ctext\n    x=\"20\"\n    y=\"30\"\n    font-weight=\"bold\"\n    font-family=\"Times New Roman\"\n    font-size=\"30\"\n    font-style=\"italic\"\n  \u003e\n    You are a dog.\n  \u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"70\" text-decoration=\"underline\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"70\" text-decoration=\"line-through\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"420\" y=\"70\" text-decoration=\"overline\"\u003eYou are a pig.\u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"110\" word-spacing=\"5\"\u003eYou are a cat.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"110\" letter-spacing=\"4\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"tspan"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"有时候我们需要对一段文字某些文字添加独立的文本修饰，比如下划线，删除线等，所以我们会考虑使用多个 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签分隔开"}]},{"type":"code-block","code":"\u003ctext\u003eYou are a\u003c/text\u003e\u003ctext text-decoration=\"underline\"\u003edog.\u003c/text\u003e","language":"html","uuid":"250c2f19-f9dc-4a70-93c1-b3ee09ef5723","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"但是有一个问题就是我们不知道文本的长度，如果使用多个 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签，那么文本摆放的位置就成了一个问题，这个时候我们可以在 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签中使用 "},{"type":"formatted","text":"tspan","code":true},{"type":"formatted","text":" 标签"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan font-family=\"Times\" font-weight=\"bold\" text-decoration=\"underline\"\u003e\n      World!\n    \u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"58d1f29a-9609-463b-9705-abf74d69525f","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan font-family=\"Times\" font-weight=\"bold\" text-decoration=\"underline\"\u003e\n      World!\n    \u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"tspan","code":true},{"type":"formatted","text":" 除了可以修改文本属性之外，还可以通过 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 修改被包含的字母的垂直位置偏移，并持续生效，"},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 是一个数组，其中的数与每个字母一一对应，如果数组中数目少于字母数，默认为 "},{"type":"formatted","text":"0","code":true}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"45f81bed-b801-4642-b7b6-f837e4aab72c","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"上面我们为 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 设置了三个值，有 "},{"type":"formatted","text":"7","code":true},{"type":"formatted","text":" 个字母，不足会自动补零，相当于 "},{"type":"formatted","text":"dy=\"0 6 6 0 0 0 0\"","code":true},{"type":"formatted","text":" 。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"可以观察到 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 是会叠加的，会持续影响后面的字母，要使得后面的字母正常显示，需要在后面指定一个相反值使得 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 变为 "},{"type":"formatted","text":"0","code":true}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 -6 6 0 -6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"485bfc1d-aa9f-41aa-bb52-dae9093269bc","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 -6 6 0 -6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"与 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 相似还有 "},{"type":"formatted","text":"dx","code":true},{"type":"formatted","text":" 它可以控制字母的水平偏移，同样它也是持续生效的，会影响到后面的字母；也可以通过 "},{"type":"formatted","text":"rotate","code":true},{"type":"formatted","text":" 来控制字母的旋转，同样影响是持续的"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan dx=\"0 4 -2 6 0 2\" rotate=\"10 -20 20 0 20 -10\"\u003eWorld!\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"4b25b388-7e87-4c31-a27d-eef596364c86","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan dx=\"0 4 -2 6 0 2\" rotate=\"10 -20 20 0 20 -10\"\u003eWorld!\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"虽然可以通过 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 产生上下标，但是使用 "},{"type":"formatted","text":"baseline-shift","code":true},{"type":"formatted","text":" 会更加的简单，它有两种取值："}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"sub","code":true},{"type":"formatted","text":"：向下偏移，产生下标"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"super","code":true},{"type":"formatted","text":"：向上偏移，产生上标"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"60\" viewBox=\"0 0 150 60\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    C\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n    H\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e12\u003c/tspan\u003e\n    O\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n  \u003c/text\u003e\n  \u003ctext x=\"0\" y=\"50\"\u003e\n    6.02×10\n    \u003ctspan baseline-shift=\"super\" font-size=\"10\"\u003e23\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"e5e7de36-4fee-4aad-acaa-0df3fc13f196","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"60\" viewBox=\"0 0 150 60\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    C\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n    H\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e12\u003c/tspan\u003e\n    O\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n  \u003c/text\u003e\n  \u003ctext x=\"0\" y=\"50\"\u003e\n    6.02×10\n    \u003ctspan baseline-shift=\"super\" font-size=\"10\"\u003e23\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"textLength"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"我们可以通过 "},{"type":"formatted","text":"textLength","code":true},{"type":"formatted","text":" 来设置文本的长度，SVG 会通过调整字符间距或文本大小以使得文本达到规定的大小。调整方式有两种，通过 "},{"type":"formatted","text":"lengthAdjust","code":true},{"type":"formatted","text":" 属性进行设置"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"spacing","code":true},{"type":"formatted","text":"：只调整字符间距，默认值"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"spacingAndGlyphs","code":true},{"type":"formatted","text":"：同时调整字符间距和字符大小"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"100\" viewBox=\"0 0 150 100\"\u003e\n  \u003ctext x=\"20\" y=\"20\" textLength=\"120\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"40\" textLength=\"120\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n  \u003ctext x=\"20\" y=\"60\" textLength=\"80\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"80\" textLength=\"80\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"14731987-b13e-4891-b800-60ef5b0b885b","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"100\" viewBox=\"0 0 150 100\" fill=\"gray\"\u003e\n  \u003ctext x=\"20\" y=\"20\" textLength=\"120\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"40\" textLength=\"120\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n  \u003ctext x=\"20\" y=\"60\" textLength=\"80\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"80\" textLength=\"80\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"纵向文本"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"可以为文本设置 "},{"type":"formatted","text":"writing-mode","code":true},{"type":"formatted","text":" 为 "},{"type":"formatted","text":"tb","code":true},{"type":"formatted","text":"(top-bottom)"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"150\" viewBox=\"0 0 150 150\"\u003e\n  \u003ctext x=\"20\" y=\"20\" writing-mode=\"tb\"\u003eHello World!\u003c/text\u003e\n\u003c/svg\u003e","language":"HTML","uuid":"da77bdfc-0a70-4301-984e-fc32cadf5d3c","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"100\" viewBox=\"0 0 150 100\" fill=\"gray\"\u003e\n  \u003ctext x=\"20\" y=\"20\" writing-mode=\"tb\"\u003eHello World!\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"文本路径"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"文本除了可以横向和纵向排列以外，还可以沿着某一路径进行排列"}]},{"type":"code-block","code":"\u003csvg width=\"250\" height=\"150\" viewBox=\"0 0 250 150\"\u003e\n  \u003cdefs\u003e\n    \u003cpath \n  id=\"curve\"\n  d=\"M30 40 C 50 10, 70 10, 120 40 S 150 0, 200 40\"\n  style=\"stroke: gray; fill: none;\"\u003e\n    \u003c/path\u003e\n  \u003c/defs\u003e\n  \u003ctext\u003e\n    \u003ctextPath xlink:href=\"#curve\"\u003e\n      Hello, World!\n    \u003c/textPath\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"a169f665-4be4-4733-9939-c7807a793c7b","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"250\" height=\"60\" viewBox=\"0 0 250 60\" fill=\"gray\"\u003e\n  \u003cdefs\u003e\n    \u003cpath \n  id=\"curve\"\n  d=\"M30 40 C 50 10, 70 10, 120 40 S 150 0, 200 40\"\n  style=\"stroke: gray; fill: none;\"\u003e\n    \u003c/path\u003e\n  \u003c/defs\u003e\n  \u003ctext\u003e\n    \u003ctextPath xlink:href=\"#curve\"\u003e\n      Hello, World!\n    \u003c/textPath\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]}],"breadcrumb":[{"label":"SVG","href":"/docs/document/9/76.html"},{"label":"基本概念"},{"label":"文本","href":"/docs/document/9/90.html"}],"prevPage":{"title":"图案","href":"/docs/document/9/89.html"},"nextPage":{"title":"变换","href":"/docs/document/9/91.html"},"createTime":1703605614904,"updateTime":1743303640566,"currentPath":"/docs/document/9/90.html"},"meta":{"type":"doc","publishTime":1764823684226}};
+      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"sidebar":[{"title":"SVG","children":[{"title":"基本概念","children":[{"title":"SVG 介绍","href":"/docs/document/9/76.html"},{"title":"视口、viewBox 与 preserveAspectRatio","href":"/docs/document/9/80.html"},{"title":"基本形状","children":[{"title":"线","href":"/docs/document/9/82.html"},{"title":"折线","href":"/docs/document/9/83.html"},{"title":"矩形","href":"/docs/document/9/84.html"},{"title":"圆和椭圆","href":"/docs/document/9/85.html"},{"title":"多边形","href":"/docs/document/9/86.html"},{"title":"路径","href":"/docs/document/9/98.html"}]},{"title":"marker","href":"/docs/document/9/99.html"},{"title":"文档组织","href":"/docs/document/9/87.html"},{"title":"渐变色","href":"/docs/document/9/88.html"},{"title":"图案","href":"/docs/document/9/89.html"},{"title":"文本","href":"/docs/document/9/90.html"},{"title":"变换","href":"/docs/document/9/91.html"},{"title":"裁剪","href":"/docs/document/9/92.html"},{"title":"蒙版","href":"/docs/document/9/93.html"}]},{"title":"动画","children":[{"title":"animate","href":"/docs/document/9/79.html"},{"title":"同步动画","href":"/docs/document/9/94.html"},{"title":"animateTransform","href":"/docs/document/9/95.html"},{"title":"animateMotion","href":"/docs/document/9/96.html"}]}]}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":14,"title":"软件使用文档","href":"/docs/document/14/609.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document","active":true}]}],"content":{"id":90,"title":"文本","content":[{"type":"paragraph","children":[{"type":"formatted","text":"如何在 SVG 中绘制文本。"}]},{"type":"header","children":[{"type":"formatted","text":"text"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"通过 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签可以在 SVG 中绘制文字"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"50\" viewBox=\"0 0 150 50\"\u003e\n  \u003ctext x=\"20\" y=\"30\"\u003eYou are a dog.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"9a9c16d1-9139-4a2e-aa81-11c288c0fb10","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"50\" viewBox=\"0 0 150 50\"\u003e\n  \u003ctext x=\"20\" y=\"30\" fill=\"gray\"\u003eYou are a dog.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 需要指定两个属性 "},{"type":"formatted","text":"x, y","code":true},{"type":"formatted","text":"，其中 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 表示文字左侧的坐标， "},{"type":"formatted","text":"y","code":true},{"type":"formatted","text":" 表示文字基线的坐标"}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"200\" viewBox=\"0 0 200 200\"\u003e\n  \u003cpath\n  d=\"M 20 10 L 20 120 M 10 30 L 120 30 M 10 70 L 120 70 M 10 110 L 120 110\"\n  stroke=\"gray\"/\u003e\n  \u003ctext x=\"20\" y=\"30\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"70\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"110\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"7f66aafc-9ab8-420d-a016-8e39d87a62c6","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"140\" viewBox=\"0 0 200 140\"\u003e\n  \u003cpath\n  d=\"M 20 10 L 20 120 M 10 30 L 120 30 M 10 70 L 120 70 M 10 110 L 120 110\"\n  stroke=\"gray\"/\u003e\n  \u003ctext fill=\"gray\" x=\"20\" y=\"30\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"20\" y=\"70\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"20\" y=\"110\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"图像中的竖线是 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 指定的位置，横线是 "},{"type":"formatted","text":"y","code":true},{"type":"formatted","text":" 指定的位置。"}]},{"type":"header","children":[{"type":"formatted","text":"水平对齐"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"可以通过 "},{"type":"formatted","text":"text-anchor","code":true},{"type":"formatted","text":" 来指定文本的水平对齐方式，有三种取值"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"start","code":true},{"type":"formatted","text":"：左侧与 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 属性对齐，默认值"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"middle","code":true},{"type":"formatted","text":"：居中与 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 属性对齐"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"end","code":true},{"type":"formatted","text":"：右侧与 "},{"type":"formatted","text":"x","code":true},{"type":"formatted","text":" 属性对齐"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"250\" height=\"200\" viewBox=\"0 0 250 200\"\u003e\n  \u003cpath d=\"M 120 10 L 120 120\" stroke=\"gray\" /\u003e\n  \u003ctext x=\"120\" y=\"30\" text-anchor=\"start\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext x=\"120\" y=\"70\" text-anchor=\"middle\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"120\" y=\"110\" text-anchor=\"end\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"aede9a0d-452f-43e2-8d9c-c983d7880976","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"250\" height=\"140\" viewBox=\"0 0 250 140\"\u003e\n  \u003cpath d=\"M 120 10 L 120 120\" stroke=\"#1a66ff\" /\u003e\n  \u003ctext fill=\"gray\" x=\"120\" y=\"30\" text-anchor=\"start\"\u003eYou are a dog.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"120\" y=\"70\" text-anchor=\"middle\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext fill=\"gray\" x=\"120\" y=\"110\" text-anchor=\"end\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"字体修饰"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"我们可以通过字体属性修改文字，包括"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"font-family","code":true},{"type":"formatted","text":"：修改字体族"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"font-size","code":true},{"type":"formatted","text":"：修改字体大小"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"font-weight","code":true},{"type":"formatted","text":"：修改字体粗细"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"text-decoration","code":true},{"type":"formatted","text":"：修饰文字，包括"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"none","code":true},{"type":"formatted","text":"：无修饰"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"underline","code":true},{"type":"formatted","text":"：下划线"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"overline","code":true},{"type":"formatted","text":"：上划线"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"line-through","code":true},{"type":"formatted","text":"：贯穿线"}]}]}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"word-spacing","code":true},{"type":"formatted","text":"：单词间的间距"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"letter-spacing","code":true},{"type":"formatted","text":"：字母间的间距"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"600\" height=\"200\" viewBox=\"0 0 600 200\"\u003e\n  \u003ctext\n    x=\"20\"\n    y=\"30\"\n    font-weight=\"bold\"\n    font-family=\"Times New Roman\"\n    font-size=\"30\"\n    font-style=\"italic\"\n  \u003e\n    You are a dog.\n  \u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"70\" text-decoration=\"underline\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"70\" text-decoration=\"line-through\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"420\" y=\"70\" text-decoration=\"overline\"\u003eYou are a pig.\u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"110\" word-spacing=\"5\"\u003eYou are a cat.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"110\" letter-spacing=\"4\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"60628815-a435-47a6-be0a-c8afd800415b","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"600\" height=\"120\" viewBox=\"0 0 600 120\" fill=\"gray\"\u003e\n  \u003ctext\n    x=\"20\"\n    y=\"30\"\n    font-weight=\"bold\"\n    font-family=\"Times New Roman\"\n    font-size=\"30\"\n    font-style=\"italic\"\n  \u003e\n    You are a dog.\n  \u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"70\" text-decoration=\"underline\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"70\" text-decoration=\"line-through\"\u003eYou are a pig.\u003c/text\u003e\n  \u003ctext x=\"420\" y=\"70\" text-decoration=\"overline\"\u003eYou are a pig.\u003c/text\u003e\n\n  \u003ctext x=\"20\" y=\"110\" word-spacing=\"5\"\u003eYou are a cat.\u003c/text\u003e\n  \u003ctext x=\"220\" y=\"110\" letter-spacing=\"4\"\u003eYou are a cat.\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"tspan"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"有时候我们需要对一段文字某些文字添加独立的文本修饰，比如下划线，删除线等，所以我们会考虑使用多个 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签分隔开"}]},{"type":"code-block","code":"\u003ctext\u003eYou are a\u003c/text\u003e\u003ctext text-decoration=\"underline\"\u003edog.\u003c/text\u003e","language":"html","uuid":"250c2f19-f9dc-4a70-93c1-b3ee09ef5723","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"但是有一个问题就是我们不知道文本的长度，如果使用多个 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签，那么文本摆放的位置就成了一个问题，这个时候我们可以在 "},{"type":"formatted","text":"text","code":true},{"type":"formatted","text":" 标签中使用 "},{"type":"formatted","text":"tspan","code":true},{"type":"formatted","text":" 标签"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan font-family=\"Times\" font-weight=\"bold\" text-decoration=\"underline\"\u003e\n      World!\n    \u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"58d1f29a-9609-463b-9705-abf74d69525f","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan font-family=\"Times\" font-weight=\"bold\" text-decoration=\"underline\"\u003e\n      World!\n    \u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"tspan","code":true},{"type":"formatted","text":" 除了可以修改文本属性之外，还可以通过 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 修改被包含的字母的垂直位置偏移，并持续生效，"},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 是一个数组，其中的数与每个字母一一对应，如果数组中数目少于字母数，默认为 "},{"type":"formatted","text":"0","code":true}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"45f81bed-b801-4642-b7b6-f837e4aab72c","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"上面我们为 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 设置了三个值，有 "},{"type":"formatted","text":"7","code":true},{"type":"formatted","text":" 个字母，不足会自动补零，相当于 "},{"type":"formatted","text":"dy=\"0 6 6 0 0 0 0\"","code":true},{"type":"formatted","text":" 。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"可以观察到 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 是会叠加的，会持续影响后面的字母，要使得后面的字母正常显示，需要在后面指定一个相反值使得 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 变为 "},{"type":"formatted","text":"0","code":true}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 -6 6 0 -6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"485bfc1d-aa9f-41aa-bb52-dae9093269bc","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\u003ctspan dy=\"0 6 -6 6 0 -6 6\"\u003eC6H12O6\u003c/tspan\u003e\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"与 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 相似还有 "},{"type":"formatted","text":"dx","code":true},{"type":"formatted","text":" 它可以控制字母的水平偏移，同样它也是持续生效的，会影响到后面的字母；也可以通过 "},{"type":"formatted","text":"rotate","code":true},{"type":"formatted","text":" 来控制字母的旋转，同样影响是持续的"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan dx=\"0 4 -2 6 0 2\" rotate=\"10 -20 20 0 20 -10\"\u003eWorld!\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"4b25b388-7e87-4c31-a27d-eef596364c86","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"40\" viewBox=\"0 0 150 40\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    Hello\n    \u003ctspan dx=\"0 4 -2 6 0 2\" rotate=\"10 -20 20 0 20 -10\"\u003eWorld!\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"虽然可以通过 "},{"type":"formatted","text":"dy","code":true},{"type":"formatted","text":" 产生上下标，但是使用 "},{"type":"formatted","text":"baseline-shift","code":true},{"type":"formatted","text":" 会更加的简单，它有两种取值："}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"sub","code":true},{"type":"formatted","text":"：向下偏移，产生下标"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"super","code":true},{"type":"formatted","text":"：向上偏移，产生上标"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"60\" viewBox=\"0 0 150 60\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    C\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n    H\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e12\u003c/tspan\u003e\n    O\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n  \u003c/text\u003e\n  \u003ctext x=\"0\" y=\"50\"\u003e\n    6.02×10\n    \u003ctspan baseline-shift=\"super\" font-size=\"10\"\u003e23\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"e5e7de36-4fee-4aad-acaa-0df3fc13f196","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"60\" viewBox=\"0 0 150 60\" fill=\"gray\"\u003e\n  \u003ctext x=\"0\" y=\"20\"\u003e\n    C\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n    H\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e12\u003c/tspan\u003e\n    O\n    \u003ctspan baseline-shift=\"sub\" font-size=\"10\"\u003e6\u003c/tspan\u003e\n  \u003c/text\u003e\n  \u003ctext x=\"0\" y=\"50\"\u003e\n    6.02×10\n    \u003ctspan baseline-shift=\"super\" font-size=\"10\"\u003e23\u003c/tspan\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"textLength"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"我们可以通过 "},{"type":"formatted","text":"textLength","code":true},{"type":"formatted","text":" 来设置文本的长度，SVG 会通过调整字符间距或文本大小以使得文本达到规定的大小。调整方式有两种，通过 "},{"type":"formatted","text":"lengthAdjust","code":true},{"type":"formatted","text":" 属性进行设置"}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"spacing","code":true},{"type":"formatted","text":"：只调整字符间距，默认值"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"spacingAndGlyphs","code":true},{"type":"formatted","text":"：同时调整字符间距和字符大小"}]}]}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"100\" viewBox=\"0 0 150 100\"\u003e\n  \u003ctext x=\"20\" y=\"20\" textLength=\"120\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"40\" textLength=\"120\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n  \u003ctext x=\"20\" y=\"60\" textLength=\"80\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"80\" textLength=\"80\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"14731987-b13e-4891-b800-60ef5b0b885b","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"100\" viewBox=\"0 0 150 100\" fill=\"gray\"\u003e\n  \u003ctext x=\"20\" y=\"20\" textLength=\"120\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"40\" textLength=\"120\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n  \u003ctext x=\"20\" y=\"60\" textLength=\"80\"\u003eHello World!\u003c/text\u003e\n  \u003ctext x=\"20\" y=\"80\" textLength=\"80\" lengthAdjust=\"spacingAndGlyphs\"\u003e\n    Hello World!\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"纵向文本"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"可以为文本设置 "},{"type":"formatted","text":"writing-mode","code":true},{"type":"formatted","text":" 为 "},{"type":"formatted","text":"tb","code":true},{"type":"formatted","text":"(top-bottom)"}]},{"type":"code-block","code":"\u003csvg width=\"150\" height=\"150\" viewBox=\"0 0 150 150\"\u003e\n  \u003ctext x=\"20\" y=\"20\" writing-mode=\"tb\"\u003eHello World!\u003c/text\u003e\n\u003c/svg\u003e","language":"HTML","uuid":"da77bdfc-0a70-4301-984e-fc32cadf5d3c","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"150\" height=\"100\" viewBox=\"0 0 150 100\" fill=\"gray\"\u003e\n  \u003ctext x=\"20\" y=\"20\" writing-mode=\"tb\"\u003eHello World!\u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"文本路径"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"文本除了可以横向和纵向排列以外，还可以沿着某一路径进行排列"}]},{"type":"code-block","code":"\u003csvg width=\"250\" height=\"150\" viewBox=\"0 0 250 150\"\u003e\n  \u003cdefs\u003e\n    \u003cpath \n  id=\"curve\"\n  d=\"M30 40 C 50 10, 70 10, 120 40 S 150 0, 200 40\"\n  style=\"stroke: gray; fill: none;\"\u003e\n    \u003c/path\u003e\n  \u003c/defs\u003e\n  \u003ctext\u003e\n    \u003ctextPath xlink:href=\"#curve\"\u003e\n      Hello, World!\n    \u003c/textPath\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","language":"html","uuid":"a169f665-4be4-4733-9939-c7807a793c7b","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"250\" height=\"60\" viewBox=\"0 0 250 60\" fill=\"gray\"\u003e\n  \u003cdefs\u003e\n    \u003cpath \n  id=\"curve\"\n  d=\"M30 40 C 50 10, 70 10, 120 40 S 150 0, 200 40\"\n  style=\"stroke: gray; fill: none;\"\u003e\n    \u003c/path\u003e\n  \u003c/defs\u003e\n  \u003ctext\u003e\n    \u003ctextPath xlink:href=\"#curve\"\u003e\n      Hello, World!\n    \u003c/textPath\u003e\n  \u003c/text\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]}],"breadcrumb":[{"label":"SVG","href":"/docs/document/9/76.html"},{"label":"基本概念"},{"label":"文本","href":"/docs/document/9/90.html"}],"prevPage":{"title":"图案","href":"/docs/document/9/89.html"},"nextPage":{"title":"变换","href":"/docs/document/9/91.html"},"createTime":1703605614904,"updateTime":1743303640566,"currentPath":"/docs/document/9/90.html"},"meta":{"type":"doc","publishTime":1767266228361}};
     </script>
-    <script type="module" crossorigin src="../../../assets/doc-BCfr2iu9.js"></script>
-    <link rel="modulepreload" crossorigin href="../../../assets/global-B543ggEw.js">
-    <link rel="modulepreload" crossorigin href="../../../assets/Dropdown-Zs5jwcr9.js">
-    <link rel="modulepreload" crossorigin href="../../../assets/index-CEpohQRa.js">
-    <link rel="stylesheet" crossorigin href="../../../assets/global-DxDSM-16.css">
+    <script type="module" crossorigin src="../../../assets/doc-C6s_Azhy.js"></script>
+    <link rel="modulepreload" crossorigin href="../../../assets/global-Dqh_OZbR.js">
+    <link rel="modulepreload" crossorigin href="../../../assets/Dropdown-Bzhy-tn3.js">
+    <link rel="modulepreload" crossorigin href="../../../assets/index-CMsEYPb_.js">
+    <link rel="stylesheet" crossorigin href="../../../assets/global-Bb86jZEf.css">
     <link rel="stylesheet" crossorigin href="../../../assets/index-oqgB9MtW.css">
-  </head>
+  <style data-runtime-tailwind>/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .italic {
+    font-style: italic;
+  }
+  .line-through {
+    text-decoration-line: line-through;
+  }
+  .overline {
+    text-decoration-line: overline;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+}
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .underline {
+    text-decoration-line: underline;
+  }
+}
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;</style>
+</head>
   <body>
     <div id="root"></div>
   </body>

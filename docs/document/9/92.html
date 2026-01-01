@@ -6,15 +6,338 @@
     <title>文档</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <script>
-      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"人生天地间，忽如远行客","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"sidebar":[{"title":"SVG","children":[{"title":"基本概念","children":[{"title":"SVG 介绍","href":"/docs/document/9/76.html"},{"title":"视口、viewBox 与 preserveAspectRatio","href":"/docs/document/9/80.html"},{"title":"基本形状","children":[{"title":"线","href":"/docs/document/9/82.html"},{"title":"折线","href":"/docs/document/9/83.html"},{"title":"矩形","href":"/docs/document/9/84.html"},{"title":"圆和椭圆","href":"/docs/document/9/85.html"},{"title":"多边形","href":"/docs/document/9/86.html"},{"title":"路径","href":"/docs/document/9/98.html"}]},{"title":"marker","href":"/docs/document/9/99.html"},{"title":"文档组织","href":"/docs/document/9/87.html"},{"title":"渐变色","href":"/docs/document/9/88.html"},{"title":"图案","href":"/docs/document/9/89.html"},{"title":"文本","href":"/docs/document/9/90.html"},{"title":"变换","href":"/docs/document/9/91.html"},{"title":"裁剪","href":"/docs/document/9/92.html"},{"title":"蒙版","href":"/docs/document/9/93.html"}]},{"title":"动画","children":[{"title":"animate","href":"/docs/document/9/79.html"},{"title":"同步动画","href":"/docs/document/9/94.html"},{"title":"animateTransform","href":"/docs/document/9/95.html"},{"title":"animateMotion","href":"/docs/document/9/96.html"}]}]}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document","active":true}]}],"content":{"id":92,"title":"裁剪","content":[{"type":"paragraph","children":[{"type":"formatted","text":"有时候我们只对图像的一部分感兴趣，这个时候我们可以定义一个裁剪路径，只有路径包围的区域才会显示出来，而在路径之外的区域则不予显示，这个就像是聚光灯一样，只有聚光灯照到的部分我们才能看得到。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"通过 "},{"type":"formatted","text":"clipPath","code":true},{"type":"formatted","text":" 定义裁剪路径，然后通过 "},{"type":"formatted","text":"clip-path","code":true},{"type":"formatted","text":" 属性来引用该路径"}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"circle\"\u003e\n      \u003c!-- 定义一个圆形的裁剪路径 --\u003e\n      \u003ccircle cx=\"50\" cy=\"50\" r=\"50\" /\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003c!-- 通过 clip-path 属性引用路径 --\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n  \twidth=\"100\"\n  \theight=\"100\"\n  \tx=\"0\"\n  \ty=\"0\"\n  \tclip-path=\"url(#circle)\"\n  /\u003e\n\u003c/svg\u003e","language":"html","uuid":"6061124f-d011-43ae-923f-82c9a16c930a","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"circle\"\u003e\n      \u003c!-- 定义一个圆形的裁剪路径 --\u003e\n      \u003ccircle cx=\"50\" cy=\"50\" r=\"50\" /\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003c!-- 通过 clip-path 属性引用路径 --\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n  \twidth=\"100\"\n  \theight=\"100\"\n  \tx=\"0\"\n  \ty=\"0\"\n  \tclip-path=\"url(#circle)\"\n  /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"clip-path","code":true},{"type":"formatted","text":" 可以是各种形状，甚至可以是文字"}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"text\"\u003e\n      \u003ctext x=\"0\" y=\"50\" font-size=\"48\" stroke=\"gray\" fill=\"none\" \u003eGIRL!\u003c/text\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n    width=\"200\"\n    height=\"200\"\n    x=\"0\"\n    y=\"0\"\n  \tclip-path=\"url(#text)\"\n  /\u003e\n\u003c/svg\u003e","language":"html","uuid":"fa300c51-f6c5-4988-907b-79b03a65a9fa","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"text\"\u003e\n      \u003ctext x=\"20\" y=\"40\" font-size=\"48\" stroke=\"none\" fill=\"black\" \u003eGIRL!\u003c/text\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n    width=\"150\"\n    height=\"150\"\n    x=\"0\"\n    y=\"0\"\n    clip-path=\"url(#text)\"\n \t/\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]}],"breadcrumb":[{"label":"SVG","href":"/docs/document/9/76.html"},{"label":"基本概念"},{"label":"裁剪","href":"/docs/document/9/92.html"}],"prevPage":{"title":"变换","href":"/docs/document/9/91.html"},"nextPage":{"title":"蒙版","href":"/docs/document/9/93.html"},"createTime":1703605662964,"updateTime":1743303640566,"currentPath":"/docs/document/9/92.html"},"meta":{"type":"doc","publishTime":1764823684231}};
+      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"sidebar":[{"title":"SVG","children":[{"title":"基本概念","children":[{"title":"SVG 介绍","href":"/docs/document/9/76.html"},{"title":"视口、viewBox 与 preserveAspectRatio","href":"/docs/document/9/80.html"},{"title":"基本形状","children":[{"title":"线","href":"/docs/document/9/82.html"},{"title":"折线","href":"/docs/document/9/83.html"},{"title":"矩形","href":"/docs/document/9/84.html"},{"title":"圆和椭圆","href":"/docs/document/9/85.html"},{"title":"多边形","href":"/docs/document/9/86.html"},{"title":"路径","href":"/docs/document/9/98.html"}]},{"title":"marker","href":"/docs/document/9/99.html"},{"title":"文档组织","href":"/docs/document/9/87.html"},{"title":"渐变色","href":"/docs/document/9/88.html"},{"title":"图案","href":"/docs/document/9/89.html"},{"title":"文本","href":"/docs/document/9/90.html"},{"title":"变换","href":"/docs/document/9/91.html"},{"title":"裁剪","href":"/docs/document/9/92.html"},{"title":"蒙版","href":"/docs/document/9/93.html"}]},{"title":"动画","children":[{"title":"animate","href":"/docs/document/9/79.html"},{"title":"同步动画","href":"/docs/document/9/94.html"},{"title":"animateTransform","href":"/docs/document/9/95.html"},{"title":"animateMotion","href":"/docs/document/9/96.html"}]}]}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":14,"title":"软件使用文档","href":"/docs/document/14/609.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document","active":true}]}],"content":{"id":92,"title":"裁剪","content":[{"type":"paragraph","children":[{"type":"formatted","text":"有时候我们只对图像的一部分感兴趣，这个时候我们可以定义一个裁剪路径，只有路径包围的区域才会显示出来，而在路径之外的区域则不予显示，这个就像是聚光灯一样，只有聚光灯照到的部分我们才能看得到。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"通过 "},{"type":"formatted","text":"clipPath","code":true},{"type":"formatted","text":" 定义裁剪路径，然后通过 "},{"type":"formatted","text":"clip-path","code":true},{"type":"formatted","text":" 属性来引用该路径"}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"circle\"\u003e\n      \u003c!-- 定义一个圆形的裁剪路径 --\u003e\n      \u003ccircle cx=\"50\" cy=\"50\" r=\"50\" /\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003c!-- 通过 clip-path 属性引用路径 --\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n  \twidth=\"100\"\n  \theight=\"100\"\n  \tx=\"0\"\n  \ty=\"0\"\n  \tclip-path=\"url(#circle)\"\n  /\u003e\n\u003c/svg\u003e","language":"html","uuid":"6061124f-d011-43ae-923f-82c9a16c930a","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"circle\"\u003e\n      \u003c!-- 定义一个圆形的裁剪路径 --\u003e\n      \u003ccircle cx=\"50\" cy=\"50\" r=\"50\" /\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003c!-- 通过 clip-path 属性引用路径 --\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n  \twidth=\"100\"\n  \theight=\"100\"\n  \tx=\"0\"\n  \ty=\"0\"\n  \tclip-path=\"url(#circle)\"\n  /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"clip-path","code":true},{"type":"formatted","text":" 可以是各种形状，甚至可以是文字"}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"text\"\u003e\n      \u003ctext x=\"0\" y=\"50\" font-size=\"48\" stroke=\"gray\" fill=\"none\" \u003eGIRL!\u003c/text\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n    width=\"200\"\n    height=\"200\"\n    x=\"0\"\n    y=\"0\"\n  \tclip-path=\"url(#text)\"\n  /\u003e\n\u003c/svg\u003e","language":"html","uuid":"fa300c51-f6c5-4988-907b-79b03a65a9fa","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cclipPath id=\"text\"\u003e\n      \u003ctext x=\"20\" y=\"40\" font-size=\"48\" stroke=\"none\" fill=\"black\" \u003eGIRL!\u003c/text\u003e\n    \u003c/clipPath\u003e\n  \u003c/defs\u003e\n  \u003cimage xlink:href=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_54a6391a-330c-4a3d-8a26-ac1df7b0acb5.png\"\n    width=\"150\"\n    height=\"150\"\n    x=\"0\"\n    y=\"0\"\n    clip-path=\"url(#text)\"\n \t/\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]}],"breadcrumb":[{"label":"SVG","href":"/docs/document/9/76.html"},{"label":"基本概念"},{"label":"裁剪","href":"/docs/document/9/92.html"}],"prevPage":{"title":"变换","href":"/docs/document/9/91.html"},"nextPage":{"title":"蒙版","href":"/docs/document/9/93.html"},"createTime":1703605662964,"updateTime":1743303640566,"currentPath":"/docs/document/9/92.html"},"meta":{"type":"doc","publishTime":1767266228410}};
     </script>
-    <script type="module" crossorigin src="../../../assets/doc-BCfr2iu9.js"></script>
-    <link rel="modulepreload" crossorigin href="../../../assets/global-B543ggEw.js">
-    <link rel="modulepreload" crossorigin href="../../../assets/Dropdown-Zs5jwcr9.js">
-    <link rel="modulepreload" crossorigin href="../../../assets/index-CEpohQRa.js">
-    <link rel="stylesheet" crossorigin href="../../../assets/global-DxDSM-16.css">
+    <script type="module" crossorigin src="../../../assets/doc-C6s_Azhy.js"></script>
+    <link rel="modulepreload" crossorigin href="../../../assets/global-Dqh_OZbR.js">
+    <link rel="modulepreload" crossorigin href="../../../assets/Dropdown-Bzhy-tn3.js">
+    <link rel="modulepreload" crossorigin href="../../../assets/index-CMsEYPb_.js">
+    <link rel="stylesheet" crossorigin href="../../../assets/global-Bb86jZEf.css">
     <link rel="stylesheet" crossorigin href="../../../assets/index-oqgB9MtW.css">
-  </head>
+  <style data-runtime-tailwind>/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;</style>
+</head>
   <body>
     <div id="root"></div>
   </body>

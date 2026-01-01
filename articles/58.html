@@ -6,15 +6,338 @@
     <title>文章</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <script>
-      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"人生天地间，忽如远行客","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document"}]}],"content":{"id":58,"title":"2023年终总结","author":"","content":[{"type":"paragraph","children":[{"type":"formatted","text":"时间飞逝，2023 年很快就过去了，是时候回顾一下自己的 2023。"}]},{"type":"header","children":[{"type":"formatted","text":"工作"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"今年的工作体验有点像过山车，起起伏伏，但总体上看依然是螺旋上升的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"去年的组织架构调整，我从新技术应用组来到了端外 Web 组，不知道是不是因为疫情居家办公的原因还是因为换个组调整了下心情，刚来这个组的时候感觉没有在新技术应用组那么压抑。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"因为端外 Web 组是新成立的，刚过来没什么业务，主要工作内容包含："}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"PC 站"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"M 站"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"PC APP"}]}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"我主要负责做 M 站这块的内容。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"M 站的技术架构非常的老，框架是自定义的 使用 AMD 模块加载，打包使用的 glup，node_modules 中的模块不能通过 npm 下载，而是通过 zip 压缩包的模式进行传递，等等。对于我来说真的是古董级别的框架，而且在项目里面无法使用 ES6 的语法，否则打包就会报错，即使这样，我当时的感觉居然是还可以，可能是在之前那个组有点太难受了，当然如果一直维护这个项目不是长久之计。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"大约维护了 M 站两三个月，过年回来说让我去做别的项目，听到这个消息，那是真的开心，这个新项目是做一个项目管理以及发布系统，定位和 Space O2 差不多，虽然不知道为什么要自己搞一套。我被分配到的任务是微信小程序和支付宝小程序的发布，主要通过官方提供的 npm 包把本地的项目上传上去，而不是通过人去手动的上传，发布这块比较简单，比较复杂的是迭代的管理，日常、预发和线上的发布，接入安全风控，审批单这些，需要仔细考虑状态之间的流转，通过这个项目了解到了 Jenkins 的使用，命令行工具的开发，以及项目发布的一些东西，收获还是蛮大的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"在我开发 VWeb 的同时，一个噩梦又来了，AI 调研，去年就是这个东西差点把我搞死，每天上班如上坟一般，每天都想着辞职不干，本以为去年的 AI 调研就这么结束了，没想到再次卷土重来。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"那个该死的 AI，又找上我了，今天开了个会，根本不知道要干什么，十分的难受。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"不过相比几个月前，还没有出现抑郁的那种情况，虽然很难受，但是没有完全快活不起来，但是我感觉在干下去也快了，折磨啊 😭。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"这次是设计用研提出的一个想法，可不可以使用 AI 来帮助他们出图，被这事搞的我心情有急转直下，我每天都在网上调研 Stable Diffusion，然后训练或者出图看看效果符不符合预期。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"大约持续了一个月，每周对一次进度，每天都感觉日子望不到头，但是转机出现了，第一季度结束后，上面决定把 WIA 端外的部分交给我们做，我们组全人力投入到这个项目中了，我就趁机和我的主管说，AI 那边我就没时间了，就这么把 AI 的事情扔出去了，当时的心情真的爽死了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"进入 WIA 业务，第一个迭代就是一个专项，终于在这里体验到了网上说的互联网节奏，基本每天都是加班到 11. 左右，后面因为开发不完，周六周日都要来进行加班。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"这周进入了 WIA 专项，终于明白了节奏多么紧，从开始进入起，几乎每天都在加班，前天干到 12. 后走，昨天干到 11.，今天周五本来 6. 可以走的，最后还是整到 9. 回家，明天两天我估计还是要去公司，太鸡儿忙了。真的感受到了什么是互联网节奏。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"刚进这个项目，就让我进行排期，由于这个项目的功能、代码和业务完全没有了解过，之前也没有排过期，然后又不敢多排时间，第一次排期就排了二十几天，我记得我的组长就惊呆了，按照我这个专项只要投两个人就可以了，让我和嘉莉重新排期，后面重新给了一版，排期时间加了两三倍，但即使这样，还是低估了，导致天天加班。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"而且给我分配的部分是比较前置的，也就是说他们依赖于我，如果按照一开始我那个法子，一时半会儿搞不完，所以我的压力特别大。我记得那个时候是清明节，力哥刚好来北京出差，我们几个在北京的同学聚了下，在吃饭前我还在家里一直敲代码，聚完回来后也在敲，当时想按照这个法子估计做不完，肯定阻塞没人，脑中突然蹦出个想法，敲了个通宵，按照新的方案来，终于项目能跑起来了，第二天早上 10 点上班，兴奋的宣布了这个结果，我记得当时大家的反应都很平淡，当时还挺失落的，毕竟我搞了个通宵，并且是在假期搞的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"本来我以为后面的每个迭代都是这个节奏，都做好长期加班的准备了，但是没想到后面的迭代都比较轻松，我干活速度又快，基本上没有加过班，甚至有的时候一吃完晚饭就直接回家了。由于之前和主管沟通过，希望自己能稳定下来，而不是这里做一下那里做一下，所以就一直在 WIA 这个项目里。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"到了第二季度，不知道为什么，产品那边突然没什么需求了，导致 WIA 人力有余，人力纷纷都支援别的项目去了。正好 M 站有一个新的需求，我又接手 M 站了，这个需求没想到一干又是两个月，目前看短时间还是会在 M 站里面，历史是惊人的相似，去年也是这个时候我开始做 M 站，也是做两个三个月。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"在职场也摸爬滚打一年多了，感觉自己的适应能力强了很多，之前碰到什么不会的，在自己掌控之外的事就会很焦虑，不知道怎么办，现在碰到这种事情就稍微淡定，不懂就问呗，实在不行和主管说干不了，总有人给你兜着，不要给自己的压力那么大。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"和我共事过的同事对我的评价都不错，特别是关于技术的评价比较高，因为我干活比较快，平时也钻研一些技术上的新东西，很多技术上的东西他们都和我讨论，而且我业务也比较熟，因此有点核心骨干的感觉，但是在其它方面评价就一般般，因为我比较怕事，碰到问题很少去主动的积极的响应，总是抱着多一事不如少一事的想法，这个被主管和组长特意的点了一下，希望我在这方面能有所改善，下半年我开始主动的揽活，补位，在慢慢的改善这方面的问题。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"所以，在工作方面，我觉得今年是在往好的方向发展的，希望明年自己越来越好，更加主动，更加具有主人翁意识，能独当一面。"}]},{"type":"header","children":[{"type":"formatted","text":"学习"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"今年在技术方面没有什么突破性的成长，连看到的技术书都没有几本，这个需要反思，没有好好的利用自己的空闲时间去精进自己。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年明显地感觉到自己的专注力显著降低，基本没法对一件事情集中长时间的精力，很容易走神玩手机，刷视频，刷文章，然后时间就这么过去了，内心很浮躁，希望一步登天，追求短期效果，这个我今年做的是在太差劲了，非常的不满意，2024 年一定要做好规划，做好长期目标，尽可能的远离电子产品（收集和平板）。"}]},{"type":"callout","calloutType":"warning","title":"警告","children":[{"type":"paragraph","children":[{"type":"formatted","text":"我发现我发的消息错别字很多，经常消息发出去，自己读一遍就发现有错别字，不知道这是不是我内心浮躁的一种表现呢，一天天着急忙慌的。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"虽然看的书很少，但是还是看了几本，这里讲几本印象比较深的："}]},{"type":"numbered-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《CSS 世界》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这本书是二刷，2022 年的时候就已经看过一遍了，第一遍看的时候没什么感觉，没感到有什么牛逼的地方，不过那个时候是用空闲时间看完的，看的比较匆忙，另个是那个时候的开发量也不多，没什么体感。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"二刷的时候看的比较仔细，发现很多精彩的地方，特别是关于宽度那里的描述，因为之前对此一直有疑惑，看了之后感觉清晰了很多，正应了那句话"},{"type":"formatted","text":"“念念不忘，必有回响”","highlight":"green"},{"text":"。","type":"formatted"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我本人对于 CSS 是特别感兴趣的，我感觉我对 CSS 的兴趣是大于 JS 的，可能和我学习前端的初衷有关，我就是像做出颜值高的东西，但是对于 CSS 没有非常体系的学习过，基本上就是看了 B 站培训班的视频，这个后续希望自己能体系化。"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《Linux 是怎样工作的》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这本书是我今年读过最好的书，我觉得写的非常的好，这本书是日本人写的，日本人写的书一贯风格是图多，所以理解起来比较轻松，另外它把 Linux 的底层原理讲的很好，强力推荐"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《快与慢》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这是一本心理学的书籍，讲述了人的两个系统，系统 1 和系统 2，一个速度快，比较感性，一个速度慢，比较理性，大部分时候，都是感性的系统帮我们做决定，有的时候你以为你是深思熟虑，非常的理想，但是我们感性的系统非常容易收到环境的影响，非常容易相信自己看到的东西，即使不合理，所以通过暗示等手段非常容易影响你做决定。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"读完收获很大，没想到心理学这么强大且有趣，可读性很高。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年还读了另外一本心理学的书，《心流：最优体验心理学》，可读性是在非常差，基本很难完整的读完一段话，我也是凭借着名气读的这本书，但是没想到可读性这么差，完全不推荐。"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《认知觉醒》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这本书其实也是二刷，读了之后真的让人干劲十足，但是即使知道了这么多道理，依旧过不好这一生，行动力还是太弱了。"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《卡片笔记写作法》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"当时看完这本书还写了篇 2000 多字的读后感，一本讲述如何做笔记的书，当然这本书的目的是讲如何进行写作，记笔记只是手段，如何通过记卡片笔记的方式来帮助你更好的写作。"}]}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年还读了 《DDIA》和《Rust权威指南》，不过因为基本没什么使用场景，虽然读的时候觉得很好，但是读完不用，又给忘了，特别是 Rust 的，这本书英文和中文加起来读了三遍了，但是现在还是忘了，估计用的时候还得再看一遍。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"剩下读完的就是一些小说和传记了，比如《深蓝的故事》，《杨振宁传：规范与对称之美》，《西游记》，《微尘》，《黑客与画家》，《一桩事先张扬的凶杀案》。小说基本过一遍就忘了，可能当时有些感悟，在潜移默化的影响我，这种书一般用来调节以下阅读品味，一直读专业书也挺累的，感受一些人间的烟火气，也是极好的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年读书少的另外一个原因是我开发了一个笔记软件，我空余的大部分时间基本上都投入到这个软件的开发上了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"之前一直使用的是 Obsidian 做笔记，而我本人也为其写了好几个插件，基本能满足记笔记的要求，而且我把我所有博客的笔记全部都移过来了，但是这个笔记有个不好用的地方，那就是所见即所得的编辑能力太弱了，另外当时读了《卡片笔记写作法》，Obsidian 不能很好的满足我的要求，所以一拍即合，就萌生了自己能不能写一个的想法。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"一开始真的就是一个想法，因为虽然想写，但是对这方面完全不熟，所以就是脑子里一直有这个想法，但是迟迟不肯下笔。后来，到了劳动节，时间比较富裕，闲着也是闲着，就开始实践脑中的这个想法，一开始有个思路，但是经过尝试之后，发现这个思路行不通。按照正常人的逻辑，此路不同不就应该放弃了吗，但是我想做都做了，自己的思路不同，看看别人怎么做的，开始尝试不同的富文本框架，捣鼓了一两天，发现 Slate 这个框架的思路和我之前的思路非常像，这就引起了我的兴趣，根据 Slate 搭建一个非常简陋的文本输入框，非常简单的小 demo，不管怎么样，它跑起来了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"从此之后一发不可收拾，虽然我对富文本编辑这个领域一窍不通，但是凭借着我想把这个东西做出来的信念，它的功能在不断的完善，基本投入了我下半年全部的精力，周末，上班前，下班后所以可以压榨的时间，基本都给了这个编辑器，这个编辑器也没有让我失望，短短的 8 个月的时间，已经完善到我之前根本不敢想象的地步，如果对开发该软件之前的我说，要我 8 个月做出这么一个软件，我当时肯定觉得不可能。但是其实事情远没有你想的那么复杂，所以别想那么多，干就是了，谋事在人，成事在天。"}]},{"type":"header","children":[{"type":"formatted","text":"生活"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"基本上生活非常的平淡，身体非常差，请假基本都去医院了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年刚参加完外公的葬礼，不出意外阳了，拖着病躯回到北京，因为嗓子特别痒，一躺下就咳嗽，根本睡不着，基本每天都往医院跑，五天晚上没睡，实在是扛不住了，去了急诊，和医生说五天没睡了，医生给开了个安眠药，第一天没把握住量，一开始吃了一粒，还是睡不着，又干了几粒，总共干了四粒，终于睡着了，但是醒来的时候头痛欲裂，现在想想都怕，我怎么敢吃这么多，可能当时被折磨的实在受不了了。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"本以为不咳嗽了，晚上可以睡个好觉，没想到居然失眠了，整晚没睡，我这已经是连着 5 个晚上没有睡觉了，感觉这样我都要死了，完全没有一点点精神。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"实在受不了了，去了医院的急诊，说我五天没睡了，让医生开点药，医生给我开了安眠药"}]},{"type":"image","url":" https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/image.1ve63pxy1scg.webp","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"吃了果然果然睡着了，从凌晨 1 点睡到了下午 2 点，中间醒了两次，一次是 7 点醒了一次，被咳醒的，我起床用了喷雾，好多了，然后又继续睡，睡到了 10 点，感觉头有点晕，于是又继续睡，睡到了下午 2 点，醒来的头还是很晕，但是不能在睡了，否则晚上咋睡。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我估计是药吃多了，医生和我说睡前吃一粒，我吃了一粒没啥感觉，就又吃了一粒，还是没啥感觉，这回直接吃了了 2 粒，总共吃了 4 粒，导致醒过来头太晕了。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"然后三月份，又中了甲流，又把我折腾的够呛"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"3.16 号，我下班回家感觉喉咙有点的不舒服，我以为是个小问题，没想到第二天，感觉头有点晕，到了下午，头开始痛了起来，幸亏周五下午搬家，没干什么活。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"五点多，头很痛，完全无法干活，我背着书包就回去了，回来后马上睡觉，睡了一会儿，头好点了，然后点了一碗羊肉汤，喝了之后好多了，然后看了一场狼队的比赛，然后就准备休息，但是我的头不允许，先是全身作冷，然后全身发热，根本无法入睡，迷迷糊糊睡到 6 点多，起床打了个车去了医院，进行检测后发现甲流，医生给我开了药，回来喝了碗热汤，感觉状态又回来了，但是没想到到了晚上，又是全身发冷，然后果然又发烧了，反反复复又折腾了一宿。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"到了星期天，这一天都是在床上度过的，躺了一天，不过这天的睡眠好不错，到了星期一，感觉自己快恢复了，不过今天请了一天假休息，中午吃完饭很困，就去睡觉了，哪里知道，睡了三个小时，一觉醒来，头非常的难受了，浑身无力，走都走不稳，点了汤喝，但是索然无味，晚上没有发烧，但是闹肚子，一直放屁，肚子贼痛，但是拉不出来，一直痛到凌晨一两点，然后我才迷迷糊糊睡过去。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"星期二醒来，感觉还是有点不舒服，但是我还是决定去上班，毕竟假可不多，这天的症状是眼睛很痛，很累，本来想吃完晚饭就走了，没想到有个 7.30 的会，开到将近 9 点，打车回去也将近 9.30 了，直接上床，闭眼听了会直播，迷迷糊糊睡过去了，一觉睡到自然醒，感觉没有任何负面状态了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我真的不想生病了，生病太难受了，什么都做不了，身体果然是革命的本钱。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"五月份一天，感觉自己的心脏不舒服，搁着乱跳，很难受，就和主管请假了，当时周围的人都听到了，被吓了一跳，所幸没什么事。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"今天上午心脏不舒服，就想请个假，我自己就想着回去休息一下，没想到，建哥直接陪我去了医院，然后杰哥、泽华他们都比较关心，峥哥说给我邮点抗原，有点感动。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"前几天看到消息，计算机大佬左耳朵耗子猝死，昨晚又收到电话，金彪的爸爸猝死了，感觉到死亡离人这么近，有点担心自己的身体，感觉自己到处都是病，还是要好好保重身体。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"六月份，公司组织团建，集体去了广西玩了四天，说实话体验不是很好，广西那个时候太热了，根本不想出去，另一个给我印象深刻的就是广西的夜市真的好繁华，感觉广西人是不是晚上才出来活动，对比北京，广西给我的感觉是烟火气息很浓。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"七月份进行了体验，体检完后我报告都没打开看，是医生打电话给我我才知道体检结果，不容乐观啊，一身的毛病"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"今天收到体验公司医生的电话，给我解读体检结果，说实话，一直忘记看体检结果了，从解读上看，我的身体不容乐观，血脂高，尿酸高，有胆囊息肉，有甲状腺结节，感觉全身是病，医生让我多注意饮食，少吃过油的，多吃清淡一点，不要加班熬夜，影响内分泌。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"九月份，趁着国庆假期，约好和佳兴去重庆完，早就想去重庆了，但是一个人不敢去。没想到一到重庆打车就把身份证落车上了，幸苦司机师傅给我送了回来。当时定的行程是 4 天 3 夜，但是万万没想到第二天嗓子就剧痛，早上被生生痛醒，不知道是不是前一天吃的太辣了，每天在重庆也是到处走，感觉没什么意思。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我第三天已经逛不动，廖权给我定了个酒店，我搁那躺了一天，买了感冒药吃，第二天头就不怎么痛了，但是还是咳嗽。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"重庆四天三夜的旅行终于结束了，第一次主动式的去旅游，不得不说旅游很累啊，花钱折磨人，第一个就把自己给整感冒了🥲。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"第一天上午，去吃了抄手，不得不说很有重庆特色，吃的很爽"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_264d7340-f457-4aaa-b5bb-f4ee280eb55a.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"然后去逛了八一好吃街，吃了当地的一些小吃，吃完之后和我权儿会合了，两年没见了，老友重逢，权儿带着我们去逛了一遍景区，不得不说重庆的路好难走啊，全是楼梯，爬上爬下，累死了"}]},{"type":"html-block","html":"\u003cvideo controls style=\"width: 100%;\" src=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/WeChat_20230928104504.mp4\"\u003e\u003c/video\u003e\n\u003cp style=\"text-align:center; \"\u003e轻轨穿楼\u003c/p\u003e","children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_bcd7f8d7-52bb-4beb-9645-a4c8d7619845.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_0d1d925d-01cb-4b3f-84ed-c7c97d82b96f.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_b9f60e0e-eea4-45a2-81df-f905ed6707f4.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_e880f1c7-f515-4fa5-982e-c5697902bd9a.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"晚上权儿请我吃了火锅，然后去洪崖洞看了夜景"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_31cd4b30-d7a1-4d1d-aa7e-0a1ca4d52c5a.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_262e9ef1-e3c8-411a-bdde-e6e3ffcbc155.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_97296d06-6ffc-4a3c-8240-ce7ea8c74a7c.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"第一天很 nice，但是到了第二天，先是喉咙痛，大早上美团买药，然后肚子痛，找了一上午的厕所。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"下午去体验了一下长江索道，排了一个小时的队，然后就体验了几分钟就结束了，没什么感觉"}]},{"type":"html-block","html":"\u003cvideo controls style=\"width: 100%;\" src=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/WeChat_20230928105213.mp4\"\u003e\u003c/video\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"下午去逛了磁器口，这个地方没什么逛的，啥玩的都没有，就一些建筑，没什么意思。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"晚上由于身体实在不行，没有出去，在床上度过了一晚上，喉咙痛的要死，小腿感觉都不是自己的了，太酸了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"第三天，上午本想去南滨路看江景，但是下雨了，而且这个江景要晚上看才行，于是和佳兴转悠了一会儿，然后再大众点评上找了家江湖菜，味道的确很 nice"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_6be443aa-0b93-43bf-8a26-994f0c481463.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"吃完后佳兴去了成都，我由于行程问题，就不打算去成都了，直接在成都再呆一天，下午去了酒店，由于头痛，在酒店睡了一个下午，应该是感冒了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"晚上权儿过来，领我去吃了串串，我由于身体原因，不敢多吃，大部分都是权儿吃了"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_67f0e75a-6d50-4a74-99f2-8fa87970a5df.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"由于我头太痛了，在美团上买了感冒药，回去吃了感冒药睡了一觉头不痛了，就是会流鼻涕。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"最后一天，中午在小吃街随便吃了点直奔机场，我第一次知道廉价航空，行李把控这么严格，基于对这种恶心的行为不满，我直接退票买了一小时后的飞机，极限回家。"}]},{"type":"callout","calloutType":"info","title":"","children":[{"type":"paragraph","children":[{"type":"formatted","text":"回过头看有点冲动，白扔掉了 800 大洋。"}]}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"过完国庆回来，我妈、我弟和我奶奶他们来北京玩，我请了两天假，陪他们玩了四天，又是特种兵把北京著名景点逛了一圈，真的太累了，不过值，这是我妈和我奶奶第一次做飞机，也是第一次出来旅游，算是满足他们的愿望了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"11 月份，突然某天左手一阵一阵的疼，晚上根本疼的睡不着交，第二天请了假去医院，确诊为腱鞘炎，我特么又添新病，一身的毛病，操了。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"从几天前开始，左手不知道为什么特别的痛，特别是按压的时候，发展到昨天晚上，在什么都不触发的情况下开始阵痛，搞得我整宿整宿睡不着，上次阵痛还是眼压犯了的时候，头阵痛，也是生不如死，现在敲了这么一会字，就已经感觉有点受不了了，不知道是不是因为键盘敲多了导致的，在敲的时候垫一个东西会不会好点😥。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"受不了了，请假下午去医院了，又添新病，腱鞘炎(;´༎ຶД༎ຶ`) 。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"12 月份，鼻子的问题越来越严重了，之前在网上买的喷雾效果越来越差，应该是我的病情加重了，最近睡觉老是半夜被憋醒，长此下去不是办法，必须得去医院看看什么情况，到了医院做了鼻内镜，拍了 CT，好家伙，医生一看 CT 结果，跟我说得做手术，让我把网上买的药赶紧扔了。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"最近鼻子的问题越来越严重，然后之前在网上买的药效果越来越差了，近期已经严重的影响到个人的生活了，于是决定今天去医院。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"做了鼻内镜检查和 CT，看到 CT 片子后，医生给我说的第一句话是，你这需要做手术了😥。真的没有想到，已经这么严重了，医生给我开了一个星期的药，如果一个星期后没有好转，就来做手术，并且让我把在网上买的药扔了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"现在的心情喜忧参半，喜的是找到了病因，困扰我多年的问题可以解决掉了，忧的是需要做手术。不过不管怎样，事情开始往正确方向走了。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"真的日了狗了，一身的毛病，希望今天能勤加锻炼，把自己身体的抵抗力搞上去，否则人迟早得没。"}]}],"tags":[],"bannerBg":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/C__Users_pc_.editor_resources_siegfried-poepperl-5xS6JwfK1xk-unsplash_52e8319c-221e-4155-abf4-5a47899fcf56_e5cc524b-3200-4318-9252-943f5f1a68c7.jpg","createTime":1704097869685,"updateTime":1743303640484},"meta":{"type":"article","publishTime":1764823685324}};
+      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":14,"title":"软件使用文档","href":"/docs/document/14/609.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document"}]}],"content":{"id":58,"title":"2023年终总结","author":"","content":[{"type":"paragraph","children":[{"type":"formatted","text":"时间飞逝，2023 年很快就过去了，是时候回顾一下自己的 2023。"}]},{"type":"header","children":[{"type":"formatted","text":"工作"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"今年的工作体验有点像过山车，起起伏伏，但总体上看依然是螺旋上升的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"去年的组织架构调整，我从新技术应用组来到了端外 Web 组，不知道是不是因为疫情居家办公的原因还是因为换个组调整了下心情，刚来这个组的时候感觉没有在新技术应用组那么压抑。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"因为端外 Web 组是新成立的，刚过来没什么业务，主要工作内容包含："}]},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"PC 站"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"M 站"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"PC APP"}]}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"我主要负责做 M 站这块的内容。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"M 站的技术架构非常的老，框架是自定义的 使用 AMD 模块加载，打包使用的 glup，node_modules 中的模块不能通过 npm 下载，而是通过 zip 压缩包的模式进行传递，等等。对于我来说真的是古董级别的框架，而且在项目里面无法使用 ES6 的语法，否则打包就会报错，即使这样，我当时的感觉居然是还可以，可能是在之前那个组有点太难受了，当然如果一直维护这个项目不是长久之计。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"大约维护了 M 站两三个月，过年回来说让我去做别的项目，听到这个消息，那是真的开心，这个新项目是做一个项目管理以及发布系统，定位和 Space O2 差不多，虽然不知道为什么要自己搞一套。我被分配到的任务是微信小程序和支付宝小程序的发布，主要通过官方提供的 npm 包把本地的项目上传上去，而不是通过人去手动的上传，发布这块比较简单，比较复杂的是迭代的管理，日常、预发和线上的发布，接入安全风控，审批单这些，需要仔细考虑状态之间的流转，通过这个项目了解到了 Jenkins 的使用，命令行工具的开发，以及项目发布的一些东西，收获还是蛮大的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"在我开发 VWeb 的同时，一个噩梦又来了，AI 调研，去年就是这个东西差点把我搞死，每天上班如上坟一般，每天都想着辞职不干，本以为去年的 AI 调研就这么结束了，没想到再次卷土重来。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"那个该死的 AI，又找上我了，今天开了个会，根本不知道要干什么，十分的难受。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"不过相比几个月前，还没有出现抑郁的那种情况，虽然很难受，但是没有完全快活不起来，但是我感觉在干下去也快了，折磨啊 😭。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"这次是设计用研提出的一个想法，可不可以使用 AI 来帮助他们出图，被这事搞的我心情有急转直下，我每天都在网上调研 Stable Diffusion，然后训练或者出图看看效果符不符合预期。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"大约持续了一个月，每周对一次进度，每天都感觉日子望不到头，但是转机出现了，第一季度结束后，上面决定把 WIA 端外的部分交给我们做，我们组全人力投入到这个项目中了，我就趁机和我的主管说，AI 那边我就没时间了，就这么把 AI 的事情扔出去了，当时的心情真的爽死了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"进入 WIA 业务，第一个迭代就是一个专项，终于在这里体验到了网上说的互联网节奏，基本每天都是加班到 11. 左右，后面因为开发不完，周六周日都要来进行加班。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"这周进入了 WIA 专项，终于明白了节奏多么紧，从开始进入起，几乎每天都在加班，前天干到 12. 后走，昨天干到 11.，今天周五本来 6. 可以走的，最后还是整到 9. 回家，明天两天我估计还是要去公司，太鸡儿忙了。真的感受到了什么是互联网节奏。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"刚进这个项目，就让我进行排期，由于这个项目的功能、代码和业务完全没有了解过，之前也没有排过期，然后又不敢多排时间，第一次排期就排了二十几天，我记得我的组长就惊呆了，按照我这个专项只要投两个人就可以了，让我和嘉莉重新排期，后面重新给了一版，排期时间加了两三倍，但即使这样，还是低估了，导致天天加班。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"而且给我分配的部分是比较前置的，也就是说他们依赖于我，如果按照一开始我那个法子，一时半会儿搞不完，所以我的压力特别大。我记得那个时候是清明节，力哥刚好来北京出差，我们几个在北京的同学聚了下，在吃饭前我还在家里一直敲代码，聚完回来后也在敲，当时想按照这个法子估计做不完，肯定阻塞没人，脑中突然蹦出个想法，敲了个通宵，按照新的方案来，终于项目能跑起来了，第二天早上 10 点上班，兴奋的宣布了这个结果，我记得当时大家的反应都很平淡，当时还挺失落的，毕竟我搞了个通宵，并且是在假期搞的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"本来我以为后面的每个迭代都是这个节奏，都做好长期加班的准备了，但是没想到后面的迭代都比较轻松，我干活速度又快，基本上没有加过班，甚至有的时候一吃完晚饭就直接回家了。由于之前和主管沟通过，希望自己能稳定下来，而不是这里做一下那里做一下，所以就一直在 WIA 这个项目里。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"到了第二季度，不知道为什么，产品那边突然没什么需求了，导致 WIA 人力有余，人力纷纷都支援别的项目去了。正好 M 站有一个新的需求，我又接手 M 站了，这个需求没想到一干又是两个月，目前看短时间还是会在 M 站里面，历史是惊人的相似，去年也是这个时候我开始做 M 站，也是做两个三个月。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"在职场也摸爬滚打一年多了，感觉自己的适应能力强了很多，之前碰到什么不会的，在自己掌控之外的事就会很焦虑，不知道怎么办，现在碰到这种事情就稍微淡定，不懂就问呗，实在不行和主管说干不了，总有人给你兜着，不要给自己的压力那么大。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"和我共事过的同事对我的评价都不错，特别是关于技术的评价比较高，因为我干活比较快，平时也钻研一些技术上的新东西，很多技术上的东西他们都和我讨论，而且我业务也比较熟，因此有点核心骨干的感觉，但是在其它方面评价就一般般，因为我比较怕事，碰到问题很少去主动的积极的响应，总是抱着多一事不如少一事的想法，这个被主管和组长特意的点了一下，希望我在这方面能有所改善，下半年我开始主动的揽活，补位，在慢慢的改善这方面的问题。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"所以，在工作方面，我觉得今年是在往好的方向发展的，希望明年自己越来越好，更加主动，更加具有主人翁意识，能独当一面。"}]},{"type":"header","children":[{"type":"formatted","text":"学习"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"今年在技术方面没有什么突破性的成长，连看到的技术书都没有几本，这个需要反思，没有好好的利用自己的空闲时间去精进自己。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年明显地感觉到自己的专注力显著降低，基本没法对一件事情集中长时间的精力，很容易走神玩手机，刷视频，刷文章，然后时间就这么过去了，内心很浮躁，希望一步登天，追求短期效果，这个我今年做的是在太差劲了，非常的不满意，2024 年一定要做好规划，做好长期目标，尽可能的远离电子产品（收集和平板）。"}]},{"type":"callout","calloutType":"warning","title":"警告","children":[{"type":"paragraph","children":[{"type":"formatted","text":"我发现我发的消息错别字很多，经常消息发出去，自己读一遍就发现有错别字，不知道这是不是我内心浮躁的一种表现呢，一天天着急忙慌的。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"虽然看的书很少，但是还是看了几本，这里讲几本印象比较深的："}]},{"type":"numbered-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《CSS 世界》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这本书是二刷，2022 年的时候就已经看过一遍了，第一遍看的时候没什么感觉，没感到有什么牛逼的地方，不过那个时候是用空闲时间看完的，看的比较匆忙，另个是那个时候的开发量也不多，没什么体感。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"二刷的时候看的比较仔细，发现很多精彩的地方，特别是关于宽度那里的描述，因为之前对此一直有疑惑，看了之后感觉清晰了很多，正应了那句话"},{"type":"formatted","text":"“念念不忘，必有回响”","highlight":"green"},{"text":"。","type":"formatted"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我本人对于 CSS 是特别感兴趣的，我感觉我对 CSS 的兴趣是大于 JS 的，可能和我学习前端的初衷有关，我就是像做出颜值高的东西，但是对于 CSS 没有非常体系的学习过，基本上就是看了 B 站培训班的视频，这个后续希望自己能体系化。"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《Linux 是怎样工作的》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这本书是我今年读过最好的书，我觉得写的非常的好，这本书是日本人写的，日本人写的书一贯风格是图多，所以理解起来比较轻松，另外它把 Linux 的底层原理讲的很好，强力推荐"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《快与慢》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这是一本心理学的书籍，讲述了人的两个系统，系统 1 和系统 2，一个速度快，比较感性，一个速度慢，比较理性，大部分时候，都是感性的系统帮我们做决定，有的时候你以为你是深思熟虑，非常的理想，但是我们感性的系统非常容易收到环境的影响，非常容易相信自己看到的东西，即使不合理，所以通过暗示等手段非常容易影响你做决定。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"读完收获很大，没想到心理学这么强大且有趣，可读性很高。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年还读了另外一本心理学的书，《心流：最优体验心理学》，可读性是在非常差，基本很难完整的读完一段话，我也是凭借着名气读的这本书，但是没想到可读性这么差，完全不推荐。"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《认知觉醒》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"这本书其实也是二刷，读了之后真的让人干劲十足，但是即使知道了这么多道理，依旧过不好这一生，行动力还是太弱了。"}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"《卡片笔记写作法》"}]},{"type":"paragraph","children":[{"type":"formatted","text":"当时看完这本书还写了篇 2000 多字的读后感，一本讲述如何做笔记的书，当然这本书的目的是讲如何进行写作，记笔记只是手段，如何通过记卡片笔记的方式来帮助你更好的写作。"}]}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年还读了 《DDIA》和《Rust权威指南》，不过因为基本没什么使用场景，虽然读的时候觉得很好，但是读完不用，又给忘了，特别是 Rust 的，这本书英文和中文加起来读了三遍了，但是现在还是忘了，估计用的时候还得再看一遍。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"剩下读完的就是一些小说和传记了，比如《深蓝的故事》，《杨振宁传：规范与对称之美》，《西游记》，《微尘》，《黑客与画家》，《一桩事先张扬的凶杀案》。小说基本过一遍就忘了，可能当时有些感悟，在潜移默化的影响我，这种书一般用来调节以下阅读品味，一直读专业书也挺累的，感受一些人间的烟火气，也是极好的。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年读书少的另外一个原因是我开发了一个笔记软件，我空余的大部分时间基本上都投入到这个软件的开发上了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"之前一直使用的是 Obsidian 做笔记，而我本人也为其写了好几个插件，基本能满足记笔记的要求，而且我把我所有博客的笔记全部都移过来了，但是这个笔记有个不好用的地方，那就是所见即所得的编辑能力太弱了，另外当时读了《卡片笔记写作法》，Obsidian 不能很好的满足我的要求，所以一拍即合，就萌生了自己能不能写一个的想法。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"一开始真的就是一个想法，因为虽然想写，但是对这方面完全不熟，所以就是脑子里一直有这个想法，但是迟迟不肯下笔。后来，到了劳动节，时间比较富裕，闲着也是闲着，就开始实践脑中的这个想法，一开始有个思路，但是经过尝试之后，发现这个思路行不通。按照正常人的逻辑，此路不同不就应该放弃了吗，但是我想做都做了，自己的思路不同，看看别人怎么做的，开始尝试不同的富文本框架，捣鼓了一两天，发现 Slate 这个框架的思路和我之前的思路非常像，这就引起了我的兴趣，根据 Slate 搭建一个非常简陋的文本输入框，非常简单的小 demo，不管怎么样，它跑起来了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"从此之后一发不可收拾，虽然我对富文本编辑这个领域一窍不通，但是凭借着我想把这个东西做出来的信念，它的功能在不断的完善，基本投入了我下半年全部的精力，周末，上班前，下班后所以可以压榨的时间，基本都给了这个编辑器，这个编辑器也没有让我失望，短短的 8 个月的时间，已经完善到我之前根本不敢想象的地步，如果对开发该软件之前的我说，要我 8 个月做出这么一个软件，我当时肯定觉得不可能。但是其实事情远没有你想的那么复杂，所以别想那么多，干就是了，谋事在人，成事在天。"}]},{"type":"header","children":[{"type":"formatted","text":"生活"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"基本上生活非常的平淡，身体非常差，请假基本都去医院了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"今年刚参加完外公的葬礼，不出意外阳了，拖着病躯回到北京，因为嗓子特别痒，一躺下就咳嗽，根本睡不着，基本每天都往医院跑，五天晚上没睡，实在是扛不住了，去了急诊，和医生说五天没睡了，医生给开了个安眠药，第一天没把握住量，一开始吃了一粒，还是睡不着，又干了几粒，总共干了四粒，终于睡着了，但是醒来的时候头痛欲裂，现在想想都怕，我怎么敢吃这么多，可能当时被折磨的实在受不了了。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"本以为不咳嗽了，晚上可以睡个好觉，没想到居然失眠了，整晚没睡，我这已经是连着 5 个晚上没有睡觉了，感觉这样我都要死了，完全没有一点点精神。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"实在受不了了，去了医院的急诊，说我五天没睡了，让医生开点药，医生给我开了安眠药"}]},{"type":"image","url":" https://cdn.staticaly.com/gh/LastKnightCoder/image-for-2022@master/image.1ve63pxy1scg.webp","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"吃了果然果然睡着了，从凌晨 1 点睡到了下午 2 点，中间醒了两次，一次是 7 点醒了一次，被咳醒的，我起床用了喷雾，好多了，然后又继续睡，睡到了 10 点，感觉头有点晕，于是又继续睡，睡到了下午 2 点，醒来的头还是很晕，但是不能在睡了，否则晚上咋睡。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我估计是药吃多了，医生和我说睡前吃一粒，我吃了一粒没啥感觉，就又吃了一粒，还是没啥感觉，这回直接吃了了 2 粒，总共吃了 4 粒，导致醒过来头太晕了。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"然后三月份，又中了甲流，又把我折腾的够呛"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"3.16 号，我下班回家感觉喉咙有点的不舒服，我以为是个小问题，没想到第二天，感觉头有点晕，到了下午，头开始痛了起来，幸亏周五下午搬家，没干什么活。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"五点多，头很痛，完全无法干活，我背着书包就回去了，回来后马上睡觉，睡了一会儿，头好点了，然后点了一碗羊肉汤，喝了之后好多了，然后看了一场狼队的比赛，然后就准备休息，但是我的头不允许，先是全身作冷，然后全身发热，根本无法入睡，迷迷糊糊睡到 6 点多，起床打了个车去了医院，进行检测后发现甲流，医生给我开了药，回来喝了碗热汤，感觉状态又回来了，但是没想到到了晚上，又是全身发冷，然后果然又发烧了，反反复复又折腾了一宿。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"到了星期天，这一天都是在床上度过的，躺了一天，不过这天的睡眠好不错，到了星期一，感觉自己快恢复了，不过今天请了一天假休息，中午吃完饭很困，就去睡觉了，哪里知道，睡了三个小时，一觉醒来，头非常的难受了，浑身无力，走都走不稳，点了汤喝，但是索然无味，晚上没有发烧，但是闹肚子，一直放屁，肚子贼痛，但是拉不出来，一直痛到凌晨一两点，然后我才迷迷糊糊睡过去。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"星期二醒来，感觉还是有点不舒服，但是我还是决定去上班，毕竟假可不多，这天的症状是眼睛很痛，很累，本来想吃完晚饭就走了，没想到有个 7.30 的会，开到将近 9 点，打车回去也将近 9.30 了，直接上床，闭眼听了会直播，迷迷糊糊睡过去了，一觉睡到自然醒，感觉没有任何负面状态了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我真的不想生病了，生病太难受了，什么都做不了，身体果然是革命的本钱。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"五月份一天，感觉自己的心脏不舒服，搁着乱跳，很难受，就和主管请假了，当时周围的人都听到了，被吓了一跳，所幸没什么事。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"今天上午心脏不舒服，就想请个假，我自己就想着回去休息一下，没想到，建哥直接陪我去了医院，然后杰哥、泽华他们都比较关心，峥哥说给我邮点抗原，有点感动。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"前几天看到消息，计算机大佬左耳朵耗子猝死，昨晚又收到电话，金彪的爸爸猝死了，感觉到死亡离人这么近，有点担心自己的身体，感觉自己到处都是病，还是要好好保重身体。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"六月份，公司组织团建，集体去了广西玩了四天，说实话体验不是很好，广西那个时候太热了，根本不想出去，另一个给我印象深刻的就是广西的夜市真的好繁华，感觉广西人是不是晚上才出来活动，对比北京，广西给我的感觉是烟火气息很浓。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"七月份进行了体验，体检完后我报告都没打开看，是医生打电话给我我才知道体检结果，不容乐观啊，一身的毛病"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"今天收到体验公司医生的电话，给我解读体检结果，说实话，一直忘记看体检结果了，从解读上看，我的身体不容乐观，血脂高，尿酸高，有胆囊息肉，有甲状腺结节，感觉全身是病，医生让我多注意饮食，少吃过油的，多吃清淡一点，不要加班熬夜，影响内分泌。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"九月份，趁着国庆假期，约好和佳兴去重庆完，早就想去重庆了，但是一个人不敢去。没想到一到重庆打车就把身份证落车上了，幸苦司机师傅给我送了回来。当时定的行程是 4 天 3 夜，但是万万没想到第二天嗓子就剧痛，早上被生生痛醒，不知道是不是前一天吃的太辣了，每天在重庆也是到处走，感觉没什么意思。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"我第三天已经逛不动，廖权给我定了个酒店，我搁那躺了一天，买了感冒药吃，第二天头就不怎么痛了，但是还是咳嗽。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"重庆四天三夜的旅行终于结束了，第一次主动式的去旅游，不得不说旅游很累啊，花钱折磨人，第一个就把自己给整感冒了🥲。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"第一天上午，去吃了抄手，不得不说很有重庆特色，吃的很爽"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_264d7340-f457-4aaa-b5bb-f4ee280eb55a.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"然后去逛了八一好吃街，吃了当地的一些小吃，吃完之后和我权儿会合了，两年没见了，老友重逢，权儿带着我们去逛了一遍景区，不得不说重庆的路好难走啊，全是楼梯，爬上爬下，累死了"}]},{"type":"html-block","html":"\u003cvideo controls style=\"width: 100%;\" src=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/WeChat_20230928104504.mp4\"\u003e\u003c/video\u003e\n\u003cp style=\"text-align:center; \"\u003e轻轨穿楼\u003c/p\u003e","children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_bcd7f8d7-52bb-4beb-9645-a4c8d7619845.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_0d1d925d-01cb-4b3f-84ed-c7c97d82b96f.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_b9f60e0e-eea4-45a2-81df-f905ed6707f4.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_e880f1c7-f515-4fa5-982e-c5697902bd9a.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"晚上权儿请我吃了火锅，然后去洪崖洞看了夜景"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_31cd4b30-d7a1-4d1d-aa7e-0a1ca4d52c5a.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_262e9ef1-e3c8-411a-bdde-e6e3ffcbc155.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_97296d06-6ffc-4a3c-8240-ce7ea8c74a7c.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"第一天很 nice，但是到了第二天，先是喉咙痛，大早上美团买药，然后肚子痛，找了一上午的厕所。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"下午去体验了一下长江索道，排了一个小时的队，然后就体验了几分钟就结束了，没什么感觉"}]},{"type":"html-block","html":"\u003cvideo controls style=\"width: 100%;\" src=\"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/WeChat_20230928105213.mp4\"\u003e\u003c/video\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"下午去逛了磁器口，这个地方没什么逛的，啥玩的都没有，就一些建筑，没什么意思。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"晚上由于身体实在不行，没有出去，在床上度过了一晚上，喉咙痛的要死，小腿感觉都不是自己的了，太酸了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"第三天，上午本想去南滨路看江景，但是下雨了，而且这个江景要晚上看才行，于是和佳兴转悠了一会儿，然后再大众点评上找了家江湖菜，味道的确很 nice"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_6be443aa-0b93-43bf-8a26-994f0c481463.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"吃完后佳兴去了成都，我由于行程问题，就不打算去成都了，直接在成都再呆一天，下午去了酒店，由于头痛，在酒店睡了一个下午，应该是感冒了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"晚上权儿过来，领我去吃了串串，我由于身体原因，不敢多吃，大部分都是权儿吃了"}]},{"type":"image","url":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_67f0e75a-6d50-4a74-99f2-8fa87970a5df.png","pasteUploading":false,"children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"由于我头太痛了，在美团上买了感冒药，回去吃了感冒药睡了一觉头不痛了，就是会流鼻涕。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"最后一天，中午在小吃街随便吃了点直奔机场，我第一次知道廉价航空，行李把控这么严格，基于对这种恶心的行为不满，我直接退票买了一小时后的飞机，极限回家。"}]},{"type":"callout","calloutType":"info","title":"","children":[{"type":"paragraph","children":[{"type":"formatted","text":"回过头看有点冲动，白扔掉了 800 大洋。"}]}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"过完国庆回来，我妈、我弟和我奶奶他们来北京玩，我请了两天假，陪他们玩了四天，又是特种兵把北京著名景点逛了一圈，真的太累了，不过值，这是我妈和我奶奶第一次做飞机，也是第一次出来旅游，算是满足他们的愿望了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"11 月份，突然某天左手一阵一阵的疼，晚上根本疼的睡不着交，第二天请了假去医院，确诊为腱鞘炎，我特么又添新病，一身的毛病，操了。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"从几天前开始，左手不知道为什么特别的痛，特别是按压的时候，发展到昨天晚上，在什么都不触发的情况下开始阵痛，搞得我整宿整宿睡不着，上次阵痛还是眼压犯了的时候，头阵痛，也是生不如死，现在敲了这么一会字，就已经感觉有点受不了了，不知道是不是因为键盘敲多了导致的，在敲的时候垫一个东西会不会好点😥。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"受不了了，请假下午去医院了，又添新病，腱鞘炎(;´༎ຶД༎ຶ`) 。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"12 月份，鼻子的问题越来越严重了，之前在网上买的喷雾效果越来越差，应该是我的病情加重了，最近睡觉老是半夜被憋醒，长此下去不是办法，必须得去医院看看什么情况，到了医院做了鼻内镜，拍了 CT，好家伙，医生一看 CT 结果，跟我说得做手术，让我把网上买的药赶紧扔了。"}]},{"type":"blockquote","children":[{"type":"paragraph","children":[{"type":"formatted","text":"最近鼻子的问题越来越严重，然后之前在网上买的药效果越来越差了，近期已经严重的影响到个人的生活了，于是决定今天去医院。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"做了鼻内镜检查和 CT，看到 CT 片子后，医生给我说的第一句话是，你这需要做手术了😥。真的没有想到，已经这么严重了，医生给我开了一个星期的药，如果一个星期后没有好转，就来做手术，并且让我把在网上买的药扔了。"}]},{"type":"paragraph","children":[{"type":"formatted","text":"现在的心情喜忧参半，喜的是找到了病因，困扰我多年的问题可以解决掉了，忧的是需要做手术。不过不管怎样，事情开始往正确方向走了。"}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"真的日了狗了，一身的毛病，希望今天能勤加锻炼，把自己身体的抵抗力搞上去，否则人迟早得没。"}]}],"tags":[],"bannerBg":"https://blog-hostimaging.oss-cn-beijing.aliyuncs.com/C__Users_pc_.editor_resources_siegfried-poepperl-5xS6JwfK1xk-unsplash_52e8319c-221e-4155-abf4-5a47899fcf56_e5cc524b-3200-4318-9252-943f5f1a68c7.jpg","createTime":1704097869685,"updateTime":1743303640484},"meta":{"type":"article","publishTime":1767266229577}};
     </script>
-    <script type="module" crossorigin src="../assets/article-68nwMAa9.js"></script>
-    <link rel="modulepreload" crossorigin href="../assets/global-B543ggEw.js">
-    <link rel="modulepreload" crossorigin href="../assets/Dropdown-Zs5jwcr9.js">
-    <link rel="modulepreload" crossorigin href="../assets/index-CEpohQRa.js">
-    <link rel="stylesheet" crossorigin href="../assets/global-DxDSM-16.css">
+    <script type="module" crossorigin src="../assets/article-puSyRPJr.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/global-Dqh_OZbR.js">
+    <link rel="modulepreload" crossorigin href="../assets/Dropdown-Bzhy-tn3.js">
+    <link rel="modulepreload" crossorigin href="../assets/index-CMsEYPb_.js">
+    <link rel="stylesheet" crossorigin href="../assets/global-Bb86jZEf.css">
     <link rel="stylesheet" crossorigin href="../assets/index-oqgB9MtW.css">
-  </head>
+  <style data-runtime-tailwind>/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;</style>
+</head>
   <body>
     <div id="root"></div>
   </body>

@@ -6,15 +6,176 @@
     <title>文章</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <script>
-      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"人生天地间，忽如远行客","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document"}]}],"content":{"id":10,"title":"渐变色的妙用","author":"","content":[{"type":"paragraph","children":[{"type":"formatted","text":"在 CSS 中渐变色作为背景可以制作出非常绚丽，迷人的效果，往往我们将焦点聚集在渐变上面，而忽略了它作为背景图片的作用，在这里我将介绍两个渐变色作为背景色以及背景图片的妙用，可以实现一些难以实现的效果。"}],"disableDrag":false},{"type":"header","children":[{"type":"formatted","text":"透明背景蒙层"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"我在一个实际的应用开发中，UI 给的背景图是一张图片加上一个透明颜色的蒙层背景合成而得的。当时 UI 只给了没有添加蒙层的图片，并告诉我实际的图片是如上做出来的。我当时表示 OK，觉得自己可以搞出来。"}],"disableDrag":false},{"type":"html-block","html":"\u003cdiv style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 10px;\"\u003e\n  \u003cimg src=\"https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/bg.2d47rqpdwx3w.png\" style=\"zoom: 50%; width: 100%; box-shadow: none;\"\u003e\n  \u003cimg src=\"https://cdn.jsdelivr.net/gh/LastKnightCoder/ImgHosting3@master/mengceng.3s6mxwl8z820.png\" style=\"zoom: 50%; width: 100%; box-shadow: none;\"\u003e \n\u003c/div\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"背景色？"}],"level":3},{"type":"paragraph","children":[{"type":"formatted","text":"第一次尝试，使用一个透明的背景色"}],"disableDrag":false},{"type":"code-block","code":"background: url('./bg.png') rgba(237, 240, 242, 0.8);","language":"css","uuid":"2c76ce4d-e6dc-4151-9076-09f95b3605d4","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"很显然是没用的，因为背景色是一直在背景图片下面的。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"但是我知道通过 "},{"type":"formatted","text":"background","code":true},{"type":"formatted","text":" 是可以设置多层背景，所以我将背景色设置在另一层背景上可不可以呢"}],"disableDrag":false},{"type":"code-block","code":"background: rgba(237, 240, 242, 0.8), url('bg.png');","language":"css","uuid":"436f6496-9690-41d8-9f97-3d95f55c509f","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"但是发现不仅没有蒙层效果，而且连背景图片都消失了，后来我查规范才知道，对于"},{"type":"formatted","text":"背景色只能设置一次，并且只能设置在最后一层背景中","bold":true},{"type":"formatted","text":"，所以这个方案不通。"}],"disableDrag":false},{"type":"header","children":[{"type":"formatted","text":"多层 DOM"}],"level":3},{"type":"paragraph","children":[{"type":"formatted","text":"使用多层 DOM 结构，使得它们在不同的层，背景图片在底部，接着是透明背景色，接着是内容"}],"disableDrag":false},{"type":"code-block","code":"\u003cdiv class=\"bg\"\u003e\n  \u003cdiv class=\"color\"\u003e\n    \u003cdiv class=\"content\"\u003e...\u003c/div\u003e\n  \u003cdiv\u003e\n\u003c/div\u003e","language":"html","uuid":"1b7078c9-7f4c-45e5-863f-69f8c09281c3","children":[{"type":"formatted","text":""}]},{"type":"code-block","code":".bg {\n  background: url('bg.png') no-repeat center / contain;\n}\n.color {\n  background: rgba(237, 240, 242, 0.8);\n}","language":"css","uuid":"5ba3b27e-5fcc-4a4e-9bf7-72e7f8554f80","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"可以实现效果，但是多了几层无意义的 "},{"type":"formatted","text":"div","code":true},{"type":"formatted","text":" 元素。"}],"disableDrag":false},{"type":"header","children":[{"type":"formatted","text":"渐变色"}],"level":3},{"type":"paragraph","children":[{"type":"formatted","text":"有没有更加简单的方法，后面我在机缘巧合下发现了，渐变色在背景里面是充当背景图片来用的"}],"disableDrag":false},{"type":"code-block","code":"background-image: linear-gardient(...);","language":"css","uuid":"7be0dc68-aa38-4a71-a7a5-b3cf2697cdbe","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"既然背景色只能出现在最后一层，但是渐变色是背景图片，它可以出现在其它背景图片的上面，只要将渐变色的两个颜色设置为一样，就是一个颜色了"}],"disableDrag":false},{"type":"code-block","code":"background: \n  linear-gradient(rgba(237, 240, 242, 0.8), rgba(237, 240, 242, 0.8)),\n  url('./bg,png') no-repeat center / contain;","language":"css","uuid":"7de24a5c-a20f-4691-89cc-09a425d551cf","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"当然最简单的办法就是让 UI 发一张合成后的图片过来 ... ...","bold":true}],"disableDrag":false},{"type":"header","children":[{"text":"背景色块","type":"formatted"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"在一个项目中，要实现如下效果"}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png"},{"type":"paragraph","children":[{"type":"formatted","text":"在特定的文字下面有一条线，线是带圆角的并且在字的下面，这个如何实现？"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"第一种方案，背景图片，将下面的线切出来，然后作为背景放在字的下面，但是如果字数一旦发生改变，你就得重新切图，这个方案是不得已而为之。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"第二种方案使用定位，考虑使用伪元素来画这条线，然后定位在下方"}],"disableDrag":false},{"type":"code-block","code":"\u003cem\u003e地上霜\u003c/em\u003e","language":"html","uuid":"562c2e09-ad06-4ad9-9d6e-809fa83516c1","children":[{"type":"formatted","text":""}]},{"type":"code-block","code":"em {\n  position: relative;\n  &::after {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    display: block;\n    content: '';\n    width: 100%;\n    height: 10px;\n    background: #45b787;\n    border-radius: 5px;\n  }\n}","language":"css","uuid":"14c3c997-c359-4f4f-9cfc-91f6edbe2bf2","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"但是发现下面这条线会"},{"type":"formatted","text":"压住文字","bold":true},{"type":"formatted","text":"，并且对于"},{"type":"formatted","text":"换行的文字","bold":true},{"type":"formatted","text":"无效。"}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/1.4v599rukurs0.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/1.4v599rukurs0.png"},{"type":"paragraph","children":[{"type":"formatted","text":"线会压住文字，因为子元素是一定在父元素的上层，所以我们改变一下文档结构，使得文字和底部的线是兄弟关系，通过改变它们的 "},{"type":"formatted","text":"z-index","code":true},{"type":"formatted","text":" 使得线在文字的下方"}],"disableDrag":false},{"type":"code-block","code":"\u003cem\u003e\n  \u003cspan class=\"words\"\u003e地上霜\u003c/span\u003e\n  \u003cspan class=\"line\"\u003e\u003c/span\u003e\n\u003c/em\u003e","language":"html","uuid":"0fdab619-166f-406c-9041-e16851aa0873","children":[{"type":"formatted","text":""}]},{"type":"code-block","code":"em {\n  position: relative;\n    .words {\n      position: relative;\n      z-index: 2;\n    }\n    .line {\n      position: absolute;\n      z-index: 1;\n      left: 0;\n      bottom: 0;\n      display: block;\n      content: '';\n      width: 100%;\n      height: 10px;\n      background: #45b787;\n      border-radius: 5px;\n    }\n}","language":"CSS","uuid":"4809919f-bd9f-418c-a347-a29cf911385d","children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/2.ir6ms555uqo.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/2.ir6ms555uqo.png"},{"type":"paragraph","children":[{"type":"formatted","text":"此种方法解决了线会压住文字的问题，但是如果文字换行的话，还是会丢失样式，所以这个方案不可用。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"下面就是终极的解决方案，使用渐变色来绘制图片，我们可以将下面的线分为三个部分，中间的一条线以及左右两边的两个圆。首先 DOM 结构如下"}],"disableDrag":false},{"type":"code-block","code":"\u003cem\u003e地上霜\u003c/em\u003e","language":"html","uuid":"9f5393ea-4ff3-4905-8af9-6d2354d89621","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"我们使用线性渐变色来绘制这个线"}],"disableDrag":false},{"type":"code-block","code":"em {\n  background: \n    linear-gradient(#45b787, #45b787) no-repeat center bottom / calc(100% - 10px) 10px;\n}","language":"css","uuid":"1102367c-317c-4bc6-a3b9-a50b65d460f4","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"线的宽度为 "},{"type":"formatted","text":"calc(100% - 10px)","code":true},{"type":"formatted","text":" ，左右各留 "},{"type":"formatted","text":"5px","code":true},{"type":"formatted","text":" 来放圆。因为是背景，所以会在文字的下方，并且即使是换行也没有问题"}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/3.3glu87q32om0.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/3.3glu87q32om0.png"},{"type":"paragraph","children":[{"type":"formatted","text":"下面使用径向渐变来绘制圆，首先来看径向渐变的语法"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(shape size at x-position y-position, color1 stop1, color2 stop2, ...);","language":"css","uuid":"a6916ab3-8c34-4818-895c-220f9410ec2a","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"shape 表示径向渐变的形状，常见的包括 circle、ellipse ； size 表示形状的大小，对于圆来说就是直径；(x-position, y-position) 表示圆心的坐标；后面的 (color, stop) 就用来表示渐变色了。使用径向渐变绘制圆可以套用如下模板"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(circle size at x-position y-position, color1 50%, transparent 50%);","language":"css","uuid":"a9bc116e-b467-4ec5-93a5-9b3c3e4edba2","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"接下来我们只需要设置圆的大小，以及原因位置，填充颜色即可，例如对于直线左边的圆，它的大小是 10px ，圆心位于直线左边的中心，也就是离左边 5px ，离底部 5px ，填充颜色同直线为 #45b787 ，所以左边的圆可以如下绘制"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(circle 10px at 5px calc(100% - 5px), #45b787 50%, transparent 50%);","language":"css","uuid":"14ce494a-dfd3-4823-b6e1-4ddf68e5784b","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"上面 y-position 设置为 calc(100% - 5px) 表示距离底部 5px 。同理右边圆的绘制如下"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(circle 10px at calc(100% - 5px) calc(100% - 5px), #45b787 50%, transparent 50%);","language":"css","uuid":"ba53f7a5-14c5-41df-b968-048b3c8aa952","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"右边圆的 x-position 设置为了 calc(100% - 5px) 表示距离右侧 5px 。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"综合以上，全部的样式如下："}],"disableDrag":false},{"type":"code-block","code":"em {\n  background: \n    linear-gradient(#45b787, #45b787) no-repeat center bottom / calc(100% - 10px) 10px,\n    radial-gradient(circle 10px at 5px calc(100% - 5px), #45b787 50%, transparent 50%),\n    radial-gradient(circle 10px at calc(100% - 5px) calc(100% - 5px), #45b787 50%, transparent 50%);\n}","language":"css","uuid":"a79aa92d-0b1d-4a07-aa84-32721a37fda0","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"效果如下："}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png"}],"tags":["CSS","渐变色","技巧"],"bannerBg":"https://github.com/LastKnightCoder/image-for-2023/raw/master/333_9101e3e0-4588-4dcd-800e-3ade1fabce0b.jpg","createTime":1629042840000,"updateTime":1756993534349},"meta":{"type":"article","publishTime":1764823685315}};
+      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":14,"title":"软件使用文档","href":"/docs/document/14/609.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document"}]}],"content":{"id":10,"title":"渐变色的妙用","author":"","content":[{"type":"paragraph","children":[{"type":"formatted","text":"在 CSS 中渐变色作为背景可以制作出非常绚丽，迷人的效果，往往我们将焦点聚集在渐变上面，而忽略了它作为背景图片的作用，在这里我将介绍两个渐变色作为背景色以及背景图片的妙用，可以实现一些难以实现的效果。"}],"disableDrag":false},{"type":"header","children":[{"type":"formatted","text":"透明背景蒙层"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"我在一个实际的应用开发中，UI 给的背景图是一张图片加上一个透明颜色的蒙层背景合成而得的。当时 UI 只给了没有添加蒙层的图片，并告诉我实际的图片是如上做出来的。我当时表示 OK，觉得自己可以搞出来。"}],"disableDrag":false},{"type":"html-block","html":"\u003cdiv style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 10px;\"\u003e\n  \u003cimg src=\"http://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_752c7b33-3c3c-4607-84e0-17dc5bd38a8d.webp\" style=\"zoom: 50%; width: 100%; box-shadow: none;\"\u003e\n  \u003cimg src=\"http://blog-hostimaging.oss-cn-beijing.aliyuncs.com/image_1a5cfdba-e570-422a-a792-df9f79a8794e.webp\" style=\"zoom: 50%; width: 100%; box-shadow: none;\"\u003e \n\u003c/div\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"背景色？"}],"level":3},{"type":"paragraph","children":[{"type":"formatted","text":"第一次尝试，使用一个透明的背景色"}],"disableDrag":false},{"type":"code-block","code":"background: url('./bg.png') rgba(237, 240, 242, 0.8);","language":"css","uuid":"2c76ce4d-e6dc-4151-9076-09f95b3605d4","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"很显然是没用的，因为背景色是一直在背景图片下面的。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"但是我知道通过 "},{"type":"formatted","text":"background","code":true},{"type":"formatted","text":" 是可以设置多层背景，所以我将背景色设置在另一层背景上可不可以呢"}],"disableDrag":false},{"type":"code-block","code":"background: rgba(237, 240, 242, 0.8), url('bg.png');","language":"css","uuid":"436f6496-9690-41d8-9f97-3d95f55c509f","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"但是发现不仅没有蒙层效果，而且连背景图片都消失了，后来我查规范才知道，对于"},{"type":"formatted","text":"背景色只能设置一次，并且只能设置在最后一层背景中","bold":true},{"type":"formatted","text":"，所以这个方案不通。"}],"disableDrag":false},{"type":"header","children":[{"type":"formatted","text":"多层 DOM"}],"level":3},{"type":"paragraph","children":[{"type":"formatted","text":"使用多层 DOM 结构，使得它们在不同的层，背景图片在底部，接着是透明背景色，接着是内容"}],"disableDrag":false},{"type":"code-block","code":"\u003cdiv class=\"bg\"\u003e\n  \u003cdiv class=\"color\"\u003e\n    \u003cdiv class=\"content\"\u003e...\u003c/div\u003e\n  \u003cdiv\u003e\n\u003c/div\u003e","language":"html","uuid":"1b7078c9-7f4c-45e5-863f-69f8c09281c3","children":[{"type":"formatted","text":""}]},{"type":"code-block","code":".bg {\n  background: url('bg.png') no-repeat center / contain;\n}\n.color {\n  background: rgba(237, 240, 242, 0.8);\n}","language":"css","uuid":"5ba3b27e-5fcc-4a4e-9bf7-72e7f8554f80","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"可以实现效果，但是多了几层无意义的 "},{"type":"formatted","text":"div","code":true},{"type":"formatted","text":" 元素。"}],"disableDrag":false},{"type":"header","children":[{"type":"formatted","text":"渐变色"}],"level":3},{"type":"paragraph","children":[{"type":"formatted","text":"有没有更加简单的方法，后面我在机缘巧合下发现了，渐变色在背景里面是充当背景图片来用的"}],"disableDrag":false},{"type":"code-block","code":"background-image: linear-gardient(...);","language":"css","uuid":"7be0dc68-aa38-4a71-a7a5-b3cf2697cdbe","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"既然背景色只能出现在最后一层，但是渐变色是背景图片，它可以出现在其它背景图片的上面，只要将渐变色的两个颜色设置为一样，就是一个颜色了"}],"disableDrag":false},{"type":"code-block","code":"background: \n  linear-gradient(rgba(237, 240, 242, 0.8), rgba(237, 240, 242, 0.8)),\n  url('./bg,png') no-repeat center / contain;","language":"css","uuid":"7de24a5c-a20f-4691-89cc-09a425d551cf","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"当然最简单的办法就是让 UI 发一张合成后的图片过来 ... ...","bold":true}],"disableDrag":false},{"type":"header","children":[{"text":"背景色块","type":"formatted"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"在一个项目中，要实现如下效果"}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png"},{"type":"paragraph","children":[{"type":"formatted","text":"在特定的文字下面有一条线，线是带圆角的并且在字的下面，这个如何实现？"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"第一种方案，背景图片，将下面的线切出来，然后作为背景放在字的下面，但是如果字数一旦发生改变，你就得重新切图，这个方案是不得已而为之。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"第二种方案使用定位，考虑使用伪元素来画这条线，然后定位在下方"}],"disableDrag":false},{"type":"code-block","code":"\u003cem\u003e地上霜\u003c/em\u003e","language":"html","uuid":"562c2e09-ad06-4ad9-9d6e-809fa83516c1","children":[{"type":"formatted","text":""}]},{"type":"code-block","code":"em {\n  position: relative;\n  &::after {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    display: block;\n    content: '';\n    width: 100%;\n    height: 10px;\n    background: #45b787;\n    border-radius: 5px;\n  }\n}","language":"css","uuid":"14c3c997-c359-4f4f-9cfc-91f6edbe2bf2","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"但是发现下面这条线会"},{"type":"formatted","text":"压住文字","bold":true},{"type":"formatted","text":"，并且对于"},{"type":"formatted","text":"换行的文字","bold":true},{"type":"formatted","text":"无效。"}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/1.4v599rukurs0.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/1.4v599rukurs0.png"},{"type":"paragraph","children":[{"type":"formatted","text":"线会压住文字，因为子元素是一定在父元素的上层，所以我们改变一下文档结构，使得文字和底部的线是兄弟关系，通过改变它们的 "},{"type":"formatted","text":"z-index","code":true},{"type":"formatted","text":" 使得线在文字的下方"}],"disableDrag":false},{"type":"code-block","code":"\u003cem\u003e\n  \u003cspan class=\"words\"\u003e地上霜\u003c/span\u003e\n  \u003cspan class=\"line\"\u003e\u003c/span\u003e\n\u003c/em\u003e","language":"html","uuid":"0fdab619-166f-406c-9041-e16851aa0873","children":[{"type":"formatted","text":""}]},{"type":"code-block","code":"em {\n  position: relative;\n    .words {\n      position: relative;\n      z-index: 2;\n    }\n    .line {\n      position: absolute;\n      z-index: 1;\n      left: 0;\n      bottom: 0;\n      display: block;\n      content: '';\n      width: 100%;\n      height: 10px;\n      background: #45b787;\n      border-radius: 5px;\n    }\n}","language":"CSS","uuid":"4809919f-bd9f-418c-a347-a29cf911385d","children":[{"type":"formatted","text":""}]},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/2.ir6ms555uqo.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/2.ir6ms555uqo.png"},{"type":"paragraph","children":[{"type":"formatted","text":"此种方法解决了线会压住文字的问题，但是如果文字换行的话，还是会丢失样式，所以这个方案不可用。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"下面就是终极的解决方案，使用渐变色来绘制图片，我们可以将下面的线分为三个部分，中间的一条线以及左右两边的两个圆。首先 DOM 结构如下"}],"disableDrag":false},{"type":"code-block","code":"\u003cem\u003e地上霜\u003c/em\u003e","language":"html","uuid":"9f5393ea-4ff3-4905-8af9-6d2354d89621","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"我们使用线性渐变色来绘制这个线"}],"disableDrag":false},{"type":"code-block","code":"em {\n  background: \n    linear-gradient(#45b787, #45b787) no-repeat center bottom / calc(100% - 10px) 10px;\n}","language":"css","uuid":"1102367c-317c-4bc6-a3b9-a50b65d460f4","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"线的宽度为 "},{"type":"formatted","text":"calc(100% - 10px)","code":true},{"type":"formatted","text":" ，左右各留 "},{"type":"formatted","text":"5px","code":true},{"type":"formatted","text":" 来放圆。因为是背景，所以会在文字的下方，并且即使是换行也没有问题"}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/3.3glu87q32om0.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/3.3glu87q32om0.png"},{"type":"paragraph","children":[{"type":"formatted","text":"下面使用径向渐变来绘制圆，首先来看径向渐变的语法"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(shape size at x-position y-position, color1 stop1, color2 stop2, ...);","language":"css","uuid":"a6916ab3-8c34-4818-895c-220f9410ec2a","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"shape 表示径向渐变的形状，常见的包括 circle、ellipse ； size 表示形状的大小，对于圆来说就是直径；(x-position, y-position) 表示圆心的坐标；后面的 (color, stop) 就用来表示渐变色了。使用径向渐变绘制圆可以套用如下模板"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(circle size at x-position y-position, color1 50%, transparent 50%);","language":"css","uuid":"a9bc116e-b467-4ec5-93a5-9b3c3e4edba2","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"接下来我们只需要设置圆的大小，以及原因位置，填充颜色即可，例如对于直线左边的圆，它的大小是 10px ，圆心位于直线左边的中心，也就是离左边 5px ，离底部 5px ，填充颜色同直线为 #45b787 ，所以左边的圆可以如下绘制"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(circle 10px at 5px calc(100% - 5px), #45b787 50%, transparent 50%);","language":"css","uuid":"14ce494a-dfd3-4823-b6e1-4ddf68e5784b","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"上面 y-position 设置为 calc(100% - 5px) 表示距离底部 5px 。同理右边圆的绘制如下"}],"disableDrag":false},{"type":"code-block","code":"radial-gradient(circle 10px at calc(100% - 5px) calc(100% - 5px), #45b787 50%, transparent 50%);","language":"css","uuid":"ba53f7a5-14c5-41df-b968-048b3c8aa952","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"右边圆的 x-position 设置为了 calc(100% - 5px) 表示距离右侧 5px 。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"综合以上，全部的样式如下："}],"disableDrag":false},{"type":"code-block","code":"em {\n  background: \n    linear-gradient(#45b787, #45b787) no-repeat center bottom / calc(100% - 10px) 10px,\n    radial-gradient(circle 10px at 5px calc(100% - 5px), #45b787 50%, transparent 50%),\n    radial-gradient(circle 10px at calc(100% - 5px) calc(100% - 5px), #45b787 50%, transparent 50%);\n}","language":"css","uuid":"a79aa92d-0b1d-4a07-aa84-32721a37fda0","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"效果如下："}],"disableDrag":false},{"type":"image","url":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png","children":[{"type":"formatted","text":""}],"previewUrl":"https://github.com/LastKnightCoder/image-for-2022/raw/master/4.54ry6ajplf00.png"}],"tags":["CSS","渐变色","技巧"],"bannerBg":"https://github.com/LastKnightCoder/image-for-2023/raw/master/333_9101e3e0-4588-4dcd-800e-3ade1fabce0b.jpg","createTime":1629042840000,"updateTime":1765112391725},"meta":{"type":"article","publishTime":1767266229520}};
     </script>
-    <script type="module" crossorigin src="../assets/article-68nwMAa9.js"></script>
-    <link rel="modulepreload" crossorigin href="../assets/global-B543ggEw.js">
-    <link rel="modulepreload" crossorigin href="../assets/Dropdown-Zs5jwcr9.js">
-    <link rel="modulepreload" crossorigin href="../assets/index-CEpohQRa.js">
-    <link rel="stylesheet" crossorigin href="../assets/global-DxDSM-16.css">
+    <script type="module" crossorigin src="../assets/article-puSyRPJr.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/global-Dqh_OZbR.js">
+    <link rel="modulepreload" crossorigin href="../assets/Dropdown-Bzhy-tn3.js">
+    <link rel="modulepreload" crossorigin href="../assets/index-CMsEYPb_.js">
+    <link rel="stylesheet" crossorigin href="../assets/global-Bb86jZEf.css">
     <link rel="stylesheet" crossorigin href="../assets/index-oqgB9MtW.css">
-  </head>
+  <style data-runtime-tailwind>/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;</style>
+</head>
   <body>
     <div id="root"></div>
   </body>

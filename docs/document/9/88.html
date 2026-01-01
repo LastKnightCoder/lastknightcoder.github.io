@@ -6,15 +6,1472 @@
     <title>文档</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <script>
-      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"人生天地间，忽如远行客","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"sidebar":[{"title":"SVG","children":[{"title":"基本概念","children":[{"title":"SVG 介绍","href":"/docs/document/9/76.html"},{"title":"视口、viewBox 与 preserveAspectRatio","href":"/docs/document/9/80.html"},{"title":"基本形状","children":[{"title":"线","href":"/docs/document/9/82.html"},{"title":"折线","href":"/docs/document/9/83.html"},{"title":"矩形","href":"/docs/document/9/84.html"},{"title":"圆和椭圆","href":"/docs/document/9/85.html"},{"title":"多边形","href":"/docs/document/9/86.html"},{"title":"路径","href":"/docs/document/9/98.html"}]},{"title":"marker","href":"/docs/document/9/99.html"},{"title":"文档组织","href":"/docs/document/9/87.html"},{"title":"渐变色","href":"/docs/document/9/88.html"},{"title":"图案","href":"/docs/document/9/89.html"},{"title":"文本","href":"/docs/document/9/90.html"},{"title":"变换","href":"/docs/document/9/91.html"},{"title":"裁剪","href":"/docs/document/9/92.html"},{"title":"蒙版","href":"/docs/document/9/93.html"}]},{"title":"动画","children":[{"title":"animate","href":"/docs/document/9/79.html"},{"title":"同步动画","href":"/docs/document/9/94.html"},{"title":"animateTransform","href":"/docs/document/9/95.html"},{"title":"animateMotion","href":"/docs/document/9/96.html"}]}]}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document","active":true}]}],"content":{"id":88,"title":"渐变色","content":[{"type":"paragraph","children":[{"type":"formatted","text":"除了可以给形状填充纯色之外，我们还可以为其添加渐变色，渐变色分为两种："}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"线性渐变"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"径向渐变"}],"disableDrag":false}]}]},{"type":"header","children":[{"type":"formatted","text":"线性渐变"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"使用 "},{"type":"formatted","text":"\u003clinearGradient\u003e\u003c/linearGradient\u003e","code":true},{"type":"formatted","text":" 来定义线性渐变，最简单的渐变就是从一个颜色渐变到另一个颜色，我们只需要定义两个颜色即可，我们使用 "},{"type":"formatted","text":"\u003cstop\u003e","code":true},{"type":"formatted","text":" 来定义颜色节点"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra1)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"2777afbf-a7af-4b6d-a3fe-8831e1f7e46f","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra1)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"stop","code":true},{"type":"formatted","text":" 标签中需要定义两个属性"}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"offset","code":true},{"type":"formatted","text":"：节点位置，取值在 0-1 之间，可以为百分比"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"stop-color","code":true},{"type":"formatted","text":"：节点颜色"}],"disableDrag":false}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"一旦我们定义好节点位置和节点颜色，它们之间的渐变色就会被自动算出。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"我们可以定义多个 "},{"type":"formatted","text":"stop","code":true},{"type":"formatted","text":" 标签，实现多个颜色的渐变"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra2)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"c0434eb3-ff0a-47d2-a67c-35d4a973d4b2","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra2)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"渐变色的方向默认是从左向右，我们可以通过 "},{"type":"formatted","text":"(x1, y1) (x2, y2)","code":true},{"type":"formatted","text":" 定义渐变的方向，方向由 "},{"type":"formatted","text":"(x1, y1) → (x2, y2)","code":true},{"type":"formatted","text":"，"},{"type":"formatted","text":"x1 ...","code":true},{"type":"formatted","text":" 四个值的取值范围在 "},{"type":"formatted","text":"[0, 1]","code":true},{"type":"formatted","text":" 之间"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003c!-- 从右到左 --\u003e\n    \u003clinearGradient id=\"gra3\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra3)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"dc568ab1-4331-465d-aaa4-27926aa4fa2f","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003c!-- 从右到左 --\u003e\n    \u003clinearGradient id=\"gra3\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra3)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"渐变色还可以被其他 "},{"type":"formatted","text":"linearGradient","code":true},{"type":"formatted","text":" 通过 "},{"type":"formatted","text":"xlink:href=\"#id\"","code":true},{"type":"formatted","text":"引用，从而达到复用的目的。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"如果我们定义的颜色起点不在 "},{"type":"formatted","text":"0%","code":true},{"type":"formatted","text":"，终点不在 "},{"type":"formatted","text":"100%","code":true},{"type":"formatted","text":"，例如 "},{"type":"formatted","text":"20%-80%","code":true},{"type":"formatted","text":" 定义有渐变，那么 "},{"type":"formatted","text":"0%-20%","code":true},{"type":"formatted","text":" 以及 "},{"type":"formatted","text":"80%-100%","code":true},{"type":"formatted","text":" 呈现什么样的颜色？这个由 "},{"type":"formatted","text":"spreadMethod","code":true},{"type":"formatted","text":" 确定，它有三种取值"}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"pad","code":true},{"type":"formatted","text":"：起点颜色扩散到 "},{"type":"formatted","text":"0%","code":true},{"type":"formatted","text":"，终点颜色扩散到 "},{"type":"formatted","text":"100%","code":true},{"type":"formatted","text":"。"}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"假设 "},{"type":"formatted","text":"20%","code":true},{"type":"formatted","text":" 是起点，那么 "},{"type":"formatted","text":"0%-20%","code":true},{"type":"formatted","text":" 填充为起点颜色"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"假设 "},{"type":"formatted","text":"80%","code":true},{"type":"formatted","text":" 是终点，那么 "},{"type":"formatted","text":"80%-100%","code":true},{"type":"formatted","text":" 填充为终点颜色"}],"disableDrag":false}]}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"repeat","code":true},{"type":"formatted","text":"：重复起点到终点的渐变"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"reflect","code":true},{"type":"formatted","text":"：以起点 → 终点，终点 → 起点的模式重复渐变"}],"disableDrag":false}]}]},{"type":"highlight-block","color":"blue","children":[{"type":"paragraph","children":[{"type":"formatted","text":"pad","code":true},{"type":"formatted","text":" 是默认值。"}],"disableDrag":false}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra4\" x1=\"0.2\" y1=\"0\" x2=\"0.8\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n    \u003clinearGradient id=\"gra-pad\" xlink:href=\"#gra4\" spreadMethod=\"pad\" /\u003e\n    \u003clinearGradient id=\"gra-repeat\" xlink:href=\"#gra4\" spreadMethod=\"repeat\" /\u003e\n    \u003clinearGradient id=\"gra-reflect\" xlink:href=\"#gra4\" spreadMethod=\"reflect\" /\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra-pad)\" /\u003e\n  \u003crect x=\"0\" y=\"30\" width=\"200\" height=\"20\" fill=\"url(#gra-repeat)\" /\u003e\n  \u003crect x=\"0\" y=\"60\" width=\"200\" height=\"20\" fill=\"url(#gra-reflect)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"0761d598-b989-4a0c-978e-3f9c7e1bb2a9","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra4\" x1=\"0.2\" y1=\"0\" x2=\"0.8\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n    \u003clinearGradient id=\"gra-pad\" \n    xlink:href=\"#gra4\" \n    spreadMethod=\"pad\" /\u003e\n    \u003clinearGradient id=\"gra-repeat\" xlink:href=\"#gra4\" spreadMethod=\"repeat\" /\u003e\n    \u003clinearGradient id=\"gra-reflect\" xlink:href=\"#gra4\" spreadMethod=\"reflect\" /\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra-pad)\" /\u003e\n  \u003crect x=\"0\" y=\"30\" width=\"200\" height=\"20\" fill=\"url(#gra-repeat)\" /\u003e\n  \u003crect x=\"0\" y=\"60\" width=\"200\" height=\"20\" fill=\"url(#gra-reflect)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"径向渐变"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"径向渐变就是颜色从某个点向外扩散"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad1)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"8aae89d7-da85-470e-9dbe-320c6530fe49","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad1)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"有 5 个控制渐变的属性："}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"cx, cy","code":true},{"type":"formatted","text":"：扩散圆心，默认值为 "},{"type":"formatted","text":"50%, 50%","code":true}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"fx, fy","code":true},{"type":"formatted","text":"：焦点，即起始颜色位置("},{"type":"formatted","text":"0%","code":true},{"type":"formatted","text":")，默认同 "},{"type":"formatted","text":"cx, cy","code":true},{"type":"formatted","text":" 一致"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"r","code":true},{"type":"formatted","text":"：扩散半径，默认为 "},{"type":"formatted","text":"50%","code":true},{"type":"formatted","text":"，水平方向的半径和垂直方向的半径分别相对于宽高计算的"}],"disableDrag":false}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"示例1："},{"type":"formatted","text":"cx=0, cy=0, r=141.4%","code":true}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad2\" cx=\"0\" cy=\"0\" r=\"141.4%\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad2)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"b69fa8f2-44c7-41ae-9db4-63a9e9f73fd3","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad2\" cx=\"0\" cy=\"0\" r=\"141.4%\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad2)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"highlight-block","color":"blue","children":[{"type":"paragraph","children":[{"type":"formatted","text":"r=141.4%","code":true},{"type":"formatted","text":" 是对角线的长度 "},{"type":"inline-math","tex":"\\sqrt{2}","children":[{"type":"formatted","text":"\\sqrt{2}"}]},{"type":"formatted","text":"。"}],"disableDrag":false}]},{"type":"paragraph","children":[{"type":"formatted","text":"示例2："},{"type":"formatted","text":"cx=50%, cy=50%, r=50%, fx=30%, fy=30%","code":true}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad3\" fx=\".2\" fy=\".2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad3)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"441a90fe-dfe0-48a8-998f-51ddee58e32c","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad3\" fx=\".2\" fy=\".2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad3)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"highlight-block","color":"blue","children":[{"type":"paragraph","children":[{"type":"formatted","text":"径向渐变也具有 "},{"type":"formatted","text":"spreadMethod","code":true},{"type":"formatted","text":" 属性，用法同上。"}],"disableDrag":false}]},{"type":"header","children":[{"type":"formatted","text":"gradientUnits"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"在线性渐变中 "},{"type":"formatted","text":"x1","code":true},{"type":"formatted","text":" 等值的范围在 "},{"type":"formatted","text":"0~1","code":true},{"type":"formatted","text":"，径向渐变中 "},{"type":"formatted","text":"cx","code":true},{"type":"formatted","text":" 等值也是以百分比表示，这就说明它使用的相对单位，"},{"type":"formatted","text":"gradientUnits","code":true},{"type":"formatted","text":" 的取值默认是 "},{"type":"formatted","text":"objectBoundingBox","code":true},{"type":"formatted","text":"，我们可以修改其为 "},{"type":"formatted","text":"userSpaceOnUse","code":true},{"type":"formatted","text":"，这时这些值的取值就是相对于当前的坐标系统的取值"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"示例1：线性渐变"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"rad4\" gradientUnits=\"userSpaceOnUse\" x1=\"50\" y1=\"0\" x2=\"150\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad4)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"d9576549-9ebf-4a20-a545-dba25f1a96f4","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"rad4\" gradientUnits=\"userSpaceOnUse\" x1=\"50\" y1=\"0\" x2=\"150\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad4)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"示例2：径向渐变"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad5\" cx=\"100\" cy=\"50\" r=\"50\" gradientUnits=\"userSpaceOnUse\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad5)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"e51a0b97-a3bb-47e6-b2f7-5cbcd7fd2e11","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad5\" cx=\"100\" cy=\"50\" r=\"50\" gradientUnits=\"userSpaceOnUse\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad5)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]}],"breadcrumb":[{"label":"SVG","href":"/docs/document/9/76.html"},{"label":"基本概念"},{"label":"渐变色","href":"/docs/document/9/88.html"}],"prevPage":{"title":"文档组织","href":"/docs/document/9/87.html"},"nextPage":{"title":"图案","href":"/docs/document/9/89.html"},"createTime":1703605557153,"updateTime":1758340741268,"currentPath":"/docs/document/9/88.html"},"meta":{"type":"doc","publishTime":1764823684226}};
+      window._INIT_DATA_ = {"site":{"title":"Tau's Blog","description":"","basePath":"/"},"navigation":[{"label":"首页","href":"/"},{"label":"卡片","href":"/cards/"},{"label":"文章","href":"/articles/"}],"sidebar":[{"title":"SVG","children":[{"title":"基本概念","children":[{"title":"SVG 介绍","href":"/docs/document/9/76.html"},{"title":"视口、viewBox 与 preserveAspectRatio","href":"/docs/document/9/80.html"},{"title":"基本形状","children":[{"title":"线","href":"/docs/document/9/82.html"},{"title":"折线","href":"/docs/document/9/83.html"},{"title":"矩形","href":"/docs/document/9/84.html"},{"title":"圆和椭圆","href":"/docs/document/9/85.html"},{"title":"多边形","href":"/docs/document/9/86.html"},{"title":"路径","href":"/docs/document/9/98.html"}]},{"title":"marker","href":"/docs/document/9/99.html"},{"title":"文档组织","href":"/docs/document/9/87.html"},{"title":"渐变色","href":"/docs/document/9/88.html"},{"title":"图案","href":"/docs/document/9/89.html"},{"title":"文本","href":"/docs/document/9/90.html"},{"title":"变换","href":"/docs/document/9/91.html"},{"title":"裁剪","href":"/docs/document/9/92.html"},{"title":"蒙版","href":"/docs/document/9/93.html"}]},{"title":"动画","children":[{"title":"animate","href":"/docs/document/9/79.html"},{"title":"同步动画","href":"/docs/document/9/94.html"},{"title":"animateTransform","href":"/docs/document/9/95.html"},{"title":"animateMotion","href":"/docs/document/9/96.html"}]}]}],"docCollections":[{"type":"project","label":"项目","items":[{"id":21,"title":"《战斗细胞》","href":"/docs/project/21/170.html","kind":"project"},{"id":18,"title":"3D 学习","href":"/docs/project/18/146.html","kind":"project"},{"id":23,"title":"笔记的方法","href":"/docs/project/23/276.html","kind":"project"}]},{"type":"document","label":"知识库","items":[{"id":11,"title":"计算机基础理论","href":"/docs/document/11/107.html","kind":"document"},{"id":14,"title":"软件使用文档","href":"/docs/document/14/609.html","kind":"document"},{"id":1,"title":"数据结构","href":"/docs/document/1/8.html","kind":"document"},{"id":12,"title":"LeetCode","href":"/docs/document/12/158.html","kind":"document"},{"id":6,"title":"Rust","href":"/docs/document/6/74.html","kind":"document"},{"id":9,"title":"SVG","href":"/docs/document/9/76.html","kind":"document","active":true}]}],"content":{"id":88,"title":"渐变色","content":[{"type":"paragraph","children":[{"type":"formatted","text":"除了可以给形状填充纯色之外，我们还可以为其添加渐变色，渐变色分为两种："}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"线性渐变"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"径向渐变"}],"disableDrag":false}]}]},{"type":"header","children":[{"type":"formatted","text":"线性渐变"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"使用 "},{"type":"formatted","text":"\u003clinearGradient\u003e\u003c/linearGradient\u003e","code":true},{"type":"formatted","text":" 来定义线性渐变，最简单的渐变就是从一个颜色渐变到另一个颜色，我们只需要定义两个颜色即可，我们使用 "},{"type":"formatted","text":"\u003cstop\u003e","code":true},{"type":"formatted","text":" 来定义颜色节点"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra1)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"2777afbf-a7af-4b6d-a3fe-8831e1f7e46f","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra1)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"stop","code":true},{"type":"formatted","text":" 标签中需要定义两个属性"}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"offset","code":true},{"type":"formatted","text":"：节点位置，取值在 0-1 之间，可以为百分比"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"stop-color","code":true},{"type":"formatted","text":"：节点颜色"}],"disableDrag":false}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"一旦我们定义好节点位置和节点颜色，它们之间的渐变色就会被自动算出。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"我们可以定义多个 "},{"type":"formatted","text":"stop","code":true},{"type":"formatted","text":" 标签，实现多个颜色的渐变"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra2)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"c0434eb3-ff0a-47d2-a67c-35d4a973d4b2","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra2)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"渐变色的方向默认是从左向右，我们可以通过 "},{"type":"formatted","text":"(x1, y1) (x2, y2)","code":true},{"type":"formatted","text":" 定义渐变的方向，方向由 "},{"type":"formatted","text":"(x1, y1) → (x2, y2)","code":true},{"type":"formatted","text":"，"},{"type":"formatted","text":"x1 ...","code":true},{"type":"formatted","text":" 四个值的取值范围在 "},{"type":"formatted","text":"[0, 1]","code":true},{"type":"formatted","text":" 之间"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003c!-- 从右到左 --\u003e\n    \u003clinearGradient id=\"gra3\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra3)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"dc568ab1-4331-465d-aaa4-27926aa4fa2f","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003c!-- 从右到左 --\u003e\n    \u003clinearGradient id=\"gra3\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#12c2e9\" /\u003e\n      \u003cstop offset=\"0.5\" stop-color=\"#c471ed\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#f64f59\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra3)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"渐变色还可以被其他 "},{"type":"formatted","text":"linearGradient","code":true},{"type":"formatted","text":" 通过 "},{"type":"formatted","text":"xlink:href=\"#id\"","code":true},{"type":"formatted","text":"引用，从而达到复用的目的。"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"如果我们定义的颜色起点不在 "},{"type":"formatted","text":"0%","code":true},{"type":"formatted","text":"，终点不在 "},{"type":"formatted","text":"100%","code":true},{"type":"formatted","text":"，例如 "},{"type":"formatted","text":"20%-80%","code":true},{"type":"formatted","text":" 定义有渐变，那么 "},{"type":"formatted","text":"0%-20%","code":true},{"type":"formatted","text":" 以及 "},{"type":"formatted","text":"80%-100%","code":true},{"type":"formatted","text":" 呈现什么样的颜色？这个由 "},{"type":"formatted","text":"spreadMethod","code":true},{"type":"formatted","text":" 确定，它有三种取值"}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"pad","code":true},{"type":"formatted","text":"：起点颜色扩散到 "},{"type":"formatted","text":"0%","code":true},{"type":"formatted","text":"，终点颜色扩散到 "},{"type":"formatted","text":"100%","code":true},{"type":"formatted","text":"。"}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"假设 "},{"type":"formatted","text":"20%","code":true},{"type":"formatted","text":" 是起点，那么 "},{"type":"formatted","text":"0%-20%","code":true},{"type":"formatted","text":" 填充为起点颜色"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"假设 "},{"type":"formatted","text":"80%","code":true},{"type":"formatted","text":" 是终点，那么 "},{"type":"formatted","text":"80%-100%","code":true},{"type":"formatted","text":" 填充为终点颜色"}],"disableDrag":false}]}]}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"repeat","code":true},{"type":"formatted","text":"：重复起点到终点的渐变"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"reflect","code":true},{"type":"formatted","text":"：以起点 → 终点，终点 → 起点的模式重复渐变"}],"disableDrag":false}]}]},{"type":"highlight-block","color":"blue","children":[{"type":"paragraph","children":[{"type":"formatted","text":"pad","code":true},{"type":"formatted","text":" 是默认值。"}],"disableDrag":false}]},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra4\" x1=\"0.2\" y1=\"0\" x2=\"0.8\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n    \u003clinearGradient id=\"gra-pad\" xlink:href=\"#gra4\" spreadMethod=\"pad\" /\u003e\n    \u003clinearGradient id=\"gra-repeat\" xlink:href=\"#gra4\" spreadMethod=\"repeat\" /\u003e\n    \u003clinearGradient id=\"gra-reflect\" xlink:href=\"#gra4\" spreadMethod=\"reflect\" /\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra-pad)\" /\u003e\n  \u003crect x=\"0\" y=\"30\" width=\"200\" height=\"20\" fill=\"url(#gra-repeat)\" /\u003e\n  \u003crect x=\"0\" y=\"60\" width=\"200\" height=\"20\" fill=\"url(#gra-reflect)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"0761d598-b989-4a0c-978e-3f9c7e1bb2a9","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"gra4\" x1=\"0.2\" y1=\"0\" x2=\"0.8\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n    \u003clinearGradient id=\"gra-pad\" \n    xlink:href=\"#gra4\" \n    spreadMethod=\"pad\" /\u003e\n    \u003clinearGradient id=\"gra-repeat\" xlink:href=\"#gra4\" spreadMethod=\"repeat\" /\u003e\n    \u003clinearGradient id=\"gra-reflect\" xlink:href=\"#gra4\" spreadMethod=\"reflect\" /\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"20\" fill=\"url(#gra-pad)\" /\u003e\n  \u003crect x=\"0\" y=\"30\" width=\"200\" height=\"20\" fill=\"url(#gra-repeat)\" /\u003e\n  \u003crect x=\"0\" y=\"60\" width=\"200\" height=\"20\" fill=\"url(#gra-reflect)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"header","children":[{"type":"formatted","text":"径向渐变"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"径向渐变就是颜色从某个点向外扩散"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad1)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"8aae89d7-da85-470e-9dbe-320c6530fe49","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad1\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad1)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"有 5 个控制渐变的属性："}],"disableDrag":false},{"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"cx, cy","code":true},{"type":"formatted","text":"：扩散圆心，默认值为 "},{"type":"formatted","text":"50%, 50%","code":true}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"fx, fy","code":true},{"type":"formatted","text":"：焦点，即起始颜色位置("},{"type":"formatted","text":"0%","code":true},{"type":"formatted","text":")，默认同 "},{"type":"formatted","text":"cx, cy","code":true},{"type":"formatted","text":" 一致"}],"disableDrag":false}]},{"type":"list-item","children":[{"type":"paragraph","children":[{"type":"formatted","text":"r","code":true},{"type":"formatted","text":"：扩散半径，默认为 "},{"type":"formatted","text":"50%","code":true},{"type":"formatted","text":"，水平方向的半径和垂直方向的半径分别相对于宽高计算的"}],"disableDrag":false}]}]},{"type":"paragraph","children":[{"type":"formatted","text":"示例1："},{"type":"formatted","text":"cx=0, cy=0, r=141.4%","code":true}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad2\" cx=\"0\" cy=\"0\" r=\"141.4%\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad2)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"b69fa8f2-44c7-41ae-9db4-63a9e9f73fd3","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad2\" cx=\"0\" cy=\"0\" r=\"141.4%\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad2)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"highlight-block","color":"blue","children":[{"type":"paragraph","children":[{"type":"formatted","text":"r=141.4%","code":true},{"type":"formatted","text":" 是对角线的长度 "},{"type":"inline-math","tex":"\\sqrt{2}","children":[{"type":"formatted","text":"\\sqrt{2}"}]},{"type":"formatted","text":"。"}],"disableDrag":false}]},{"type":"paragraph","children":[{"type":"formatted","text":"示例2："},{"type":"formatted","text":"cx=50%, cy=50%, r=50%, fx=30%, fy=30%","code":true}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad3\" fx=\".2\" fy=\".2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad3)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"441a90fe-dfe0-48a8-998f-51ddee58e32c","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad3\" fx=\".2\" fy=\".2\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad3)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"highlight-block","color":"blue","children":[{"type":"paragraph","children":[{"type":"formatted","text":"径向渐变也具有 "},{"type":"formatted","text":"spreadMethod","code":true},{"type":"formatted","text":" 属性，用法同上。"}],"disableDrag":false}]},{"type":"header","children":[{"type":"formatted","text":"gradientUnits"}],"level":2},{"type":"paragraph","children":[{"type":"formatted","text":"在线性渐变中 "},{"type":"formatted","text":"x1","code":true},{"type":"formatted","text":" 等值的范围在 "},{"type":"formatted","text":"0~1","code":true},{"type":"formatted","text":"，径向渐变中 "},{"type":"formatted","text":"cx","code":true},{"type":"formatted","text":" 等值也是以百分比表示，这就说明它使用的相对单位，"},{"type":"formatted","text":"gradientUnits","code":true},{"type":"formatted","text":" 的取值默认是 "},{"type":"formatted","text":"objectBoundingBox","code":true},{"type":"formatted","text":"，我们可以修改其为 "},{"type":"formatted","text":"userSpaceOnUse","code":true},{"type":"formatted","text":"，这时这些值的取值就是相对于当前的坐标系统的取值"}],"disableDrag":false},{"type":"paragraph","children":[{"type":"formatted","text":"示例1：线性渐变"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"rad4\" gradientUnits=\"userSpaceOnUse\" x1=\"50\" y1=\"0\" x2=\"150\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad4)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"d9576549-9ebf-4a20-a545-dba25f1a96f4","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"20\" viewBox=\"0 0 200 20\"\u003e\n  \u003cdefs\u003e\n    \u003clinearGradient id=\"rad4\" gradientUnits=\"userSpaceOnUse\" x1=\"50\" y1=\"0\" x2=\"150\" y2=\"0\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/linearGradient\u003e\n  \u003c/defs\u003e\n  \u003crect x=\"0\" y=\"0\" width=\"200\" height=\"100\" fill=\"url(#rad4)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]},{"type":"paragraph","children":[{"type":"formatted","text":"示例2：径向渐变"}],"disableDrag":false},{"type":"code-block","code":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad5\" cx=\"100\" cy=\"50\" r=\"50\" gradientUnits=\"userSpaceOnUse\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad5)\" /\u003e\n\u003c/svg\u003e","language":"html","uuid":"e51a0b97-a3bb-47e6-b2f7-5cbcd7fd2e11","children":[{"type":"formatted","text":""}]},{"type":"html-block","html":"\u003csvg width=\"200\" height=\"100\" viewBox=\"0 0 200 100\"\u003e\n  \u003cdefs\u003e\n    \u003cradialGradient id=\"rad5\" cx=\"100\" cy=\"50\" r=\"50\" gradientUnits=\"userSpaceOnUse\"\u003e\n      \u003cstop offset=\"0\" stop-color=\"#5698c3\" /\u003e\n      \u003cstop offset=\"1\" stop-color=\"#45b787\" /\u003e\n    \u003c/radialGradient\u003e\n  \u003c/defs\u003e\n  \u003cellipse cx=\"100\" cy=\"50\" rx=\"100\" ry=\"50\" fill=\"url(#rad5)\" /\u003e\n\u003c/svg\u003e","children":[{"type":"formatted","text":""}]}],"breadcrumb":[{"label":"SVG","href":"/docs/document/9/76.html"},{"label":"基本概念"},{"label":"渐变色","href":"/docs/document/9/88.html"}],"prevPage":{"title":"文档组织","href":"/docs/document/9/87.html"},"nextPage":{"title":"图案","href":"/docs/document/9/89.html"},"createTime":1703605557153,"updateTime":1758340741268,"currentPath":"/docs/document/9/88.html"},"meta":{"type":"doc","publishTime":1767266228326}};
     </script>
-    <script type="module" crossorigin src="../../../assets/doc-BCfr2iu9.js"></script>
-    <link rel="modulepreload" crossorigin href="../../../assets/global-B543ggEw.js">
-    <link rel="modulepreload" crossorigin href="../../../assets/Dropdown-Zs5jwcr9.js">
-    <link rel="modulepreload" crossorigin href="../../../assets/index-CEpohQRa.js">
-    <link rel="stylesheet" crossorigin href="../../../assets/global-DxDSM-16.css">
+    <script type="module" crossorigin src="../../../assets/doc-C6s_Azhy.js"></script>
+    <link rel="modulepreload" crossorigin href="../../../assets/global-Dqh_OZbR.js">
+    <link rel="modulepreload" crossorigin href="../../../assets/Dropdown-Bzhy-tn3.js">
+    <link rel="modulepreload" crossorigin href="../../../assets/index-CMsEYPb_.js">
+    <link rel="stylesheet" crossorigin href="../../../assets/global-Bb86jZEf.css">
     <link rel="stylesheet" crossorigin href="../../../assets/index-oqgB9MtW.css">
-  </head>
+  <style data-runtime-tailwind>/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities;</style>
+</head>
   <body>
     <div id="root"></div>
   </body>
