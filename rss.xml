@@ -5,14 +5,283 @@
     <link>/</link>
     <description>人生天地间，忽如远行客</description>
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 12 Jun 2026 08:02:49 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 15:46:08 GMT</lastBuildDate>
     <item>
-      <title>Sec-Fetch-Site 请求头的作用？</title>
-      <link>/quests/190.html</link>
-      <guid isPermaLink="false">quest:190</guid>
+      <title>0.49.1</title>
+      <link>/docs/document/14/871.html</link>
+      <guid isPermaLink="false">doc:871</guid>
+      <description>feat: 项目和知识库侧边栏支持思维导图视图 feat: 首页数据显示 T 实时数据 feat: 白板中的视频支持视频笔记 feat: Vibe Learning 项目和 PDF 去掉使用 LLM 对长文本的语义划分，根据搜索结果返回可定...</description>
+      <pubDate>Tue, 23 Jun 2026 01:32:48 GMT</pubDate>
+    </item>
+    <item>
+      <title>0.50.0</title>
+      <link>/docs/document/14/873.html</link>
+      <guid isPermaLink="false">doc:873</guid>
+      <description>feat: 支持徽章中心</description>
+      <pubDate>Sat, 27 Jun 2026 15:41:31 GMT</pubDate>
+    </item>
+    <item>
+      <title>通过 focus() 可以让元素聚焦，聚焦后元素才可以对键盘事件做出反应，比如文...</title>
+      <link>/cards/767.html</link>
+      <guid isPermaLink="false">card:767</guid>
+      <description>通过 focus() 可以让元素聚焦，聚焦后元素才可以对键盘事件做出反应，比如文本输入，又或者回车，比如当我们聚焦到链接上的时候，通过回车就可以直接访问。 但 focus(options) 这个函数还可以接收一些选项： preventScr...</description>
+      <category>DOM/focus</category>
+      <pubDate>Sat, 27 Jun 2026 14:29:46 GMT</pubDate>
+    </item>
+    <item>
+      <title>focus({ preventScroll: true }) 的作用，解决了什么问题？</title>
+      <link>/quests/176.html</link>
+      <guid isPermaLink="false">quest:176</guid>
+      <description>我之前以为这个方法是和 popover 相关的，后来发现这其实是 focus 的使用，它有很多 options，所以问题调整为，focus 的 options 使用介绍？ 最近刚看到张鑫旭的一...</description>
+      <category>前端</category>
+      <pubDate>Sat, 27 Jun 2026 14:29:46 GMT</pubDate>
+    </item>
+    <item>
+      <title>canvas.captureStream() 的作用和使用场景！</title>
+      <link>/quests/204.html</link>
+      <guid isPermaLink="false">quest:204</guid>
+      <description>canvas.captureStream(fps?: number) 支持将 canvas 上渲染的内容捕获为一个 MediaStream 对象，其中包含一个视频轨道。 fps 参数用来指定捕...</description>
+      <category>前端</category>
+      <pubDate>Fri, 26 Jun 2026 01:15:54 GMT</pubDate>
+    </item>
+    <item>
+      <title>MediaRecorder 是什么，作用是啥？</title>
+      <link>/quests/211.html</link>
+      <guid isPermaLink="false">quest:211</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 26 Jun 2026 01:06:53 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 MediaStream，这个对象有啥用？</title>
+      <link>/quests/210.html</link>
+      <guid isPermaLink="false">quest:210</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 26 Jun 2026 01:06:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>在表单中限制用户只能输入数字，一种常见做法是监听 input 事件，检测到非法字...</title>
+      <link>/cards/765.html</link>
+      <guid isPermaLink="false">card:765</guid>
+      <description>在表单中限制用户只能输入数字，一种常见做法是监听 input 事件，检测到非法字符后再把值覆盖回去。但这会产生一个体验问题：非法字符会短暂出现在输入框中再消失。如果能在值写入 DOM 之前就拦截掉非法输入，体验会更干净。 beforeinp...</description>
+      <category>DOM</category>
+      <category>概念对比</category>
+      <category>input</category>
+      <category>beforeinput</category>
+      <pubDate>Wed, 24 Jun 2026 10:36:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>beforeinput 事件和 input 事件的关系，作用！</title>
+      <link>/quests/207.html</link>
+      <guid isPermaLink="false">quest:207</guid>
       <description>收录 1 个答案</description>
       <category>前端</category>
-      <pubDate>Wed, 03 Jun 2026 10:27:43 GMT</pubDate>
+      <pubDate>Wed, 24 Jun 2026 10:36:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>String.prototype.toWellFormed 函数的作用是什么?</title>
+      <link>/quests/209.html</link>
+      <guid isPermaLink="false">quest:209</guid>
+      <description>String.prototype.toWellFormed()</description>
+      <category>前端</category>
+      <pubDate>Tue, 23 Jun 2026 04:45:08 GMT</pubDate>
+    </item>
+    <item>
+      <title>0.49.0</title>
+      <link>/docs/document/14/870.html</link>
+      <guid isPermaLink="false">doc:870</guid>
+      <description>feat: 首页改版，添加数据和快捷方式 feat: 日记改版，朋友圈时间轴的流式视图，通过标签区分类型，比如总结、日常、反思等 feat: 卡片列表页支持搜索卡片 fix: 日记页搜索按照相关度排序</description>
+      <pubDate>Sun, 21 Jun 2026 12:27:28 GMT</pubDate>
+    </item>
+    <item>
+      <title>建立反馈系统</title>
+      <link>/articles/85.html</link>
+      <guid isPermaLink="false">article:85</guid>
+      <description>我在起点看一本小说时，有一个场景是男主教人射箭，思路是算好抛物线方程，设定角度和力度，每次都能射到同一个点。我当时就忍不住写了一条评论： 没想到有 2000 多人点赞。大家认同的是什么呢？我觉得是对「提前算好一切」这件事的不信任。现实中不可...</description>
+      <pubDate>Tue, 09 Jun 2026 00:09:11 GMT</pubDate>
+    </item>
+    <item>
+      <title>「我不杀伯仁，伯仁却因我而死」这句话常用来表示，一件事虽然不是自己直接造成的，但...</title>
+      <link>/cards/763.html</link>
+      <guid isPermaLink="false">card:763</guid>
+      <description>「我不杀伯仁，伯仁却因我而死」这句话常用来表示，一件事虽然不是自己直接造成的，但自己却负有不可推卸的间接责任。 背后的故事读来让人唏嘘。 西晋灭亡后，琅邪王司马睿（晋元帝）建立东晋，王导是核心辅臣，他的堂兄王敦是大将，功高盖主，发动叛乱，攻...</description>
+      <category>典故</category>
+      <category>历史</category>
+      <pubDate>Mon, 15 Jun 2026 04:18:53 GMT</pubDate>
+    </item>
+    <item>
+      <title>0.48.2</title>
+      <link>/docs/document/14/868.html</link>
+      <guid isPermaLink="false">doc:868</guid>
+      <description>feat: 白板顶部工具栏创建新白板弹窗统一 feat: 右键菜单 icon 补充完整 feat: 箭头引出支持自定义吸附 feat: 演示模式，小浮层样式和交互优化 feat: 图片生成支持配置多提供商 fix: 创建思维导图点击工具栏未...</description>
+      <pubDate>Sat, 20 Jun 2026 03:43:05 GMT</pubDate>
+    </item>
+    <item>
+      <title>0.48.1</title>
+      <link>/docs/document/14/867.html</link>
+      <guid isPermaLink="false">doc:867</guid>
+      <description>feat: 创建演示序列窗口 UI 优化 feat: 白板图片导出弹窗样式优化 feat: MindNode 笔记关联样式和交互优化 feat: 卡片、富文本和图片支持设置阴影 feat: 白板右键创建新白板弹窗优化 feat: 引用白板输...</description>
+      <pubDate>Fri, 19 Jun 2026 09:08:43 GMT</pubDate>
+    </item>
+    <item>
+      <title>使用 Notion 作为视频托管</title>
+      <link>/articles/20.html</link>
+      <guid isPermaLink="false">article:20</guid>
+      <description>有的时候希望在博客里面添加视频，博客托管在 Github Page 上，但是视频一般比较大，也就没有办法将其上传到 Github 上，一般来说我们可以讲视频上传到视频托管平台，比如 bilibili 和 Youtube。 对于国内将视频上传...</description>
+      <category>Notion</category>
+      <category>视频托管</category>
+      <pubDate>Mon, 22 Nov 2021 09:12:32 GMT</pubDate>
+    </item>
+    <item>
+      <title>我是如何成为一名程序员的</title>
+      <link>/articles/2.html</link>
+      <guid isPermaLink="false">article:2</guid>
+      <description>随这我在学校就业网提交签约信息，也就意味着我的秋招基本结束了 我也正好捋捋我是如何成为一名程序员的。 翁恺男神：拯救了我的 C 语言 在上大学之前，从来没写过程序，甚至连编程这件事情是什么都不知道，只会用电脑看小说和打游戏(而且只会4399...</description>
+      <category>程序人生</category>
+      <pubDate>Thu, 18 Nov 2021 03:20:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>笔记折腾之旅</title>
+      <link>/articles/8.html</link>
+      <guid isPermaLink="false">article:8</guid>
+      <description>记录从上大学开始到现在做笔记的方式，先是手抄纸质笔记，然后是折腾各种电子笔记，在进阶自定义个人博客，到现在自己写了一个笔记软件。 手抄笔记 自从上了大学之后，知识越发艰涩难懂，往往我看完一遍书之后，都不知道自己看了什么，所以当时就觉得我需要...</description>
+      <category>笔记</category>
+      <category>学习方法</category>
+      <category>OneNote</category>
+      <category>CSDN</category>
+      <category>博客园</category>
+      <category>docsify</category>
+      <category>Hexo</category>
+      <category>VuePress</category>
+      <category>Notion</category>
+      <category>Obsidian</category>
+      <pubDate>Fri, 01 Oct 2021 14:14:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>渐变色的妙用</title>
+      <link>/articles/10.html</link>
+      <guid isPermaLink="false">article:10</guid>
+      <description>在 CSS 中渐变色作为背景可以制作出非常绚丽，迷人的效果，往往我们将焦点聚集在渐变上面，而忽略了它作为背景图片的作用，在这里我将介绍两个渐变色作为背景色以及背景图片的妙用，可以实现一些难以实现的效果。 透明背景蒙层 我在一个实际的应用开发...</description>
+      <category>CSS</category>
+      <category>渐变色</category>
+      <category>技巧</category>
+      <pubDate>Sun, 15 Aug 2021 15:54:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>跑马灯动画</title>
+      <link>/articles/14.html</link>
+      <guid isPermaLink="false">article:14</guid>
+      <description>本篇文章介绍了如何实现支持动态加减速的跑马灯动画，效果如下： 上面的动画主要实现了两个功能： 文字的无缝衔接 动画的动态加减速 首先给出例子用到的 html 与 css 代码 &lt;!DOCTYPE html&gt; &lt;html lang=&quot;en&quot;&gt;...</description>
+      <category>跑马灯</category>
+      <category>动画</category>
+      <category>动态加减速</category>
+      <pubDate>Fri, 02 Jul 2021 10:11:12 GMT</pubDate>
+    </item>
+    <item>
+      <title>远程访问 jupyter</title>
+      <link>/articles/7.html</link>
+      <guid isPermaLink="false">article:7</guid>
+      <description>最近又开始折腾了 jupyter 了，因为实验室的网络环境太差，每次我使用 conda 开启一个新的环境，然后下载一些新的包时会非常的慢，慢我还能忍，问题是经常下载失败，浪费我的时间😭，接着我想到我有一台腾讯云的服务器，我就想在服务器上下...</description>
+      <category>jupyter</category>
+      <category>远程访问</category>
+      <category>conda</category>
+      <pubDate>Fri, 04 Jun 2021 11:14:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>JavaScript 访问对象中的属性</title>
+      <link>/articles/6.html</link>
+      <guid isPermaLink="false">article:6</guid>
+      <description>本篇文章关于遍历对象属性的问题，包括 for ...in ， Object.keys() ， Reflect.ownKeys() ， Object.getOwnPropertyNames() ， Object.getOwnPropertyS...</description>
+      <category>for ... in</category>
+      <category>Object.keys</category>
+      <category>Reflect.ownKeys</category>
+      <category>Object.getOwnPropertyNames()</category>
+      <category>Object.getOwnPropertySymbols()</category>
+      <pubDate>Fri, 30 Apr 2021 03:25:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>Node EventEmitter 使用及实现</title>
+      <link>/articles/12.html</link>
+      <guid isPermaLink="false">article:12</guid>
+      <description>EventEmitter 是 Node 提供的一个事件订阅模块，本片文章将介绍具体的使用，然后实现一遍。 EventEmitter 的使用 EventEmitter 为我们提供了事件订阅机制，通过引入 events 模块来使用它。 cons...</description>
+      <category>Node</category>
+      <category>EventEmitter</category>
+      <pubDate>Fri, 12 Mar 2021 02:15:02 GMT</pubDate>
+    </item>
+    <item>
+      <title>排序算法</title>
+      <link>/articles/22.html</link>
+      <guid isPermaLink="false">article:22</guid>
+      <description>本篇文章将对常见的排序算法进行介绍，包括： 选择排序 插入排序 希尔排序 归并排序 快速排序 堆排序 为了对实现的算法进行测试，我们准备一个工具类 Helper ，里面包括我们由于测试算法正确与否的方法以及性能测试的代码，包括交换数组中的两...</description>
+      <category>排序算法</category>
+      <category>选择排序</category>
+      <category>插入排序</category>
+      <category>希尔排序</category>
+      <category>归并排序</category>
+      <category>快速排序</category>
+      <category>堆排序</category>
+      <pubDate>Sat, 03 Apr 2021 03:25:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>2021 年终总结</title>
+      <link>/articles/35.html</link>
+      <guid isPermaLink="false">article:35</guid>
+      <description>2021 没想到这么快就过去了，简单的回顾一下 2021 年吧。 去年寒假的这个时候，我参加了阿里巴巴举办的前端练习生计划，参加了几场直播，完成了几次作业。分组的时候成为了队长，本来是要合作完成一个项目的，但是要求写 PRD 需求文档之类的...</description>
+      <pubDate>Sat, 22 Jan 2022 13:18:15 GMT</pubDate>
+    </item>
+    <item>
+      <title>0.48.0</title>
+      <link>/docs/document/14/866.html</link>
+      <guid isPermaLink="false">doc:866</guid>
+      <description>feat: 白板演示时支持录制 feat: 白板演示时支持激光笔 feat: 白板演示 Frame bounds 适配 feat: 聊天对话标题自动总结只触发一次，节省 token feat: 箭头上方的文字位置和背景调整 feat: 箭头...</description>
+      <pubDate>Fri, 19 Jun 2026 05:35:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>Blob</title>
+      <link>/articles/86.html</link>
+      <guid isPermaLink="false">article:86</guid>
+      <description>前端开发中经常需要和二进制数据打交道，用户选了一张图片要立即预览、录制一段音频要拼接成完整文件、从 Canvas 导出一张截图要触发下载。这些场景有一个共同点，就是需要在浏览器中表示和操作一段原始的二进制数据。 Blob（Binary La...</description>
+      <pubDate>Fri, 12 Jun 2026 14:17:30 GMT</pubDate>
+    </item>
+    <item>
+      <title>基于开源模型训练还是基于已有的顶尖模型 自己锻炼模型的反馈周期长，训练到一半新出...</title>
+      <link>/cards/762.html</link>
+      <guid isPermaLink="false">card:762</guid>
+      <description>基于开源模型训练还是基于已有的顶尖模型 自己锻炼模型的反馈周期长，训练到一半新出现的模型就使得这一切没有意义，Mannus 的选择是基于顶尖的模型做 Agent，如果模型的进步是上涨的潮水，那么 Mannus 就是那条船 围绕着 KV 缓存...</description>
+      <category>AI/Agent</category>
+      <pubDate>Sat, 13 Jun 2026 15:24:55 GMT</pubDate>
+    </item>
+    <item>
+      <title>Scroll-driven animations</title>
+      <link>/quests/208.html</link>
+      <guid isPermaLink="false">quest:208</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 13 Jun 2026 05:38:48 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS hypot() 函数用于计算多个值的平方和的平方根，和 Math.hyp...</title>
+      <link>/cards/761.html</link>
+      <guid isPermaLink="false">card:761</guid>
+      <description>CSS hypot() 函数用于计算多个值的平方和的平方根，和 Math.hypot 一致，让我们可以在样式层直接表达距离和长度，而不用再依赖 JavaScript 预先计算。 hypot(x [, ...]#) 它接受至少一个由逗号分隔的...</description>
+      <category>CSS/function/hypot</category>
+      <pubDate>Sat, 13 Jun 2026 03:32:18 GMT</pubDate>
+    </item>
+    <item>
+      <title>0.47.2</title>
+      <link>/docs/document/14/864.html</link>
+      <guid isPermaLink="false">doc:864</guid>
+      <description>feat: 博客发布支持搜索 feat: 新增胶囊风格的 PPT 和 报告模板 feat: 浏览器插件聊天会话 UI 和行为和客户端对齐 feat: Claude 模型支持设置最大输出 token feat: 代码编辑器支持 mod + 滚...</description>
+      <pubDate>Sat, 06 Jun 2026 02:23:03 GMT</pubDate>
+    </item>
+    <item>
+      <title>Blob API 使用介绍</title>
+      <link>/quests/196.html</link>
+      <guid isPermaLink="false">quest:196</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 12 Jun 2026 14:17:30 GMT</pubDate>
     </item>
     <item>
       <title>在打开浏览器网络面板的时候，会发现浏览器发送的请求始终携带三个请求头，比如下面是...</title>
@@ -26,20 +295,12 @@
       <pubDate>Fri, 12 Jun 2026 06:26:41 GMT</pubDate>
     </item>
     <item>
-      <title>beforeinput 事件和 input 事件的关系，作用！</title>
-      <link>/quests/207.html</link>
-      <guid isPermaLink="false">quest:207</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 12 Jun 2026 07:07:22 GMT</pubDate>
-    </item>
-    <item>
-      <title>sibling-index() 函数的作用是什么？</title>
-      <link>/quests/197.html</link>
-      <guid isPermaLink="false">quest:197</guid>
+      <title>Sec-Fetch-Site 请求头的作用？</title>
+      <link>/quests/190.html</link>
+      <guid isPermaLink="false">quest:190</guid>
       <description>收录 1 个答案</description>
       <category>前端</category>
-      <pubDate>Sun, 07 Jun 2026 01:44:46 GMT</pubDate>
+      <pubDate>Fri, 12 Jun 2026 06:26:41 GMT</pubDate>
     </item>
     <item>
       <title>在 CSS 中，如果想根据元素在兄弟节点中的位置来设置样式，过去只能依赖 :nt...</title>
@@ -48,6 +309,14 @@
       <description>在 CSS 中，如果想根据元素在兄弟节点中的位置来设置样式，过去只能依赖 :nth-child() 硬编码索引，或者用 JavaScript 动态计算。 sibling-index() 和 sibling-count() 的出现改变了这个局...</description>
       <category>CSS/function/sibling-index</category>
       <category>CSS/function/sibling-count</category>
+      <pubDate>Fri, 12 Jun 2026 02:57:10 GMT</pubDate>
+    </item>
+    <item>
+      <title>sibling-index() 函数的作用是什么？</title>
+      <link>/quests/197.html</link>
+      <guid isPermaLink="false">quest:197</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Fri, 12 Jun 2026 02:57:10 GMT</pubDate>
     </item>
     <item>
@@ -68,14 +337,6 @@
       <pubDate>Fri, 12 Jun 2026 00:45:53 GMT</pubDate>
     </item>
     <item>
-      <title>transition-behavior 的用法！</title>
-      <link>/quests/205.html</link>
-      <guid isPermaLink="false">quest:205</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 11 Jun 2026 01:11:56 GMT</pubDate>
-    </item>
-    <item>
       <title>attr() 是一个 CSS 函数，可以读取 HTML 元素的属性值，来作为 C...</title>
       <link>/cards/757.html</link>
       <guid isPermaLink="false">card:757</guid>
@@ -92,6 +353,14 @@
       <pubDate>Thu, 11 Jun 2026 00:32:03 GMT</pubDate>
     </item>
     <item>
+      <title>transition-behavior 的用法！</title>
+      <link>/quests/205.html</link>
+      <guid isPermaLink="false">quest:205</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 12 Jun 2026 00:45:53 GMT</pubDate>
+    </item>
+    <item>
       <title>context.imageSmoothingEnabled，这个字段的作用是什么？</title>
       <link>/quests/206.html</link>
       <guid isPermaLink="false">quest:206</guid>
@@ -100,12 +369,12 @@
       <pubDate>Thu, 11 Jun 2026 09:08:14 GMT</pubDate>
     </item>
     <item>
-      <title>canvas.captureStream() 的作用和使用场景！</title>
-      <link>/quests/204.html</link>
-      <guid isPermaLink="false">quest:204</guid>
-      <description>暂未记录答案</description>
+      <title>attr() 函数的使用</title>
+      <link>/quests/195.html</link>
+      <guid isPermaLink="false">quest:195</guid>
+      <description>这篇文章 Managing Anchor Associations With Data Attributes and Advanced attr() 介绍了 attr() 配合 Anchor ...</description>
       <category>前端</category>
-      <pubDate>Wed, 10 Jun 2026 01:40:24 GMT</pubDate>
+      <pubDate>Thu, 11 Jun 2026 07:15:48 GMT</pubDate>
     </item>
     <item>
       <title>@starting-style 是什么，以及应用场景！</title>
@@ -113,1552 +382,7 @@
       <guid isPermaLink="false">quest:203</guid>
       <description>收录 1 个答案</description>
       <category>前端</category>
-      <pubDate>Wed, 10 Jun 2026 01:07:01 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS random()</title>
-      <link>/quests/202.html</link>
-      <guid isPermaLink="false">quest:202</guid>
-      <description>https://www.sitepoint.com/css-mathrandom-in-production-native-randomness-without-javascript/</description>
-      <category>前端</category>
-      <pubDate>Sun, 07 Jun 2026 13:57:56 GMT</pubDate>
-    </item>
-    <item>
-      <title>HTML Sanitizer API 使用介绍！</title>
-      <link>/quests/201.html</link>
-      <guid isPermaLink="false">quest:201</guid>
-      <description>https://alfy.blog/2026/05/07/html-sanitizer-api.html</description>
-      <category>前端</category>
-      <pubDate>Sun, 07 Jun 2026 13:57:15 GMT</pubDate>
-    </item>
-    <item>
-      <title>间隙装饰，column-rule 的使用</title>
-      <link>/quests/200.html</link>
-      <guid isPermaLink="false">quest:200</guid>
-      <description>https://developer.chrome.com/blog/gap-decorations-stable?hl=zh-cn</description>
-      <category>前端</category>
-      <pubDate>Sun, 07 Jun 2026 08:11:35 GMT</pubDate>
-    </item>
-    <item>
-      <title>Temporal API 的使用！</title>
-      <link>/quests/199.html</link>
-      <guid isPermaLink="false">quest:199</guid>
-      <description>https://nodesource.com/blog/javascript-temporal-history-nodejs-26</description>
-      <category>前端</category>
-      <pubDate>Sun, 07 Jun 2026 08:10:09 GMT</pubDate>
-    </item>
-    <item>
-      <title>ident() 函数的使用介绍！</title>
-      <link>/quests/198.html</link>
-      <guid isPermaLink="false">quest:198</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 07 Jun 2026 01:45:07 GMT</pubDate>
-    </item>
-    <item>
-      <title>Blob API 使用介绍</title>
-      <link>/quests/196.html</link>
-      <guid isPermaLink="false">quest:196</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 07 Jun 2026 00:57:57 GMT</pubDate>
-    </item>
-    <item>
-      <title>attr() 函数的使用</title>
-      <link>/quests/195.html</link>
-      <guid isPermaLink="false">quest:195</guid>
-      <description>这篇文章 Managing Anchor Associations With Data Attributes and Advanced attr() 介绍了 attr() 配合 Anchor ...</description>
-      <category>前端</category>
-      <pubDate>Sat, 06 Jun 2026 14:51:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>Tanstack Query 解决了什么问题，使用方法？</title>
-      <link>/quests/194.html</link>
-      <guid isPermaLink="false">quest:194</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 06 Jun 2026 09:20:31 GMT</pubDate>
-    </item>
-    <item>
-      <title>font-display 属性的作用</title>
-      <link>/quests/193.html</link>
-      <guid isPermaLink="false">quest:193</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 05 Jun 2026 23:24:54 GMT</pubDate>
-    </item>
-    <item>
-      <title>BarcodeDetector 的使用！</title>
-      <link>/quests/192.html</link>
-      <guid isPermaLink="false">quest:192</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 04 Jun 2026 04:05:54 GMT</pubDate>
-    </item>
-    <item>
-      <title>Math.hypot 的作用？</title>
-      <link>/quests/191.html</link>
-      <guid isPermaLink="false">quest:191</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Wed, 03 Jun 2026 10:36:52 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是货币债权？</title>
-      <link>/quests/189.html</link>
-      <guid isPermaLink="false">quest:189</guid>
-      <description>暂未记录答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Wed, 03 Jun 2026 05:58:24 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么叫无交易对手方？</title>
-      <link>/quests/188.html</link>
-      <guid isPermaLink="false">quest:188</guid>
-      <description>暂未记录答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Wed, 03 Jun 2026 05:58:11 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 revert-layer？</title>
-      <link>/quests/187.html</link>
-      <guid isPermaLink="false">quest:187</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 01 Jun 2026 04:15:30 GMT</pubDate>
-    </item>
-    <item>
-      <title>@layer 解决了什么问题?</title>
-      <link>/quests/186.html</link>
-      <guid isPermaLink="false">quest:186</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 01 Jun 2026 04:15:17 GMT</pubDate>
-    </item>
-    <item>
-      <title>Web Animation API 的使用介绍！</title>
-      <link>/quests/185.html</link>
-      <guid isPermaLink="false">quest:185</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 01 Jun 2026 01:30:13 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 OffscreenCanvas，它可以解决什么问题？</title>
-      <link>/quests/184.html</link>
-      <guid isPermaLink="false">quest:184</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 01 Jun 2026 01:29:51 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 scroll-behavior？</title>
-      <link>/quests/183.html</link>
-      <guid isPermaLink="false">quest:183</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 31 May 2026 09:08:56 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 overscroll-behavior？</title>
-      <link>/quests/182.html</link>
-      <guid isPermaLink="false">quest:182</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 31 May 2026 09:08:46 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是中等收入陷阱？</title>
-      <link>/quests/181.html</link>
-      <guid isPermaLink="false">quest:181</guid>
-      <description>暂未记录答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Fri, 29 May 2026 08:09:23 GMT</pubDate>
-    </item>
-    <item>
-      <title>inset() 函数是什么？</title>
-      <link>/quests/180.html</link>
-      <guid isPermaLink="false">quest:180</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 25 May 2026 13:54:01 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是杰文斯悖论？</title>
-      <link>/quests/179.html</link>
-      <guid isPermaLink="false">quest:179</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Fri, 22 May 2026 06:22:46 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 Passkeys？</title>
-      <link>/quests/178.html</link>
-      <guid isPermaLink="false">quest:178</guid>
-      <description>参考文章：https://kerkour.com/passkeys</description>
-      <category>未分类</category>
-      <pubDate>Fri, 22 May 2026 06:19:36 GMT</pubDate>
-    </item>
-    <item>
-      <title>popover 是什么以及基本使用方法！</title>
-      <link>/quests/177.html</link>
-      <guid isPermaLink="false">quest:177</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 19 May 2026 14:36:56 GMT</pubDate>
-    </item>
-    <item>
-      <title>focus({ preventScroll: true }) 的作用，解决了什么问题？</title>
-      <link>/quests/176.html</link>
-      <guid isPermaLink="false">quest:176</guid>
-      <description>我之前以为这个方法是和 popover 相关的，后来发现这其实是 focus 的使用，它有很多 options，所以问题调整为，focus 的 options 使用介绍？ 最近刚看到张鑫旭的一...</description>
-      <category>前端</category>
-      <pubDate>Mon, 18 May 2026 08:48:32 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是再贴现？</title>
-      <link>/quests/175.html</link>
-      <guid isPermaLink="false">quest:175</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Mon, 18 May 2026 04:53:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是再贷款？</title>
-      <link>/quests/174.html</link>
-      <guid isPermaLink="false">quest:174</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Mon, 18 May 2026 04:52:48 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是美林时钟？</title>
-      <link>/quests/173.html</link>
-      <guid isPermaLink="false">quest:173</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 17 May 2026 10:41:23 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是挤出效应？</title>
-      <link>/quests/172.html</link>
-      <guid isPermaLink="false">quest:172</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sat, 16 May 2026 08:10:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是夏普比率？</title>
-      <link>/quests/171.html</link>
-      <guid isPermaLink="false">quest:171</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Mon, 11 May 2026 15:02:21 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是修昔底德陷阱？</title>
-      <link>/quests/170.html</link>
-      <guid isPermaLink="false">quest:170</guid>
-      <description>《置身之内》，第七章，扩展阅读提及</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 10 May 2026 13:04:29 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是产能周期？</title>
-      <link>/quests/169.html</link>
-      <guid isPermaLink="false">quest:169</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Fri, 08 May 2026 10:01:12 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是库存周期？</title>
-      <link>/quests/168.html</link>
-      <guid isPermaLink="false">quest:168</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Fri, 08 May 2026 10:01:02 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是印花税？</title>
-      <link>/quests/167.html</link>
-      <guid isPermaLink="false">quest:167</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Fri, 08 May 2026 01:12:30 GMT</pubDate>
-    </item>
-    <item>
-      <title>navigator.sendBeacon，这个方法的作用和使用场景</title>
-      <link>/quests/166.html</link>
-      <guid isPermaLink="false">quest:166</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 07 May 2026 07:24:47 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是马尔萨斯陷阱？</title>
-      <link>/quests/165.html</link>
-      <guid isPermaLink="false">quest:165</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 06:38:37 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是康波周期？</title>
-      <link>/quests/164.html</link>
-      <guid isPermaLink="false">quest:164</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 04:30:04 GMT</pubDate>
-    </item>
-    <item>
-      <title>广场协议，背景，内容和发展</title>
-      <link>/quests/163.html</link>
-      <guid isPermaLink="false">quest:163</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 04:21:22 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是智猪博弈？</title>
-      <link>/quests/162.html</link>
-      <guid isPermaLink="false">quest:162</guid>
-      <description>大企业和小企业</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 04:18:26 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是饿狮博弈？</title>
-      <link>/quests/161.html</link>
-      <guid isPermaLink="false">quest:161</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 04:17:21 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是帕累托改进和帕累托最优？</title>
-      <link>/quests/160.html</link>
-      <guid isPermaLink="false">quest:160</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 04:11:47 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是锚定效应？</title>
-      <link>/quests/159.html</link>
-      <guid isPermaLink="false">quest:159</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 01:50:01 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是禀赋效应？</title>
-      <link>/quests/158.html</link>
-      <guid isPermaLink="false">quest:158</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 01:49:52 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是沉没成本？</title>
-      <link>/quests/156.html</link>
-      <guid isPermaLink="false">quest:156</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 01:20:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是机会成本？</title>
-      <link>/quests/155.html</link>
-      <guid isPermaLink="false">quest:155</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 01:14:34 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是吉芬商品？</title>
-      <link>/quests/154.html</link>
-      <guid isPermaLink="false">quest:154</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 01:00:24 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是凡勃伦效应？</title>
-      <link>/quests/153.html</link>
-      <guid isPermaLink="false">quest:153</guid>
-      <description>《财富之眼》，P123，价格越高，反而销量越高</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 03 May 2026 00:54:21 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是棘轮效应？</title>
-      <link>/quests/152.html</link>
-      <guid isPermaLink="false">quest:152</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Wed, 29 Apr 2026 14:32:45 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是乘数效应？</title>
-      <link>/quests/151.html</link>
-      <guid isPermaLink="false">quest:151</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Fri, 10 Apr 2026 06:17:14 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 Shared Worker？基本概念和使用方法。</title>
-      <link>/quests/150.html</link>
-      <guid isPermaLink="false">quest:150</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 10 Apr 2026 03:19:35 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 Service Worker，基本概念和解决的问题</title>
-      <link>/quests/149.html</link>
-      <guid isPermaLink="false">quest:149</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 10 Apr 2026 03:17:51 GMT</pubDate>
-    </item>
-    <item>
-      <title>Web Locks API 的作用及使用场景</title>
-      <link>/quests/148.html</link>
-      <guid isPermaLink="false">quest:148</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 30 Mar 2026 10:17:42 GMT</pubDate>
-    </item>
-    <item>
-      <title>Math.trunc 方法的作用</title>
-      <link>/quests/147.html</link>
-      <guid isPermaLink="false">quest:147</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 30 Mar 2026 10:07:39 GMT</pubDate>
-    </item>
-    <item>
-      <title>介绍 BroadcastChannel API——多标签页通信</title>
-      <link>/quests/146.html</link>
-      <guid isPermaLink="false">quest:146</guid>
-      <description>参考 https://juejin.cn/post/7618525731951034383</description>
-      <category>前端</category>
-      <pubDate>Mon, 30 Mar 2026 10:06:42 GMT</pubDate>
-    </item>
-    <item>
-      <title>IdleDetector 是什么，使用方法</title>
-      <link>/quests/145.html</link>
-      <guid isPermaLink="false">quest:145</guid>
-      <description>参考 https://juejin.cn/post/7618525731951034383</description>
-      <category>前端</category>
-      <pubDate>Mon, 30 Mar 2026 10:03:45 GMT</pubDate>
-    </item>
-    <item>
-      <title>pnpm.overrides 的作用是什么？</title>
-      <link>/quests/144.html</link>
-      <guid isPermaLink="false">quest:144</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Wed, 11 Feb 2026 18:37:28 GMT</pubDate>
-    </item>
-    <item>
-      <title>Promise 的值穿透现象</title>
-      <link>/quests/143.html</link>
-      <guid isPermaLink="false">quest:143</guid>
-      <description>《JavaScript 重难点解析》，7.11.4，Promise 用法示例 Promise.resolve(1).then(2).then(Promise.resolve(3)).then(...</description>
-      <category>前端</category>
-      <pubDate>Tue, 03 Feb 2026 01:33:42 GMT</pubDate>
-    </item>
-    <item>
-      <title>application/x-www-form-unlencoded 和 multipart/formdata 的区别？</title>
-      <link>/quests/142.html</link>
-      <guid isPermaLink="false">quest:142</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 30 Jan 2026 14:34:52 GMT</pubDate>
-    </item>
-    <item>
-      <title>cross-fade 是什么？一般用于何处？</title>
-      <link>/quests/141.html</link>
-      <guid isPermaLink="false">quest:141</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 26 Jan 2026 12:37:35 GMT</pubDate>
-    </item>
-    <item>
-      <title>HTML 中 :is 属性的作用</title>
-      <link>/quests/140.html</link>
-      <guid isPermaLink="false">quest:140</guid>
-      <description>参考：《HTML 并不简单，10.5》</description>
-      <category>前端</category>
-      <pubDate>Fri, 16 Jan 2026 06:59:46 GMT</pubDate>
-    </item>
-    <item>
-      <title>animation-play-state 的作用是什么？</title>
-      <link>/quests/139.html</link>
-      <guid isPermaLink="false">quest:139</guid>
-      <description>来源：CSS 实现无限滚动，https://blog.logto.io/css-only-infinite-scroll</description>
-      <category>前端</category>
-      <pubDate>Fri, 16 Jan 2026 03:37:25 GMT</pubDate>
-    </item>
-    <item>
-      <title>tabIndex 的使用</title>
-      <link>/quests/138.html</link>
-      <guid isPermaLink="false">quest:138</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 16 Jan 2026 01:22:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>showOpenFilePicker 和 showDiectoryPick 方法的作用</title>
-      <link>/quests/137.html</link>
-      <guid isPermaLink="false">quest:137</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:34:25 GMT</pubDate>
-    </item>
-    <item>
-      <title>showPicker 方法的作用是什么？</title>
-      <link>/quests/136.html</link>
-      <guid isPermaLink="false">quest:136</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:32:55 GMT</pubDate>
-    </item>
-    <item>
-      <title>Web 中值变化但是属性没有跟随变化的属性有哪些？</title>
-      <link>/quests/135.html</link>
-      <guid isPermaLink="false">quest:135</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:32:39 GMT</pubDate>
-    </item>
-    <item>
-      <title>inert 属性的作用是什么？</title>
-      <link>/quests/134.html</link>
-      <guid isPermaLink="false">quest:134</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:30:16 GMT</pubDate>
-    </item>
-    <item>
-      <title>formdata 事件是什么，常用于什么场景？</title>
-      <link>/quests/133.html</link>
-      <guid isPermaLink="false">quest:133</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:27:49 GMT</pubDate>
-    </item>
-    <item>
-      <title>crossOrigin 属性的作用是什么？</title>
-      <link>/quests/132.html</link>
-      <guid isPermaLink="false">quest:132</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:27:27 GMT</pubDate>
-    </item>
-    <item>
-      <title>img、figure、picture 各元素的使用对比</title>
-      <link>/quests/131.html</link>
-      <guid isPermaLink="false">quest:131</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:27:07 GMT</pubDate>
-    </item>
-    <item>
-      <title>image-set 函数的作用是什么？</title>
-      <link>/quests/130.html</link>
-      <guid isPermaLink="false">quest:130</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:26:38 GMT</pubDate>
-    </item>
-    <item>
-      <title> work-break 和 work-wrap 的区别是什么？</title>
-      <link>/quests/129.html</link>
-      <guid isPermaLink="false">quest:129</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:26:23 GMT</pubDate>
-    </item>
-    <item>
-      <title>script 标签上的 nonce 和 integrity 属性的作用</title>
-      <link>/quests/128.html</link>
-      <guid isPermaLink="false">quest:128</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:25:57 GMT</pubDate>
-    </item>
-    <item>
-      <title>@scope 的作用和使用方法？</title>
-      <link>/quests/127.html</link>
-      <guid isPermaLink="false">quest:127</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:25:20 GMT</pubDate>
-    </item>
-    <item>
-      <title>script 标签 importmap 的作用，以及使用方法？</title>
-      <link>/quests/126.html</link>
-      <guid isPermaLink="false">quest:126</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 15 Jan 2026 15:24:51 GMT</pubDate>
-    </item>
-    <item>
-      <title>srcset 属性的作用，以及使用</title>
-      <link>/quests/125.html</link>
-      <guid isPermaLink="false">quest:125</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 02 Jan 2026 12:42:48 GMT</pubDate>
-    </item>
-    <item>
-      <title>focusin/focusout 事件什么时候会触发，和 focus/blur 事件的区别是什么？</title>
-      <link>/quests/124.html</link>
-      <guid isPermaLink="false">quest:124</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 01 Jan 2026 05:10:23 GMT</pubDate>
-    </item>
-    <item>
-      <title>lh 单位是什么？</title>
-      <link>/quests/123.html</link>
-      <guid isPermaLink="false">quest:123</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Wed, 31 Dec 2025 02:54:54 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是破窗效应？</title>
-      <link>/quests/122.html</link>
-      <guid isPermaLink="false">quest:122</guid>
-      <description>收录 1 个答案</description>
-      <category>心理学</category>
-      <pubDate>Tue, 30 Dec 2025 00:38:37 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是债务重组？</title>
-      <link>/quests/121.html</link>
-      <guid isPermaLink="false">quest:121</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Mon, 29 Dec 2025 04:48:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>form.submit 和 form.requestSubmit 的区别是什么？</title>
-      <link>/quests/120.html</link>
-      <guid isPermaLink="false">quest:120</guid>
-      <description>最近在做一个项目，发现调用了 requestSubmit，不知道有什么用</description>
-      <category>前端</category>
-      <pubDate>Fri, 26 Dec 2025 07:35:58 GMT</pubDate>
-    </item>
-    <item>
-      <title>承销股票是什么意思？</title>
-      <link>/quests/119.html</link>
-      <guid isPermaLink="false">quest:119</guid>
-      <description>来自金钱博弈，投行和商业银行拆分，投行可以进行承销股票</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Thu, 25 Dec 2025 22:45:24 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是煤气灯效应？</title>
-      <link>/quests/118.html</link>
-      <guid isPermaLink="false">quest:118</guid>
-      <description>来自于知识星球 https://t.zsxq.com/ELqbu 提及的一个概念</description>
-      <category>心理学</category>
-      <pubDate>Mon, 22 Dec 2025 04:55:40 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是特里芬难题？</title>
-      <link>/quests/117.html</link>
-      <guid isPermaLink="false">quest:117</guid>
-      <description>来自 B 站视频， 反抗美元霸权的下场有多惨？美元收割的底层逻辑与致命缺陷【美元霸权2】</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Fri, 12 Dec 2025 16:27:20 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是出清？</title>
-      <link>/quests/116.html</link>
-      <guid isPermaLink="false">quest:116</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Mon, 01 Dec 2025 01:06:39 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是资本金？</title>
-      <link>/quests/115.html</link>
-      <guid isPermaLink="false">quest:115</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Wed, 19 Nov 2025 14:06:33 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是黑天鹅？什么是灰犀牛？</title>
-      <link>/quests/114.html</link>
-      <guid isPermaLink="false">quest:114</guid>
-      <description>简单来说：“黑天鹅”是你从未想过会发生的意外；而“灰犀牛”是你明明看到它冲过来，却因为侥幸心理而没有躲避的灾难。</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Wed, 19 Nov 2025 13:08:46 GMT</pubDate>
-    </item>
-    <item>
-      <title>pnpm run -C 是什么意思？</title>
-      <link>/quests/113.html</link>
-      <guid isPermaLink="false">quest:113</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 15 Nov 2025 06:42:47 GMT</pubDate>
-    </item>
-    <item>
-      <title>拉格朗日乘数法是什么？是用来解决什么问题的？</title>
-      <link>/quests/112.html</link>
-      <guid isPermaLink="false">quest:112</guid>
-      <description>暂未记录答案</description>
-      <category>数学</category>
-      <pubDate>Sat, 15 Nov 2025 06:41:50 GMT</pubDate>
-    </item>
-    <item>
-      <title>npm link 的原理是什么？</title>
-      <link>/quests/111.html</link>
-      <guid isPermaLink="false">quest:111</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 15 Nov 2025 06:40:35 GMT</pubDate>
-    </item>
-    <item>
-      <title>npm 如何下载本地的文件？</title>
-      <link>/quests/110.html</link>
-      <guid isPermaLink="false">quest:110</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 15 Nov 2025 06:40:16 GMT</pubDate>
-    </item>
-    <item>
-      <title>节流和防抖函数中 leading 和 tailing 两个参数的作用是什么？</title>
-      <link>/quests/109.html</link>
-      <guid isPermaLink="false">quest:109</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 15 Nov 2025 06:39:22 GMT</pubDate>
-    </item>
-    <item>
-      <title>img 标签 sizes 属性的作用是什么？用于什么场景？</title>
-      <link>/quests/108.html</link>
-      <guid isPermaLink="false">quest:108</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 15 Nov 2025 06:38:38 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是预后？</title>
-      <link>/quests/107.html</link>
-      <guid isPermaLink="false">quest:107</guid>
-      <description>收录 1 个答案</description>
-      <category>生物医学</category>
-      <pubDate>Sat, 15 Nov 2025 06:37:49 GMT</pubDate>
-    </item>
-    <item>
-      <title>moveBefore 的作用是什么？解决了什么问题？</title>
-      <link>/quests/106.html</link>
-      <guid isPermaLink="false">quest:106</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 15 Nov 2025 06:37:24 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是滑梯效应？</title>
-      <link>/quests/105.html</link>
-      <guid isPermaLink="false">quest:105</guid>
-      <description>收录 1 个答案</description>
-      <category>心理学</category>
-      <pubDate>Sat, 15 Nov 2025 06:36:27 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是效应值，什么是元分析？</title>
-      <link>/quests/104.html</link>
-      <guid isPermaLink="false">quest:104</guid>
-      <description>暂未记录答案</description>
-      <category>数学</category>
-      <pubDate>Sat, 15 Nov 2025 06:34:06 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是知识反刍？</title>
-      <link>/quests/103.html</link>
-      <guid isPermaLink="false">quest:103</guid>
-      <description>收录 1 个答案</description>
-      <category>心理学</category>
-      <pubDate>Sat, 15 Nov 2025 06:33:52 GMT</pubDate>
-    </item>
-    <item>
-      <title>经济学中的外部性指的是什么？</title>
-      <link>/quests/102.html</link>
-      <guid isPermaLink="false">quest:102</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Tue, 11 Nov 2025 13:31:46 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是资产负债表？</title>
-      <link>/quests/101.html</link>
-      <guid isPermaLink="false">quest:101</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 09 Nov 2025 14:43:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是期货？</title>
-      <link>/quests/100.html</link>
-      <guid isPermaLink="false">quest:100</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Sun, 09 Nov 2025 14:08:08 GMT</pubDate>
-    </item>
-    <item>
-      <title>shape-outside 属性的作用，可用于解决什么问题？</title>
-      <link>/quests/98.html</link>
-      <guid isPermaLink="false">quest:98</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 13 Oct 2025 01:20:48 GMT</pubDate>
-    </item>
-    <item>
-      <title>悬空指针和野指针是什么？Rust 是如何解决这个问题的？</title>
-      <link>/quests/97.html</link>
-      <guid isPermaLink="false">quest:97</guid>
-      <description>暂未记录答案</description>
-      <category>Rust</category>
-      <pubDate>Wed, 08 Oct 2025 02:33:34 GMT</pubDate>
-    </item>
-    <item>
-      <title>Rust 中 str，String，&amp;str 和 &amp;String 的关系是什么？</title>
-      <link>/quests/96.html</link>
-      <guid isPermaLink="false">quest:96</guid>
-      <description>暂未记录答案</description>
-      <category>Rust</category>
-      <pubDate>Wed, 08 Oct 2025 02:20:51 GMT</pubDate>
-    </item>
-    <item>
-      <title>Rust 中 edition 的作用是什么？</title>
-      <link>/quests/95.html</link>
-      <guid isPermaLink="false">quest:95</guid>
-      <description>暂未记录答案</description>
-      <category>Rust</category>
-      <pubDate>Wed, 08 Oct 2025 02:17:44 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是骨髓穿刺活检？</title>
-      <link>/quests/94.html</link>
-      <guid isPermaLink="false">quest:94</guid>
-      <description>暂未记录答案</description>
-      <category>生物医学</category>
-      <pubDate>Tue, 30 Sep 2025 01:04:12 GMT</pubDate>
-    </item>
-    <item>
-      <title>animation-composition 属性的作用是什么？可以解决什么问题？</title>
-      <link>/quests/93.html</link>
-      <guid isPermaLink="false">quest:93</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 26 Sep 2025 04:43:23 GMT</pubDate>
-    </item>
-    <item>
-      <title>padStart 和 padEnd 方法的使用和介绍</title>
-      <link>/quests/92.html</link>
-      <guid isPermaLink="false">quest:92</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Wed, 24 Sep 2025 16:03:37 GMT</pubDate>
-    </item>
-    <item>
-      <title>浏览器中的 top-layer 是什么？有哪些特点？有什么方式可以形成 top-layer？</title>
-      <link>/quests/91.html</link>
-      <guid isPermaLink="false">quest:91</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Wed, 24 Sep 2025 15:18:47 GMT</pubDate>
-    </item>
-    <item>
-      <title>URLPattern 的作用是什么？可以解决什么问题？</title>
-      <link>/quests/89.html</link>
-      <guid isPermaLink="false">quest:89</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 22 Sep 2025 08:46:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>mask-image 的作用是什么？如何使用？</title>
-      <link>/quests/88.html</link>
-      <guid isPermaLink="false">quest:88</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 22 Sep 2025 08:35:07 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS 中的 if() 函数的使用，有哪些使用场景？</title>
-      <link>/quests/87.html</link>
-      <guid isPermaLink="false">quest:87</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 22 Sep 2025 01:36:43 GMT</pubDate>
-    </item>
-    <item>
-      <title>corner-shape 是什么，使用技巧及场景是什么？</title>
-      <link>/quests/86.html</link>
-      <guid isPermaLink="false">quest:86</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 22 Sep 2025 01:35:38 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS @property 的使用方式，常见的使用场景是什么？</title>
-      <link>/quests/85.html</link>
-      <guid isPermaLink="false">quest:85</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 20 Sep 2025 04:57:30 GMT</pubDate>
-    </item>
-    <item>
-      <title>操作系统的发展历史是怎样的，每个阶段都试图解决什么问题？</title>
-      <link>/quests/84.html</link>
-      <guid isPermaLink="false">quest:84</guid>
-      <description>暂未记录答案</description>
-      <category>操作系统</category>
-      <pubDate>Sat, 20 Sep 2025 04:34:29 GMT</pubDate>
-    </item>
-    <item>
-      <title>C 语言中和线程操作有关的函数有哪些？</title>
-      <link>/quests/83.html</link>
-      <guid isPermaLink="false">quest:83</guid>
-      <description>暂未记录答案</description>
-      <category>未分类</category>
-      <pubDate>Sat, 20 Sep 2025 03:09:49 GMT</pubDate>
-    </item>
-    <item>
-      <title>C 语言中 volatile 关键字的作用是什么？</title>
-      <link>/quests/82.html</link>
-      <guid isPermaLink="false">quest:82</guid>
-      <description>暂未记录答案</description>
-      <category>未分类</category>
-      <pubDate>Sat, 20 Sep 2025 03:09:03 GMT</pubDate>
-    </item>
-    <item>
-      <title>行内（块）元素的是如何对齐的？</title>
-      <link>/quests/81.html</link>
-      <guid isPermaLink="false">quest:81</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 16 Sep 2025 04:41:36 GMT</pubDate>
-    </item>
-    <item>
-      <title>immer 中的 enableMapSet 的作用是什么？</title>
-      <link>/quests/80.html</link>
-      <guid isPermaLink="false">quest:80</guid>
-      <description>从 immer v6 版本开始，为了保持包大小的体积，默认不包含对 Map 和 Set 的处理，如果尝试在 produce 中修改 Map 或 Set ，就会导致报错。 [Immer] The...</description>
-      <category>前端</category>
-      <pubDate>Mon, 15 Sep 2025 13:08:17 GMT</pubDate>
-    </item>
-    <item>
-      <title>径向渐变的语法及使用技巧</title>
-      <link>/quests/79.html</link>
-      <guid isPermaLink="false">quest:79</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 15 Sep 2025 04:08:06 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS 规范中的 &lt;zero&gt; 是什么意思？</title>
-      <link>/quests/78.html</link>
-      <guid isPermaLink="false">quest:78</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 14 Sep 2025 11:30:13 GMT</pubDate>
-    </item>
-    <item>
-      <title>循环线性渐变的语法？有哪些使用技巧？</title>
-      <link>/quests/77.html</link>
-      <guid isPermaLink="false">quest:77</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 04 Sep 2025 13:27:22 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 kiosk 模式</title>
-      <link>/quests/76.html</link>
-      <guid isPermaLink="false">quest:76</guid>
-      <description>收录 1 个答案</description>
-      <category>Electron</category>
-      <pubDate>Thu, 04 Sep 2025 11:37:37 GMT</pubDate>
-    </item>
-    <item>
-      <title>线性渐变的基本语法</title>
-      <link>/quests/75.html</link>
-      <guid isPermaLink="false">quest:75</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Wed, 03 Sep 2025 15:23:14 GMT</pubDate>
-    </item>
-    <item>
-      <title>角向渐变的使用方法</title>
-      <link>/quests/74.html</link>
-      <guid isPermaLink="false">quest:74</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 02 Sep 2025 03:59:17 GMT</pubDate>
-    </item>
-    <item>
-      <title>网络效应是什么？</title>
-      <link>/quests/73.html</link>
-      <guid isPermaLink="false">quest:73</guid>
-      <description>收录 1 个答案</description>
-      <category>经济&amp;金融</category>
-      <pubDate>Mon, 02 Jun 2025 11:46:25 GMT</pubDate>
-    </item>
-    <item>
-      <title>Git Submodule 是什么？如何使用？</title>
-      <link>/quests/72.html</link>
-      <guid isPermaLink="false">quest:72</guid>
-      <description>暂未记录答案</description>
-      <category>Git</category>
-      <pubDate>Mon, 26 May 2025 12:03:30 GMT</pubDate>
-    </item>
-    <item>
-      <title>HTML 中 &lt;dialog&gt; 元素的使用？</title>
-      <link>/quests/71.html</link>
-      <guid isPermaLink="false">quest:71</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:46:58 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS 中的相对颜色是什么？</title>
-      <link>/quests/70.html</link>
-      <guid isPermaLink="false">quest:70</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:46:37 GMT</pubDate>
-    </item>
-    <item>
-      <title>:focus-visible 是什么，如何使用？</title>
-      <link>/quests/69.html</link>
-      <guid isPermaLink="false">quest:69</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:46:16 GMT</pubDate>
-    </item>
-    <item>
-      <title>:user-valid 和 :user-invalid 是什么？</title>
-      <link>/quests/68.html</link>
-      <guid isPermaLink="false">quest:68</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:45:37 GMT</pubDate>
-    </item>
-    <item>
-      <title>HTML details 如何实现独占式手风琴？</title>
-      <link>/quests/67.html</link>
-      <guid isPermaLink="false">quest:67</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:44:42 GMT</pubDate>
-    </item>
-    <item>
-      <title>View Transition 的使用方法？</title>
-      <link>/quests/66.html</link>
-      <guid isPermaLink="false">quest:66</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:44:06 GMT</pubDate>
-    </item>
-    <item>
-      <title>anchor-position 的使用方法？</title>
-      <link>/quests/65.html</link>
-      <guid isPermaLink="false">quest:65</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:43:21 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS 中 scroll snap 的使用方式？</title>
-      <link>/quests/64.html</link>
-      <guid isPermaLink="false">quest:64</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:42:59 GMT</pubDate>
-    </item>
-    <item>
-      <title>field-sizing 是什么？</title>
-      <link>/quests/63.html</link>
-      <guid isPermaLink="false">quest:63</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sat, 10 May 2025 12:42:07 GMT</pubDate>
-    </item>
-    <item>
-      <title>TCP 四次挥手的流程，为什么要进行四次挥手？</title>
-      <link>/quests/62.html</link>
-      <guid isPermaLink="false">quest:62</guid>
-      <description>暂未记录答案</description>
-      <category>网络</category>
-      <pubDate>Thu, 01 May 2025 05:41:32 GMT</pubDate>
-    </item>
-    <item>
-      <title>:focus-within 的作用是什么？和 :focus 的区别是什么?</title>
-      <link>/quests/61.html</link>
-      <guid isPermaLink="false">quest:61</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 01 May 2025 05:33:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 JWT？JWT 是如何工作的？</title>
-      <link>/quests/60.html</link>
-      <guid isPermaLink="false">quest:60</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 29 Apr 2025 10:16:33 GMT</pubDate>
-    </item>
-    <item>
-      <title>V8 与 Libuv 事件循环的差异？</title>
-      <link>/quests/59.html</link>
-      <guid isPermaLink="false">quest:59</guid>
-      <description>暂未记录答案</description>
-      <category>Node.js</category>
-      <pubDate>Tue, 29 Apr 2025 00:46:08 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 HTTP 队头阻塞？</title>
-      <link>/quests/58.html</link>
-      <guid isPermaLink="false">quest:58</guid>
-      <description>收录 1 个答案</description>
-      <category>网络</category>
-      <pubDate>Mon, 28 Apr 2025 02:50:28 GMT</pubDate>
-    </item>
-    <item>
-      <title>移动端如何解决点透问题，以及 click 的 300ms 左右延迟？</title>
-      <link>/quests/57.html</link>
-      <guid isPermaLink="false">quest:57</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 24 Apr 2025 03:15:36 GMT</pubDate>
-    </item>
-    <item>
-      <title>HTTP 持久连接解决了什么问题，带来了什么问题，Content-Length 和 Transfer-Encoding 的引入是怎么解决的？</title>
-      <link>/quests/56.html</link>
-      <guid isPermaLink="false">quest:56</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 24 Apr 2025 03:12:11 GMT</pubDate>
-    </item>
-    <item>
-      <title>for ... of 和 for ... in 的区别</title>
-      <link>/quests/55.html</link>
-      <guid isPermaLink="false">quest:55</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 24 Apr 2025 03:11:22 GMT</pubDate>
-    </item>
-    <item>
-      <title>浏览器的事件模型？在当前的事件模型中，哪些事件可以冒泡，哪些不会冒泡，为什么？</title>
-      <link>/quests/54.html</link>
-      <guid isPermaLink="false">quest:54</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 24 Apr 2025 03:09:10 GMT</pubDate>
-    </item>
-    <item>
-      <title>HTML 的 meta 标签的用途，并列举一些常用的 meta 标签</title>
-      <link>/quests/53.html</link>
-      <guid isPermaLink="false">quest:53</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 24 Apr 2025 03:07:53 GMT</pubDate>
-    </item>
-    <item>
-      <title>line-height 取值的区别？</title>
-      <link>/quests/52.html</link>
-      <guid isPermaLink="false">quest:52</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 24 Apr 2025 02:58:14 GMT</pubDate>
-    </item>
-    <item>
-      <title>push 和 concat 的区别？</title>
-      <link>/quests/50.html</link>
-      <guid isPermaLink="false">quest:50</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Wed, 23 Apr 2025 05:54:49 GMT</pubDate>
-    </item>
-    <item>
-      <title>package.json 里面的 resolution 是做什么用的？</title>
-      <link>/quests/49.html</link>
-      <guid isPermaLink="false">quest:49</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 21 Apr 2025 10:52:43 GMT</pubDate>
-    </item>
-    <item>
-      <title>pnpm 的优势在哪里？</title>
-      <link>/quests/48.html</link>
-      <guid isPermaLink="false">quest:48</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 21 Apr 2025 09:59:02 GMT</pubDate>
-    </item>
-    <item>
-      <title>React 和 Vue 的区别？</title>
-      <link>/quests/47.html</link>
-      <guid isPermaLink="false">quest:47</guid>
-      <description>相同点： 组件化 数据驱动视图 不同点： React 扩展 JavaScript 语法，描述 UI 更新机制：Fiber Node Tree，全量渲染，打 flag 更新，性能差 生态，生态丰...</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 14:18:14 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS 中的 isolation 属性是干什么用的？</title>
-      <link>/quests/46.html</link>
-      <guid isPermaLink="false">quest:46</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 12:33:15 GMT</pubDate>
-    </item>
-    <item>
-      <title>怎么实现一套代码，多端运行？</title>
-      <link>/quests/45.html</link>
-      <guid isPermaLink="false">quest:45</guid>
-      <description>一套代码，多端运行： 运行时 高德的方案：Android、iOS、鸿蒙、PC 跨端容器，提供统一的跨端环境，统一切面接口 Android -&gt; Java iOS -&gt; Swift 鸿蒙 -&gt; ...</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 11:03:50 GMT</pubDate>
-    </item>
-    <item>
-      <title>虚拟列表是怎么实现的？</title>
-      <link>/quests/44.html</link>
-      <guid isPermaLink="false">quest:44</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 10:39:38 GMT</pubDate>
-    </item>
-    <item>
-      <title>在 TCP 建立连接后，HTTP 传输数据前，这之间发生了什么？</title>
-      <link>/quests/43.html</link>
-      <guid isPermaLink="false">quest:43</guid>
-      <description>TLS 握手 HTTP 协议协商</description>
-      <category>网络</category>
-      <pubDate>Sun, 20 Apr 2025 10:39:12 GMT</pubDate>
-    </item>
-    <item>
-      <title>怎么减少 LCP 时间？</title>
-      <link>/quests/42.html</link>
-      <guid isPermaLink="false">quest:42</guid>
-      <description>如何减小 LCP 时间： 优化服务响应时间 高性能服务器 CDN 优化资源加载时间 资源预加载，&lt;link ref=&quot;preload&quot; href=&quot;xxx.png&quot; as=&quot;img&quot; /&gt; 资...</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 10:33:13 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 SSR 流式渲染？</title>
-      <link>/quests/41.html</link>
-      <guid isPermaLink="false">quest:41</guid>
-      <description>暂未记录答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 10:13:55 GMT</pubDate>
-    </item>
-    <item>
-      <title>Cookie 有哪些属性？</title>
-      <link>/quests/40.html</link>
-      <guid isPermaLink="false">quest:40</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 07:53:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>内存泄露怎么解决？</title>
-      <link>/quests/39.html</link>
-      <guid isPermaLink="false">quest:39</guid>
-      <description>首先明确有哪些情况会导致内存泄露： 意外声明了全局变量，在函数没有使用关键字声明变量，会成为全局变量 -&gt; 严格模式 定时器，事件监听没有去除 -&gt; 及时清理 引用了不需要的变量 -&gt; Wea...</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 07:52:21 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS 的层叠上下文是什么？</title>
-      <link>/quests/38.html</link>
-      <guid isPermaLink="false">quest:38</guid>
-      <description>层叠上下文是 HTML 元素的一个属性，定义了在 Z 轴上的层叠顺序。可以把层叠上下文认为是一个图层，图层内部的 HTML 元素按照一定规则层叠。 如何创建层叠上下文： HTML 根元素 po...</description>
-      <category>前端</category>
-      <pubDate>Sun, 20 Apr 2025 07:52:13 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 XSS 攻击？攻击原理和防范方式？</title>
-      <link>/quests/37.html</link>
-      <guid isPermaLink="false">quest:37</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 18 Apr 2025 13:27:13 GMT</pubDate>
-    </item>
-    <item>
-      <title>ES Module 和 CommonJS 的区别？</title>
-      <link>/quests/36.html</link>
-      <guid isPermaLink="false">quest:36</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Fri, 18 Apr 2025 08:43:57 GMT</pubDate>
-    </item>
-    <item>
-      <title>怎么计算秒开率？</title>
-      <link>/quests/35.html</link>
-      <guid isPermaLink="false">quest:35</guid>
-      <description>某段时间内， FCP 在 1s 内的次数除以总次数。</description>
-      <category>前端</category>
-      <pubDate>Thu, 17 Apr 2025 15:22:42 GMT</pubDate>
-    </item>
-    <item>
-      <title>React 19 的新特性？</title>
-      <link>/quests/34.html</link>
-      <guid isPermaLink="false">quest:34</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 17 Apr 2025 15:20:36 GMT</pubDate>
-    </item>
-    <item>
-      <title>Node.js 的事件循环</title>
-      <link>/quests/33.html</link>
-      <guid isPermaLink="false">quest:33</guid>
-      <description>收录 1 个答案</description>
-      <category>Node.js</category>
-      <pubDate>Thu, 17 Apr 2025 15:20:13 GMT</pubDate>
-    </item>
-    <item>
-      <title>TypeScript 的 Await 类型如何实现？</title>
-      <link>/quests/32.html</link>
-      <guid isPermaLink="false">quest:32</guid>
-      <description>type Await&lt;T&gt; = T extends PromiseLike&lt;infer U&gt; ? U : T;</description>
-      <category>前端</category>
-      <pubDate>Thu, 17 Apr 2025 15:12:40 GMT</pubDate>
-    </item>
-    <item>
-      <title>短轮询、长轮询、SSE 和 WebSocket 的区别？</title>
-      <link>/quests/31.html</link>
-      <guid isPermaLink="false">quest:31</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 17 Apr 2025 09:44:11 GMT</pubDate>
-    </item>
-    <item>
-      <title>离屏 Canvas 的性能为什么比 Canvas 好？</title>
-      <link>/quests/30.html</link>
-      <guid isPermaLink="false">quest:30</guid>
-      <description>离屏 Canvas：可在 Web Worker 中运行，利用多线程并行计算，避免主线程阻塞</description>
-      <category>前端</category>
-      <pubDate>Thu, 17 Apr 2025 09:01:45 GMT</pubDate>
-    </item>
-    <item>
-      <title>git reset 的使用，和 git revert 的区别是什么？</title>
-      <link>/quests/28.html</link>
-      <guid isPermaLink="false">quest:28</guid>
-      <description>收录 1 个答案</description>
-      <category>Git</category>
-      <pubDate>Wed, 16 Apr 2025 08:14:50 GMT</pubDate>
-    </item>
-    <item>
-      <title>React 为什么要自定义合成事件？</title>
-      <link>/quests/27.html</link>
-      <guid isPermaLink="false">quest:27</guid>
-      <description>React 为什么要自定义合成事件： 跨浏览器的兼容 抹平不同浏览器事件名称，事件属性，监听方式上的差异，开发者仅需关心 React 提供的一直的事件接口，而无需关注浏览器底层的差异 性能提升...</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:21:15 GMT</pubDate>
-    </item>
-    <item>
-      <title>浮点数运算的精度问题，比如 0.1 + 0.2 不等于 0.3 这是什么原因，要怎么解决？</title>
-      <link>/quests/26.html</link>
-      <guid isPermaLink="false">quest:26</guid>
-      <description>收录 1 个答案</description>
-      <category>未分类</category>
-      <pubDate>Tue, 15 Apr 2025 07:20:32 GMT</pubDate>
-    </item>
-    <item>
-      <title>模块化的发展的历史是什么？</title>
-      <link>/quests/25.html</link>
-      <guid isPermaLink="false">quest:25</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:17:37 GMT</pubDate>
-    </item>
-    <item>
-      <title>Webpack 中 loader 和 plugin 的区别？</title>
-      <link>/quests/24.html</link>
-      <guid isPermaLink="false">quest:24</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:17:14 GMT</pubDate>
-    </item>
-    <item>
-      <title>域名解析时是 TCP 还是 UDP？</title>
-      <link>/quests/23.html</link>
-      <guid isPermaLink="false">quest:23</guid>
-      <description>域名解析通常使用 UDP 协议，因为 UDP 协议具有较低的延迟和较少的开销，非常适合于快速查询。但是在有的时候，当响应大于 512 字节时，或需要可靠传输时，会使用 TCP 协议。</description>
-      <category>网络</category>
-      <pubDate>Tue, 15 Apr 2025 07:16:38 GMT</pubDate>
-    </item>
-    <item>
-      <title>GET 和 POST 的区别？什么情况下用到？</title>
-      <link>/quests/22.html</link>
-      <guid isPermaLink="false">quest:22</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:16:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>浏览器同一时间能够从一个域名下载多少资源？</title>
-      <link>/quests/21.html</link>
-      <guid isPermaLink="false">quest:21</guid>
-      <description>大部分现代浏览器在同一个域名下通常允许的最大并发数在 6 到 8 之间</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:13:48 GMT</pubDate>
-    </item>
-    <item>
-      <title>defer 和 async 的区别？</title>
-      <link>/quests/20.html</link>
-      <guid isPermaLink="false">quest:20</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:13:24 GMT</pubDate>
-    </item>
-    <item>
-      <title>document load 和 document DOMContentLoaded 两个事件的区别是什么？
-</title>
-      <link>/quests/19.html</link>
-      <guid isPermaLink="false">quest:19</guid>
-      <description>DOMContentLoaded 是当文档解析完成后触发 load 是文档解析完成并且资源加载完成后触发</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:12:09 GMT</pubDate>
-    </item>
-    <item>
-      <title>new 一个对象具体做了什么？</title>
-      <link>/quests/18.html</link>
-      <guid isPermaLink="false">quest:18</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:11:44 GMT</pubDate>
-    </item>
-    <item>
-      <title>原型链是什么？为什么要有原型链？</title>
-      <link>/quests/17.html</link>
-      <guid isPermaLink="false">quest:17</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:11:20 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS 的加载是异步的吗？表现在什么地方？</title>
-      <link>/quests/16.html</link>
-      <guid isPermaLink="false">quest:16</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:10:36 GMT</pubDate>
-    </item>
-    <item>
-      <title>Attribute 和 Property 的区别？
-</title>
-      <link>/quests/15.html</link>
-      <guid isPermaLink="false">quest:15</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:09:44 GMT</pubDate>
-    </item>
-    <item>
-      <title>link 和 @import 引入 CSS 的区别？</title>
-      <link>/quests/14.html</link>
-      <guid isPermaLink="false">quest:14</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:08:55 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS JS 放置位置和原因？</title>
-      <link>/quests/13.html</link>
-      <guid isPermaLink="false">quest:13</guid>
-      <description>CSS 一般放于 head 中，原因是浏览器会边解析文档边渲染，如果把 CSS 放在文档后面，那么会显示没有样式的内容，然后解析到 CSS 后，突然显示有样式的内容，这样的体验不好，所以把 C...</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 07:08:24 GMT</pubDate>
-    </item>
-    <item>
-      <title>请求参数 credentials 的作用是什么？</title>
-      <link>/quests/12.html</link>
-      <guid isPermaLink="false">quest:12</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Tue, 15 Apr 2025 05:34:03 GMT</pubDate>
-    </item>
-    <item>
-      <title>什么是 CSRF 攻击？怎么预防 CSRF 攻击？</title>
-      <link>/quests/10.html</link>
-      <guid isPermaLink="false">quest:10</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 14 Apr 2025 16:02:50 GMT</pubDate>
-    </item>
-    <item>
-      <title>Promise 的底层原理是什么？</title>
-      <link>/quests/7.html</link>
-      <guid isPermaLink="false">quest:7</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Mon, 14 Apr 2025 08:10:38 GMT</pubDate>
-    </item>
-    <item>
-      <title>Vite 和 Webpack 的区别？</title>
-      <link>/quests/6.html</link>
-      <guid isPermaLink="false">quest:6</guid>
-      <description>Vite 和 Webpack 的区别： 冷启动 Webpack：需要全量分析依赖，并进行打包后才能访问，速度较慢 Vite：依赖浏览器原生对 ES Module 的能力，动态加载模块返回，速度...</description>
-      <category>前端</category>
-      <pubDate>Mon, 14 Apr 2025 08:09:12 GMT</pubDate>
-    </item>
-    <item>
-      <title>对象键的排序顺序是什么？</title>
-      <link>/quests/5.html</link>
-      <guid isPermaLink="false">quest:5</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 13 Apr 2025 06:23:17 GMT</pubDate>
-    </item>
-    <item>
-      <title>Set 和 Map 键值的顺序是什么？</title>
-      <link>/quests/4.html</link>
-      <guid isPermaLink="false">quest:4</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Sun, 13 Apr 2025 06:22:54 GMT</pubDate>
-    </item>
-    <item>
-      <title>怎么查看性能指标？性能优化的手段有哪些？</title>
-      <link>/quests/3.html</link>
-      <guid isPermaLink="false">quest:3</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 10 Apr 2025 15:01:48 GMT</pubDate>
-    </item>
-    <item>
-      <title>为什么 Canvas 的性能比 SVG 好？</title>
-      <link>/quests/2.html</link>
-      <guid isPermaLink="false">quest:2</guid>
-      <description>SVG 需要构建和维护 DOM 树，内存占用高，更新时会触发浏览器渲染管线，引起重排和重绘。当 DOM 数量增加时，复杂度呈指数级增长，性能急剧下降。 Canvas 直接绘制到屏幕上，无中间结...</description>
-      <category>前端</category>
-      <pubDate>Thu, 10 Apr 2025 15:01:30 GMT</pubDate>
-    </item>
-    <item>
-      <title>Canvas 和 SVG 的区别是什么？</title>
-      <link>/quests/1.html</link>
-      <guid isPermaLink="false">quest:1</guid>
-      <description>收录 1 个答案</description>
-      <category>前端</category>
-      <pubDate>Thu, 10 Apr 2025 15:01:07 GMT</pubDate>
-    </item>
-    <item>
-      <title>0.47.2</title>
-      <link>/docs/document/14/864.html</link>
-      <guid isPermaLink="false">doc:864</guid>
-      <description>feat: 博客发布支持搜索 feat: 新增胶囊风格的 PPT 和 报告模板 feat: 浏览器插件聊天会话 UI 和行为和客户端对齐 feat: Claude 模型支持设置最大输出 token feat: 代码编辑器支持 mod + 滚...</description>
-      <pubDate>Sat, 06 Jun 2026 02:23:03 GMT</pubDate>
+      <pubDate>Thu, 11 Jun 2026 00:32:03 GMT</pubDate>
     </item>
     <item>
       <title>background-attachment 规定在滚动的情况下，背景图片相对于哪...</title>
@@ -1720,11 +444,20 @@
       <pubDate>Wed, 10 Jun 2026 04:24:08 GMT</pubDate>
     </item>
     <item>
-      <title>建立反馈系统</title>
-      <link>/articles/85.html</link>
-      <guid isPermaLink="false">article:85</guid>
-      <description>我在起点看一本小说时，有一个场景是男主教人射箭，思路是算好抛物线方程，设定角度和力度，每次都能射到同一个点。我当时就忍不住写了一条评论： 没想到有 2000 多人点赞。大家认同的是什么呢？我觉得是对「提前算好一切」这件事的不信任。现实中不可...</description>
-      <pubDate>Tue, 09 Jun 2026 00:09:11 GMT</pubDate>
+      <title>什么是 OffscreenCanvas，它可以解决什么问题？</title>
+      <link>/quests/184.html</link>
+      <guid isPermaLink="false">quest:184</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 10 Jun 2026 04:24:08 GMT</pubDate>
+    </item>
+    <item>
+      <title>popover 是什么以及基本使用方法！</title>
+      <link>/quests/177.html</link>
+      <guid isPermaLink="false">quest:177</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 09 Jun 2026 23:38:09 GMT</pubDate>
     </item>
     <item>
       <title>2025 年终总结</title>
@@ -1745,6 +478,46 @@
       <pubDate>Mon, 08 Jun 2026 04:16:50 GMT</pubDate>
     </item>
     <item>
+      <title>inset() 函数是什么？</title>
+      <link>/quests/180.html</link>
+      <guid isPermaLink="false">quest:180</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 08 Jun 2026 04:16:50 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS random()</title>
+      <link>/quests/202.html</link>
+      <guid isPermaLink="false">quest:202</guid>
+      <description>https://www.sitepoint.com/css-mathrandom-in-production-native-randomness-without-javascript/</description>
+      <category>前端</category>
+      <pubDate>Sun, 07 Jun 2026 13:57:56 GMT</pubDate>
+    </item>
+    <item>
+      <title>HTML Sanitizer API 使用介绍！</title>
+      <link>/quests/201.html</link>
+      <guid isPermaLink="false">quest:201</guid>
+      <description>https://alfy.blog/2026/05/07/html-sanitizer-api.html</description>
+      <category>前端</category>
+      <pubDate>Sun, 07 Jun 2026 13:57:15 GMT</pubDate>
+    </item>
+    <item>
+      <title>间隙装饰，column-rule 的使用</title>
+      <link>/quests/200.html</link>
+      <guid isPermaLink="false">quest:200</guid>
+      <description>https://developer.chrome.com/blog/gap-decorations-stable?hl=zh-cn</description>
+      <category>前端</category>
+      <pubDate>Sun, 07 Jun 2026 08:11:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>Temporal API 的使用！</title>
+      <link>/quests/199.html</link>
+      <guid isPermaLink="false">quest:199</guid>
+      <description>https://nodesource.com/blog/javascript-temporal-history-nodejs-26</description>
+      <category>前端</category>
+      <pubDate>Sun, 07 Jun 2026 08:10:09 GMT</pubDate>
+    </item>
+    <item>
       <title>View Transition 的基本概念和使用</title>
       <link>/articles/84.html</link>
       <guid isPermaLink="false">article:84</guid>
@@ -1752,11 +525,43 @@
       <pubDate>Fri, 05 Jun 2026 00:21:50 GMT</pubDate>
     </item>
     <item>
+      <title>ident() 函数的使用介绍！</title>
+      <link>/quests/198.html</link>
+      <guid isPermaLink="false">quest:198</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 07 Jun 2026 01:45:07 GMT</pubDate>
+    </item>
+    <item>
+      <title>Tanstack Query 解决了什么问题，使用方法？</title>
+      <link>/quests/194.html</link>
+      <guid isPermaLink="false">quest:194</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 06 Jun 2026 09:20:31 GMT</pubDate>
+    </item>
+    <item>
       <title>0.47.1</title>
       <link>/docs/document/14/863.html</link>
       <guid isPermaLink="false">doc:863</guid>
       <description>feat: 支持发布问题管理 feat: 博客模板添加 RSS 订阅 feat: 发布选中 UI 优化，搜索框背景优化 feat: 信息流支持订阅 B 站动态 fix: 小组件侧边栏删除临期卡片确认弹窗优化 fix: 博客模板第一次点击筛选...</description>
       <pubDate>Sat, 06 Jun 2026 01:06:37 GMT</pubDate>
+    </item>
+    <item>
+      <title>font-display 属性的作用</title>
+      <link>/quests/193.html</link>
+      <guid isPermaLink="false">quest:193</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 05 Jun 2026 23:24:54 GMT</pubDate>
+    </item>
+    <item>
+      <title>View Transition 的使用方法？</title>
+      <link>/quests/66.html</link>
+      <guid isPermaLink="false">quest:66</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 05 Jun 2026 00:21:50 GMT</pubDate>
     </item>
     <item>
       <title>Math.trunc() 是一个取整函数，它的取整方式为去掉数字中的小数部分： ...</title>
@@ -1775,6 +580,14 @@
       <pubDate>Fri, 05 Jun 2026 00:05:27 GMT</pubDate>
     </item>
     <item>
+      <title>Math.hypot 的作用？</title>
+      <link>/quests/191.html</link>
+      <guid isPermaLink="false">quest:191</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 05 Jun 2026 00:05:27 GMT</pubDate>
+    </item>
+    <item>
       <title>我们通常认为，技术进步带来效率提升，资源消耗自然会减少。但现实中往往事与愿违，效...</title>
       <link>/cards/751.html</link>
       <guid isPermaLink="false">card:751</guid>
@@ -1782,6 +595,38 @@
       <category>经济/杰文斯悖论</category>
       <category>悖论/杰文斯悖论</category>
       <pubDate>Thu, 04 Jun 2026 04:27:12 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是杰文斯悖论？</title>
+      <link>/quests/179.html</link>
+      <guid isPermaLink="false">quest:179</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Thu, 04 Jun 2026 04:27:12 GMT</pubDate>
+    </item>
+    <item>
+      <title>BarcodeDetector 的使用！</title>
+      <link>/quests/192.html</link>
+      <guid isPermaLink="false">quest:192</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 04 Jun 2026 04:05:54 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是货币债权？</title>
+      <link>/quests/189.html</link>
+      <guid isPermaLink="false">quest:189</guid>
+      <description>暂未记录答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Wed, 03 Jun 2026 05:58:24 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么叫无交易对手方？</title>
+      <link>/quests/188.html</link>
+      <guid isPermaLink="false">quest:188</guid>
+      <description>暂未记录答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Wed, 03 Jun 2026 05:58:11 GMT</pubDate>
     </item>
     <item>
       <title>0.47.0</title>
@@ -1823,12 +668,36 @@
       <pubDate>Tue, 02 Jun 2026 04:48:51 GMT</pubDate>
     </item>
     <item>
+      <title>什么是 scroll-behavior？</title>
+      <link>/quests/183.html</link>
+      <guid isPermaLink="false">quest:183</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 02 Jun 2026 04:48:51 GMT</pubDate>
+    </item>
+    <item>
       <title>overscroll-behavior 用来控制当滚动到边界之后，滚动链的穿透行...</title>
       <link>/cards/749.html</link>
       <guid isPermaLink="false">card:749</guid>
       <description>overscroll-behavior 用来控制当滚动到边界之后，滚动链的穿透行为和回弹效果。 一个很典型的场景，我们打开了一个弹窗，在弹窗里面滚动，当滚动到底部时，继续滚动会导致弹窗底部的页面内容发生了滚动，以往情况我们要解决这个问题会使...</description>
       <category>CSS/overscroll-behavior</category>
       <pubDate>Tue, 02 Jun 2026 00:23:44 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 overscroll-behavior？</title>
+      <link>/quests/182.html</link>
+      <guid isPermaLink="false">quest:182</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 02 Jun 2026 00:23:44 GMT</pubDate>
+    </item>
+    <item>
+      <title>animation-composition 属性的作用是什么？可以解决什么问题？</title>
+      <link>/quests/93.html</link>
+      <guid isPermaLink="false">quest:93</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 01 Jun 2026 15:04:50 GMT</pubDate>
     </item>
     <item>
       <title>在 CSS 中，如果想让元素的某些部分呈现不同程度的透明， opacity 是做...</title>
@@ -1840,11 +709,59 @@
       <pubDate>Mon, 01 Jun 2026 10:19:03 GMT</pubDate>
     </item>
     <item>
+      <title>mask-image 的作用是什么？如何使用？</title>
+      <link>/quests/88.html</link>
+      <guid isPermaLink="false">quest:88</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 01 Jun 2026 10:19:03 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 revert-layer？</title>
+      <link>/quests/187.html</link>
+      <guid isPermaLink="false">quest:187</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 01 Jun 2026 04:15:30 GMT</pubDate>
+    </item>
+    <item>
+      <title>@layer 解决了什么问题?</title>
+      <link>/quests/186.html</link>
+      <guid isPermaLink="false">quest:186</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 01 Jun 2026 04:15:17 GMT</pubDate>
+    </item>
+    <item>
+      <title>Web Animation API 的使用介绍！</title>
+      <link>/quests/185.html</link>
+      <guid isPermaLink="false">quest:185</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 01 Jun 2026 01:30:13 GMT</pubDate>
+    </item>
+    <item>
       <title>基于 SVG 无限画板的拖拽和缩放实现</title>
       <link>/articles/48.html</link>
       <guid isPermaLink="false">article:48</guid>
       <description>SVG 可以看作是一个无限大小的画布，而 viewBox 属性就是决定将画布中的哪一部分展示出来， viewBox 指定的这个范围称之为视口。 viewBox 通过四个属性来定义视口： 左上角坐标 (minX， minY) 视口大小 (wi...</description>
       <pubDate>Mon, 23 Sep 2024 14:28:36 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS 中 scroll snap 的使用方式？</title>
+      <link>/quests/64.html</link>
+      <guid isPermaLink="false">quest:64</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 31 May 2026 06:32:16 GMT</pubDate>
+    </item>
+    <item>
+      <title>corner-shape 是什么，使用技巧及场景是什么？</title>
+      <link>/quests/86.html</link>
+      <guid isPermaLink="false">quest:86</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 31 May 2026 00:11:27 GMT</pubDate>
     </item>
     <item>
       <title>0.46.2</title>
@@ -1861,10 +778,34 @@
       <pubDate>Sat, 30 May 2026 07:54:56 GMT</pubDate>
     </item>
     <item>
+      <title>anchor-position 的使用方法？</title>
+      <link>/quests/65.html</link>
+      <guid isPermaLink="false">quest:65</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 30 May 2026 07:54:56 GMT</pubDate>
+    </item>
+    <item>
       <title>不同步的 attribute 和 property</title>
       <link>/articles/81.html</link>
       <guid isPermaLink="false">article:81</guid>
       <description>在前端开发中，你是否遇到过这样的困惑：为什么通过 value 属性设置的值，用 getAttribute 却读不到？ const input = document.querySelector(&apos;input&apos;); input.value = ...</description>
+      <pubDate>Fri, 29 May 2026 07:24:36 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是中等收入陷阱？</title>
+      <link>/quests/181.html</link>
+      <guid isPermaLink="false">quest:181</guid>
+      <description>暂未记录答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Fri, 29 May 2026 08:09:23 GMT</pubDate>
+    </item>
+    <item>
+      <title>Web 中值变化但是属性没有跟随变化的属性有哪些？</title>
+      <link>/quests/135.html</link>
+      <guid isPermaLink="false">quest:135</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Fri, 29 May 2026 07:24:36 GMT</pubDate>
     </item>
     <item>
@@ -1873,6 +814,14 @@
       <guid isPermaLink="false">card:742</guid>
       <description>页面中经常会遇到需要折叠/展开内容的场景，比如 FAQ 列表、配置面板、长文摘要等，过去通常需要借助 JavaScript 来实现这类交互。实际上 HTML 原生提供了 details 元素来解决这个问题，它是一个可折叠的小部件，常配合 s...</description>
       <category>HTML/details</category>
+      <pubDate>Thu, 28 May 2026 10:47:15 GMT</pubDate>
+    </item>
+    <item>
+      <title>HTML details 如何实现独占式手风琴？</title>
+      <link>/quests/67.html</link>
+      <guid isPermaLink="false">quest:67</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Thu, 28 May 2026 10:47:15 GMT</pubDate>
     </item>
     <item>
@@ -1892,6 +841,14 @@
       <pubDate>Thu, 14 May 2026 08:54:28 GMT</pubDate>
     </item>
     <item>
+      <title>img、figure、picture 各元素的使用对比</title>
+      <link>/quests/131.html</link>
+      <guid isPermaLink="false">quest:131</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 28 May 2026 01:21:27 GMT</pubDate>
+    </item>
+    <item>
       <title>突然意识到，AI 带来的高效率就是时间，最近我写需求，正常情况要写三四天，但是老...</title>
       <link>/cards/740.html</link>
       <guid isPermaLink="false">card:740</guid>
@@ -1908,12 +865,28 @@
       <pubDate>Tue, 26 May 2026 14:48:31 GMT</pubDate>
     </item>
     <item>
+      <title>URLPattern 的作用是什么？可以解决什么问题？</title>
+      <link>/quests/89.html</link>
+      <guid isPermaLink="false">quest:89</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 26 May 2026 14:48:31 GMT</pubDate>
+    </item>
+    <item>
       <title>在网页排版中，当我们使用浮动让文字环绕图片或元素时，文字总是沿着一个矩形的边界进...</title>
       <link>/cards/739.html</link>
       <guid isPermaLink="false">card:739</guid>
       <description>在网页排版中，当我们使用浮动让文字环绕图片或元素时，文字总是沿着一个矩形的边界进行排列。即便元素本身是圆形头像或者不规则的图形，周围的文字依然呆板地贴着方方正正的盒子流动。 shape-outside 就是为了解决这个问题而生的，它允许我们...</description>
       <category>CSS/浮动</category>
       <category>CSS/shape-outside</category>
+      <pubDate>Mon, 25 May 2026 00:18:11 GMT</pubDate>
+    </item>
+    <item>
+      <title>shape-outside 属性的作用，可用于解决什么问题？</title>
+      <link>/quests/98.html</link>
+      <guid isPermaLink="false">quest:98</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Mon, 25 May 2026 00:18:11 GMT</pubDate>
     </item>
     <item>
@@ -1925,12 +898,44 @@
       <pubDate>Fri, 22 May 2026 08:11:58 GMT</pubDate>
     </item>
     <item>
+      <title>CSS @property 的使用方式，常见的使用场景是什么？</title>
+      <link>/quests/85.html</link>
+      <guid isPermaLink="false">quest:85</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 22 May 2026 08:11:58 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 Passkeys？</title>
+      <link>/quests/178.html</link>
+      <guid isPermaLink="false">quest:178</guid>
+      <description>参考文章：https://kerkour.com/passkeys</description>
+      <category>未分类</category>
+      <pubDate>Fri, 22 May 2026 06:19:36 GMT</pubDate>
+    </item>
+    <item>
       <title>animation-play-state 用于控制 CSS 动画的播放状态，它只...</title>
       <link>/cards/737.html</link>
       <guid isPermaLink="false">card:737</guid>
       <description>animation-play-state 用于控制 CSS 动画的播放状态，它只接受两个值： animation-play-state: running | paused; 其中 running 是默认值，表示动画正常播放； paused ...</description>
       <category>CSS/动画</category>
       <pubDate>Fri, 22 May 2026 01:06:10 GMT</pubDate>
+    </item>
+    <item>
+      <title>animation-play-state 的作用是什么？</title>
+      <link>/quests/139.html</link>
+      <guid isPermaLink="false">quest:139</guid>
+      <description>来源：CSS 实现无限滚动，https://blog.logto.io/css-only-infinite-scroll</description>
+      <category>前端</category>
+      <pubDate>Fri, 22 May 2026 01:06:10 GMT</pubDate>
+    </item>
+    <item>
+      <title>cross-fade 是什么？一般用于何处？</title>
+      <link>/quests/141.html</link>
+      <guid isPermaLink="false">quest:141</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 22 May 2026 00:05:23 GMT</pubDate>
     </item>
     <item>
       <title>如今大家对 token 的需求让我想到一个经济学中的概念， 产能周期 。 根据产...</title>
@@ -1950,6 +955,14 @@
       <pubDate>Thu, 21 May 2026 01:19:38 GMT</pubDate>
     </item>
     <item>
+      <title>广场协议，背景，内容和发展</title>
+      <link>/quests/163.html</link>
+      <guid isPermaLink="false">quest:163</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Thu, 21 May 2026 01:19:38 GMT</pubDate>
+    </item>
+    <item>
       <title>Web 应用有时需要知道用户是否还在电脑前。在线协作工具想在用户离开时将状态切换...</title>
       <link>/cards/733.html</link>
       <guid isPermaLink="false">card:733</guid>
@@ -1959,11 +972,27 @@
       <pubDate>Wed, 20 May 2026 12:15:44 GMT</pubDate>
     </item>
     <item>
+      <title>IdleDetector 是什么，使用方法</title>
+      <link>/quests/145.html</link>
+      <guid isPermaLink="false">quest:145</guid>
+      <description>参考 https://juejin.cn/post/7618525731951034383</description>
+      <category>前端</category>
+      <pubDate>Wed, 20 May 2026 12:15:44 GMT</pubDate>
+    </item>
+    <item>
       <title>srcset 是 &lt;img&gt; 元素上用于响应式图片加载的属性。 目前存在很多种设...</title>
       <link>/cards/732.html</link>
       <guid isPermaLink="false">card:732</guid>
       <description>srcset 是 &lt;img&gt; 元素上用于响应式图片加载的属性。 目前存在很多种设备，PC、移动端，不同设备之间的分辨率和屏幕尺寸也各不相同。如果所有场景都使用同一张图片，可能会造成带宽浪费和加载速度下降，比如在低分辨率设备上加载高清大图，或...</description>
       <category>HTML/srcset</category>
+      <pubDate>Wed, 20 May 2026 00:23:12 GMT</pubDate>
+    </item>
+    <item>
+      <title>srcset 属性的作用，以及使用</title>
+      <link>/quests/125.html</link>
+      <guid isPermaLink="false">quest:125</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Wed, 20 May 2026 00:23:12 GMT</pubDate>
     </item>
     <item>
@@ -1977,12 +1006,36 @@
       <pubDate>Tue, 19 May 2026 22:53:33 GMT</pubDate>
     </item>
     <item>
+      <title>什么是再贴现？</title>
+      <link>/quests/175.html</link>
+      <guid isPermaLink="false">quest:175</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Tue, 19 May 2026 22:53:33 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是再贷款？</title>
+      <link>/quests/174.html</link>
+      <guid isPermaLink="false">quest:174</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Tue, 19 May 2026 22:53:33 GMT</pubDate>
+    </item>
+    <item>
       <title>在页面关闭或跳转时上报数据是前端常见的需求，比如埋点统计、错误日志等。传统的 X...</title>
       <link>/cards/730.html</link>
       <guid isPermaLink="false">card:730</guid>
       <description>在页面关闭或跳转时上报数据是前端常见的需求，比如埋点统计、错误日志等。传统的 XMLHttpRequest 或 fetch 在页面卸载阶段往往来不及发出，或者会阻塞页面跳转，影响用户体验。为了解决这个问题，浏览器提供了 navigator....</description>
       <category>浏览器/sendBeacon</category>
       <category>JavaScript</category>
+      <pubDate>Tue, 19 May 2026 09:07:21 GMT</pubDate>
+    </item>
+    <item>
+      <title>navigator.sendBeacon，这个方法的作用和使用场景</title>
+      <link>/quests/166.html</link>
+      <guid isPermaLink="false">quest:166</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Tue, 19 May 2026 09:07:21 GMT</pubDate>
     </item>
     <item>
@@ -1995,11 +1048,27 @@
       <pubDate>Tue, 19 May 2026 00:00:53 GMT</pubDate>
     </item>
     <item>
+      <title>什么是美林时钟？</title>
+      <link>/quests/173.html</link>
+      <guid isPermaLink="false">quest:173</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Tue, 19 May 2026 00:00:53 GMT</pubDate>
+    </item>
+    <item>
       <title>在链式调用 Promise 时，有时会不小心向 .then() 或 .catch...</title>
       <link>/cards/728.html</link>
       <guid isPermaLink="false">card:728</guid>
       <description>在链式调用 Promise 时，有时会不小心向 .then() 或 .catch() 传入一个非函数值（比如 null 、字符串甚至另一个 Promise 对象），这时程序并不会报错，而是出现一种&quot;值穿透&quot;现象：前一个 Promise 的结...</description>
       <category>JavaScript/Promise</category>
+      <pubDate>Mon, 18 May 2026 23:48:55 GMT</pubDate>
+    </item>
+    <item>
+      <title>Promise 的值穿透现象</title>
+      <link>/quests/143.html</link>
+      <guid isPermaLink="false">quest:143</guid>
+      <description>《JavaScript 重难点解析》，7.11.4，Promise 用法示例 Promise.resolve(1).then(2).then(Promise.resolve(3)).then(...</description>
+      <category>前端</category>
       <pubDate>Mon, 18 May 2026 23:48:55 GMT</pubDate>
     </item>
     <item>
@@ -2022,6 +1091,14 @@
       <pubDate>Sat, 24 Jan 2026 07:59:39 GMT</pubDate>
     </item>
     <item>
+      <title>showPicker 方法的作用是什么？</title>
+      <link>/quests/136.html</link>
+      <guid isPermaLink="false">quest:136</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 18 May 2026 13:57:19 GMT</pubDate>
+    </item>
+    <item>
       <title>政府想要刺激经济时，通常会采取扩张性财政政策，比如扩大政府支出或减税。但一个有趣...</title>
       <link>/cards/726.html</link>
       <guid isPermaLink="false">card:726</guid>
@@ -2031,12 +1108,28 @@
       <pubDate>Mon, 18 May 2026 01:21:03 GMT</pubDate>
     </item>
     <item>
+      <title>什么是挤出效应？</title>
+      <link>/quests/172.html</link>
+      <guid isPermaLink="false">quest:172</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Mon, 18 May 2026 01:21:03 GMT</pubDate>
+    </item>
+    <item>
       <title>投资时我们常面临一个问题：收益高的产品风险也大，那怎么判断一项投资的「性价比」？...</title>
       <link>/cards/725.html</link>
       <guid isPermaLink="false">card:725</guid>
       <description>投资时我们常面临一个问题：收益高的产品风险也大，那怎么判断一项投资的「性价比」？夏普比率就是用来回答这个问题的，它衡量的是每多承担一份风险，能换来多少额外收益。 它的计算方式如下： 其中： 表示无风险利率，比如国债的收益率 表示预期的投资收...</description>
       <category>金融/夏普比率</category>
       <category>概念</category>
+      <pubDate>Mon, 18 May 2026 00:47:29 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是夏普比率？</title>
+      <link>/quests/171.html</link>
+      <guid isPermaLink="false">quest:171</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Mon, 18 May 2026 00:47:29 GMT</pubDate>
     </item>
     <item>
@@ -2057,12 +1150,28 @@
       <pubDate>Sun, 17 May 2026 10:41:12 GMT</pubDate>
     </item>
     <item>
+      <title>什么是产能周期？</title>
+      <link>/quests/169.html</link>
+      <guid isPermaLink="false">quest:169</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sun, 17 May 2026 10:41:12 GMT</pubDate>
+    </item>
+    <item>
       <title>我们常说经济有周期，其中有一个和日常商业活动最贴近的短周期，叫库存周期，也被称为...</title>
       <link>/cards/723.html</link>
       <guid isPermaLink="false">card:723</guid>
       <description>我们常说经济有周期，其中有一个和日常商业活动最贴近的短周期，叫库存周期，也被称为基钦周期。它的核心逻辑很简单：供给与需求之间存在时间差，这个时间差导致库存不断波动，形成周期。 举个例子，假设你在卖一个商品，有一天突然爆火了，而你没有足够多的...</description>
       <category>经济/库存周期</category>
       <category>概念</category>
+      <pubDate>Sun, 17 May 2026 09:59:09 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是库存周期？</title>
+      <link>/quests/168.html</link>
+      <guid isPermaLink="false">quest:168</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Sun, 17 May 2026 09:59:09 GMT</pubDate>
     </item>
     <item>
@@ -2075,11 +1184,27 @@
       <pubDate>Sun, 17 May 2026 05:28:16 GMT</pubDate>
     </item>
     <item>
+      <title>什么是修昔底德陷阱？</title>
+      <link>/quests/170.html</link>
+      <guid isPermaLink="false">quest:170</guid>
+      <description>《置身之内》，第七章，扩展阅读提及</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sun, 17 May 2026 05:28:16 GMT</pubDate>
+    </item>
+    <item>
       <title>在日常经济活动中，当我们签署具有法律效力的特定合同（买卖合同、借款合同、股权转让...</title>
       <link>/cards/721.html</link>
       <guid isPermaLink="false">card:721</guid>
       <description>在日常经济活动中，当我们签署具有法律效力的特定合同（买卖合同、借款合同、股权转让合同等）时，需要缴纳一种税，叫做印花税。 这个名字来源于历史上的缴纳方式。过去纳税人交税后，会收到一张类似邮票的「印花税票」，纳税人把税票贴在合同或凭证上，画线...</description>
       <category>经济/印花税</category>
+      <pubDate>Sun, 17 May 2026 03:59:43 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是印花税？</title>
+      <link>/quests/167.html</link>
+      <guid isPermaLink="false">quest:167</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Sun, 17 May 2026 03:59:43 GMT</pubDate>
     </item>
     <item>
@@ -2092,6 +1217,14 @@
       <pubDate>Sun, 17 May 2026 03:33:02 GMT</pubDate>
     </item>
     <item>
+      <title>什么是马尔萨斯陷阱？</title>
+      <link>/quests/165.html</link>
+      <guid isPermaLink="false">quest:165</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sun, 17 May 2026 03:33:02 GMT</pubDate>
+    </item>
+    <item>
       <title>当我们面对资源分配的问题时，第一反应往往是争抢，但经济学告诉我们，在动手抢之前，...</title>
       <link>/cards/719.html</link>
       <guid isPermaLink="false">card:719</guid>
@@ -2099,6 +1232,14 @@
       <category>经济/帕累托改进</category>
       <category>经济/帕累托最优</category>
       <category>概念</category>
+      <pubDate>Sun, 17 May 2026 03:11:57 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是帕累托改进和帕累托最优？</title>
+      <link>/quests/160.html</link>
+      <guid isPermaLink="false">quest:160</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Sun, 17 May 2026 03:11:57 GMT</pubDate>
     </item>
     <item>
@@ -2119,6 +1260,14 @@
       <pubDate>Sun, 17 May 2026 01:48:42 GMT</pubDate>
     </item>
     <item>
+      <title>什么是锚定效应？</title>
+      <link>/quests/159.html</link>
+      <guid isPermaLink="false">quest:159</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sun, 17 May 2026 01:48:42 GMT</pubDate>
+    </item>
+    <item>
       <title>你有没有过这样的经历：一件闲置物品，放在家里觉得挺值钱的，但如果让你去买同样的东...</title>
       <link>/cards/716.html</link>
       <guid isPermaLink="false">card:716</guid>
@@ -2126,6 +1275,14 @@
       <category>经济/禀赋效应</category>
       <category>心理/损失厌恶</category>
       <category>概念</category>
+      <pubDate>Sun, 17 May 2026 01:05:39 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是禀赋效应？</title>
+      <link>/quests/158.html</link>
+      <guid isPermaLink="false">quest:158</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Sun, 17 May 2026 01:05:39 GMT</pubDate>
     </item>
     <item>
@@ -2138,6 +1295,14 @@
       <pubDate>Sat, 16 May 2026 23:21:52 GMT</pubDate>
     </item>
     <item>
+      <title>什么是沉没成本？</title>
+      <link>/quests/156.html</link>
+      <guid isPermaLink="false">quest:156</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sat, 16 May 2026 23:21:52 GMT</pubDate>
+    </item>
+    <item>
       <title>经济学有一条基本定律：价格升高，需求降低，二者反向变动。但有一类特殊的商品恰恰相...</title>
       <link>/cards/714.html</link>
       <guid isPermaLink="false">card:714</guid>
@@ -2147,12 +1312,28 @@
       <pubDate>Sat, 16 May 2026 11:15:43 GMT</pubDate>
     </item>
     <item>
+      <title>什么是吉芬商品？</title>
+      <link>/quests/154.html</link>
+      <guid isPermaLink="false">quest:154</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sat, 16 May 2026 11:15:43 GMT</pubDate>
+    </item>
+    <item>
       <title>在经济学中，「价格越高，需求越低」是一条基本规律。但现实中存在一种反常现象：某些...</title>
       <link>/cards/713.html</link>
       <guid isPermaLink="false">card:713</guid>
       <description>在经济学中，「价格越高，需求越低」是一条基本规律。但现实中存在一种反常现象：某些商品价格越高，买的人反而越多。 美国经济学家托尔斯坦·凡勃伦在其著作《有闲阶级论》中描述了这一现象。随着工业革命的发展，出现了一批迅速暴富的有闲阶级，他们需要通...</description>
       <category>经济/凡勃伦效应</category>
       <category>概念</category>
+      <pubDate>Sat, 16 May 2026 10:57:31 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是凡勃伦效应？</title>
+      <link>/quests/153.html</link>
+      <guid isPermaLink="false">quest:153</guid>
+      <description>《财富之眼》，P123，价格越高，反而销量越高</description>
+      <category>经济&amp;金融</category>
       <pubDate>Sat, 16 May 2026 10:57:31 GMT</pubDate>
     </item>
     <item>
@@ -2174,6 +1355,14 @@
       <pubDate>Sat, 16 May 2026 10:47:04 GMT</pubDate>
     </item>
     <item>
+      <title>什么是机会成本？</title>
+      <link>/quests/155.html</link>
+      <guid isPermaLink="false">quest:155</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sat, 16 May 2026 10:47:04 GMT</pubDate>
+    </item>
+    <item>
       <title>「由俭入奢易，由奢入俭难」，生活中我们常常发现，一旦习惯了某种生活水平，就很难再...</title>
       <link>/cards/711.html</link>
       <guid isPermaLink="false">card:711</guid>
@@ -2181,6 +1370,14 @@
       <category>经济/棘轮效应</category>
       <category>概念</category>
       <pubDate>Sat, 16 May 2026 08:53:59 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是棘轮效应？</title>
+      <link>/quests/152.html</link>
+      <guid isPermaLink="false">quest:152</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sat, 16 May 2026 08:38:10 GMT</pubDate>
     </item>
     <item>
       <title>经济下行的时候，我们总能看到政府大搞基建：修高铁、建机场、扩公路。为什么经济越差...</title>
@@ -2192,12 +1389,28 @@
       <pubDate>Sat, 16 May 2026 08:08:19 GMT</pubDate>
     </item>
     <item>
+      <title>什么是乘数效应？</title>
+      <link>/quests/151.html</link>
+      <guid isPermaLink="false">quest:151</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Sat, 16 May 2026 07:58:50 GMT</pubDate>
+    </item>
+    <item>
       <title>当一个企业或个人还不起钱的时候，债权人和债务人坐下来重新商量怎么还钱，这个过程就...</title>
       <link>/cards/709.html</link>
       <guid isPermaLink="false">card:709</guid>
       <description>当一个企业或个人还不起钱的时候，债权人和债务人坐下来重新商量怎么还钱，这个过程就是债务重组。核心目的是避免直接走向破产清算，让双方都能少亏一点。 为什么双方都愿意坐下来谈？对债务人（欠钱的人）来说，不重组可能直接倒闭，重组后可以获得缓冲时间...</description>
       <category>经济/债务重组</category>
       <category>概念</category>
+      <pubDate>Fri, 15 May 2026 04:17:46 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是债务重组？</title>
+      <link>/quests/121.html</link>
+      <guid isPermaLink="false">quest:121</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Fri, 15 May 2026 04:17:46 GMT</pubDate>
     </item>
     <item>
@@ -2210,12 +1423,28 @@
       <pubDate>Fri, 15 May 2026 01:11:06 GMT</pubDate>
     </item>
     <item>
+      <title>承销股票是什么意思？</title>
+      <link>/quests/119.html</link>
+      <guid isPermaLink="false">quest:119</guid>
+      <description>来自金钱博弈，投行和商业银行拆分，投行可以进行承销股票</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Fri, 15 May 2026 01:11:06 GMT</pubDate>
+    </item>
+    <item>
       <title>在经济运行中，供给和需求往往难以天然匹配，市场上总会出现商品积压卖不出去，或者需...</title>
       <link>/cards/707.html</link>
       <guid isPermaLink="false">card:707</guid>
       <description>在经济运行中，供给和需求往往难以天然匹配，市场上总会出现商品积压卖不出去，或者需求旺盛却供不应求的情况。出清（Market Clearing）描述的正是市场消化这种失衡、最终重新达到均衡的过程。当某一价格水平下，买方愿意购买的数量恰好等于卖...</description>
       <category>经济/出清</category>
       <category>概念</category>
+      <pubDate>Fri, 15 May 2026 00:30:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是出清？</title>
+      <link>/quests/116.html</link>
+      <guid isPermaLink="false">quest:116</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Fri, 15 May 2026 00:30:35 GMT</pubDate>
     </item>
     <item>
@@ -2256,6 +1485,22 @@
       <pubDate>Mon, 11 May 2026 14:02:25 GMT</pubDate>
     </item>
     <item>
+      <title>什么是资本金？</title>
+      <link>/quests/115.html</link>
+      <guid isPermaLink="false">quest:115</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Mon, 11 May 2026 14:02:25 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是资产负债表？</title>
+      <link>/quests/101.html</link>
+      <guid isPermaLink="false">quest:101</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Mon, 11 May 2026 06:53:47 GMT</pubDate>
+    </item>
+    <item>
       <title>在布雷顿森林体系下，美元与黄金挂钩（35美元兑1盎司黄金），各国货币再与美元挂钩...</title>
       <link>/cards/704.html</link>
       <guid isPermaLink="false">card:704</guid>
@@ -2263,6 +1508,22 @@
       <category>经济/货币</category>
       <category>经济/特里芬难题</category>
       <pubDate>Mon, 11 May 2026 01:22:17 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是特里芬难题？</title>
+      <link>/quests/117.html</link>
+      <guid isPermaLink="false">quest:117</guid>
+      <description>来自 B 站视频， 反抗美元霸权的下场有多惨？美元收割的底层逻辑与致命缺陷【美元霸权2】</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Mon, 11 May 2026 01:22:17 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是康波周期？</title>
+      <link>/quests/164.html</link>
+      <guid isPermaLink="false">quest:164</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Fri, 08 May 2026 08:24:42 GMT</pubDate>
     </item>
     <item>
       <title>在一个猪圈里，有一头大猪和一头小猪。猪圈的一端装了一个按钮，按下后，另一端的食槽...</title>
@@ -2278,6 +1539,22 @@
       <guid isPermaLink="false">card:701</guid>
       <description>博弈论中有一个经典问题：草原上有 N 只狮子和一头羊，每只狮子都极度理性，它们的偏好排序是&quot;吃饱 &gt; 饿着 &gt; 被吃&quot;。关键设定是，狮子吃完羊后需要消化，这段时间会进入虚弱状态，可以被其它狮子吃掉。那么，会不会有狮子敢去吃羊？ 要分析这个问...</description>
       <category>博弈论/饿狮博弈</category>
+      <pubDate>Thu, 07 May 2026 07:30:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是智猪博弈？</title>
+      <link>/quests/162.html</link>
+      <guid isPermaLink="false">quest:162</guid>
+      <description>大企业和小企业</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Thu, 07 May 2026 13:33:15 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是饿狮博弈？</title>
+      <link>/quests/161.html</link>
+      <guid isPermaLink="false">quest:161</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Thu, 07 May 2026 07:30:35 GMT</pubDate>
     </item>
     <item>
@@ -2297,6 +1574,14 @@
       <description>外部性是指，某项活动的参与者对未参与该活动的第三方产生了影响，这种影响可以是正面的，也可以是负面的。 正外部性，是指某项活动在带来私人收益的同时，也对外部社会产生了积极影响。上大学看似只是个人的事，但一个社会中受高等教育的人越多，高技术人才...</description>
       <category>概念</category>
       <category>经济/外部性</category>
+      <pubDate>Wed, 06 May 2026 10:59:02 GMT</pubDate>
+    </item>
+    <item>
+      <title>经济学中的外部性指的是什么？</title>
+      <link>/quests/102.html</link>
+      <guid isPermaLink="false">quest:102</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
       <pubDate>Wed, 06 May 2026 10:59:02 GMT</pubDate>
     </item>
     <item>
@@ -4342,6 +3627,30 @@
       <pubDate>Thu, 02 May 2024 06:44:54 GMT</pubDate>
     </item>
     <item>
+      <title>Web Locks API 的作用及使用场景</title>
+      <link>/quests/148.html</link>
+      <guid isPermaLink="false">quest:148</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 11 Apr 2026 00:57:49 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 Shared Worker？基本概念和使用方法。</title>
+      <link>/quests/150.html</link>
+      <guid isPermaLink="false">quest:150</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 10 Apr 2026 03:19:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 Service Worker，基本概念和解决的问题</title>
+      <link>/quests/149.html</link>
+      <guid isPermaLink="false">quest:149</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 10 Apr 2026 03:17:51 GMT</pubDate>
+    </item>
+    <item>
       <title>isolation 属性用于控制元素是否应该创建一个新的层叠上下文（stacki...</title>
       <link>/cards/661.html</link>
       <guid isPermaLink="false">card:661</guid>
@@ -4370,12 +3679,28 @@
       <pubDate>Thu, 22 Jan 2026 15:29:10 GMT</pubDate>
     </item>
     <item>
+      <title>Math.trunc 方法的作用</title>
+      <link>/quests/147.html</link>
+      <guid isPermaLink="false">quest:147</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 09 Apr 2026 03:06:20 GMT</pubDate>
+    </item>
+    <item>
       <title>考虑这样一个场景：你依赖了 A，而 A 依赖了 B。突然 B 被发现存在 bug...</title>
       <link>/cards/694.html</link>
       <guid isPermaLink="false">card:694</guid>
       <description>考虑这样一个场景：你依赖了 A，而 A 依赖了 B。突然 B 被发现存在 bug 或者安全隐患，需要升级。但是 B 不是你直接依赖的，你只能等待 A 的维护者发布新版，这其中的等待时间完全不可控。所以如果能有一种方式直接修改 B 的版本就好...</description>
       <category>包管理器/pnpm</category>
       <pubDate>Tue, 07 Apr 2026 08:34:49 GMT</pubDate>
+    </item>
+    <item>
+      <title>pnpm.overrides 的作用是什么？</title>
+      <link>/quests/144.html</link>
+      <guid isPermaLink="false">quest:144</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 07 Apr 2026 06:16:48 GMT</pubDate>
     </item>
     <item>
       <title>浏览器上传文件的两种方式： input 标签 拖拽 将 input 标签的 ty...</title>
@@ -4499,6 +3824,46 @@
       <pubDate>Fri, 23 Jan 2026 14:39:35 GMT</pubDate>
     </item>
     <item>
+      <title>application/x-www-form-unlencoded 和 multipart/formdata 的区别？</title>
+      <link>/quests/142.html</link>
+      <guid isPermaLink="false">quest:142</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 31 Mar 2026 13:30:38 GMT</pubDate>
+    </item>
+    <item>
+      <title>tabIndex 的使用</title>
+      <link>/quests/138.html</link>
+      <guid isPermaLink="false">quest:138</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 30 Mar 2026 10:18:04 GMT</pubDate>
+    </item>
+    <item>
+      <title>介绍 BroadcastChannel API——多标签页通信</title>
+      <link>/quests/146.html</link>
+      <guid isPermaLink="false">quest:146</guid>
+      <description>参考 https://juejin.cn/post/7618525731951034383</description>
+      <category>前端</category>
+      <pubDate>Mon, 30 Mar 2026 10:06:42 GMT</pubDate>
+    </item>
+    <item>
+      <title>moveBefore 的作用是什么？解决了什么问题？</title>
+      <link>/quests/106.html</link>
+      <guid isPermaLink="false">quest:106</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 24 Mar 2026 15:15:13 GMT</pubDate>
+    </item>
+    <item>
+      <title>HTTP 持久连接解决了什么问题，带来了什么问题，Content-Length 和 Transfer-Encoding 的引入是怎么解决的？</title>
+      <link>/quests/56.html</link>
+      <guid isPermaLink="false">quest:56</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 23 Mar 2026 09:14:58 GMT</pubDate>
+    </item>
+    <item>
       <title>AI 编程漫谈</title>
       <link>/articles/75.html</link>
       <guid isPermaLink="false">article:75</guid>
@@ -4609,6 +3974,22 @@
       <pubDate>Mon, 24 Jul 2023 00:49:54 GMT</pubDate>
     </item>
     <item>
+      <title>image-set 函数的作用是什么？</title>
+      <link>/quests/130.html</link>
+      <guid isPermaLink="false">quest:130</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 26 Jan 2026 12:19:47 GMT</pubDate>
+    </item>
+    <item>
+      <title>showOpenFilePicker 和 showDiectoryPick 方法的作用</title>
+      <link>/quests/137.html</link>
+      <guid isPermaLink="false">quest:137</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 24 Jan 2026 05:42:41 GMT</pubDate>
+    </item>
+    <item>
       <title>undefined 和 null 的对比： 相同点 都是假值，转化为 Boole...</title>
       <link>/cards/667.html</link>
       <guid isPermaLink="false">card:667</guid>
@@ -4616,6 +3997,22 @@
       <category>JavaScript</category>
       <category>概念对比</category>
       <pubDate>Fri, 16 Jan 2026 10:42:57 GMT</pubDate>
+    </item>
+    <item>
+      <title>script 标签 importmap 的作用，以及使用方法？</title>
+      <link>/quests/126.html</link>
+      <guid isPermaLink="false">quest:126</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 23 Jan 2026 13:04:20 GMT</pubDate>
+    </item>
+    <item>
+      <title>immer 中的 enableMapSet 的作用是什么？</title>
+      <link>/quests/80.html</link>
+      <guid isPermaLink="false">quest:80</guid>
+      <description>从 immer v6 版本开始，为了保持包大小的体积，默认不包含对 Map 和 Set 的处理，如果尝试在 produce 中修改 Map 或 Set ，就会导致报错。 [Immer] The...</description>
+      <category>前端</category>
+      <pubDate>Fri, 23 Jan 2026 00:51:06 GMT</pubDate>
     </item>
     <item>
       <title>表单： 表单提交，submit vs requestsubmit dialog ...</title>
@@ -4641,6 +4038,22 @@
       <pubDate>Thu, 22 Jan 2026 15:44:09 GMT</pubDate>
     </item>
     <item>
+      <title>script 标签上的 nonce 和 integrity 属性的作用</title>
+      <link>/quests/128.html</link>
+      <guid isPermaLink="false">quest:128</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 22 Jan 2026 15:34:38 GMT</pubDate>
+    </item>
+    <item>
+      <title>crossOrigin 属性的作用是什么？</title>
+      <link>/quests/132.html</link>
+      <guid isPermaLink="false">quest:132</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 22 Jan 2026 14:57:46 GMT</pubDate>
+    </item>
+    <item>
       <title>submit 和 requestSubmit 都是用来提交表单的，但是在行为上有...</title>
       <link>/cards/654.html</link>
       <guid isPermaLink="false">card:654</guid>
@@ -4649,6 +4062,14 @@
       <category>HTML/form</category>
       <category>JavaScript/表单</category>
       <pubDate>Wed, 31 Dec 2025 10:55:14 GMT</pubDate>
+    </item>
+    <item>
+      <title>formdata 事件是什么，常用于什么场景？</title>
+      <link>/quests/133.html</link>
+      <guid isPermaLink="false">quest:133</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 22 Jan 2026 12:03:40 GMT</pubDate>
     </item>
     <item>
       <title>inert 是 HTML 的一个全局布尔属性，它指示浏览器忽略该元素以及子元素，...</title>
@@ -4660,6 +4081,14 @@
       <pubDate>Sun, 18 Jan 2026 12:05:34 GMT</pubDate>
     </item>
     <item>
+      <title>inert 属性的作用是什么？</title>
+      <link>/quests/134.html</link>
+      <guid isPermaLink="false">quest:134</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 18 Jan 2026 11:37:39 GMT</pubDate>
+    </item>
+    <item>
       <title>JWT 全称 JSON Web Token，是一种开放标准（RFC 7519），...</title>
       <link>/cards/669.html</link>
       <guid isPermaLink="false">card:669</guid>
@@ -4667,6 +4096,14 @@
       <category>JWT</category>
       <category>安全/签名</category>
       <pubDate>Sun, 18 Jan 2026 08:57:28 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 JWT？JWT 是如何工作的？</title>
+      <link>/quests/60.html</link>
+      <guid isPermaLink="false">quest:60</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 18 Jan 2026 07:53:38 GMT</pubDate>
     </item>
     <item>
       <title>在 TypeScript 中使用 useRef 来获取 DOM 对象，会报类型错...</title>
@@ -4731,6 +4168,46 @@
       <pubDate>Sat, 01 Mar 2025 08:29:17 GMT</pubDate>
     </item>
     <item>
+      <title>HTML 中 :is 属性的作用</title>
+      <link>/quests/140.html</link>
+      <guid isPermaLink="false">quest:140</guid>
+      <description>参考：《HTML 并不简单，10.5》</description>
+      <category>前端</category>
+      <pubDate>Sat, 17 Jan 2026 10:12:25 GMT</pubDate>
+    </item>
+    <item>
+      <title>:user-valid 和 :user-invalid 是什么？</title>
+      <link>/quests/68.html</link>
+      <guid isPermaLink="false">quest:68</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 17 Jan 2026 09:22:16 GMT</pubDate>
+    </item>
+    <item>
+      <title> work-break 和 work-wrap 的区别是什么？</title>
+      <link>/quests/129.html</link>
+      <guid isPermaLink="false">quest:129</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 15 Jan 2026 15:26:23 GMT</pubDate>
+    </item>
+    <item>
+      <title>@scope 的作用和使用方法？</title>
+      <link>/quests/127.html</link>
+      <guid isPermaLink="false">quest:127</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 15 Jan 2026 15:25:20 GMT</pubDate>
+    </item>
+    <item>
+      <title>浏览器中的 top-layer 是什么？有哪些特点？有什么方式可以形成 top-layer？</title>
+      <link>/quests/91.html</link>
+      <guid isPermaLink="false">quest:91</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 12 Jan 2026 15:10:59 GMT</pubDate>
+    </item>
+    <item>
       <title>pnpm -C 或者 pnpm --dir 的作用是指定命令执行时的工作目录 p...</title>
       <link>/cards/663.html</link>
       <guid isPermaLink="false">card:663</guid>
@@ -4738,6 +4215,14 @@
       <category>包管理器/pnpm</category>
       <category>使用技巧/pnpm</category>
       <pubDate>Sun, 04 Jan 2026 14:32:17 GMT</pubDate>
+    </item>
+    <item>
+      <title>pnpm run -C 是什么意思？</title>
+      <link>/quests/113.html</link>
+      <guid isPermaLink="false">quest:113</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 04 Jan 2026 14:24:57 GMT</pubDate>
     </item>
     <item>
       <title>防抖和节流都是防止短时间内多次触发的技术。防抖是为了防止抖动，例如一个表单的提交...</title>
@@ -4748,12 +4233,28 @@
       <pubDate>Sun, 23 Jul 2023 08:18:48 GMT</pubDate>
     </item>
     <item>
+      <title>节流和防抖函数中 leading 和 tailing 两个参数的作用是什么？</title>
+      <link>/quests/109.html</link>
+      <guid isPermaLink="false">quest:109</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 03 Jan 2026 09:58:09 GMT</pubDate>
+    </item>
+    <item>
       <title>下载本地包的方法： 使用相对路径或者本地路径直接下载 npm install ....</title>
       <link>/cards/660.html</link>
       <guid isPermaLink="false">card:660</guid>
       <description>下载本地包的方法： 使用相对路径或者本地路径直接下载 npm install ./local-lib npm install /Users/xxx/local-lib 在 package.json 通过 file 协议指定本地下载路径 { ...</description>
       <category>包管理器/npm</category>
       <pubDate>Sat, 03 Jan 2026 06:32:55 GMT</pubDate>
+    </item>
+    <item>
+      <title>npm 如何下载本地的文件？</title>
+      <link>/quests/110.html</link>
+      <guid isPermaLink="false">quest:110</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 03 Jan 2026 06:19:22 GMT</pubDate>
     </item>
     <item>
       <title>lh 是相对长度单位，表示的当前的行高。不管当前 lh 是什么值，都会最终计算为...</title>
@@ -4807,6 +4308,38 @@
       <pubDate>Sun, 27 Aug 2023 02:42:08 GMT</pubDate>
     </item>
     <item>
+      <title>npm link 的原理是什么？</title>
+      <link>/quests/111.html</link>
+      <guid isPermaLink="false">quest:111</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 02 Jan 2026 13:01:16 GMT</pubDate>
+    </item>
+    <item>
+      <title>img 标签 sizes 属性的作用是什么？用于什么场景？</title>
+      <link>/quests/108.html</link>
+      <guid isPermaLink="false">quest:108</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 02 Jan 2026 12:00:13 GMT</pubDate>
+    </item>
+    <item>
+      <title>lh 单位是什么？</title>
+      <link>/quests/123.html</link>
+      <guid isPermaLink="false">quest:123</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 02 Jan 2026 10:15:44 GMT</pubDate>
+    </item>
+    <item>
+      <title>focusin/focusout 事件什么时候会触发，和 focus/blur 事件的区别是什么？</title>
+      <link>/quests/124.html</link>
+      <guid isPermaLink="false">quest:124</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 01 Jan 2026 08:33:34 GMT</pubDate>
+    </item>
+    <item>
       <title>stopPropagation 和 stopImmediatePropagati...</title>
       <link>/cards/524.html</link>
       <guid isPermaLink="false">card:524</guid>
@@ -4823,6 +4356,14 @@
       <pubDate>Thu, 01 Jan 2026 06:09:48 GMT</pubDate>
     </item>
     <item>
+      <title>浏览器的事件模型？在当前的事件模型中，哪些事件可以冒泡，哪些不会冒泡，为什么？</title>
+      <link>/quests/54.html</link>
+      <guid isPermaLink="false">quest:54</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 01 Jan 2026 05:14:16 GMT</pubDate>
+    </item>
+    <item>
       <title>field-sizing 属性可以控制表单元素的大小，在一般情况下表单元素的大小...</title>
       <link>/cards/653.html</link>
       <guid isPermaLink="false">card:653</guid>
@@ -4837,6 +4378,22 @@
       <description>在琢磨 破窗效应 和 滑梯效应 时，我发现这两个概念非常相似：它们都在强调“第一步”——无论是打破第一扇窗，还是踏上滑梯的顶端，都会让事态不可避免地滑向混乱。 但仔细拆解后，会发现两者的侧重点其实大有径庭： 破窗效应 ：更侧重于 环境的暗示...</description>
       <category>概念对比</category>
       <pubDate>Wed, 31 Dec 2025 01:28:20 GMT</pubDate>
+    </item>
+    <item>
+      <title>form.submit 和 form.requestSubmit 的区别是什么？</title>
+      <link>/quests/120.html</link>
+      <guid isPermaLink="false">quest:120</guid>
+      <description>最近在做一个项目，发现调用了 requestSubmit，不知道有什么用</description>
+      <category>前端</category>
+      <pubDate>Wed, 31 Dec 2025 10:41:41 GMT</pubDate>
+    </item>
+    <item>
+      <title>field-sizing 是什么？</title>
+      <link>/quests/63.html</link>
+      <guid isPermaLink="false">quest:63</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 31 Dec 2025 06:05:27 GMT</pubDate>
     </item>
     <item>
       <title>link 和 @import 引入 CSS 的区别： 语法 link 是 HTM...</title>
@@ -4857,12 +4414,44 @@
       <pubDate>Tue, 30 Dec 2025 00:28:38 GMT</pubDate>
     </item>
     <item>
+      <title>什么是破窗效应？</title>
+      <link>/quests/122.html</link>
+      <guid isPermaLink="false">quest:122</guid>
+      <description>收录 1 个答案</description>
+      <category>心理学</category>
+      <pubDate>Wed, 31 Dec 2025 00:57:54 GMT</pubDate>
+    </item>
+    <item>
       <title>煤气灯效应，本质上是一种通过长期的心理操纵和精神霸凌，让受害者陷入深度自我怀疑、...</title>
       <link>/cards/650.html</link>
       <guid isPermaLink="false">card:650</guid>
       <description>煤气灯效应，本质上是一种通过长期的心理操纵和精神霸凌，让受害者陷入深度自我怀疑、认知失调的心理陷阱。 这个词源于 1944 年的经典电影《煤气灯下》（Gaslight）。片中，丈夫为了霸占妻子的财产，故意将家中的煤气灯调得忽明忽暗。每当妻子...</description>
       <category>心理学/煤气灯效应</category>
       <pubDate>Tue, 30 Dec 2025 11:41:38 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是煤气灯效应？</title>
+      <link>/quests/118.html</link>
+      <guid isPermaLink="false">quest:118</guid>
+      <description>来自于知识星球 https://t.zsxq.com/ELqbu 提及的一个概念</description>
+      <category>心理学</category>
+      <pubDate>Tue, 30 Dec 2025 09:35:29 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是滑梯效应？</title>
+      <link>/quests/105.html</link>
+      <guid isPermaLink="false">quest:105</guid>
+      <description>收录 1 个答案</description>
+      <category>心理学</category>
+      <pubDate>Tue, 30 Dec 2025 00:53:18 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是预后？</title>
+      <link>/quests/107.html</link>
+      <guid isPermaLink="false">quest:107</guid>
+      <description>收录 1 个答案</description>
+      <category>生物医学</category>
+      <pubDate>Mon, 29 Dec 2025 14:42:44 GMT</pubDate>
     </item>
     <item>
       <title>神经连接是通过什么机制建立的？又是如何得到加强的？ 早在1949年，赫布就在其著...</title>
@@ -4947,6 +4536,14 @@
       <pubDate>Thu, 13 Nov 2025 01:09:16 GMT</pubDate>
     </item>
     <item>
+      <title>什么是知识反刍？</title>
+      <link>/quests/103.html</link>
+      <guid isPermaLink="false">quest:103</guid>
+      <description>收录 1 个答案</description>
+      <category>心理学</category>
+      <pubDate>Tue, 09 Dec 2025 01:41:18 GMT</pubDate>
+    </item>
+    <item>
       <title>在 微信公众号 上看到张朝阳关于拖延的看法：我们想做一件事情的时候会选择拖延，是...</title>
       <link>/cards/637.html</link>
       <guid isPermaLink="false">card:637</guid>
@@ -4954,16 +4551,6 @@
       <category>随笔</category>
       <category>个人成长</category>
       <pubDate>Tue, 11 Nov 2025 01:19:55 GMT</pubDate>
-    </item>
-    <item>
-      <title>渐变色的妙用</title>
-      <link>/articles/10.html</link>
-      <guid isPermaLink="false">article:10</guid>
-      <description>在 CSS 中渐变色作为背景可以制作出非常绚丽，迷人的效果，往往我们将焦点聚集在渐变上面，而忽略了它作为背景图片的作用，在这里我将介绍两个渐变色作为背景色以及背景图片的妙用，可以实现一些难以实现的效果。 透明背景蒙层 我在一个实际的应用开发...</description>
-      <category>CSS</category>
-      <category>渐变色</category>
-      <category>技巧</category>
-      <pubDate>Sun, 15 Aug 2021 15:54:00 GMT</pubDate>
     </item>
     <item>
       <title>第四课：变换II</title>
@@ -4986,6 +4573,14 @@
       <description>思维导图布局实现，如下 简单考虑，只考虑向右展开的布局。 已经条件，知道根节点的位置 (rootX, rootY) ，以及所有节点的大小（宽高），求其他节点的位置 (x, y) 。 首先看子节点的 x 和父节点 parentX 的关系，非常...</description>
       <category>算法</category>
       <pubDate>Sun, 23 Feb 2025 22:36:58 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是黑天鹅？什么是灰犀牛？</title>
+      <link>/quests/114.html</link>
+      <guid isPermaLink="false">quest:114</guid>
+      <description>简单来说：“黑天鹅”是你从未想过会发生的意外；而“灰犀牛”是你明明看到它冲过来，却因为侥幸心理而没有躲避的灾难。</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Wed, 19 Nov 2025 13:34:34 GMT</pubDate>
     </item>
     <item>
       <title>假设你需要部署你的网页，出于成本和维护的考虑，我们会选中云服务厂商，一般情况下我...</title>
@@ -5094,6 +4689,22 @@
       <pubDate>Sun, 21 Jan 2024 09:50:25 GMT</pubDate>
     </item>
     <item>
+      <title>拉格朗日乘数法是什么？是用来解决什么问题的？</title>
+      <link>/quests/112.html</link>
+      <guid isPermaLink="false">quest:112</guid>
+      <description>暂未记录答案</description>
+      <category>数学</category>
+      <pubDate>Sat, 15 Nov 2025 06:41:50 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是效应值，什么是元分析？</title>
+      <link>/quests/104.html</link>
+      <guid isPermaLink="false">quest:104</guid>
+      <description>暂未记录答案</description>
+      <category>数学</category>
+      <pubDate>Sat, 15 Nov 2025 06:34:06 GMT</pubDate>
+    </item>
+    <item>
       <title>let 声明的变量与其他语言声明的变量特性一致： 在变量声明之前不能使用 con...</title>
       <link>/cards/505.html</link>
       <guid isPermaLink="false">card:505</guid>
@@ -5148,6 +4759,14 @@
       <guid isPermaLink="false">card:636</guid>
       <description>统计学家乔治·博克斯(George Box)曾说：​“所有模型都是错的，但有些是有用的。​”他的观点是，所有的模型都会做出一系列假设，以简化我们周围的世界；如果它们没有这样做，那么模型和真实世界也就没有什么差别（因此，对理解真实世界也就没有...</description>
       <pubDate>Mon, 10 Nov 2025 01:15:52 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是期货？</title>
+      <link>/quests/100.html</link>
+      <guid isPermaLink="false">quest:100</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Thu, 13 Nov 2025 01:09:16 GMT</pubDate>
     </item>
     <item>
       <title>第五课：光栅化I</title>
@@ -5211,6 +4830,14 @@
       <category>技巧/浏览器</category>
       <category>浏览器/技巧</category>
       <pubDate>Wed, 09 Apr 2025 03:46:16 GMT</pubDate>
+    </item>
+    <item>
+      <title>移动端如何解决点透问题，以及 click 的 300ms 左右延迟？</title>
+      <link>/quests/57.html</link>
+      <guid isPermaLink="false">quest:57</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 11 Nov 2025 12:47:05 GMT</pubDate>
     </item>
     <item>
       <title>两个元素叠在一起，重合的部分应该显示谁？ 看两个元素所在的层叠上下文，所在的层叠...</title>
@@ -5416,12 +5043,60 @@
       <pubDate>Sun, 25 Feb 2024 04:44:15 GMT</pubDate>
     </item>
     <item>
+      <title>HTML 中 &lt;dialog&gt; 元素的使用？</title>
+      <link>/quests/71.html</link>
+      <guid isPermaLink="false">quest:71</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 10 Oct 2025 13:21:46 GMT</pubDate>
+    </item>
+    <item>
       <title>for ... in 的作用是遍历对象上 可枚举 的属性，包括原型链上的属性 c...</title>
       <link>/cards/633.html</link>
       <guid isPermaLink="false">card:633</guid>
       <description>for ... in 的作用是遍历对象上 可枚举 的属性，包括原型链上的属性 const animal = { type: &apos;哺乳动物&apos;, eat: function() { console.log(&apos;正在吃东西...&apos;); } }; co...</description>
       <category>JavaScript</category>
       <pubDate>Thu, 09 Oct 2025 23:29:51 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 HTTP 队头阻塞？</title>
+      <link>/quests/58.html</link>
+      <guid isPermaLink="false">quest:58</guid>
+      <description>收录 1 个答案</description>
+      <category>网络</category>
+      <pubDate>Thu, 09 Oct 2025 23:28:45 GMT</pubDate>
+    </item>
+    <item>
+      <title>for ... of 和 for ... in 的区别</title>
+      <link>/quests/55.html</link>
+      <guid isPermaLink="false">quest:55</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 09 Oct 2025 01:40:48 GMT</pubDate>
+    </item>
+    <item>
+      <title>悬空指针和野指针是什么？Rust 是如何解决这个问题的？</title>
+      <link>/quests/97.html</link>
+      <guid isPermaLink="false">quest:97</guid>
+      <description>暂未记录答案</description>
+      <category>Rust</category>
+      <pubDate>Wed, 08 Oct 2025 02:33:34 GMT</pubDate>
+    </item>
+    <item>
+      <title>Rust 中 str，String，&amp;str 和 &amp;String 的关系是什么？</title>
+      <link>/quests/96.html</link>
+      <guid isPermaLink="false">quest:96</guid>
+      <description>暂未记录答案</description>
+      <category>Rust</category>
+      <pubDate>Wed, 08 Oct 2025 02:20:51 GMT</pubDate>
+    </item>
+    <item>
+      <title>Rust 中 edition 的作用是什么？</title>
+      <link>/quests/95.html</link>
+      <guid isPermaLink="false">quest:95</guid>
+      <description>暂未记录答案</description>
+      <category>Rust</category>
+      <pubDate>Wed, 08 Oct 2025 02:17:44 GMT</pubDate>
     </item>
     <item>
       <title>XMLHttpRequest 实例上存在一个 responseType 属性，通...</title>
@@ -5446,6 +5121,14 @@
       <description>cross-env 的作用：用以跨平台设置环境变量，不同平台设置环境变量的方式不一样，通过 cross-env 可以以相同的方式设置环境变量，提高了脚本的可移植性。 cross-env NODE_ENV=prod webpack 同时设置多...</description>
       <category>JavaScript/三方库/cross-env</category>
       <pubDate>Wed, 12 Jul 2023 15:51:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是骨髓穿刺活检？</title>
+      <link>/quests/94.html</link>
+      <guid isPermaLink="false">quest:94</guid>
+      <description>暂未记录答案</description>
+      <category>生物医学</category>
+      <pubDate>Tue, 30 Sep 2025 01:04:12 GMT</pubDate>
     </item>
     <item>
       <title>satisfies 是 TypeScript 4.9 引入的一个操作符，它可以检...</title>
@@ -5497,12 +5180,52 @@
       <pubDate>Wed, 24 Sep 2025 14:00:43 GMT</pubDate>
     </item>
     <item>
+      <title>行内（块）元素的是如何对齐的？</title>
+      <link>/quests/81.html</link>
+      <guid isPermaLink="false">quest:81</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 26 Sep 2025 00:39:08 GMT</pubDate>
+    </item>
+    <item>
       <title>padStart ，在字符串的前面填充指定字符以满足指定的长度要求，接收两个参数...</title>
       <link>/cards/631.html</link>
       <guid isPermaLink="false">card:631</guid>
       <description>padStart ，在字符串的前面填充指定字符以满足指定的长度要求，接收两个参数： 目标长度 填充字符串，可选，默认为空格 &quot; &quot;(U+0020) const month = （new Date().getMonth() + 1） // -...</description>
       <category>JavaScript/字符串</category>
       <pubDate>Thu, 25 Sep 2025 14:36:55 GMT</pubDate>
+    </item>
+    <item>
+      <title>padStart 和 padEnd 方法的使用和介绍</title>
+      <link>/quests/92.html</link>
+      <guid isPermaLink="false">quest:92</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 25 Sep 2025 14:36:55 GMT</pubDate>
+    </item>
+    <item>
+      <title>:focus-visible 是什么，如何使用？</title>
+      <link>/quests/69.html</link>
+      <guid isPermaLink="false">quest:69</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 24 Sep 2025 14:00:43 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS 中的 if() 函数的使用，有哪些使用场景？</title>
+      <link>/quests/87.html</link>
+      <guid isPermaLink="false">quest:87</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 22 Sep 2025 01:36:43 GMT</pubDate>
+    </item>
+    <item>
+      <title>操作系统的发展历史是怎样的，每个阶段都试图解决什么问题？</title>
+      <link>/quests/84.html</link>
+      <guid isPermaLink="false">quest:84</guid>
+      <description>暂未记录答案</description>
+      <category>操作系统</category>
+      <pubDate>Sat, 20 Sep 2025 04:34:29 GMT</pubDate>
     </item>
     <item>
       <title>文档组织</title>
@@ -5519,12 +5242,36 @@
       <pubDate>Tue, 26 Dec 2023 15:45:57 GMT</pubDate>
     </item>
     <item>
+      <title>C 语言中和线程操作有关的函数有哪些？</title>
+      <link>/quests/83.html</link>
+      <guid isPermaLink="false">quest:83</guid>
+      <description>暂未记录答案</description>
+      <category>未分类</category>
+      <pubDate>Sat, 20 Sep 2025 03:09:49 GMT</pubDate>
+    </item>
+    <item>
+      <title>C 语言中 volatile 关键字的作用是什么？</title>
+      <link>/quests/82.html</link>
+      <guid isPermaLink="false">quest:82</guid>
+      <description>暂未记录答案</description>
+      <category>未分类</category>
+      <pubDate>Sat, 20 Sep 2025 03:09:03 GMT</pubDate>
+    </item>
+    <item>
       <title>循环径向渐变的语法同 径向渐变 的语法相同，差异在于循环二字，会以渐变图像的大小...</title>
       <link>/cards/627.html</link>
       <guid isPermaLink="false">card:627</guid>
       <description>循环径向渐变的语法同 径向渐变 的语法相同，差异在于循环二字，会以渐变图像的大小向四个方向重复。其形式语法如下 &lt;repeating-radial-gradient()&gt; = repeating-radial-gradient( [ &lt;ra...</description>
       <category>CSS/渐变色</category>
       <pubDate>Wed, 17 Sep 2025 04:57:28 GMT</pubDate>
+    </item>
+    <item>
+      <title>角向渐变的使用方法</title>
+      <link>/quests/74.html</link>
+      <guid isPermaLink="false">quest:74</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 18 Sep 2025 14:06:16 GMT</pubDate>
     </item>
     <item>
       <title>getopts 用于 shell 脚本中，它一次处理一个命令行选项，当处理完所有...</title>
@@ -5553,6 +5300,14 @@
       <pubDate>Mon, 14 Jul 2025 01:44:41 GMT</pubDate>
     </item>
     <item>
+      <title>line-height 取值的区别？</title>
+      <link>/quests/52.html</link>
+      <guid isPermaLink="false">quest:52</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 16 Sep 2025 01:29:49 GMT</pubDate>
+    </item>
+    <item>
       <title>Promise.all 可以等待多个异步任务执行完成，其返回一个 Promise...</title>
       <link>/cards/297.html</link>
       <guid isPermaLink="false">card:297</guid>
@@ -5561,10 +5316,34 @@
       <pubDate>Wed, 16 Aug 2023 15:01:24 GMT</pubDate>
     </item>
     <item>
+      <title>径向渐变的语法及使用技巧</title>
+      <link>/quests/79.html</link>
+      <guid isPermaLink="false">quest:79</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 15 Sep 2025 04:32:14 GMT</pubDate>
+    </item>
+    <item>
+      <title>网络效应是什么？</title>
+      <link>/quests/73.html</link>
+      <guid isPermaLink="false">quest:73</guid>
+      <description>收录 1 个答案</description>
+      <category>经济&amp;金融</category>
+      <pubDate>Mon, 15 Sep 2025 01:37:35 GMT</pubDate>
+    </item>
+    <item>
       <title>kiosk 模式又被称为 信息台模式 或 展台模式 ，当用户运行在这种模式下，用...</title>
       <link>/cards/623.html</link>
       <guid isPermaLink="false">card:623</guid>
       <description>kiosk 模式又被称为 信息台模式 或 展台模式 ，当用户运行在这种模式下，用户对系统功能的访问受到严格限制，常见于银行 ATM 自动取款机，电影院的自助售票机，它具有如下特点： 应用全屏，窗口会占据整个屏幕的显示区域 覆盖一切，窗口会覆...</description>
+      <category>Electron</category>
+      <pubDate>Mon, 15 Sep 2025 01:17:36 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 kiosk 模式</title>
+      <link>/quests/76.html</link>
+      <guid isPermaLink="false">quest:76</guid>
+      <description>收录 1 个答案</description>
       <category>Electron</category>
       <pubDate>Mon, 15 Sep 2025 01:17:36 GMT</pubDate>
     </item>
@@ -5577,11 +5356,27 @@
       <pubDate>Sun, 14 Sep 2025 12:16:06 GMT</pubDate>
     </item>
     <item>
+      <title>循环线性渐变的语法？有哪些使用技巧？</title>
+      <link>/quests/77.html</link>
+      <guid isPermaLink="false">quest:77</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 14 Sep 2025 12:16:06 GMT</pubDate>
+    </item>
+    <item>
       <title>在 CSS 中 &lt;zero&gt; 是一个占位符，表示此处可以写为 不带单位 的 0 ...</title>
       <link>/cards/621.html</link>
       <guid isPermaLink="false">card:621</guid>
       <description>在 CSS 中 &lt;zero&gt; 是一个占位符，表示此处可以写为 不带单位 的 0 值，需要注意，必须为显式的字面量，计算出来量如 calc(0) 不能与 &lt;zero&gt; 匹配。 例子 1： 线性渐变 的语法 &lt;linear-gradient()...</description>
       <category>CSS</category>
+      <pubDate>Sun, 14 Sep 2025 11:30:01 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS 规范中的 &lt;zero&gt; 是什么意思？</title>
+      <link>/quests/78.html</link>
+      <guid isPermaLink="false">quest:78</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Sun, 14 Sep 2025 11:30:01 GMT</pubDate>
     </item>
     <item>
@@ -5630,6 +5425,14 @@
       <description>线性渐变的 基本语法 ： &lt;linear-gradient()&gt; = linear-gradient( [ &lt;linear-gradient-syntax&gt; ] ) &lt;linear-gradient-syntax&gt; = [ &lt;angle&gt; ...</description>
       <category>CSS/渐变色</category>
       <pubDate>Wed, 03 Sep 2025 15:54:19 GMT</pubDate>
+    </item>
+    <item>
+      <title>线性渐变的基本语法</title>
+      <link>/quests/75.html</link>
+      <guid isPermaLink="false">quest:75</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 03 Sep 2025 15:30:19 GMT</pubDate>
     </item>
     <item>
       <title>Node.js之事件循环</title>
@@ -5902,6 +5705,14 @@
       <guid isPermaLink="false">card:618</guid>
       <description>:focus 伪类选择器选中当前获得焦点的元素 &lt;style&gt; #input { width: 300px; height: 48px; border-radius: 24px; outline: 2px solid rgb(255, 25...</description>
       <category>CSS/选择器</category>
+      <pubDate>Fri, 22 Aug 2025 10:36:25 GMT</pubDate>
+    </item>
+    <item>
+      <title>:focus-within 的作用是什么？和 :focus 的区别是什么?</title>
+      <link>/quests/61.html</link>
+      <guid isPermaLink="false">quest:61</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
       <pubDate>Fri, 22 Aug 2025 10:36:25 GMT</pubDate>
     </item>
     <item>
@@ -6771,6 +6582,14 @@
       <pubDate>Wed, 23 Apr 2025 11:01:44 GMT</pubDate>
     </item>
     <item>
+      <title>Git Submodule 是什么？如何使用？</title>
+      <link>/quests/72.html</link>
+      <guid isPermaLink="false">quest:72</guid>
+      <description>暂未记录答案</description>
+      <category>Git</category>
+      <pubDate>Mon, 26 May 2025 12:03:30 GMT</pubDate>
+    </item>
+    <item>
       <title>记笔记的建议： 记录自己的想法 为什么要记录个人想法，现在的公共知识都可以通过搜...</title>
       <link>/cards/543.html</link>
       <guid isPermaLink="false">card:543</guid>
@@ -6785,6 +6604,14 @@
       <guid isPermaLink="false">doc:285</guid>
       <description>记笔记的建议： 记录自己的想法 为什么要记录个人想法，现在的公共知识都可以通过搜索引擎或者 AI 问出来，反而是个人想法与思考值得记录。 记录感到触动的时刻： 灵感很棒，当时看似无用的灵感，能为未来困顿时刻提供帮助，值得记录 信息有用，如何...</description>
       <pubDate>Mon, 31 Mar 2025 02:01:28 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS 中的相对颜色是什么？</title>
+      <link>/quests/70.html</link>
+      <guid isPermaLink="false">quest:70</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Sat, 10 May 2025 12:46:37 GMT</pubDate>
     </item>
     <item>
       <title>package.json 中的 resolutions 字段是 yarn 和 p...</title>
@@ -6832,6 +6659,22 @@
       <pubDate>Mon, 14 Apr 2025 08:37:51 GMT</pubDate>
     </item>
     <item>
+      <title>TCP 四次挥手的流程，为什么要进行四次挥手？</title>
+      <link>/quests/62.html</link>
+      <guid isPermaLink="false">quest:62</guid>
+      <description>暂未记录答案</description>
+      <category>网络</category>
+      <pubDate>Thu, 01 May 2025 05:41:32 GMT</pubDate>
+    </item>
+    <item>
+      <title>V8 与 Libuv 事件循环的差异？</title>
+      <link>/quests/59.html</link>
+      <guid isPermaLink="false">quest:59</guid>
+      <description>暂未记录答案</description>
+      <category>Node.js</category>
+      <pubDate>Tue, 29 Apr 2025 00:46:08 GMT</pubDate>
+    </item>
+    <item>
       <title>第二十二课：动画与模拟II</title>
       <link>/docs/project/18/202.html</link>
       <guid isPermaLink="false">doc:202</guid>
@@ -6855,6 +6698,14 @@
       <pubDate>Sun, 19 Jan 2025 15:10:52 GMT</pubDate>
     </item>
     <item>
+      <title>HTML 的 meta 标签的用途，并列举一些常用的 meta 标签</title>
+      <link>/quests/53.html</link>
+      <guid isPermaLink="false">quest:53</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Thu, 24 Apr 2025 03:07:53 GMT</pubDate>
+    </item>
+    <item>
       <title>模块 fileinput 让你能够轻松地迭代一系列文本文件中的所有行。 使用模块...</title>
       <link>/cards/479.html</link>
       <guid isPermaLink="false">card:479</guid>
@@ -6870,6 +6721,39 @@
       <category>面试题</category>
       <category>安全/XSS</category>
       <pubDate>Mon, 21 Apr 2025 07:01:19 GMT</pubDate>
+    </item>
+    <item>
+      <title>React 为什么要自定义合成事件？</title>
+      <link>/quests/27.html</link>
+      <guid isPermaLink="false">quest:27</guid>
+      <description>React 为什么要自定义合成事件： 跨浏览器的兼容 抹平不同浏览器事件名称，事件属性，监听方式上的差异，开发者仅需关心 React 提供的一直的事件接口，而无需关注浏览器底层的差异 性能提升...</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Apr 2025 11:13:40 GMT</pubDate>
+    </item>
+    <item>
+      <title>原型链是什么？为什么要有原型链？</title>
+      <link>/quests/17.html</link>
+      <guid isPermaLink="false">quest:17</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Apr 2025 10:54:02 GMT</pubDate>
+    </item>
+    <item>
+      <title>link 和 @import 引入 CSS 的区别？</title>
+      <link>/quests/14.html</link>
+      <guid isPermaLink="false">quest:14</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Apr 2025 10:45:16 GMT</pubDate>
+    </item>
+    <item>
+      <title>Attribute 和 Property 的区别？
+</title>
+      <link>/quests/15.html</link>
+      <guid isPermaLink="false">quest:15</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Apr 2025 09:31:30 GMT</pubDate>
     </item>
     <item>
       <title>如何发布 npm 包。 需要有 npm 账号，前往[官网](https://ww...</title>
@@ -6904,11 +6788,43 @@
       <pubDate>Wed, 16 Aug 2023 13:13:57 GMT</pubDate>
     </item>
     <item>
+      <title>pnpm 的优势在哪里？</title>
+      <link>/quests/48.html</link>
+      <guid isPermaLink="false">quest:48</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Apr 2025 06:01:47 GMT</pubDate>
+    </item>
+    <item>
       <title>模块化的发展历史： 无模块（1995-2009） var module1 = {...</title>
       <link>/cards/583.html</link>
       <guid isPermaLink="false">card:583</guid>
       <description>模块化的发展历史： 无模块（1995-2009） var module1 = { foo: function() { /*...*/ } }; var module2 = { bar: function() { /*...*/ } }; 全...</description>
       <pubDate>Wed, 23 Apr 2025 05:49:56 GMT</pubDate>
+    </item>
+    <item>
+      <title>模块化的发展的历史是什么？</title>
+      <link>/quests/25.html</link>
+      <guid isPermaLink="false">quest:25</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Apr 2025 05:49:25 GMT</pubDate>
+    </item>
+    <item>
+      <title>请求参数 credentials 的作用是什么？</title>
+      <link>/quests/12.html</link>
+      <guid isPermaLink="false">quest:12</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 23 Apr 2025 04:57:29 GMT</pubDate>
+    </item>
+    <item>
+      <title>package.json 里面的 resolution 是做什么用的？</title>
+      <link>/quests/49.html</link>
+      <guid isPermaLink="false">quest:49</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 22 Apr 2025 10:41:49 GMT</pubDate>
     </item>
     <item>
       <title>GET 和 POST 的比较： 作用 GET：一般用以请求资源 POST：一般用...</title>
@@ -6919,6 +6835,14 @@
       <category>面试题</category>
       <category>概念对比</category>
       <pubDate>Mon, 21 Apr 2025 07:50:05 GMT</pubDate>
+    </item>
+    <item>
+      <title>Vite 和 Webpack 的区别？</title>
+      <link>/quests/6.html</link>
+      <guid isPermaLink="false">quest:6</guid>
+      <description>Vite 和 Webpack 的区别： 冷启动 Webpack：需要全量分析依赖，并进行打包后才能访问，速度较慢 Vite：依赖浏览器原生对 ES Module 的能力，动态加载模块返回，速度...</description>
+      <category>前端</category>
+      <pubDate>Mon, 21 Apr 2025 09:08:09 GMT</pubDate>
     </item>
     <item>
       <title>为什么不能用场所的 WiFi，一旦我们通过 HTTP 访问网站，网站就可能被篡改...</title>
@@ -6935,6 +6859,54 @@
       <description>密钥交换算法： RSA 使用证书里面的的公钥对本地生成的 pre-master 进行加密，然后传输给服务端，二者使用之前交换的两个随机数和 pre-master 合成会话密钥进行加密通信。 缺点是一旦服务端的私钥泄露，之前发送的所有消息都可...</description>
       <category>安全/算法</category>
       <pubDate>Mon, 10 Jul 2023 04:39:59 GMT</pubDate>
+    </item>
+    <item>
+      <title>GET 和 POST 的区别？什么情况下用到？</title>
+      <link>/quests/22.html</link>
+      <guid isPermaLink="false">quest:22</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 21 Apr 2025 07:37:12 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 XSS 攻击？攻击原理和防范方式？</title>
+      <link>/quests/37.html</link>
+      <guid isPermaLink="false">quest:37</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 21 Apr 2025 06:39:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS 中的 isolation 属性是干什么用的？</title>
+      <link>/quests/46.html</link>
+      <guid isPermaLink="false">quest:46</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 21 Apr 2025 06:15:15 GMT</pubDate>
+    </item>
+    <item>
+      <title>React 和 Vue 的区别？</title>
+      <link>/quests/47.html</link>
+      <guid isPermaLink="false">quest:47</guid>
+      <description>相同点： 组件化 数据驱动视图 不同点： React 扩展 JavaScript 语法，描述 UI 更新机制：Fiber Node Tree，全量渲染，打 flag 更新，性能差 生态，生态丰...</description>
+      <category>前端</category>
+      <pubDate>Mon, 21 Apr 2025 05:50:07 GMT</pubDate>
+    </item>
+    <item>
+      <title>Promise 的底层原理是什么？</title>
+      <link>/quests/7.html</link>
+      <guid isPermaLink="false">quest:7</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 13:40:13 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS JS 放置位置和原因？</title>
+      <link>/quests/13.html</link>
+      <guid isPermaLink="false">quest:13</guid>
+      <description>CSS 一般放于 head 中，原因是浏览器会边解析文档边渲染，如果把 CSS 放在文档后面，那么会显示没有样式的内容，然后解析到 CSS 后，突然显示有样式的内容，这样的体验不好，所以把 C...</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 13:30:57 GMT</pubDate>
     </item>
     <item>
       <title>通过 cat 命令可以查看文件的内容 # 查看 hello.c 的文件内容 ~ ...</title>
@@ -7034,6 +7006,22 @@
       <pubDate>Thu, 13 Jul 2023 13:32:03 GMT</pubDate>
     </item>
     <item>
+      <title>ES Module 和 CommonJS 的区别？</title>
+      <link>/quests/36.html</link>
+      <guid isPermaLink="false">quest:36</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 13:14:30 GMT</pubDate>
+    </item>
+    <item>
+      <title>Cookie 有哪些属性？</title>
+      <link>/quests/40.html</link>
+      <guid isPermaLink="false">quest:40</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 12:54:59 GMT</pubDate>
+    </item>
+    <item>
       <title>通过 keyof 可以查询类型包含的所有的键 interface Obj { a...</title>
       <link>/cards/138.html</link>
       <guid isPermaLink="false">card:138</guid>
@@ -7064,6 +7052,62 @@
       <description>绝对定位的性质： 如果不设置 left(right) 和 top(bottom) 值，其默认值并不是 0 ，而是其 position: static 所在的位置 在不设置宽度的情况下，其宽度具有包裹性，即其宽度由内容的多少决定，同 disp...</description>
       <category>CSS/定位/absolute</category>
       <pubDate>Sun, 12 Nov 2023 08:47:18 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS 的层叠上下文是什么？</title>
+      <link>/quests/38.html</link>
+      <guid isPermaLink="false">quest:38</guid>
+      <description>层叠上下文是 HTML 元素的一个属性，定义了在 Z 轴上的层叠顺序。可以把层叠上下文认为是一个图层，图层内部的 HTML 元素按照一定规则层叠。 如何创建层叠上下文： HTML 根元素 po...</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 12:17:40 GMT</pubDate>
+    </item>
+    <item>
+      <title>怎么减少 LCP 时间？</title>
+      <link>/quests/42.html</link>
+      <guid isPermaLink="false">quest:42</guid>
+      <description>如何减小 LCP 时间： 优化服务响应时间 高性能服务器 CDN 优化资源加载时间 资源预加载，&lt;link ref=&quot;preload&quot; href=&quot;xxx.png&quot; as=&quot;img&quot; /&gt; 资...</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 11:35:26 GMT</pubDate>
+    </item>
+    <item>
+      <title>在 TCP 建立连接后，HTTP 传输数据前，这之间发生了什么？</title>
+      <link>/quests/43.html</link>
+      <guid isPermaLink="false">quest:43</guid>
+      <description>TLS 握手 HTTP 协议协商</description>
+      <category>网络</category>
+      <pubDate>Sun, 20 Apr 2025 11:31:36 GMT</pubDate>
+    </item>
+    <item>
+      <title>怎么实现一套代码，多端运行？</title>
+      <link>/quests/45.html</link>
+      <guid isPermaLink="false">quest:45</guid>
+      <description>一套代码，多端运行： 运行时 高德的方案：Android、iOS、鸿蒙、PC 跨端容器，提供统一的跨端环境，统一切面接口 Android -&gt; Java iOS -&gt; Swift 鸿蒙 -&gt; ...</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 11:12:58 GMT</pubDate>
+    </item>
+    <item>
+      <title>虚拟列表是怎么实现的？</title>
+      <link>/quests/44.html</link>
+      <guid isPermaLink="false">quest:44</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 10:39:38 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 SSR 流式渲染？</title>
+      <link>/quests/41.html</link>
+      <guid isPermaLink="false">quest:41</guid>
+      <description>暂未记录答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 10:13:55 GMT</pubDate>
+    </item>
+    <item>
+      <title>内存泄露怎么解决？</title>
+      <link>/quests/39.html</link>
+      <guid isPermaLink="false">quest:39</guid>
+      <description>首先明确有哪些情况会导致内存泄露： 意外声明了全局变量，在函数没有使用关键字声明变量，会成为全局变量 -&gt; 严格模式 定时器，事件监听没有去除 -&gt; 及时清理 引用了不需要的变量 -&gt; Wea...</description>
+      <category>前端</category>
+      <pubDate>Sun, 20 Apr 2025 08:01:12 GMT</pubDate>
     </item>
     <item>
       <title>每个函数内部都会自动传入一个 arguments 对象，但是箭头函数内部并没有 ...</title>
@@ -7154,12 +7198,69 @@
       <pubDate>Mon, 24 Jun 2024 00:34:40 GMT</pubDate>
     </item>
     <item>
+      <title>离屏 Canvas 的性能为什么比 Canvas 好？</title>
+      <link>/quests/30.html</link>
+      <guid isPermaLink="false">quest:30</guid>
+      <description>离屏 Canvas：可在 Web Worker 中运行，利用多线程并行计算，避免主线程阻塞</description>
+      <category>前端</category>
+      <pubDate>Fri, 18 Apr 2025 06:12:45 GMT</pubDate>
+    </item>
+    <item>
       <title>git revert 的用法。 它是什么 恢复到指定的 commit 工作原理 ...</title>
       <link>/cards/364.html</link>
       <guid isPermaLink="false">card:364</guid>
       <description>git revert 的用法。 它是什么 恢复到指定的 commit 工作原理 通过反向应用新建一个 commit，使得这个 commit 的内容与指定的 commit 相同，这样做可以保留历史记录，特别是在多人协作的项目。 如何使用 gi...</description>
       <category>Git</category>
       <pubDate>Wed, 18 Oct 2023 14:35:26 GMT</pubDate>
+    </item>
+    <item>
+      <title>git reset 的使用，和 git revert 的区别是什么？</title>
+      <link>/quests/28.html</link>
+      <guid isPermaLink="false">quest:28</guid>
+      <description>收录 1 个答案</description>
+      <category>Git</category>
+      <pubDate>Fri, 18 Apr 2025 05:12:53 GMT</pubDate>
+    </item>
+    <item>
+      <title>document load 和 document DOMContentLoaded 两个事件的区别是什么？
+</title>
+      <link>/quests/19.html</link>
+      <guid isPermaLink="false">quest:19</guid>
+      <description>DOMContentLoaded 是当文档解析完成后触发 load 是文档解析完成并且资源加载完成后触发</description>
+      <category>前端</category>
+      <pubDate>Fri, 18 Apr 2025 04:33:07 GMT</pubDate>
+    </item>
+    <item>
+      <title>短轮询、长轮询、SSE 和 WebSocket 的区别？</title>
+      <link>/quests/31.html</link>
+      <guid isPermaLink="false">quest:31</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 18 Apr 2025 04:13:59 GMT</pubDate>
+    </item>
+    <item>
+      <title>React 19 的新特性？</title>
+      <link>/quests/34.html</link>
+      <guid isPermaLink="false">quest:34</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Fri, 18 Apr 2025 02:51:55 GMT</pubDate>
+    </item>
+    <item>
+      <title>怎么计算秒开率？</title>
+      <link>/quests/35.html</link>
+      <guid isPermaLink="false">quest:35</guid>
+      <description>某段时间内， FCP 在 1s 内的次数除以总次数。</description>
+      <category>前端</category>
+      <pubDate>Fri, 18 Apr 2025 01:51:31 GMT</pubDate>
+    </item>
+    <item>
+      <title>TypeScript 的 Await 类型如何实现？</title>
+      <link>/quests/32.html</link>
+      <guid isPermaLink="false">quest:32</guid>
+      <description>type Await&lt;T&gt; = T extends PromiseLike&lt;infer U&gt; ? U : T;</description>
+      <category>前端</category>
+      <pubDate>Thu, 17 Apr 2025 15:14:01 GMT</pubDate>
     </item>
     <item>
       <title>二叉树的最近公共祖先</title>
@@ -7196,6 +7297,22 @@
       <pubDate>Thu, 13 Jul 2023 14:16:21 GMT</pubDate>
     </item>
     <item>
+      <title>defer 和 async 的区别？</title>
+      <link>/quests/20.html</link>
+      <guid isPermaLink="false">quest:20</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 16 Apr 2025 04:07:19 GMT</pubDate>
+    </item>
+    <item>
+      <title>怎么查看性能指标？性能优化的手段有哪些？</title>
+      <link>/quests/3.html</link>
+      <guid isPermaLink="false">quest:3</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Wed, 16 Apr 2025 02:32:05 GMT</pubDate>
+    </item>
+    <item>
       <title>new 一个对象具体做了什么： 基于构造器原型创建一个对象 调用构建器方法，并将...</title>
       <link>/cards/570.html</link>
       <guid isPermaLink="false">card:570</guid>
@@ -7205,6 +7322,54 @@
       <pubDate>Tue, 15 Apr 2025 14:28:50 GMT</pubDate>
     </item>
     <item>
+      <title>new 一个对象具体做了什么？</title>
+      <link>/quests/18.html</link>
+      <guid isPermaLink="false">quest:18</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 15 Apr 2025 14:28:47 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS 的加载是异步的吗？表现在什么地方？</title>
+      <link>/quests/16.html</link>
+      <guid isPermaLink="false">quest:16</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 15 Apr 2025 14:03:21 GMT</pubDate>
+    </item>
+    <item>
+      <title>浏览器同一时间能够从一个域名下载多少资源？</title>
+      <link>/quests/21.html</link>
+      <guid isPermaLink="false">quest:21</guid>
+      <description>大部分现代浏览器在同一个域名下通常允许的最大并发数在 6 到 8 之间</description>
+      <category>前端</category>
+      <pubDate>Tue, 15 Apr 2025 13:27:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>域名解析时是 TCP 还是 UDP？</title>
+      <link>/quests/23.html</link>
+      <guid isPermaLink="false">quest:23</guid>
+      <description>域名解析通常使用 UDP 协议，因为 UDP 协议具有较低的延迟和较少的开销，非常适合于快速查询。但是在有的时候，当响应大于 512 字节时，或需要可靠传输时，会使用 TCP 协议。</description>
+      <category>网络</category>
+      <pubDate>Tue, 15 Apr 2025 13:18:33 GMT</pubDate>
+    </item>
+    <item>
+      <title>Webpack 中 loader 和 plugin 的区别？</title>
+      <link>/quests/24.html</link>
+      <guid isPermaLink="false">quest:24</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Tue, 15 Apr 2025 13:12:13 GMT</pubDate>
+    </item>
+    <item>
+      <title>什么是 CSRF 攻击？怎么预防 CSRF 攻击？</title>
+      <link>/quests/10.html</link>
+      <guid isPermaLink="false">quest:10</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 14 Apr 2025 16:23:02 GMT</pubDate>
+    </item>
+    <item>
       <title>TCP 为什么要进行三次握手？为什么不是两次？为什么不是四次？ 首先要明白进行握...</title>
       <link>/cards/562.html</link>
       <guid isPermaLink="false">card:562</guid>
@@ -7212,6 +7377,14 @@
       <category>计算机网络/TCP</category>
       <category>面试题</category>
       <pubDate>Thu, 10 Apr 2025 01:42:48 GMT</pubDate>
+    </item>
+    <item>
+      <title>push 和 concat 的区别？</title>
+      <link>/quests/50.html</link>
+      <guid isPermaLink="false">quest:50</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Mon, 14 Apr 2025 08:37:51 GMT</pubDate>
     </item>
     <item>
       <title>isPointInPath(x, y) 可以判断某个点 (x, y) 是否在当前...</title>
@@ -7244,6 +7417,30 @@
       <description>Map 是用来存储键值对结构的数据的，可以通过 new Map() 创建一个 Map 集合 const map = new Map(); map.set(5, &quot;alice&quot;); map.set(10, &quot;bob&quot;); console.lo...</description>
       <category>JavaScript/Map</category>
       <pubDate>Wed, 02 Aug 2023 13:58:17 GMT</pubDate>
+    </item>
+    <item>
+      <title>Set 和 Map 键值的顺序是什么？</title>
+      <link>/quests/4.html</link>
+      <guid isPermaLink="false">quest:4</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 13 Apr 2025 07:03:37 GMT</pubDate>
+    </item>
+    <item>
+      <title>为什么 Canvas 的性能比 SVG 好？</title>
+      <link>/quests/2.html</link>
+      <guid isPermaLink="false">quest:2</guid>
+      <description>SVG 需要构建和维护 DOM 树，内存占用高，更新时会触发浏览器渲染管线，引起重排和重绘。当 DOM 数量增加时，复杂度呈指数级增长，性能急剧下降。 Canvas 直接绘制到屏幕上，无中间结...</description>
+      <category>前端</category>
+      <pubDate>Sun, 13 Apr 2025 06:21:42 GMT</pubDate>
+    </item>
+    <item>
+      <title>Canvas 和 SVG 的区别是什么？</title>
+      <link>/quests/1.html</link>
+      <guid isPermaLink="false">quest:1</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 13 Apr 2025 06:05:53 GMT</pubDate>
     </item>
     <item>
       <title>在 JavaScript 中，每一个函数都会默认的传入一个 this 参数，它的...</title>
@@ -8349,6 +8546,14 @@
       <pubDate>Sun, 05 Jul 2020 04:14:25 GMT</pubDate>
     </item>
     <item>
+      <title>Node.js 的事件循环</title>
+      <link>/quests/33.html</link>
+      <guid isPermaLink="false">quest:33</guid>
+      <description>收录 1 个答案</description>
+      <category>Node.js</category>
+      <pubDate>Sun, 30 Mar 2025 03:00:40 GMT</pubDate>
+    </item>
+    <item>
       <title>离散傅里叶变换</title>
       <link>/articles/42.html</link>
       <guid isPermaLink="false">article:42</guid>
@@ -8384,36 +8589,6 @@
       <pubDate>Sat, 01 Dec 2018 02:20:28 GMT</pubDate>
     </item>
     <item>
-      <title>2021 年终总结</title>
-      <link>/articles/35.html</link>
-      <guid isPermaLink="false">article:35</guid>
-      <description>2021 没想到这么快就过去了，简单的回顾一下 2021 年吧。 去年寒假的这个时候，我参加了阿里巴巴举办的前端练习生计划，参加了几场直播，完成了几次作业。分组的时候成为了队长，本来是要合作完成一个项目的，但是要求写 PRD 需求文档之类的...</description>
-      <pubDate>Sat, 22 Jan 2022 13:18:15 GMT</pubDate>
-    </item>
-    <item>
-      <title>使用 Notion 作为视频托管</title>
-      <link>/articles/20.html</link>
-      <guid isPermaLink="false">article:20</guid>
-      <description>有的时候希望在博客里面添加视频，博客托管在 Github Page 上，但是视频一般比较大，也就没有办法将其上传到 Github 上，一般来说我们可以讲视频上传到视频托管平台，比如 bilibili 和 Youtube。 对于国内将视频上传...</description>
-      <category>Notion</category>
-      <category>视频托管</category>
-      <pubDate>Mon, 22 Nov 2021 09:12:32 GMT</pubDate>
-    </item>
-    <item>
-      <title>排序算法</title>
-      <link>/articles/22.html</link>
-      <guid isPermaLink="false">article:22</guid>
-      <description>本篇文章将对常见的排序算法进行介绍，包括： 选择排序 插入排序 希尔排序 归并排序 快速排序 堆排序 为了对实现的算法进行测试，我们准备一个工具类 Helper ，里面包括我们由于测试算法正确与否的方法以及性能测试的代码，包括交换数组中的两...</description>
-      <category>排序算法</category>
-      <category>选择排序</category>
-      <category>插入排序</category>
-      <category>希尔排序</category>
-      <category>归并排序</category>
-      <category>快速排序</category>
-      <category>堆排序</category>
-      <pubDate>Sat, 03 Apr 2021 03:25:35 GMT</pubDate>
-    </item>
-    <item>
       <title>JavaScript 正则表达式</title>
       <link>/articles/17.html</link>
       <guid isPermaLink="false">article:17</guid>
@@ -8426,15 +8601,6 @@
       <category>元字符</category>
       <category>分组</category>
       <pubDate>Thu, 28 May 2020 07:21:12 GMT</pubDate>
-    </item>
-    <item>
-      <title>Node EventEmitter 使用及实现</title>
-      <link>/articles/12.html</link>
-      <guid isPermaLink="false">article:12</guid>
-      <description>EventEmitter 是 Node 提供的一个事件订阅模块，本片文章将介绍具体的使用，然后实现一遍。 EventEmitter 的使用 EventEmitter 为我们提供了事件订阅机制，通过引入 events 模块来使用它。 cons...</description>
-      <category>Node</category>
-      <category>EventEmitter</category>
-      <pubDate>Fri, 12 Mar 2021 02:15:02 GMT</pubDate>
     </item>
     <item>
       <title>JavaScript 控制对象的访问</title>
@@ -8450,16 +8616,6 @@
       <pubDate>Tue, 13 Apr 2021 14:18:00 GMT</pubDate>
     </item>
     <item>
-      <title>跑马灯动画</title>
-      <link>/articles/14.html</link>
-      <guid isPermaLink="false">article:14</guid>
-      <description>本篇文章介绍了如何实现支持动态加减速的跑马灯动画，效果如下： 上面的动画主要实现了两个功能： 文字的无缝衔接 动画的动态加减速 首先给出例子用到的 html 与 css 代码 &lt;!DOCTYPE html&gt; &lt;html lang=&quot;en&quot;&gt;...</description>
-      <category>跑马灯</category>
-      <category>动画</category>
-      <category>动态加减速</category>
-      <pubDate>Fri, 02 Jul 2021 10:11:12 GMT</pubDate>
-    </item>
-    <item>
       <title>Node Stream 详解</title>
       <link>/articles/5.html</link>
       <guid isPermaLink="false">article:5</guid>
@@ -8467,53 +8623,6 @@
       <category>Node</category>
       <category>Stream</category>
       <pubDate>Sat, 06 Mar 2021 04:14:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>JavaScript 访问对象中的属性</title>
-      <link>/articles/6.html</link>
-      <guid isPermaLink="false">article:6</guid>
-      <description>本篇文章关于遍历对象属性的问题，包括 for ...in ， Object.keys() ， Reflect.ownKeys() ， Object.getOwnPropertyNames() ， Object.getOwnPropertyS...</description>
-      <category>for ... in</category>
-      <category>Object.keys</category>
-      <category>Reflect.ownKeys</category>
-      <category>Object.getOwnPropertyNames()</category>
-      <category>Object.getOwnPropertySymbols()</category>
-      <pubDate>Fri, 30 Apr 2021 03:25:35 GMT</pubDate>
-    </item>
-    <item>
-      <title>远程访问 jupyter</title>
-      <link>/articles/7.html</link>
-      <guid isPermaLink="false">article:7</guid>
-      <description>最近又开始折腾了 jupyter 了，因为实验室的网络环境太差，每次我使用 conda 开启一个新的环境，然后下载一些新的包时会非常的慢，慢我还能忍，问题是经常下载失败，浪费我的时间😭，接着我想到我有一台腾讯云的服务器，我就想在服务器上下...</description>
-      <category>jupyter</category>
-      <category>远程访问</category>
-      <category>conda</category>
-      <pubDate>Fri, 04 Jun 2021 11:14:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>笔记折腾之旅</title>
-      <link>/articles/8.html</link>
-      <guid isPermaLink="false">article:8</guid>
-      <description>记录从上大学开始到现在做笔记的方式，先是手抄纸质笔记，然后是折腾各种电子笔记，在进阶自定义个人博客，到现在自己写了一个笔记软件。 手抄笔记 自从上了大学之后，知识越发艰涩难懂，往往我看完一遍书之后，都不知道自己看了什么，所以当时就觉得我需要...</description>
-      <category>笔记</category>
-      <category>学习方法</category>
-      <category>OneNote</category>
-      <category>CSDN</category>
-      <category>博客园</category>
-      <category>docsify</category>
-      <category>Hexo</category>
-      <category>VuePress</category>
-      <category>Notion</category>
-      <category>Obsidian</category>
-      <pubDate>Fri, 01 Oct 2021 14:14:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>我是如何成为一名程序员的</title>
-      <link>/articles/2.html</link>
-      <guid isPermaLink="false">article:2</guid>
-      <description>随这我在学校就业网提交签约信息，也就意味着我的秋招基本结束了 我也正好捋捋我是如何成为一名程序员的。 翁恺男神：拯救了我的 C 语言 在上大学之前，从来没写过程序，甚至连编程这件事情是什么都不知道，只会用电脑看小说和打游戏(而且只会4399...</description>
-      <category>程序人生</category>
-      <pubDate>Thu, 18 Nov 2021 03:20:00 GMT</pubDate>
     </item>
     <item>
       <title>const 和 let 具有相同的特点，有一个不同的是 let 声明的变量是可变...</title>
@@ -8912,6 +9021,14 @@
       <pubDate>Mon, 12 Feb 2024 13:23:59 GMT</pubDate>
     </item>
     <item>
+      <title>浮点数运算的精度问题，比如 0.1 + 0.2 不等于 0.3 这是什么原因，要怎么解决？</title>
+      <link>/quests/26.html</link>
+      <guid isPermaLink="false">quest:26</guid>
+      <description>收录 1 个答案</description>
+      <category>未分类</category>
+      <pubDate>Sun, 30 Mar 2025 03:00:40 GMT</pubDate>
+    </item>
+    <item>
       <title>float 设计的目的是为了实现图文环绕效果，后续布局的用法并不是其设计的目的，...</title>
       <link>/cards/370.html</link>
       <guid isPermaLink="false">card:370</guid>
@@ -9263,6 +9380,14 @@
       <description>如果重写了原型中的方法，如何访问原型中的方法。 在 ES5 中，通过 Object.getPrototypeOf(this).[method].call(this) 来访问原型 const person = { sayHello() { r...</description>
       <category>JavaScript/类</category>
       <pubDate>Tue, 15 Aug 2023 14:51:10 GMT</pubDate>
+    </item>
+    <item>
+      <title>对象键的排序顺序是什么？</title>
+      <link>/quests/5.html</link>
+      <guid isPermaLink="false">quest:5</guid>
+      <description>收录 1 个答案</description>
+      <category>前端</category>
+      <pubDate>Sun, 30 Mar 2025 03:00:40 GMT</pubDate>
     </item>
     <item>
       <title>在实际中我们经常需要将对象转化为原始类型，例如对一个对象做加法，那么就会触发将对...</title>
