@@ -5,13 +5,124 @@
     <link>/</link>
     <description>人生天地间，忽如远行客</description>
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 18 Jul 2026 05:11:19 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 11:14:28 GMT</lastBuildDate>
+    <item>
+      <title>0.51.0</title>
+      <link>/docs/document/14/876.html</link>
+      <guid isPermaLink="false">doc:876</guid>
+      <description>feat: 支持本地 Codex 代理 feat: 思维导图拖拽优化，根组件也支持吸附 feat: 支持批量导出项目 feat: 聊天支持显示上下文长度 feat: 聊天支持在后台运行 feat: 支持 Ctrl + F 全文搜索 feat...</description>
+      <pubDate>Sat, 05 Sep 2026 11:04:24 GMT</pubDate>
+    </item>
+    <item>
+      <title>匹配问题</title>
+      <link>/docs/document/1/56.html</link>
+      <guid isPermaLink="false">doc:56</guid>
+      <description>最大匹配与完全匹配 下面我们讲解的算法都是有关于二分图的算法 例如对于上图就是一个二分图，每条边都连接了两个不同部分的节点，生活中很多问题都可以建模为二分图的问题，例如相亲。左边表示男生群体，右边表示女生群体，如果两个节点之间有一条边，说明...</description>
+      <pubDate>Sat, 09 Dec 2023 15:04:11 GMT</pubDate>
+    </item>
+    <item>
+      <title>网络流与最大流</title>
+      <link>/docs/document/1/52.html</link>
+      <guid isPermaLink="false">doc:52</guid>
+      <description>网络流与最大流 考虑一幅有向带权图 如果图中有一个源点，即入度为 0 的节点，上图的节点 0 ，有一个汇点，它的出度为 0 ，上图的节点 3 ，并且图中所有边的权值都是非负的，那么我们可以说这是一个网络流。 同一般的带权图不同，网络流中边的...</description>
+      <pubDate>Sat, 09 Dec 2023 14:32:58 GMT</pubDate>
+    </item>
+    <item>
+      <title>欧拉回路</title>
+      <link>/docs/document/1/41.html</link>
+      <guid isPermaLink="false">doc:41</guid>
+      <description>18世纪初普鲁士的哥尼斯堡，有一条河穿过，河上有两个小岛，有七座桥把两个岛与河岸联系起来，如下图(黄色线条代表桥，绿色区域代表小岛和河岸) 有个人提出一个问题：一个步行者怎样才能不重复、不遗漏地一次走完七座桥，最后回到出发点。 数学家欧拉将...</description>
+      <pubDate>Sat, 09 Dec 2023 02:06:53 GMT</pubDate>
+    </item>
+    <item>
+      <title>武动乾坤读后感</title>
+      <link>/docs/document/4/874.html</link>
+      <guid isPermaLink="false">doc:874</guid>
+      <description>因为最近想写小说，遇到了一些瓶颈，写起来的时候才发现无从下笔，就去借鉴一些成名小说的写法，最近就看了《武动乾坤》。 看完之后有些心得，感觉这本小说有缺点还是很明显的： 优点 矛盾清晰 作者非常善于建立矛盾，基本每一个阶段都有一个对手，从最开...</description>
+      <pubDate>Sat, 05 Sep 2026 04:25:48 GMT</pubDate>
+    </item>
+    <item>
+      <title>我们经常会在开发启动应用时遇到端口被占用的情况。通常可能是在其他命令行窗口启动了...</title>
+      <link>/cards/780.html</link>
+      <guid isPermaLink="false">card:780</guid>
+      <description>我们经常会在开发启动应用时遇到端口被占用的情况。通常可能是在其他命令行窗口启动了服务，但是忘记了关掉，一时之间也不知道在那个命令行窗口，这是我们迫切需要找到这个进程，然后杀掉。 可是我们只知道端口号，那么怎么根据端口号找到进程呢？ 有一个 ...</description>
+      <category>技巧</category>
+      <pubDate>Fri, 04 Sep 2026 08:58:36 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS Anchor Positioning</title>
+      <link>/articles/82.html</link>
+      <guid isPermaLink="false">article:82</guid>
+      <description>页面上总有一些元素需要&quot;跟着&quot;另一个元素出现，tooltip 跟着按钮、下拉菜单跟着触发器、弹出卡片跟着列表项。这类需求看起来简单，实现起来却很繁琐。 过去我们只能依赖 JavaScript 来完成这件事：先用 getBoundingCli...</description>
+      <category>CSS</category>
+      <pubDate>Sat, 30 May 2026 07:54:56 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS Scroll Snap</title>
+      <link>/articles/83.html</link>
+      <guid isPermaLink="false">article:83</guid>
+      <description>当我们滚动页面时，滚动可以停在任意位置。但有些场景下这并不理想：轮播图中，我们不希望卡片一半露在视口里、一半藏在外面；落地页中，我们希望用户一屏一屏地浏览。 以往实现这种「滚动到指定位置」的效果，通常需要用 JavaScript 监听 sc...</description>
+      <category>CSS</category>
+      <pubDate>Sun, 31 May 2026 06:32:16 GMT</pubDate>
+    </item>
+    <item>
+      <title>View Transition 的基本概念和使用</title>
+      <link>/articles/84.html</link>
+      <guid isPermaLink="false">article:84</guid>
+      <description>在前端开发中，页面状态的切换往往是「硬切」的，列表页跳详情页、Tab 之间的内容替换、弹窗的出现与消失，DOM 一帧之间完成更替，用户感知不到新旧视图之间的空间关系。为了让体验更丝滑，我们通常会手动编排过渡动画，但这件事做起来复杂得多。 单...</description>
+      <category>CSS</category>
+      <category>动画</category>
+      <pubDate>Fri, 05 Jun 2026 00:21:50 GMT</pubDate>
+    </item>
+    <item>
+      <title>建立反馈系统</title>
+      <link>/articles/85.html</link>
+      <guid isPermaLink="false">article:85</guid>
+      <description>我在起点看一本小说时，有一个场景是男主教人射箭，思路是算好抛物线方程，设定角度和力度，每次都能射到同一个点。我当时就忍不住写了一条评论： 没想到有 2000 多人点赞。大家认同的是什么呢？我觉得是对「提前算好一切」这件事的不信任。现实中不可...</description>
+      <pubDate>Tue, 09 Jun 2026 00:09:11 GMT</pubDate>
+    </item>
     <item>
       <title>CSS Scroll-driven Animation</title>
       <link>/articles/87.html</link>
       <guid isPermaLink="false">article:87</guid>
       <description>在过去，我们要制作滚动动画时，一般会使用 JavaScript 监听 scroll 事件，读取 scrollTop 等位置数据来计算动画进度，然后修改元素的样式。对于元素入场和离场这类效果，也可以通过 IntersectionObserve...</description>
+      <category>CSS</category>
+      <category>动画</category>
       <pubDate>Fri, 03 Jul 2026 08:27:42 GMT</pubDate>
+    </item>
+    <item>
+      <title>CSS @layer</title>
+      <link>/articles/88.html</link>
+      <guid isPermaLink="false">article:88</guid>
+      <description>在真实开发中，我们经常会受困于 CSS 的优先级问题。 比如我们使用了一个第三方库，但是第三方库的样式不符合我们的要求，我们想进行修改，为了修改成功，要么我们需要以更高的权重覆盖库的样式，又或者通过 !important 强行将优先级调到最...</description>
+      <category>CSS</category>
+      <pubDate>Sat, 18 Jul 2026 11:00:48 GMT</pubDate>
+    </item>
+    <item>
+      <title>做深色模式时，我们通常会先想到 prefers-color-scheme 。它可...</title>
+      <link>/cards/770.html</link>
+      <guid isPermaLink="false">card:770</guid>
+      <description>做深色模式时，我们通常会先想到 prefers-color-scheme 。它可以读取用户的系统颜色偏好，然后让页面根据系统当前是浅色还是深色来切换样式。 @media (prefers-color-scheme: dark) { body...</description>
+      <category>CSS/color-scheme</category>
+      <category>CSS/function/light-dark</category>
+      <category>CSS/prefers-color-scheme</category>
+      <pubDate>Mon, 29 Jun 2026 13:14:25 GMT</pubDate>
+    </item>
+    <item>
+      <title>在 CSS 中存在一些系统颜色关键字，它的实际色值由操作系统或浏览器决定，会随着...</title>
+      <link>/cards/779.html</link>
+      <guid isPermaLink="false">card:779</guid>
+      <description>在 CSS 中存在一些系统颜色关键字，它的实际色值由操作系统或浏览器决定，会随着操作系统主题和浏览器设置进行变化。 下面列举常见的系统颜色关键字： Canvas 表示应用程序内容区域或文档的背景颜色 body { background: C...</description>
+      <category>CSS</category>
+      <pubDate>Sat, 18 Jul 2026 09:28:39 GMT</pubDate>
+    </item>
+    <item>
+      <title>在渲染图片时，如果图片的大小和实际渲染的大小不一样时，就会对图片进行缩放，在缩放...</title>
+      <link>/cards/778.html</link>
+      <guid isPermaLink="false">card:778</guid>
+      <description>在渲染图片时，如果图片的大小和实际渲染的大小不一样时，就会对图片进行缩放，在缩放时浏览器会应用渲染算法，默认情况下浏览器会对图片进行平滑处理。 但是有的时候我们希望不进行平滑处理，比如在一些像素风图片进行渲染时，一般资源都会比较小，需要进行...</description>
+      <category>CSS/image-rendering</category>
+      <pubDate>Sat, 18 Jul 2026 07:14:46 GMT</pubDate>
     </item>
     <item>
       <title>font-display 是 @font-face 规则里面的一个属性，它用来定...</title>
@@ -128,16 +239,6 @@
       <pubDate>Tue, 30 Jun 2026 15:13:31 GMT</pubDate>
     </item>
     <item>
-      <title>做深色模式时，我们通常会先想到 prefers-color-scheme 。它可...</title>
-      <link>/cards/770.html</link>
-      <guid isPermaLink="false">card:770</guid>
-      <description>做深色模式时，我们通常会先想到 prefers-color-scheme 。它可以读取用户的系统颜色偏好，然后让页面根据系统当前是浅色还是深色来切换样式。 @media (prefers-color-scheme: dark) { body...</description>
-      <category>CSS/color-scheme</category>
-      <category>CSS/function/light-dark</category>
-      <category>CSS/prefers-color-scheme</category>
-      <pubDate>Mon, 29 Jun 2026 13:14:25 GMT</pubDate>
-    </item>
-    <item>
       <title>当我们通过 context.drawImage 将图片绘制到 canvas 上时...</title>
       <link>/cards/769.html</link>
       <guid isPermaLink="false">card:769</guid>
@@ -251,13 +352,6 @@
       <guid isPermaLink="false">doc:870</guid>
       <description>feat: 首页改版，添加数据和快捷方式 feat: 日记改版，朋友圈时间轴的流式视图，通过标签区分类型，比如总结、日常、反思等 feat: 卡片列表页支持搜索卡片 fix: 日记页搜索按照相关度排序</description>
       <pubDate>Sun, 21 Jun 2026 12:27:28 GMT</pubDate>
-    </item>
-    <item>
-      <title>建立反馈系统</title>
-      <link>/articles/85.html</link>
-      <guid isPermaLink="false">article:85</guid>
-      <description>我在起点看一本小说时，有一个场景是男主教人射箭，思路是算好抛物线方程，设定角度和力度，每次都能射到同一个点。我当时就忍不住写了一条评论： 没想到有 2000 多人点赞。大家认同的是什么呢？我觉得是对「提前算好一切」这件事的不信任。现实中不可...</description>
-      <pubDate>Tue, 09 Jun 2026 00:09:11 GMT</pubDate>
     </item>
     <item>
       <title>「我不杀伯仁，伯仁却因我而死」这句话常用来表示，一件事虽然不是自己直接造成的，但...</title>
@@ -394,13 +488,6 @@
       <guid isPermaLink="false">doc:866</guid>
       <description>feat: 白板演示时支持录制 feat: 白板演示时支持激光笔 feat: 白板演示 Frame bounds 适配 feat: 聊天对话标题自动总结只触发一次，节省 token feat: 箭头上方的文字位置和背景调整 feat: 箭头...</description>
       <pubDate>Fri, 19 Jun 2026 05:35:35 GMT</pubDate>
-    </item>
-    <item>
-      <title>将其改进为手绘风格，字体和树的示意都要动漫手绘风格，示意图和流程不要自行改造，和...</title>
-      <link>/cards/718.html</link>
-      <guid isPermaLink="false">card:718</guid>
-      <description>将其改进为手绘风格，字体和树的示意都要动漫手绘风格，示意图和流程不要自行改造，和代码相关字体使用 mono 相关字体，不要出现人物，长图，内容不要太拥挤，纯白背景 PS: 原图中的横线是导出导致，不需要还原</description>
-      <pubDate>Sun, 17 May 2026 02:56:16 GMT</pubDate>
     </item>
     <item>
       <title>Blob</title>
@@ -635,13 +722,6 @@
       <pubDate>Mon, 08 Jun 2026 04:16:50 GMT</pubDate>
     </item>
     <item>
-      <title>View Transition 的基本概念和使用</title>
-      <link>/articles/84.html</link>
-      <guid isPermaLink="false">article:84</guid>
-      <description>在前端开发中，页面状态的切换往往是「硬切」的，列表页跳详情页、Tab 之间的内容替换、弹窗的出现与消失，DOM 一帧之间完成更替，用户感知不到新旧视图之间的空间关系。为了让体验更丝滑，我们通常会手动编排过渡动画，但这件事做起来复杂得多。 单...</description>
-      <pubDate>Fri, 05 Jun 2026 00:21:50 GMT</pubDate>
-    </item>
-    <item>
       <title>0.47.1</title>
       <link>/docs/document/14/863.html</link>
       <guid isPermaLink="false">doc:863</guid>
@@ -720,13 +800,6 @@
       <category>CSS/排版</category>
       <category>CSS/vertical-align</category>
       <pubDate>Fri, 26 Sep 2025 00:39:08 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS Scroll Snap</title>
-      <link>/articles/83.html</link>
-      <guid isPermaLink="false">article:83</guid>
-      <description>当我们滚动页面时，滚动可以停在任意位置。但有些场景下这并不理想：轮播图中，我们不希望卡片一半露在视口里、一半藏在外面；落地页中，我们希望用户一屏一屏地浏览。 以往实现这种「滚动到指定位置」的效果，通常需要用 JavaScript 监听 sc...</description>
-      <pubDate>Sun, 31 May 2026 06:32:16 GMT</pubDate>
     </item>
     <item>
       <title>当用户点击页面内的锚点链接或「返回顶部」按钮时，浏览器默认会瞬间跳转到目标位置，...</title>
@@ -814,13 +887,6 @@
       <guid isPermaLink="false">doc:860</guid>
       <description>feat: 添加了小组件侧边栏 feat: 点击修改意见时自动滚动并且自动聚焦 feat: AI 生图支持多选参考 feat: 复制微信公众号尾部链接样式优化以及内边距优化 fix: 修复 ask-question 工具调用无限渲染问题 f...</description>
       <pubDate>Thu, 28 May 2026 06:13:05 GMT</pubDate>
-    </item>
-    <item>
-      <title>CSS Anchor Positioning</title>
-      <link>/articles/82.html</link>
-      <guid isPermaLink="false">article:82</guid>
-      <description>页面上总有一些元素需要&quot;跟着&quot;另一个元素出现，tooltip 跟着按钮、下拉菜单跟着触发器、弹出卡片跟着列表项。这类需求看起来简单，实现起来却很繁琐。 过去我们只能依赖 JavaScript 来完成这件事：先用 getBoundingCli...</description>
-      <pubDate>Sat, 30 May 2026 07:54:56 GMT</pubDate>
     </item>
     <item>
       <title>anchor-position 的使用方法？</title>
@@ -1996,6 +2062,13 @@
       <category>卡片笔记</category>
       <category>学习方法</category>
       <pubDate>Fri, 25 Aug 2023 16:54:31 GMT</pubDate>
+    </item>
+    <item>
+      <title>卡片笔记写作法读后感</title>
+      <link>/docs/document/4/58.html</link>
+      <guid isPermaLink="false">doc:58</guid>
+      <description>这本书不是教大家写作技巧的，它比较强调写作前的准备。 写作的困难是什么，是你对着一张白纸难以下手，不知道写什么，或是写的过程很困难，因为你在绞尽脑汁靠记忆在写作。此时想象如果你有一个素材库，里面包含了文章的观点、论点，你要做的只是对素材的组...</description>
+      <pubDate>Sun, 10 Dec 2023 14:24:31 GMT</pubDate>
     </item>
     <item>
       <title>工具调用、MCP、Skill……这些 AI 术语到底在说什么？</title>
@@ -3220,13 +3293,6 @@
       <guid isPermaLink="false">doc:38</guid>
       <description>桥 定义 我们首先看一下桥的概念 上面这幅图中，我们称节点 3-5 之间的这条边为桥，它具有什么特点呢? 一旦将这条边去掉，图的联通分量就会发生变化，所以有如下定义： 如果去掉某条边，使得图的联通分量发生变化，那么称这条边为桥。 桥可以看做...</description>
       <pubDate>Fri, 08 Dec 2023 16:14:39 GMT</pubDate>
-    </item>
-    <item>
-      <title>欧拉回路</title>
-      <link>/docs/document/1/41.html</link>
-      <guid isPermaLink="false">doc:41</guid>
-      <description>18世纪初普鲁士的哥尼斯堡，有一条河穿过，河上有两个小岛，有七座桥把两个岛与河岸联系起来，如下图(黄色线条代表桥，绿色区域代表小岛和河岸) 有个人提出一个问题：一个步行者怎样才能不重复、不遗漏地一次走完七座桥，最后回到出发点。 数学家欧拉将...</description>
-      <pubDate>Sat, 09 Dec 2023 02:06:53 GMT</pubDate>
     </item>
     <item>
       <title>最小生成树</title>
@@ -8085,25 +8151,11 @@
       <pubDate>Sat, 09 Dec 2023 14:55:47 GMT</pubDate>
     </item>
     <item>
-      <title>匹配问题</title>
-      <link>/docs/document/1/56.html</link>
-      <guid isPermaLink="false">doc:56</guid>
-      <description>最大匹配与完全匹配 下面我们讲解的算法都是有关于二分图的算法 例如对于上图就是一个二分图，每条边都连接了两个不同部分的节点，生活中很多问题都可以建模为二分图的问题，例如相亲。左边表示男生群体，右边表示女生群体，如果两个节点之间有一条边，说明...</description>
-      <pubDate>Sat, 09 Dec 2023 15:04:11 GMT</pubDate>
-    </item>
-    <item>
       <title>LCP04 覆盖</title>
       <link>/docs/document/1/57.html</link>
       <guid isPermaLink="false">doc:57</guid>
       <description>LCP04 覆盖是一道 LeetCode 上的题目，我们可以将这道题建模为二分图的最大匹配问题。 题目介绍 你有一块棋盘，棋盘上有一些格子已经坏掉了。你还有无穷块大小为 1 ∗ 2 的多米诺骨牌，你想把这些骨牌不重叠地覆盖在完好的格子上，请...</description>
       <pubDate>Sat, 09 Dec 2023 15:08:18 GMT</pubDate>
-    </item>
-    <item>
-      <title>网络流与最大流</title>
-      <link>/docs/document/1/52.html</link>
-      <guid isPermaLink="false">doc:52</guid>
-      <description>网络流与最大流 考虑一幅有向带权图 如果图中有一个源点，即入度为 0 的节点，上图的节点 0 ，有一个汇点，它的出度为 0 ，上图的节点 3 ，并且图中所有边的权值都是非负的，那么我们可以说这是一个网络流。 同一般的带权图不同，网络流中边的...</description>
-      <pubDate>Sat, 09 Dec 2023 14:32:58 GMT</pubDate>
     </item>
     <item>
       <title>Ford-Fulkerson 思想</title>
