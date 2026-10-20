@@ -1,0 +1,34 @@
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer utilities {
+  .resize {
+    resize: both;
+  }
+}
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer utilities {
+  .resize {
+    resize: both;
+  }
+}
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer utilities {
+  .fixed {
+    position: fixed;
+  }
+  .resize {
+    resize: both;
+  }
+}
+
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer theme, base, components, utilities;
+@layer utilities {
+  .resize {
+    resize: both;
+  }
+}
